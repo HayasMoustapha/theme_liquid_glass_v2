@@ -141,32 +141,99 @@ table {
             font-weight: 700;
         }
     }
+
+    .o_cp_switch_buttons {
+        gap: 8px;
+
+        .btn,
+        button {
+            background: rgba(255, 255, 255, 0.12) !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-radius: 12px !important;
+            color: #ffffff !important;
+            min-width: 42px;
+            min-height: 42px;
+            box-shadow: none !important;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.2) !important;
+            }
+
+            &.active {
+                background: #ffffff !important;
+                border-color: #ffffff !important;
+                color: #155b9b !important;
+            }
+        }
+    }
+
+    .btn-primary {
+        background: #f5d64f !important;
+        border-color: #f5d64f !important;
+        color: #184777 !important;
+        box-shadow: none !important;
+
+        &:hover,
+        &:focus,
+        &:active {
+            background: #ffe171 !important;
+            border-color: #ffe171 !important;
+            color: #143d69 !important;
+        }
+    }
+
+    .btn-secondary,
+    .btn-light,
+    .o-dropdown button,
+    .o_cp_buttons .btn:not(.btn-primary) {
+        background: rgba(255, 255, 255, 0.12) !important;
+        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        color: #ffffff !important;
+
+        &:hover,
+        &:focus {
+            background: rgba(255, 255, 255, 0.2) !important;
+        }
+    }
 }
 
-.o_cp_action_menus div .o-dropdown,
+.o_cp_action_menus div .o-dropdown {
+    color: #ffffff !important;
+}
+
 .o-mail-Message-actions button:hover {
     color: $text-white !important;
 }
 
 .o_pager {
+    color: #ffffff !important;
+
     button {
-        @include transparent-bg;
-        border: none !important;
+        background: rgba(255, 255, 255, 0.12) !important;
+        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        border-radius: 12px !important;
+        color: #ffffff !important;
+        min-width: 42px;
+        min-height: 42px;
 
         &:hover:not(:disabled) {
-            @include glass-effect($hover-bg, $blur-light);
+            background: rgba(255, 255, 255, 0.2) !important;
         }
     }
 }
 
 .btn-group {
     .o_graph_button {
-        @include transparent-bg;
-        color: $text-white;
+        background: rgba(255, 255, 255, 0.12) !important;
+        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        color: #ffffff !important;
+        border-radius: 12px !important;
 
         &:hover,
         &.active {
-            @include glass-effect($glass-bg-light, $blur-light);
+            background: #ffffff !important;
+            border-color: #ffffff !important;
+            color: #155b9b !important;
         }
     }
 }
