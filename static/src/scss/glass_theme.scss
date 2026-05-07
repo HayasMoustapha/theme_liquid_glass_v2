@@ -132,7 +132,8 @@ table {
     .o_cp_searchview {
         flex: 0 1 468px;
         max-width: 468px;
-        margin-inline: auto;
+        width: 100%;
+        margin-inline: 0;
         align-items: center;
 
         .o_searchview {
@@ -199,6 +200,7 @@ table {
 
     .o_control_panel_main {
         row-gap: 8px;
+        position: relative;
     }
 
     .o_cp_top,
@@ -208,7 +210,7 @@ table {
 
     .o_control_panel_breadcrumbs {
         gap: 14px !important;
-        align-items: center !important;
+        align-items: flex-start !important;
         flex-wrap: wrap;
         flex: 0 0 auto !important;
         min-width: 0;
@@ -230,6 +232,7 @@ table {
         min-width: 0;
         flex: 0 1 auto;
         margin-right: 0 !important;
+        flex-wrap: nowrap;
 
         .breadcrumb-item,
         .breadcrumb_item.background,
@@ -251,6 +254,18 @@ table {
             color: rgba(255, 255, 255, 0.55) !important;
         }
 
+        &.o_bao_cp_upgraded {
+            display: grid !important;
+            grid-template-columns: minmax(0, auto) auto;
+            column-gap: 10px !important;
+            row-gap: 0 !important;
+            align-items: flex-start;
+
+            > .o_last_breadcrumb_item {
+                display: none !important;
+            }
+        }
+
         .active,
         .breadcrumb-item.active,
         li.active,
@@ -262,6 +277,49 @@ table {
             font-size: 1.12rem !important;
             letter-spacing: 0;
         }
+    }
+
+    .o_bao_cp_heading {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 0;
+    }
+
+    .o_bao_cp_section {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+        @include bao-display-text(600);
+        color: #ffffff !important;
+        font-size: 1.08rem;
+        line-height: 1.1;
+    }
+
+    .o_bao_cp_section_icon {
+        color: rgba(255, 255, 255, 0.86) !important;
+        font-size: 0.8rem;
+    }
+
+    .o_bao_cp_trail {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-width: 0;
+        font-size: 0.84rem;
+        font-weight: 600;
+        line-height: 1;
+        color: rgba(255, 255, 255, 0.82) !important;
+    }
+
+    .o_bao_cp_trail_parent,
+    .o_bao_cp_trail_sep {
+        color: rgba(255, 255, 255, 0.76) !important;
+    }
+
+    .o_bao_cp_trail_current {
+        color: $warning-color !important;
     }
 
     .o_control_panel_main_buttons {
@@ -359,6 +417,53 @@ table {
             &:focus {
                 background: rgba(255, 255, 255, 0.22) !important;
             }
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .o_control_panel {
+        .o_control_panel_main {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 468px) minmax(0, 1fr);
+            align-items: center !important;
+            column-gap: 24px;
+        }
+
+        .o_control_panel_breadcrumbs {
+            grid-column: 1;
+            justify-self: start;
+            display: grid !important;
+            grid-template-columns: minmax(0, auto) auto;
+            grid-template-rows: auto auto;
+            column-gap: 16px;
+            row-gap: 4px;
+
+            .o_breadcrumb {
+                grid-column: 1;
+                grid-row: 1 / span 2;
+            }
+
+            .o_control_panel_main_buttons {
+                grid-column: 2;
+                grid-row: 1;
+                align-self: start;
+            }
+        }
+
+        .o_control_panel_actions {
+            grid-column: 2;
+            width: 100% !important;
+            justify-self: center;
+            justify-content: center !important;
+            order: initial !important;
+        }
+
+        .o_control_panel_navigation {
+            grid-column: 3;
+            justify-self: end;
+            margin-left: 0 !important;
+            order: initial !important;
         }
     }
 }
