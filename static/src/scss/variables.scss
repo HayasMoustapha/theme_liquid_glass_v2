@@ -1,36 +1,36 @@
-$glass-bg-light: rgba(255, 255, 255, 0.15);
-$glass-bg-medium: rgba(255, 255, 255, 0.10);
-$glass-bg-dark: rgba(255, 255, 255, 0.08);
-$glass-bg-darker: rgba(255, 255, 255, 0.05);
-$glass-dropdown: rgba(70, 80, 90, 0.85);
-$glass-border: rgba(255, 255, 255, 0.18);
-$glass-border-light: rgba(255, 255, 255, 0.25);
+$glass-bg-light: #ffffff;
+$glass-bg-medium: #f4f8fc;
+$glass-bg-dark: #eef4fb;
+$glass-bg-darker: #e8f0f8;
+$glass-dropdown: #ffffff;
+$glass-border: rgba(18, 63, 111, 0.12);
+$glass-border-light: rgba(18, 63, 111, 0.18);
 
-$blur-light: 30px;
-$blur-medium: 35px;
-$blur-heavy: 40px;
+$blur-light: 0;
+$blur-medium: 0;
+$blur-heavy: 0;
 
-$primary-color: rgba(6, 190, 160, 1);
-$primary-gradient: linear-gradient(90deg, rgba(6, 190, 160, 0.6), rgba(10, 160, 140, 0.5));
-$hover-bg: rgba(255, 255, 255, 0.18);
+$primary-color: #155b9b;
+$primary-gradient: linear-gradient(135deg, #1c5f9f 0%, #0f457d 100%);
+$hover-bg: rgba(21, 91, 155, 0.08);
 
-$text-white: #ffffff;
-$text-muted: rgba(255, 255, 255, 0.65);
+$text-white: #24405f;
+$text-muted: #6c7d95;
 
-$radius-sm: 12px;
-$radius-md: 18px;
-$radius-lg: 22px;
-$radius-xl: 26px;
+$radius-sm: 10px;
+$radius-md: 14px;
+$radius-lg: 18px;
+$radius-xl: 22px;
 $radius-pill: 999px;
 
-$shadow-medium: 0 10px 40px rgba(0, 0, 0, 0.4);
-$shadow-heavy: 0 20px 70px rgba(0, 0, 0, 0.5);
+$shadow-medium: 0 14px 32px rgba(10, 41, 74, 0.1);
+$shadow-heavy: 0 22px 48px rgba(10, 41, 74, 0.14);
 
 $transition-base: all 0.25s ease;
 
 @mixin glass-effect($bg, $blur) {
     background: $bg !important;
-    backdrop-filter: blur($blur) saturate(180%) !important;
+    backdrop-filter: none !important;
 }
 
 @mixin glass-border($color: $glass-border) {

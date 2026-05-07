@@ -1,6 +1,8 @@
 .o_web_client {
-    background: url("/theme_liquid_glass_v2/static/src/img/bg-img.svg") no-repeat center center fixed;
-    background-size: cover;
+    background:
+        radial-gradient(circle at top left, rgba(21, 91, 155, 0.08), transparent 28%),
+        linear-gradient(180deg, #f8fbfe 0%, #eef4fb 100%);
+    background-attachment: fixed;
     color: $text-white;
 }
 
@@ -10,21 +12,34 @@
 }
 
 body,
-.o_web_client,
+.o_web_client {
+    color: $text-white;
+}
+
 label,
 .o_form_label,
 .o_field_widget,
-.text-muted,
 .o_animated_number,
-h1, h2, h3, h4, h5,
-span, div, p {
-    @include text-white-color;
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+    color: inherit;
+}
+
+.text-muted,
+.text-600,
+.text-700 {
+    color: $text-muted !important;
 }
 
 a {
-    color: $text-white;
+    color: $primary-color;
+
     &:hover {
-        color: rgba(255, 255, 255, 0.8);
+        color: #0f457d;
     }
 }
 
@@ -37,7 +52,7 @@ table {
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+    scrollbar-color: rgba(21, 91, 155, 0.3) transparent;
 }
 
 .o_searchview,
