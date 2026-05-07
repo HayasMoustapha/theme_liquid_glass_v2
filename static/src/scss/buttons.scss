@@ -58,12 +58,15 @@ input[type="submit"],
 }
 
 .oe_stat_button {
-    @include transparent-bg;
-    border: 2px solid $glass-border !important;
-    border-radius: $radius-xl;
+    background: #ffffff !important;
+    border: 1px solid rgba(18, 63, 111, 0.12) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 14px 28px rgba(10, 41, 74, 0.08);
+    color: #23415f !important;
 
     &:hover {
-        @include glass-effect($hover-bg, $blur-light);
+        background: #eef4fb !important;
+        border-color: rgba(21, 91, 155, 0.18) !important;
     }
 }
 
@@ -71,6 +74,13 @@ input[type="submit"],
     color: $primary-color;
 }
 
+.o-form-buttonbox .oe_stat_button,
+.oe_stat_button .o_stat_info,
+.oe_stat_button .o_stat_text,
+.oe_stat_button .o_stat_value {
+    color: #23415f !important;
+}
+
 .o-form-buttonbox .oe_stat_button {
-    padding: 20px !important
+    padding: 20px !important;
 }

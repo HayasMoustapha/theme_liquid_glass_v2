@@ -3,19 +3,23 @@
 }
 
 .o_form_statusbar {
-    background: rgba(70, 80, 90, 0.85) !important;
-    backdrop-filter: blur(30px) saturate(180%) !important;
+    background: #155b9b !important;
+    border-radius: 18px;
+    padding: 10px 14px !important;
+    box-shadow: none !important;
 
     .o_arrow_button.btn-secondary {
-        @include transparent-bg;
-        backdrop-filter: none !important;
-        color: $text-muted !important;
+        background: rgba(255, 255, 255, 0.12) !important;
+        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        color: rgba(255, 255, 255, 0.78) !important;
+        border-radius: 12px !important;
     }
 
-    .o_arrow_button.btn-    primary,
+    .o_arrow_button.btn-primary,
     .o_arrow_button.o_arrow_button_current {
-        background: $primary-gradient !important;
-        @include text-white-color;
+        background: #f5d64f !important;
+        border-color: #f5d64f !important;
+        color: #184777 !important;
     }
 }
 
