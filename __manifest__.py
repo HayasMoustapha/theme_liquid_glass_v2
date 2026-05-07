@@ -32,6 +32,9 @@
     'website': 'https://www.cybrosys.com',
     'license': 'LGPL-3',
     'depends': ['web', 'base'],
+    'data': [
+        'data/module_visibility.xml',
+    ],
     'assets': {
         'web.assets_backend': [
             'theme_liquid_glass_v2/static/src/scss/variables.scss',
@@ -42,6 +45,7 @@
             'theme_liquid_glass_v2/static/src/scss/kanban.scss',
             'theme_liquid_glass_v2/static/src/scss/modals.scss',
             'theme_liquid_glass_v2/static/src/scss/navbar.scss',
+            'theme_liquid_glass_v2/static/src/scss/icons.scss',
             'theme_liquid_glass_v2/static/src/js/navbar_sidebar.js',
             'theme_liquid_glass_v2/static/src/xml/apps_sidebar.xml',
         ],
@@ -55,6 +59,6 @@
         'static/description/icon.png'
     ],
     'installable': True,
-    'application': False,
+    'application': True,
     'auto_install': False,
 }

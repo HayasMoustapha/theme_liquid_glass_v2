@@ -3,7 +3,7 @@
 import { patch } from "@web/core/utils/patch";
 import { GraphRenderer } from "@web/views/graph/graph_renderer";
 
-const FONT_COLOR = "#ffffff";
+const FONT_COLOR = "#35567a";
 
 patch(GraphRenderer.prototype, {
 
@@ -29,6 +29,10 @@ patch(GraphRenderer.prototype, {
 
     getLegendOptions() {
         const options = super.getLegendOptions();
+
+        if (options.labels) {
+            options.labels.color = FONT_COLOR;
+        }
 
         if (options.labels?.generateLabels) {
             const originalGenerateLabels = options.labels.generateLabels;

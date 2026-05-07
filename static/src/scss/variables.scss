@@ -1,32 +1,84 @@
+@font-face {
+    font-family: "CreightonPro";
+    src: url("../fonts/CreightonProMedium.otf") format("opentype");
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "CreightonPro";
+    src: url("../fonts/CreightonProBlack.otf") format("opentype");
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Regular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Semibold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Bold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
+
+$bao-font-display: "CreightonPro", "Open Sans", sans-serif;
+$bao-font-body: "Open Sans", sans-serif;
+
 $glass-bg-light: #ffffff;
-$glass-bg-medium: #f4f8fc;
-$glass-bg-dark: #eef4fb;
-$glass-bg-darker: #e8f0f8;
+$glass-bg-medium: #f7fbff;
+$glass-bg-dark: #edf5fd;
+$glass-bg-darker: #dce9f6;
 $glass-dropdown: #ffffff;
-$glass-border: rgba(18, 63, 111, 0.12);
-$glass-border-light: rgba(18, 63, 111, 0.18);
+$glass-border: rgba(17, 74, 126, 0.12);
+$glass-border-light: rgba(17, 74, 126, 0.2);
 
 $blur-light: 0;
 $blur-medium: 0;
 $blur-heavy: 0;
 
 $primary-color: #155b9b;
-$primary-gradient: linear-gradient(135deg, #1c5f9f 0%, #0f457d 100%);
+$primary-color-dark: #0e477d;
+$primary-gradient: linear-gradient(180deg, #1e5ea0 0%, #11508f 100%);
 $hover-bg: rgba(21, 91, 155, 0.08);
+$warning-color: #ffd915;
+$warning-soft: #fff2a8;
+$success-soft: #daf6e7;
+$danger-soft: #ffdfe0;
+$cyan-soft: #d9f1f9;
+$surface-shadow: rgba(17, 54, 95, 0.08);
 
-$text-white: #24405f;
-$text-muted: #6c7d95;
+$text-white: #274768;
+$text-strong: #1e3c5a;
+$text-muted: #7388a3;
+$text-soft: #a3b4c6;
 
-$radius-sm: 10px;
-$radius-md: 14px;
-$radius-lg: 18px;
-$radius-xl: 22px;
+$radius-sm: 12px;
+$radius-md: 16px;
+$radius-lg: 20px;
+$radius-xl: 28px;
 $radius-pill: 999px;
 
-$shadow-medium: 0 14px 32px rgba(10, 41, 74, 0.1);
-$shadow-heavy: 0 22px 48px rgba(10, 41, 74, 0.14);
+$shadow-medium: 0 18px 40px rgba(13, 41, 76, 0.08);
+$shadow-heavy: 0 24px 56px rgba(13, 41, 76, 0.14);
 
-$transition-base: all 0.25s ease;
+$transition-base: all 0.24s ease;
 
 @mixin glass-effect($bg, $blur) {
     background: $bg !important;
@@ -41,6 +93,7 @@ $transition-base: all 0.25s ease;
     @include glass-effect($bg, $blur);
     @include glass-border;
     border-radius: $radius-xl;
+    box-shadow: $shadow-medium;
 }
 
 @mixin transparent-bg {
@@ -49,4 +102,30 @@ $transition-base: all 0.25s ease;
 
 @mixin text-white-color {
     color: $text-white !important;
+}
+
+@mixin bao-display-text($weight: 600) {
+    font-family: $bao-font-display !important;
+    font-weight: $weight;
+}
+
+@mixin bao-field-surface {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.14) !important;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+}
+
+@mixin bao-panel-shell {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.11) !important;
+    border-radius: 24px !important;
+    box-shadow: $shadow-medium;
+}
+
+@mixin bao-blue-pill($bg: rgba(255, 255, 255, 0.14), $border: rgba(255, 255, 255, 0.18)) {
+    background: $bg !important;
+    border: 1px solid $border !important;
+    border-radius: 14px !important;
+    color: #ffffff !important;
 }

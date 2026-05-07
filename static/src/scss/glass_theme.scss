@@ -1,37 +1,57 @@
 .o_web_client {
     background:
-        radial-gradient(circle at top left, rgba(21, 91, 155, 0.08), transparent 28%),
-        linear-gradient(180deg, #f8fbfe 0%, #eef4fb 100%);
+        radial-gradient(circle at left center, rgba(222, 234, 246, 0.85) 0, rgba(222, 234, 246, 0.2) 18%, transparent 28%),
+        linear-gradient(180deg, #f9fcff 0%, #eef5fd 100%);
     background-attachment: fixed;
     color: $text-white;
 }
 
+body,
+.o_web_client,
+button,
+input,
+textarea,
+select {
+    color: $text-white;
+    font-family: $bao-font-body;
+}
+
 .o_action_manager,
-.o_content {
+.o_content,
+.o_view_controller,
+.o_renderer,
+.o_view_nocontent {
     @include transparent-bg;
 }
 
-body,
-.o_web_client {
-    color: $text-white;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.o_menu_brand,
+.o_form_view .oe_title h1,
+.o_form_view .oe_title h2,
+.o_kanban_record_title,
+.o_search_panel_label_title {
+    @include bao-display-text(600);
 }
 
 label,
 .o_form_label,
 .o_field_widget,
 .o_animated_number,
-h1,
-h2,
-h3,
-h4,
-h5,
-p {
+p,
+span,
+small {
     color: inherit;
 }
 
 .text-muted,
 .text-600,
-.text-700 {
+.text-700,
+.text-secondary {
     color: $text-muted !important;
 }
 
@@ -39,39 +59,48 @@ a {
     color: $primary-color;
 
     &:hover {
-        color: #0f457d;
+        color: $primary-color-dark;
     }
 }
 
 table {
     @include transparent-bg;
-    thead, tbody, tfoot, tr, th, td {
+
+    thead,
+    tbody,
+    tfoot,
+    tr,
+    th,
+    td {
         @include transparent-bg;
     }
 }
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(21, 91, 155, 0.3) transparent;
+    scrollbar-color: rgba(21, 91, 155, 0.26) transparent;
 }
 
-.o_searchview,
-.o_searchview_dropdown_toggler {
-    background: #f7f9fc !important;
-    border: 1px solid rgba(14, 54, 101, 0.14) !important;
+.o_searchview {
+    min-height: 44px;
+    padding-inline: 10px;
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.16) !important;
     border-radius: 14px !important;
     box-shadow: none !important;
-    min-height: 44px;
 
     .o_searchview_input_container {
         gap: 6px;
-        padding: 0 10px;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
 
         .o_searchview_facet {
             background: rgba(21, 91, 155, 0.1) !important;
-            border: 1px solid rgba(21, 91, 155, 0.14) !important;
+            border: 1px solid rgba(21, 91, 155, 0.12) !important;
             border-radius: 10px;
-            color: #23415f !important;
+            color: $text-white !important;
+            font-weight: 600;
 
             &:hover {
                 background: rgba(21, 91, 155, 0.16) !important;
@@ -79,11 +108,49 @@ table {
         }
 
         .o_searchview_input {
-            color: #23415f !important;
+            color: $text-strong !important;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
 
             &::placeholder {
-                color: #7d8ca2 !important;
+                color: $text-muted !important;
             }
+        }
+    }
+}
+
+.o_control_panel {
+    .o_cp_searchview {
+        flex: 0 1 512px;
+        max-width: 512px;
+        margin-inline: auto;
+        align-items: center;
+
+        .o_searchview {
+            min-height: 40px;
+            padding-inline: 12px;
+            border-radius: 14px 0 0 14px !important;
+        }
+
+        .o_searchview_input_container {
+            gap: 8px;
+        }
+
+        .o_searchview_input {
+            font-size: 0.98rem;
+            font-weight: 600;
+        }
+
+        .o_searchview_dropdown_toggler {
+            min-width: 44px;
+            min-height: 40px;
+            padding-inline: 0 !important;
+            background: #ffffff !important;
+            border: 1px solid rgba(17, 74, 126, 0.16) !important;
+            border-left: none !important;
+            border-radius: 0 14px 14px 0 !important;
+            color: #6d7d93 !important;
         }
     }
 }
@@ -91,20 +158,29 @@ table {
 .o_searchview_dropdown_toggler {
     background: transparent !important;
     border: none !important;
-    color: #6c7d95 !important;
+    color: rgba(255, 255, 255, 0.72) !important;
 }
 
 .o_control_panel {
     border: none !important;
-    background: #155b9b !important;
+    background: $primary-gradient !important;
     box-shadow: none !important;
     color: #ffffff;
-    padding: 16px 24px 20px !important;
+    padding: 18px 24px 20px !important;
 
     .o_control_panel_main,
     .o_cp_top,
-    .o_cp_bottom {
-        gap: 16px;
+    .o_cp_bottom,
+    .o_cp_top_left,
+    .o_cp_top_right,
+    .o_cp_bottom_left,
+    .o_cp_bottom_right {
+        gap: 14px;
+        align-items: center;
+    }
+
+    .o_control_panel_main {
+        row-gap: 12px;
     }
 
     .o_breadcrumb,
@@ -116,12 +192,12 @@ table {
         .breadcrumb-item,
         .breadcrumb_item.background,
         li {
-            color: rgba(255, 255, 255, 0.78) !important;
-            font-size: 15px;
-            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-size: 14px;
+            font-weight: 600;
 
             a {
-                color: rgba(255, 255, 255, 0.78) !important;
+                color: rgba(255, 255, 255, 0.8) !important;
 
                 &:hover {
                     color: #ffffff !important;
@@ -137,68 +213,53 @@ table {
         .breadcrumb-item.active,
         li.active,
         span.active {
-            color: #f5d64f !important;
+            color: $warning-color !important;
             font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0;
         }
     }
 
+    .o_cp_action_menus {
+        color: #ffffff !important;
+    }
+
     .o_cp_switch_buttons {
-        gap: 8px;
+        gap: 10px;
 
         .btn,
         button {
-            background: rgba(255, 255, 255, 0.12) !important;
-            border: 1px solid rgba(255, 255, 255, 0.18) !important;
-            border-radius: 12px !important;
-            color: #ffffff !important;
-            min-width: 42px;
-            min-height: 42px;
+            @include bao-blue-pill;
+            min-width: 44px;
+            min-height: 44px;
             box-shadow: none !important;
 
-            &:hover {
-                background: rgba(255, 255, 255, 0.2) !important;
+            &:hover,
+            &:focus {
+                background: rgba(255, 255, 255, 0.22) !important;
             }
 
             &.active {
                 background: #ffffff !important;
                 border-color: #ffffff !important;
-                color: #155b9b !important;
+                color: $primary-color !important;
             }
         }
     }
 
-    .btn-primary {
-        background: #f5d64f !important;
-        border-color: #f5d64f !important;
-        color: #184777 !important;
-        box-shadow: none !important;
+    .o_cp_buttons,
+    .o_cp_action_menus {
+        .btn:not(.btn-primary):not(.o_searchview_dropdown_toggler),
+        .dropdown-toggle:not(.o_searchview_dropdown_toggler),
+        .o-dropdown button:not(.o_searchview_dropdown_toggler) {
+            @include bao-blue-pill;
 
-        &:hover,
-        &:focus,
-        &:active {
-            background: #ffe171 !important;
-            border-color: #ffe171 !important;
-            color: #143d69 !important;
+            &:hover,
+            &:focus {
+                background: rgba(255, 255, 255, 0.22) !important;
+            }
         }
     }
-
-    .btn-secondary,
-    .btn-light,
-    .o-dropdown button,
-    .o_cp_buttons .btn:not(.btn-primary) {
-        background: rgba(255, 255, 255, 0.12) !important;
-        border: 1px solid rgba(255, 255, 255, 0.18) !important;
-        color: #ffffff !important;
-
-        &:hover,
-        &:focus {
-            background: rgba(255, 255, 255, 0.2) !important;
-        }
-    }
-}
-
-.o_cp_action_menus div .o-dropdown {
-    color: #ffffff !important;
 }
 
 .o-mail-Message-actions button:hover {
@@ -209,48 +270,52 @@ table {
     color: #ffffff !important;
 
     button {
-        background: rgba(255, 255, 255, 0.12) !important;
-        border: 1px solid rgba(255, 255, 255, 0.18) !important;
-        border-radius: 12px !important;
-        color: #ffffff !important;
-        min-width: 42px;
-        min-height: 42px;
+        @include bao-blue-pill;
+        min-width: 44px;
+        min-height: 44px;
 
         &:hover:not(:disabled) {
-            background: rgba(255, 255, 255, 0.2) !important;
+            background: rgba(255, 255, 255, 0.22) !important;
         }
     }
 }
 
-.btn-group {
-    .o_graph_button {
-        background: rgba(255, 255, 255, 0.12) !important;
-        border: 1px solid rgba(255, 255, 255, 0.18) !important;
-        color: #ffffff !important;
-        border-radius: 12px !important;
+.btn-group .o_graph_button {
+    @include bao-blue-pill;
 
-        &:hover,
-        &.active {
-            background: #ffffff !important;
-            border-color: #ffffff !important;
-            color: #155b9b !important;
-        }
+    &:hover,
+    &.active {
+        background: #ffffff !important;
+        border-color: #ffffff !important;
+        color: $primary-color !important;
     }
+}
+
+.o_search_panel {
+    padding-right: 16px;
 }
 
 .o_search_panel_section {
-    @include glass-effect($glass-bg-medium, $blur-medium);
-    @include glass-border;
-    border-radius: $radius-md;
-    margin-bottom: 5px;
-    padding: 18px;
+    @include bao-panel-shell;
+    margin-bottom: 12px;
+    padding: 16px 18px;
+
+    .o_search_panel_label_title {
+        color: $text-strong !important;
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
 
     .o_search_panel_category_value {
         @include transparent-bg;
         @include text-white-color;
+        border-radius: 12px;
+        padding: 8px 10px;
 
-        &:hover {
-            background: $hover-bg !important;
+        &:hover,
+        &.active {
+            background: #eef5fd !important;
+            color: $primary-color !important;
         }
     }
 }
@@ -261,22 +326,26 @@ table {
 }
 
 .dropdown-menu,
+.o-dropdown--menu,
 .o_popover,
-.o-tooltip {
+.o-tooltip,
+.ui-autocomplete {
     background: $glass-dropdown !important;
     @include glass-border;
-    border-radius: $radius-md;
+    border-radius: $radius-md !important;
+    box-shadow: $shadow-medium !important;
 
     .dropdown-item,
     a,
     button {
         @include text-white-color;
         @include transparent-bg;
+        border-radius: 12px;
 
         &:hover,
         &:focus {
-            background: $hover-bg !important;
-            @include text-white-color;
+            background: #eef5fd !important;
+            color: $primary-color !important;
         }
     }
 
@@ -289,33 +358,121 @@ table {
     border-bottom-color: $glass-bg-medium !important;
 }
 
-.ui-autocomplete {
-    backdrop-filter: blur($blur-light) saturate(180%) !important;
+.badge,
+.o_badge,
+.badge.rounded-pill,
+.o_tag_badge {
+    border-radius: 999px !important;
+    font-weight: 600;
 }
 
-.settings_tab {
-    @include glass-effect($glass-bg-medium, $blur-medium);
-    @include glass-border;
-    border-radius: $radius-md;
-    margin-right: 5px;
-    border-right: transparent !important;
+.o_tag_badge,
+.badge.bg-success,
+.badge.text-bg-success {
+    background: #0b9244 !important;
+    color: #ffffff !important;
+}
 
-    .tab {
-        @include glass-effect($glass-bg-dark, $blur-light);
-        box-shadow: $shadow-medium;
+.badge.bg-danger,
+.badge.text-bg-danger {
+    background: #df4a4d !important;
+    color: #ffffff !important;
+}
+
+.badge.bg-warning,
+.badge.text-bg-warning {
+    background: #f2d85d !important;
+    color: #2e4968 !important;
+}
+
+.badge.bg-info,
+.badge.text-bg-info {
+    background: #1da9c8 !important;
+    color: #ffffff !important;
+}
+
+.o_base_settings_view {
+    .o_form_renderer {
+        @include transparent-bg;
+    }
+
+    .app_settings_block {
+        @include bao-panel-shell;
+        overflow: hidden;
+        margin-bottom: 18px;
+    }
+
+    .o_setting_container,
+    .settings {
+        @include bao-panel-shell;
+        padding: 0 !important;
+    }
+
+    .settings_tab {
+        background: #eef5fd !important;
+        border-radius: 24px 0 0 24px !important;
+        border-right: none !important;
+        box-shadow: none !important;
+
+        .tab {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 46px;
+            margin: 6px;
+            padding: 10px 14px;
+            border-radius: 16px;
+            color: $text-white !important;
+            font-weight: 600;
+            transition: $transition-base;
+
+            &:hover {
+                background: #ffffff !important;
+                color: $primary-color !important;
+            }
+        }
+
+        .selected,
+        .active,
+        .tab.active {
+            background: #ffffff !important;
+            color: $primary-color !important;
+            box-shadow: 0 10px 22px rgba(13, 41, 76, 0.06);
+        }
+    }
+
+    .settings .app_settings_block h2,
+    .settings .settingSearchHeader {
+        background: #e6f0fb !important;
+        color: $text-strong !important;
+    }
+
+    .o_setting_box,
+    .row.mt16.o_settings_container {
+        padding: 18px 22px;
+        border-top: 1px solid rgba(17, 74, 126, 0.08);
     }
 }
 
-.settings {
-    @include glass-card($glass-bg-light, $blur-medium);
-
-    h2 {
-        @include glass-effect($glass-bg-darker, $blur-light);
-    }
+.o_graph_renderer,
+.o_pivot_view,
+.o_cohort_view {
+    @include bao-panel-shell;
+    padding: 18px;
 }
 
-.o_base_settings_view .o_form_renderer .o_setting_container .settings .settingSearchHeader {
-    @include glass-effect($glass-bg-darker, $blur-light);
+.o_graph_view {
+    .btn-group .btn,
+    .btn-group button,
+    .o_graph_buttons .btn,
+    .o_graph_buttons button {
+        @include bao-field-surface;
+        color: $text-white !important;
+    }
+
+    canvas {
+        border-radius: 20px;
+    }
 }
 
 .form-check {

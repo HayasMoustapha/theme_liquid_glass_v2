@@ -1,60 +1,145 @@
 .o_content {
-    margin: 30px;
+    margin: 26px;
+}
+
+.o_form_view {
+    .o_form_renderer {
+        @include transparent-bg;
+    }
+
+    .oe_title h1,
+    .oe_title h2,
+    .o_form_view_header h1,
+    .o_form_view_header h2 {
+        color: $text-strong !important;
+        font-size: clamp(2.1rem, 3vw, 3.1rem);
+        line-height: 1;
+        margin-bottom: 0;
+    }
 }
 
 .o_form_statusbar {
-    background: #155b9b !important;
-    border-radius: 18px;
+    background: $primary-gradient !important;
+    border-radius: 24px;
     padding: 10px 14px !important;
     box-shadow: none !important;
 
-    .o_arrow_button.btn-secondary {
-        background: rgba(255, 255, 255, 0.12) !important;
-        border: 1px solid rgba(255, 255, 255, 0.18) !important;
-        color: rgba(255, 255, 255, 0.78) !important;
-        border-radius: 12px !important;
+    .o_statusbar_buttons {
+        gap: 10px;
+    }
+
+    .o_arrow_button.btn-secondary,
+    .o_statusbar_status .btn,
+    .o_statusbar_status button {
+        @include bao-blue-pill;
+        color: rgba(255, 255, 255, 0.8) !important;
     }
 
     .o_arrow_button.btn-primary,
-    .o_arrow_button.o_arrow_button_current {
-        background: #f5d64f !important;
-        border-color: #f5d64f !important;
-        color: #184777 !important;
+    .o_arrow_button.o_arrow_button_current,
+    .o_statusbar_status .btn-primary,
+    .o_statusbar_status .btn.active {
+        background: $warning-color !important;
+        border-color: $warning-color !important;
+        color: $primary-color-dark !important;
     }
 }
 
 .o_form_sheet_bg {
-    @include glass-effect($glass-bg-dark, $blur-heavy);
-    border: 2px solid $glass-border !important;
+    background: rgba(231, 241, 251, 0.55) !important;
+    border: 1px solid rgba(17, 74, 126, 0.12) !important;
     border-radius: $radius-xl;
+    box-shadow: $shadow-medium;
 
     .o_form_sheet {
-        @include glass-effect($glass-bg-medium, $blur-medium);
-        border: 2px solid $glass-border !important;
-        border-radius: $radius-xl;
-        margin: 20px;
+        background: #ffffff !important;
+        border: 1px solid rgba(17, 74, 126, 0.1) !important;
+        border-radius: 18px !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        margin: 18px;
+        padding: 16px 16px 10px;
     }
 }
 
-.o_form_renderer {
-    @include glass-effect($glass-bg-dark, $blur-medium);
-    border-radius: $radius-sm;
+.o_form_sheet,
+.o_group .o_inner_group,
+.o_group .o_td_label,
+.o_group_col_6,
+.o_group_col_12 {
+    color: $text-white !important;
 }
 
-.form-control {
-    border: $glass-border !important;
-    @include text-white-color;
+.o_form_sheet .o_group {
+    row-gap: 10px;
+}
+
+.o_form_sheet .o_inner_group {
+    gap: 10px 14px;
+}
+
+.o_form_label,
+.o_td_label .col-form-label,
+.o_wrap_label .col-form-label,
+.o_form_view .o_horizontal_separator {
+    color: $primary-color !important;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.o_form_sheet .o_td_label .col-form-label,
+.o_form_sheet .o_wrap_label .col-form-label {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 12px;
+    background: #edf5fd !important;
+    border: 1px solid rgba(17, 74, 126, 0.12) !important;
+    border-radius: 14px !important;
+}
+
+.form-control,
+.o_input,
+.o_field_widget input:not([type="checkbox"]):not([type="radio"]),
+.o_field_widget textarea,
+.o_field_widget select,
+.o_field_many2one input {
+    @include bao-field-surface;
+    color: $text-strong !important;
+    min-height: 40px;
+
+    &::placeholder {
+        color: $text-soft !important;
+    }
+
+    &:focus {
+        border-color: rgba(21, 91, 155, 0.28) !important;
+        box-shadow: 0 0 0 3px rgba(21, 91, 155, 0.08) !important;
+    }
+}
+
+.o_form_sheet .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html),
+.o_form_sheet .o_field_widget.o_field_readonly {
+    color: $text-strong !important;
+}
+
+.o_form_sheet .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html) > span,
+.o_form_sheet .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html) > div:not(.o_field_x2many):not(.o_field_html),
+.o_form_sheet .o_field_widget .o_input_dropdown,
+.o_form_sheet .o_field_widget .o_field_many2one_selection,
+.o_form_sheet .o_field_widget .o_field_many2many_selection,
+.o_form_sheet .o_field_widget .o_tag_badge {
+    color: $text-strong !important;
 }
 
 .o_cell {
     background: $glass-bg-dark !important;
     @include glass-border;
     border-radius: $radius-sm;
-    padding: 10px;
+    padding: 10px 12px;
 
     &:hover {
         background: $glass-bg-light !important;
-        border: 1px solid $glass-border-light !important;
+        border-color: $glass-border-light !important;
     }
 }
 
@@ -62,26 +147,283 @@
     .nav-tabs {
         @include transparent-bg;
         border-bottom: transparent !important;
+        gap: 10px;
+        margin-bottom: 8px;
+
+        .nav-item {
+            margin-bottom: 0;
+        }
 
         .nav-link {
+            background: #edf5fd !important;
+            border: 1px solid rgba(17, 74, 126, 0.1) !important;
+            border-radius: 14px !important;
+            box-shadow: none !important;
             color: $text-muted !important;
-            background: $glass-bg-light !important;
-            border-radius: $radius-sm;
-            margin-bottom: 18px;
-            margin-right: 18px;
+            font-weight: 600;
+            margin: 0;
+            padding: 8px 14px;
 
             &:hover {
-                @include text-white-color;
-                @include glass-effect($glass-bg-dark, $blur-medium);
-                @include glass-border;
+                background: #eef5fd !important;
+                border-color: rgba(17, 74, 126, 0.18) !important;
+                color: $primary-color !important;
             }
 
             &.active {
-                @include text-white-color;
-                @include glass-effect($glass-bg-medium, $blur-medium);
+                background: #ffffff !important;
+                border-color: rgba(17, 74, 126, 0.18) !important;
+                color: $primary-color !important;
+                box-shadow: 0 10px 24px rgba(13, 41, 76, 0.06);
             }
         }
     }
+
+    .tab-content {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 4px 0 0;
+    }
+
+    .tab-pane {
+        background: transparent !important;
+    }
+}
+
+.o_field_x2many,
+.o_x2m_control_panel,
+.o_x2m_control_panel .o_cp_buttons {
+    @include transparent-bg;
+}
+
+.o_field_x2many {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0;
+}
+
+.o_field_x2many_list {
+    .o_x2m_control_panel {
+        margin-bottom: 10px;
+
+        .btn,
+        button {
+            @include bao-field-surface;
+            color: $text-white !important;
+        }
+    }
+
+    .o_field_x2many_list_row_add a,
+    .o_field_x2many_list_row_add .btn-link {
+        color: $primary-color !important;
+        font-weight: 600;
+    }
+
+    .o_field_x2many_list_row_add {
+        padding-top: 8px;
+    }
+}
+
+.o_form_view .o_field_x2many .o_list_renderer,
+.o_form_view .o_field_x2many .o_kanban_renderer {
+    @include bao-panel-shell;
+    background: rgba(255, 255, 255, 0.92) !important;
+    border-radius: 18px !important;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.o_form_view .o_field_x2many .o_list_table {
+    margin-bottom: 0;
+
+    thead th {
+        background: rgba(237, 245, 253, 0.9) !important;
+        border-bottom: 1px solid rgba(17, 74, 126, 0.1) !important;
+        color: $primary-color !important;
+        font-size: 0.84rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    tbody td,
+    tfoot td {
+        background: rgba(255, 255, 255, 0.94) !important;
+        border-top: 1px solid rgba(17, 74, 126, 0.08) !important;
+        color: $text-strong !important;
+        vertical-align: middle;
+    }
+
+    tbody tr:hover td,
+    tbody tr.o_selected_row td {
+        background: #f7fbff !important;
+    }
+}
+
+.o_form_view .o_field_x2many .o_list_renderer .o_list_number,
+.o_form_view .o_field_x2many .o_list_renderer .o_row_handle {
+    color: $text-muted !important;
+}
+
+.o_form_view .o_field_x2many .o_handle_cell,
+.o_form_view .o_field_x2many .o_list_controller,
+.o_form_view .o_field_x2many .o_list_controller .dropdown-toggle {
+    background: rgba(237, 245, 253, 0.9) !important;
+}
+
+.o_form_view .o_field_x2many .o_row_handle,
+.o_form_view .o_field_x2many .oi-draggable,
+.o_form_view .o_field_x2many .o_optional_columns_dropdown_toggle,
+.o_form_view .o_field_x2many .dropdown-toggle {
+    color: $primary-color !important;
+    min-width: 1.25rem;
+    opacity: 0.82;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.o_form_view .o_field_x2many .o_data_row:hover .o_row_handle,
+.o_form_view .o_field_x2many .o_data_row:hover .oi-draggable,
+.o_form_view .o_field_x2many .o_list_controller:hover .o_optional_columns_dropdown_toggle,
+.o_form_view .o_field_x2many .dropdown-toggle:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.o_form_view .o_field_x2many .o_field_many2one .o-autocomplete--input,
+.o_form_view .o_field_x2many .o_field_many2one input[role="combobox"] {
+    @include bao-field-surface;
+    color: $text-strong !important;
+    min-height: 38px;
+}
+
+.o_form_view .o_field_x2many .o-autocomplete--dropdown-menu,
+.o_form_view .o_field_x2many .ui-autocomplete {
+    @include bao-panel-shell;
+    border-radius: 16px !important;
+    overflow: hidden;
+}
+
+.o_form_view .o_field_x2many .o-autocomplete--dropdown-item,
+.o_form_view .o_field_x2many .ui-menu-item {
+    color: $text-strong !important;
+}
+
+.o_form_view .o_field_x2many .o_list_renderer tfoot,
+.o_form_view .o_field_x2many .o_list_renderer tfoot.o_list_footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow: 0 -10px 18px rgba(13, 41, 76, 0.05);
+}
+
+.o_form_sheet .oe_subtotal_footer,
+.o_form_sheet .oe_subtotal_footer_separator {
+    background: linear-gradient(180deg, rgba(247, 251, 255, 0.95) 0%, #ffffff 100%) !important;
+    border: 1px solid rgba(17, 74, 126, 0.12) !important;
+    border-radius: 18px !important;
+    box-shadow: none !important;
+    padding: 12px 16px;
+}
+
+.o_form_sheet .oe_subtotal_footer td,
+.o_form_sheet .oe_subtotal_footer .oe_currency_value,
+.o_form_sheet .oe_subtotal_footer .oe_subtotal_footer_separator {
+    color: $text-strong !important;
+}
+
+.o_form_sheet .oe_chatter,
+.o_form_sheet_bg .oe_chatter,
+.o-mail-Chatter,
+.o_FormRenderer_chatterContainer {
+    @include bao-panel-shell;
+    background: #f7fbff !important;
+}
+
+.o-mail-Chatter {
+    min-height: 100%;
+    padding: 14px;
+}
+
+.o_form_view .o-mail-Chatter {
+    position: relative;
+}
+
+.o-mail-Chatter-content,
+.o-mail-Thread,
+.o_FormRenderer_chatterContainer {
+    background: transparent !important;
+}
+
+.o_ChatterTopbar,
+.o-mail-Chatter-top {
+    background: transparent !important;
+    border-bottom: none !important;
+    gap: 10px;
+
+    .btn,
+    button {
+        @include bao-field-surface;
+        color: $text-white !important;
+
+        &.btn-primary,
+        &.btn-primary:hover {
+            background: $warning-color !important;
+            border-color: $warning-color !important;
+            color: $primary-color-dark !important;
+        }
+    }
+}
+
+.o_form_view .o-mail-Chatter-top {
+    background: rgba(247, 251, 255, 0.96) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 18px rgba(13, 41, 76, 0.05);
+    padding-bottom: 6px;
+    z-index: 3;
+}
+
+.o_form_view .o-mail-Chatter-topbar {
+    gap: 10px;
+}
+
+.o-mail-Message,
+.o-mail-Thread,
+.o-mail-Composer {
+    color: $text-white !important;
+}
+
+.o-mail-Message,
+.o-mail-Composer {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(17, 74, 126, 0.09) !important;
+    border-radius: 18px !important;
+    box-shadow: none !important;
+}
+
+.o_form_view .o-mail-Chatter .o-mail-Composer {
+    border-top: 1px solid rgba(17, 74, 126, 0.1) !important;
+    background: #ffffff !important;
+    padding: 12px;
+}
+
+.o_form_view .o-mail-Chatter .o-mail-Composer-input,
+.o_form_view .o-mail-Chatter .o-mail-Composer-coreMain {
+    @include bao-field-surface;
+    background: #fdfefe !important;
+    border-radius: 16px !important;
+}
+
+.o_form_view .o-mail-Chatter .o-mail-Composer-actions {
+    gap: 8px;
+    padding-top: 8px;
+}
+
+.o_form_view .o-mail-Chatter .o-mail-Composer-send {
+    @include bao-blue-pill(rgba(21, 91, 155, 0.95), rgba(21, 91, 155, 0.95));
 }
 
 .o_form_uri {

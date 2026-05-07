@@ -20,9 +20,9 @@
     padding: 0;
     background: #ffffff !important;
     border: 1px solid rgba(18, 63, 111, 0.1);
-    border-radius: 20px;
+    border-radius: 24px;
     margin: 0;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 18px 38px rgba(10, 41, 74, 0.08);
 
     .o_many2many_avatar_user_cell {
@@ -33,6 +33,8 @@
 }
 
 .o_list_table {
+    border-radius: 24px;
+
     thead {
         background: #f7f9fc !important;
         border-bottom: 1px solid rgba(18, 63, 111, 0.12) !important;
@@ -67,11 +69,23 @@
             background: transparent !important;
         }
     }
+
+    tfoot {
+        background: #ffffff !important;
+        border-top: 1px solid rgba(18, 63, 111, 0.1) !important;
+
+        td,
+        th {
+            color: $text-strong !important;
+            font-weight: 700;
+            padding: 14px 16px !important;
+        }
+    }
 }
 
 .o_list_renderer .o_data_row.o_selected_row > .o_data_cell,
 .o_list_renderer .o_data_row.o_selected_row {
-    background: #edf4ff !important;
+    background: #e5f8ef !important;
 }
 
 .o_list_sortable_icon {
@@ -93,4 +107,147 @@
 .o_field_highlight .o_field_widget .o_input,
 .o_field_highlight.o_field_widget .o_input {
     border-color: $primary-color;
+}
+
+.o_list_renderer .badge,
+.o_list_renderer .o_badge,
+.o_list_renderer .o_tag_badge {
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    border-radius: $radius-pill !important;
+    border: none !important;
+    box-shadow: none !important;
+    transition: $transition-base;
+}
+
+.o_list_renderer .o_field_badge {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+
+    .badge {
+        min-height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+    }
+}
+
+.o_list_renderer .o_field_badge:hover .badge,
+.o_list_renderer .badge:hover,
+.o_list_renderer .o_badge:hover,
+.o_list_renderer .o_tag_badge:hover {
+    filter: brightness(0.96);
+}
+
+.o_list_renderer .o_field_badge.text-success .badge,
+.o_list_renderer .badge.text-bg-success {
+    background: #129148 !important;
+    color: #ffffff !important;
+}
+
+.o_list_renderer .o_field_badge.text-info .badge,
+.o_list_renderer .badge.text-bg-info {
+    background: #1d78bb !important;
+    color: #ffffff !important;
+}
+
+.o_list_renderer .o_field_badge.text-danger .badge,
+.o_list_renderer .badge.text-bg-danger {
+    background: #d94f4c !important;
+    color: #ffffff !important;
+}
+
+.o_list_renderer .o_field_badge.text-warning .badge,
+.o_list_renderer .badge.text-bg-warning {
+    background: #f3df86 !important;
+    color: $text-strong !important;
+}
+
+.o_list_renderer .o_field_badge.text-muted .badge,
+.o_list_renderer .badge.text-bg-300,
+.o_list_renderer .badge.bg-light {
+    background: #dfe4ea !important;
+    color: #4f647f !important;
+}
+
+.o_list_renderer .text-danger {
+    color: #df504a !important;
+    font-weight: 600;
+}
+
+.o_list_renderer .text-warning {
+    color: #c68c10 !important;
+    font-weight: 600;
+}
+
+.o_list_renderer .text-success {
+    color: #149149 !important;
+    font-weight: 600;
+}
+
+.o_list_renderer .text-info {
+    color: #1d78bb !important;
+}
+
+.o_list_renderer .o-mail-ActivityButton,
+.o_list_renderer .o_replenish_buttons,
+.o_list_renderer .btn.text-warning.btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-weight: 600;
+    text-decoration: none !important;
+}
+
+.o_list_renderer .o-mail-ActivityButton,
+.o_list_renderer .o_replenish_buttons {
+    color: $text-white !important;
+
+    &:hover,
+    &:focus {
+        color: $primary-color !important;
+    }
+}
+
+.o_list_renderer .btn.text-warning.btn-link {
+    color: #bb8745 !important;
+
+    &:hover,
+    &:focus {
+        color: #9f6f33 !important;
+    }
+}
+
+.o_list_renderer .o_button_icon,
+.o_list_renderer .o-mail-ActivityButton .fa,
+.o_list_renderer .o_replenish_buttons .fa {
+    font-size: 0.95rem;
+}
+
+.o_list_renderer .o_priority_star,
+.o_list_renderer .o_button_icon.fa-undo,
+.o_list_renderer .o_button_icon.fa-info-circle,
+.o_list_renderer .o_button_icon.fa-area-chart,
+.o_list_renderer .o_button_icon.fa-truck,
+.o_list_renderer .o_button_icon.fa-refresh {
+    color: #617892 !important;
+}
+
+.o_list_renderer .o_button_icon.fa-warning,
+.o_list_renderer .o_button_icon.fa-bell-slash,
+.o_list_renderer .o-mail-ActivityButton .text-warning,
+.o_list_renderer .o-mail-ActivityButton .text-danger,
+.o_list_renderer .o-mail-ActivityButton .text-success {
+    color: inherit !important;
 }

@@ -3,18 +3,17 @@
 
     .o_kanban_renderer {
         @include transparent-bg;
-        border-top: 1px solid $glass-border !important;
+        border-top: 1px solid rgba(17, 74, 126, 0.1) !important;
+        gap: 16px;
 
         .o_kanban_record {
-            @include glass-effect($glass-bg-light, $blur-medium);
-            border-radius: $radius-md;
-            margin-bottom: 10px !important;
+            @include bao-panel-shell;
+            margin-bottom: 14px !important;
         }
 
         .o_kanban_quick_create {
             @include transparent-bg;
-            backdrop-filter: blur($blur-light) saturate(180%) !important;
-            border: 3px solid $glass-border;
+            border: 2px dashed rgba(17, 74, 126, 0.18);
             border-radius: $radius-xl;
         }
     }
@@ -23,12 +22,10 @@
         @include transparent-bg;
 
         .o_kanban_record {
-            @include glass-effect($glass-bg-light, $blur-medium);
-            border: $glass-bg-light !important;
-            margin-bottom: 5px;
+            @include bao-panel-shell;
+            margin-bottom: 12px;
 
             &:hover {
-                @include glass-effect($glass-bg-light, $blur-heavy);
                 transform: translateY(-2px);
                 box-shadow: $shadow-medium;
             }
@@ -37,13 +34,31 @@
 
     .o_kanban_ungrouped {
         .o_kanban_record {
-            @include glass-effect($glass-bg-light, $blur-light);
-            border: transparent !important;
+            @include bao-panel-shell;
             margin-top: 5px;
 
             &:hover {
-                @include glass-effect($hover-bg, $blur-light);
+                background: #f7fbff !important;
             }
         }
     }
+}
+
+.o_kanban_record_title,
+.o_kanban_primary_left,
+.o_kanban_counter,
+.o_kanban_record_body,
+.o_kanban_record_subtitle {
+    color: $text-white !important;
+}
+
+.o_kanban_dashboard .o_kanban_record,
+.o_kanban_renderer .o_kanban_record.oe_kanban_global_click {
+    min-height: 220px;
+    padding: 18px;
+}
+
+.o_kanban_dashboard .o_kanban_record .btn,
+.o_kanban_dashboard .o_kanban_record button {
+    border-radius: 14px !important;
 }
