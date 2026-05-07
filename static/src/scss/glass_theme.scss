@@ -82,12 +82,15 @@ table {
 }
 
 .o_searchview {
-    min-height: 44px;
-    padding-inline: 10px;
+    min-height: 38px;
+    height: 38px;
+    padding-inline: 12px;
     background: #ffffff !important;
-    border: 1px solid rgba(17, 74, 126, 0.16) !important;
-    border-radius: 14px !important;
+    border: 1px solid rgba(17, 74, 126, 0.08) !important;
+    border-radius: 11px !important;
     box-shadow: none !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 
     .o_searchview_input_container {
         gap: 6px;
@@ -96,10 +99,13 @@ table {
         box-shadow: none !important;
 
         .o_searchview_facet {
-            background: rgba(21, 91, 155, 0.1) !important;
-            border: 1px solid rgba(21, 91, 155, 0.12) !important;
-            border-radius: 10px;
-            color: $text-white !important;
+            min-height: 28px;
+            padding: 4px 8px;
+            background: rgba(21, 91, 155, 0.12) !important;
+            border: 1px solid rgba(21, 91, 155, 0.1) !important;
+            border-radius: 9px;
+            color: $primary-color !important;
+            font-size: 0.78rem;
             font-weight: 600;
 
             &:hover {
@@ -112,6 +118,8 @@ table {
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
+            font-size: 0.95rem !important;
+            font-weight: 400 !important;
 
             &::placeholder {
                 color: $text-muted !important;
@@ -122,15 +130,20 @@ table {
 
 .o_control_panel {
     .o_cp_searchview {
-        flex: 0 1 512px;
-        max-width: 512px;
+        flex: 0 1 468px;
+        max-width: 468px;
         margin-inline: auto;
         align-items: center;
 
         .o_searchview {
-            min-height: 40px;
-            padding-inline: 12px;
-            border-radius: 14px 0 0 14px !important;
+            min-height: 38px;
+            height: 38px;
+            padding-inline: 14px 12px;
+            border-radius: 11px 0 0 11px !important;
+        }
+
+        > .o_searchview:last-child {
+            border-radius: 11px !important;
         }
 
         .o_searchview_input_container {
@@ -138,19 +151,24 @@ table {
         }
 
         .o_searchview_input {
-            font-size: 0.98rem;
-            font-weight: 600;
+            font-size: 0.95rem !important;
+            font-weight: 400 !important;
         }
 
         .o_searchview_dropdown_toggler {
-            min-width: 44px;
-            min-height: 40px;
-            padding-inline: 0 !important;
+            min-width: 38px;
+            min-height: 38px;
+            padding: 0 10px !important;
             background: #ffffff !important;
-            border: 1px solid rgba(17, 74, 126, 0.16) !important;
+            border: 1px solid rgba(17, 74, 126, 0.08) !important;
             border-left: none !important;
-            border-radius: 0 14px 14px 0 !important;
+            border-radius: 0 11px 11px 0 !important;
             color: #6d7d93 !important;
+
+            &::after {
+                margin-inline-start: 0;
+                font-size: 0.76rem;
+            }
         }
     }
 }
@@ -163,10 +181,10 @@ table {
 
 .o_control_panel {
     border: none !important;
-    background: $primary-gradient !important;
-    box-shadow: none !important;
+    background: #155b9b !important;
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08) !important;
     color: #ffffff;
-    padding: 18px 24px 20px !important;
+    padding: 10px 24px 12px !important;
 
     .o_control_panel_main,
     .o_cp_top,
@@ -175,12 +193,29 @@ table {
     .o_cp_top_right,
     .o_cp_bottom_left,
     .o_cp_bottom_right {
-        gap: 14px;
+        gap: 12px;
         align-items: center;
     }
 
     .o_control_panel_main {
-        row-gap: 12px;
+        row-gap: 8px;
+    }
+
+    .o_cp_top,
+    .o_cp_bottom {
+        min-height: 42px;
+    }
+
+    .o_control_panel_breadcrumbs {
+        gap: 14px !important;
+        align-items: center !important;
+        flex-wrap: wrap;
+        flex: 0 0 auto !important;
+        min-width: 0;
+
+        > .me-auto {
+            display: none;
+        }
     }
 
     .o_breadcrumb,
@@ -188,12 +223,19 @@ table {
         background: transparent !important;
         margin-bottom: 0;
         padding: 0;
+        order: 0;
+        display: inline-flex !important;
+        align-items: center;
+        gap: 6px !important;
+        min-width: 0;
+        flex: 0 1 auto;
+        margin-right: 0 !important;
 
         .breadcrumb-item,
         .breadcrumb_item.background,
         li {
             color: rgba(255, 255, 255, 0.8) !important;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
 
             a {
@@ -212,26 +254,87 @@ table {
         .active,
         .breadcrumb-item.active,
         li.active,
-        span.active {
-            color: $warning-color !important;
-            font-weight: 700;
-            font-size: 1.05rem;
+        span.active,
+        .o_last_breadcrumb_item {
+            @include bao-display-text(600);
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            font-size: 1.12rem !important;
             letter-spacing: 0;
+        }
+    }
+
+    .o_control_panel_main_buttons {
+        order: 1;
+        gap: 10px !important;
+        flex: 0 0 auto;
+
+        .btn,
+        button {
+            min-height: 36px;
+            padding: 8px 16px !important;
+            border-radius: 10px !important;
+            font-size: 0.92rem !important;
+            font-weight: 600 !important;
+            box-shadow: none !important;
+        }
+
+        .btn-primary {
+            background: $warning-color !important;
+            border-color: $warning-color !important;
+            color: $primary-color-dark !important;
+        }
+
+        .btn-secondary,
+        .o_form_button_edit,
+        .o_form_button_create {
+            background: rgba(179, 211, 244, 0.9) !important;
+            border-color: rgba(179, 211, 244, 0.96) !important;
+            color: $primary-color-dark !important;
+
+            &:hover,
+            &:focus {
+                background: #c4def7 !important;
+                border-color: #c4def7 !important;
+                color: $primary-color-dark !important;
+            }
         }
     }
 
     .o_cp_action_menus {
         color: #ffffff !important;
+        gap: 0 !important;
+
+        .btn,
+        button,
+        .o-dropdown button {
+            min-width: 20px;
+            min-height: 20px;
+            padding: 0 !important;
+            background: transparent !important;
+            border: none !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            color: rgba(255, 255, 255, 0.92) !important;
+
+            &:hover,
+            &:focus {
+                background: transparent !important;
+                color: #ffffff !important;
+            }
+        }
     }
 
     .o_cp_switch_buttons {
-        gap: 10px;
+        gap: 8px;
 
         .btn,
         button {
             @include bao-blue-pill;
-            min-width: 44px;
-            min-height: 44px;
+            min-width: 40px;
+            min-height: 40px;
+            padding: 8px 12px !important;
+            border-radius: 10px !important;
             box-shadow: none !important;
 
             &:hover,
@@ -247,11 +350,9 @@ table {
         }
     }
 
-    .o_cp_buttons,
-    .o_cp_action_menus {
+    .o_cp_buttons {
         .btn:not(.btn-primary):not(.o_searchview_dropdown_toggler),
-        .dropdown-toggle:not(.o_searchview_dropdown_toggler),
-        .o-dropdown button:not(.o_searchview_dropdown_toggler) {
+        .dropdown-toggle:not(.o_searchview_dropdown_toggler) {
             @include bao-blue-pill;
 
             &:hover,
@@ -268,15 +369,26 @@ table {
 
 .o_pager {
     color: #ffffff !important;
+    gap: 8px !important;
 
     button {
         @include bao-blue-pill;
-        min-width: 44px;
-        min-height: 44px;
+        min-width: 40px;
+        min-height: 40px;
+        padding: 8px !important;
+        border-radius: 10px !important;
 
         &:hover:not(:disabled) {
             background: rgba(255, 255, 255, 0.22) !important;
         }
+    }
+
+    .o_pager_counter,
+    .o_pager_value,
+    .o_pager_limit {
+        color: #ffffff !important;
+        font-size: 0.95rem;
+        font-weight: 600;
     }
 }
 
@@ -351,6 +463,52 @@ table {
 
     .dropdown-header {
         color: $text-muted !important;
+    }
+}
+
+.o_search_bar_menu {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.12) !important;
+    border-radius: 18px !important;
+    box-shadow: $shadow-medium !important;
+    color: $text-strong !important;
+    padding: 16px 0 !important;
+
+    .o_dropdown_container {
+        padding-inline: 10px !important;
+    }
+
+    .o_filter_menu,
+    .o_group_by_menu {
+        border-color: rgba(17, 74, 126, 0.08) !important;
+    }
+
+    .o_dropdown_title,
+    h5 {
+        @include bao-display-text(600);
+        color: $text-strong !important;
+        font-size: 1rem !important;
+    }
+
+    .text-primary,
+    .fa,
+    .oi {
+        color: $primary-color !important;
+    }
+
+    .dropdown-item,
+    .o-dropdown-item,
+    .o_menu_item,
+    .o_accordion_toggle {
+        color: $text-strong !important;
+        border-radius: 10px !important;
+        padding: 8px 14px !important;
+
+        &:hover,
+        &:focus {
+            background: #eef5fd !important;
+            color: $primary-color !important;
+        }
     }
 }
 
