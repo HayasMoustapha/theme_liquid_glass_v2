@@ -299,9 +299,11 @@
     box-shadow: 0 22px 60px rgba(6, 24, 47, 0.45);
     overflow-y: auto;
     border-radius: 0 28px 28px 0;
+    pointer-events: none;
 
     &.o_sidebar_open {
         left: 0;
+        pointer-events: auto;
     }
 
     .o_sidebar_header {
@@ -376,10 +378,6 @@
     z-index: 1040;
     background: rgba(7, 23, 47, 0.45);
     backdrop-filter: blur(2px);
-}
-
-body.o_sidebar_lock {
-    overflow: hidden;
 }
 
 .o_navbar_sidebar_toggle,

@@ -255,15 +255,9 @@ table {
         }
 
         &.o_bao_cp_upgraded {
-            display: grid !important;
-            grid-template-columns: minmax(0, auto) auto;
-            column-gap: 10px !important;
-            row-gap: 0 !important;
-            align-items: flex-start;
-
-            > .o_last_breadcrumb_item {
-                display: none !important;
-            }
+            gap: 6px !important;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .active,
@@ -279,47 +273,66 @@ table {
         }
     }
 
-    .o_bao_cp_heading {
-        display: inline-flex;
-        flex-direction: column;
-        gap: 4px;
-        min-width: 0;
-    }
-
-    .o_bao_cp_section {
+    .o_bao_cp_heading_row {
         display: inline-flex;
         align-items: center;
         gap: 8px;
         min-width: 0;
+    }
+
+    .o_bao_cp_heading_title {
         @include bao-display-text(600);
         color: #ffffff !important;
         font-size: 1.08rem;
         line-height: 1.1;
     }
 
-    .o_bao_cp_section_icon {
+    .o_bao_cp_section_icon_real {
         color: rgba(255, 255, 255, 0.86) !important;
         font-size: 0.8rem;
     }
 
-    .o_bao_cp_trail {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        min-width: 0;
-        font-size: 0.84rem;
-        font-weight: 600;
-        line-height: 1;
-        color: rgba(255, 255, 255, 0.82) !important;
+    .o_breadcrumb.o_bao_cp_upgraded {
+        font-family: $bao-font-body;
+        justify-content: flex-start;
+        gap: 5px !important;
+        margin-top: 1px;
+
+        .o_last_breadcrumb_item,
+        .breadcrumb-item:last-child,
+        .o_last_breadcrumb_item span,
+        .breadcrumb-item:last-child a,
+        .breadcrumb-item:last-child span {
+            font-family: $bao-font-body !important;
+            font-size: 0.84rem !important;
+            font-weight: 600 !important;
+            line-height: 1 !important;
+            color: $warning-color !important;
+        }
+
+        .o_last_breadcrumb_item,
+        .breadcrumb-item,
+        .breadcrumb-item a,
+        .breadcrumb-item span {
+            font-family: $bao-font-body !important;
+            font-weight: 600 !important;
+            font-size: 0.84rem !important;
+            line-height: 1 !important;
+        }
     }
 
-    .o_bao_cp_trail_parent,
-    .o_bao_cp_trail_sep {
-        color: rgba(255, 255, 255, 0.76) !important;
-    }
+    .o_bao_cp_heading_row {
+        justify-content: flex-start;
+        .o_control_panel_breadcrumbs_actions,
+        .o_cp_action_menus,
+        .lh-1 {
+            display: inline-flex;
+            align-items: center;
+        }
 
-    .o_bao_cp_trail_current {
-        color: $warning-color !important;
+        .o_control_panel_breadcrumbs_actions {
+            margin-inline-start: 0;
+        }
     }
 
     .o_control_panel_main_buttons {
@@ -383,6 +396,26 @@ table {
         }
     }
 
+    .o_bao_cp_heading_row {
+        .o_cp_action_menus,
+        .o_control_panel_breadcrumbs_actions {
+            gap: 0 !important;
+        }
+
+        .dropdown-toggle::after {
+            display: none !important;
+        }
+
+        .o_cp_action_menus .btn,
+        .o_cp_action_menus button,
+        .o_control_panel_breadcrumbs_actions .btn,
+        .o_control_panel_breadcrumbs_actions button {
+            min-width: 16px !important;
+            min-height: 16px !important;
+            padding: 0 !important;
+        }
+    }
+
     .o_cp_switch_buttons {
         gap: 8px;
 
@@ -433,21 +466,31 @@ table {
         .o_control_panel_breadcrumbs {
             grid-column: 1;
             justify-self: start;
+        }
+
+        .o_control_panel_breadcrumbs.o_bao_cp_upgraded {
             display: grid !important;
             grid-template-columns: minmax(0, auto) auto;
             grid-template-rows: auto auto;
-            column-gap: 16px;
-            row-gap: 4px;
+            column-gap: 14px;
+            row-gap: 3px;
+
+            .o_bao_cp_heading_row {
+                grid-column: 1;
+                grid-row: 1;
+                align-self: end;
+            }
 
             .o_breadcrumb {
                 grid-column: 1;
-                grid-row: 1 / span 2;
+                grid-row: 2;
+                align-self: start;
             }
 
             .o_control_panel_main_buttons {
                 grid-column: 2;
                 grid-row: 1;
-                align-self: start;
+                align-self: center;
             }
         }
 

@@ -19,7 +19,7 @@
                             <div class="col-6">
                                 <a t-att-href="getMenuItemHref(app)"
                                    class="o_apps_sidebar_item d-flex flex-column align-items-center p-3 text-decoration-none"
-                                   t-on-click.prevent="() => this.onNavBarAppClick(app)">
+                                   t-on-click="closeSidebar">
                                     <div class="o_app_icon_container mb-2">
                                         <img t-if="app.webIconData"
                                              t-att-src="app.webIconData"
