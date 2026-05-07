@@ -116,56 +116,78 @@
     }
 }
 
+.o_navbar_apps_menu {
+    margin-right: 4px;
+}
+
 .o_apps_sidebar {
     position: fixed;
     top: 0;
-    left: -350px;
-    width: 350px;
+    left: -390px;
+    width: 390px;
+    max-width: 100vw;
     height: 100vh;
     z-index: 1050;
-    padding: 30px 20px;
-    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    @include glass-effect($glass-bg-medium, $blur-heavy);
-    border-right: 1px solid $glass-border-light !important;
-    box-shadow: $shadow-heavy;
+    padding: 24px;
+    transition: left 0.35s ease;
+    background: linear-gradient(180deg, #155b9b 0%, #0f457d 100%) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow: 0 22px 60px rgba(6, 24, 47, 0.45);
     overflow-y: auto;
-    border-radius: 0 30px 30px 0;
+    border-radius: 0 28px 28px 0;
 
     &.o_sidebar_open {
         left: 0;
     }
 
     .o_sidebar_header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        margin: -24px -24px 18px;
+        padding: 24px 24px 18px;
+        background: linear-gradient(180deg, rgba(21, 91, 155, 0.98) 0%, rgba(21, 91, 155, 0.88) 100%);
+
         h3 {
             @include text-white-color;
-            letter-spacing: 0.5px;
-            font-size: 24px;
+            letter-spacing: 0.01em;
+            font-size: 1.5rem;
         }
     }
 
+    .o_apps_sidebar_grid {
+        row-gap: 14px;
+    }
+
     .o_apps_sidebar_item {
-        border-radius: $radius-md;
+        min-height: 156px;
+        border-radius: 20px;
         transition: $transition-base;
-        background: transparent;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
         &:hover {
-            background: $hover-bg !important;
-            transform: translateY(-3px);
-            box-shadow: $shadow-medium;
+            background: rgba(255, 255, 255, 0.16) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 16px 34px rgba(7, 30, 66, 0.24);
         }
 
         .o_app_icon_container {
-            width: 80px;
-            height: 80px;
+            width: 72px;
+            height: 72px;
             display: flex;
             align-items: center;
             justify-content: center;
-            @include glass-effect($glass-bg-darker, $blur-light);
-            border-radius: $radius-lg;
-            @include glass-border;
+            background: rgba(255, 255, 255, 0.14) !important;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.16) !important;
 
             .o_app_icon {
-                filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+                width: 52px;
+                height: 52px;
+                object-fit: contain;
+                filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.22));
             }
 
             .o_app_icon_placeholder {
@@ -175,30 +197,45 @@
 
         .o_app_name {
             @include text-white-color;
-            margin-top: 5px;
+            margin-top: 8px;
             font-size: 14px;
+            line-height: 1.3;
         }
     }
 }
 
-.o_navbar_sidebar_toggle {
-    @include glass-effect($glass-bg-light, $blur-light);
-    @include glass-border;
-    color: white !important;
-    border: none !important;
-    transition: $transition-base;
+.o_sidebar_overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1040;
+    background: rgba(7, 23, 47, 0.45);
+    backdrop-filter: blur(2px);
+}
 
-    &:hover {
-        background: $hover-bg !important;
-        transform: scale(1.05);
+.o_navbar_sidebar_toggle,
+.o_sidebar_close {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: white !important;
+    transition: $transition-base;
+}
+
+.o_navbar_sidebar_toggle {
+    border-radius: 12px !important;
+
+    &:hover,
+    &:focus {
+        background: rgba(255, 255, 255, 0.2) !important;
+        transform: translateY(-1px);
     }
 }
 
 .o_sidebar_close {
-    transition: $transition-base;
-    &:hover {
-        transform: rotate(90deg);
-        color: $primary-color !important;
+    border-radius: 12px !important;
+
+    &:hover,
+    &:focus {
+        background: rgba(255, 255, 255, 0.2) !important;
     }
 }
 
