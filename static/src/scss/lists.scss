@@ -1,15 +1,14 @@
 .list-group-item-action {
-    @include transparent-bg;
-    @include text-white-color;
-    border-radius: $radius-xl;
-    margin-bottom: 5px;
+    background: transparent !important;
+    color: #23415f !important;
+    border-radius: 14px;
+    margin-bottom: 6px;
     border: none !important;
 
     &:hover,
     &.active {
-        background: $hover-bg !important;
-        border-radius: $radius-sm;
-        @include text-white-color;
+        background: #eef4fb !important;
+        color: #163f71 !important;
     }
 }
 
@@ -18,52 +17,72 @@
 }
 
 .o_list_renderer {
-    padding: 10px;
-    background: $glass-bg-light !important;
-    border-radius: $radius-sm;
-    margin: 3px;
+    padding: 0;
+    background: #ffffff !important;
+    border: 1px solid rgba(18, 63, 111, 0.1);
+    border-radius: 20px;
+    margin: 0;
+    overflow: hidden;
+    box-shadow: 0 18px 38px rgba(10, 41, 74, 0.08);
 
-    .o_many2many_avatar_user_cell{
+    .o_many2many_avatar_user_cell {
         .o_tag_badge_text {
-            color: $text-white !important;
+            color: #23415f !important;
         }
-     }
+    }
 }
 
 .o_list_table {
     thead {
-        border-bottom: 2px solid $glass-border !important;
-        @include glass-effect($glass-bg-light, $blur-medium);
+        background: #f7f9fc !important;
+        border-bottom: 1px solid rgba(18, 63, 111, 0.12) !important;
 
-        &:hover {
-            background: $hover-bg !important;
+        th {
+            background: #f7f9fc !important;
+            color: #4f647f !important;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            padding: 14px 16px !important;
+            border-bottom: 1px solid rgba(18, 63, 111, 0.12) !important;
         }
     }
 
     tbody {
         tr {
-            border-bottom: 1px solid $glass-border !important;
+            border-bottom: 1px solid rgba(18, 63, 111, 0.08) !important;
+            background: #ffffff !important;
+            color: #23415f !important;
 
             &:hover {
-                background: $glass-bg-light !important;
-                border-radius: $radius-sm !important;
+                background: #f4f8fc !important;
             }
         }
 
         td {
-            padding: 12px;
+            color: #23415f !important;
+            padding: 14px 16px !important;
+            vertical-align: middle;
+            background: transparent !important;
         }
     }
 }
 
+.o_list_renderer .o_data_row.o_selected_row > .o_data_cell,
+.o_list_renderer .o_data_row.o_selected_row {
+    background: #edf4ff !important;
+}
+
 .o_list_sortable_icon {
-    @include transparent-bg;
+    background: transparent !important;
+    color: #6c7d95 !important;
 }
 
 .table-info {
-    --table-hover-bg: transparent !important;
-    --table-striped-bg: #{$hover-bg} !important;
-    @include text-white-color;
+    --table-hover-bg: #f4f8fc !important;
+    --table-striped-bg: #eef4fb !important;
+    color: #23415f !important;
 }
 
 .o_input:focus,
