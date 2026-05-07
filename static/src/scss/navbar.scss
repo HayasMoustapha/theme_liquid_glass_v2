@@ -212,6 +212,10 @@
     backdrop-filter: blur(2px);
 }
 
+body.o_sidebar_lock {
+    overflow: hidden;
+}
+
 .o_navbar_sidebar_toggle,
 .o_sidebar_close {
     background: rgba(255, 255, 255, 0.12) !important;
