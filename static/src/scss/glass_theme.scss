@@ -57,64 +57,88 @@ table {
 
 .o_searchview,
 .o_searchview_dropdown_toggler {
-    background: $glass-bg-light !important;
-    @include glass-border;
-    border-radius: $radius-md;
+    background: #f7f9fc !important;
+    border: 1px solid rgba(14, 54, 101, 0.14) !important;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+    min-height: 44px;
 
     .o_searchview_input_container {
+        gap: 6px;
+        padding: 0 10px;
+
         .o_searchview_facet {
-            @include glass-effect($hover-bg, $blur-light);
-            @include text-white-color;
+            background: rgba(21, 91, 155, 0.1) !important;
+            border: 1px solid rgba(21, 91, 155, 0.14) !important;
+            border-radius: 10px;
+            color: #23415f !important;
 
             &:hover {
-                @include transparent-bg;
+                background: rgba(21, 91, 155, 0.16) !important;
             }
         }
 
         .o_searchview_input {
-            @include text-white-color;
+            color: #23415f !important;
+
+            &::placeholder {
+                color: #7d8ca2 !important;
+            }
         }
     }
 }
 
+.o_searchview_dropdown_toggler {
+    background: transparent !important;
+    border: none !important;
+    color: #6c7d95 !important;
+}
+
 .o_control_panel {
     border: none !important;
-    background: $glass-bg-darker !important;
+    background: #155b9b !important;
+    box-shadow: none !important;
+    color: #ffffff;
+    padding: 16px 24px 20px !important;
+
+    .o_control_panel_main,
+    .o_cp_top,
+    .o_cp_bottom {
+        gap: 16px;
+    }
 
     .o_breadcrumb,
     .breadcrumb {
-        @include transparent-bg;
+        background: transparent !important;
+        margin-bottom: 0;
+        padding: 0;
 
         .breadcrumb-item,
         .breadcrumb_item.background,
         li {
-            @include text-white-color;
+            color: rgba(255, 255, 255, 0.78) !important;
             font-size: 15px;
+            font-weight: 500;
 
             a {
-                color: $text-muted !important;
+                color: rgba(255, 255, 255, 0.78) !important;
 
                 &:hover {
-                    @include text-white-color;
+                    color: #ffffff !important;
                 }
             }
         }
-    }
 
-    .o_cp_switch_buttons {
-        .btn,
-        button {
-            @include transparent-bg;
+        .breadcrumb-item + .breadcrumb-item::before {
+            color: rgba(255, 255, 255, 0.55) !important;
+        }
 
-            &:hover {
-                background: $hover-bg !important;
-            }
-
-            &.active {
-                @include glass-effect($glass-bg-light, $blur-light);
-                @include glass-border;
-                color: $text-white;
-            }
+        .active,
+        .breadcrumb-item.active,
+        li.active,
+        span.active {
+            color: #f5d64f !important;
+            font-weight: 700;
         }
     }
 }
