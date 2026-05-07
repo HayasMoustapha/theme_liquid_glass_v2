@@ -2,13 +2,13 @@
     :target: https://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 
-Liquid Glass Backend Theme
-====================
-* Liquid Glass Backend Theme module for Odoo 19 community editions
+Liquid Glass Backend Theme V2
+=============================
+* Liquid Glass Backend Theme V2 module for Odoo 19 community editions
 
 Installation
 ============
-    - www.odoo.com/documentation/18.0/administration/install.html
+    - www.odoo.com/documentation/19.0/administration/install.html
     - Install our custom addon
 
 License
