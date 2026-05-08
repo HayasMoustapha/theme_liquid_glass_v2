@@ -1470,7 +1470,7 @@
     background: rgba(247, 251, 255, 0.96) !important;
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 18px rgba(13, 41, 76, 0.05);
-    padding-bottom: 6px;
+    padding-bottom: 0px !important;
     z-index: 3;
 }
 
@@ -2732,4 +2732,239 @@
     .tab-pane {
         background: transparent !important;
     }
+}
+
+// Wave6 first-pass rule: palette BAO only on Liquid/Odoo-native x2many and chatter structures.
+.o_field_x2many,
+.o_x2m_control_panel,
+.o_x2m_control_panel .o_cp_buttons {
+    @include transparent-bg;
+}
+
+.o_field_x2many {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.o_field_x2many_list {
+    .o_x2m_control_panel {
+        margin-bottom: 10px !important;
+
+        .btn,
+        button {
+            background: #ffffff !important;
+            border: 1px solid rgba(17, 74, 126, 0.14) !important;
+            border-radius: 14px !important;
+            box-shadow: none !important;
+            color: $primary-color !important;
+        }
+    }
+
+    .o_field_x2many_list_row_add,
+    .o_field_x2many_list_row_add a,
+    .o_field_x2many_list_row_add .btn-link {
+        color: $primary-color !important;
+        font-weight: 600 !important;
+    }
+}
+
+.o_form_view .o_field_x2many .o_list_renderer,
+.o_form_view .o_field_x2many .o_kanban_renderer {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.11) !important;
+    border-radius: $radius-xl !important;
+    box-shadow: $shadow-medium !important;
+    margin-top: 8px !important;
+    overflow: hidden;
+}
+
+.o_form_view .o_field_x2many .o_list_table {
+    margin-bottom: 0 !important;
+
+    thead th {
+        background: #edf5fd !important;
+        border-bottom: 1px solid rgba(17, 74, 126, 0.1) !important;
+        color: $primary-color !important;
+        font-size: 0.84rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.04em !important;
+        text-transform: uppercase !important;
+    }
+
+    tbody td,
+    tfoot td {
+        background: rgba(255, 255, 255, 0.96) !important;
+        border-top: 1px solid rgba(17, 74, 126, 0.08) !important;
+        color: $text-strong !important;
+        vertical-align: middle !important;
+    }
+
+    tbody tr:hover td,
+    tbody tr.o_selected_row td {
+        background: #f7fbff !important;
+    }
+}
+
+.o_form_view .o_field_x2many .o_list_renderer .o_list_number,
+.o_form_view .o_field_x2many .o_list_renderer .o_row_handle,
+.o_form_view .o_field_x2many .o_row_handle,
+.o_form_view .o_field_x2many .oi-draggable,
+.o_form_view .o_field_x2many .o_optional_columns_dropdown_toggle,
+.o_form_view .o_field_x2many .dropdown-toggle {
+    color: $text-muted !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.o_form_view .o_field_x2many .o_handle_cell,
+.o_form_view .o_field_x2many .o_list_controller,
+.o_form_view .o_field_x2many .o_list_controller .dropdown-toggle {
+    background: #edf5fd !important;
+}
+
+.o_form_view .o_field_x2many .o_field_many2one .o-autocomplete--input,
+.o_form_view .o_field_x2many .o_field_many2one input[role="combobox"] {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.14) !important;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+    color: $text-strong !important;
+    min-height: 38px;
+}
+
+.o_form_view .o_field_x2many .o-autocomplete--dropdown-menu,
+.o_form_view .o_field_x2many .ui-autocomplete {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.11) !important;
+    border-radius: $radius-md !important;
+    box-shadow: $shadow-medium !important;
+    overflow: hidden;
+}
+
+.o_form_view .o_field_x2many .o-autocomplete--dropdown-item,
+.o_form_view .o_field_x2many .ui-menu-item {
+    color: $text-strong !important;
+}
+
+.o_form_view .o_field_x2many .o_list_renderer tfoot,
+.o_form_view .o_field_x2many .o_list_renderer tfoot.o_list_footer {
+    position: static !important;
+    bottom: auto !important;
+    z-index: auto !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    box-shadow: none !important;
+}
+
+.o_form_sheet .oe_subtotal_footer,
+.o_form_sheet .oe_subtotal_footer_separator {
+    background: linear-gradient(180deg, rgba(247, 251, 255, 0.96) 0%, #ffffff 100%) !important;
+    border: 1px solid rgba(17, 74, 126, 0.12) !important;
+    border-radius: $radius-xl !important;
+    box-shadow: none !important;
+    color: $text-strong !important;
+}
+
+.o_form_sheet .oe_subtotal_footer td,
+.o_form_sheet .oe_subtotal_footer .oe_currency_value,
+.o_form_sheet .oe_subtotal_footer .oe_subtotal_footer_separator {
+    color: $text-strong !important;
+}
+
+.o_form_sheet .oe_chatter,
+.o_form_sheet_bg .oe_chatter,
+.o-mail-Chatter,
+.o_FormRenderer_chatterContainer {
+    @include transparent-bg;
+}
+
+.o-mail-Chatter {
+    background: #f7fbff !important;
+    border: 1px solid rgba(17, 74, 126, 0.12) !important;
+    border-radius: $radius-xl !important;
+    box-shadow: $shadow-medium !important;
+    color: $text-strong !important;
+    margin-left: 30px;
+    min-height: auto !important;
+    padding: 0 !important;
+}
+
+.o-mail-Chatter-content,
+.o-mail-Thread,
+.o_FormRenderer_chatterContainer,
+.o-mail-Chatter-top,
+.o-mail-Chatter-topbar {
+    background: transparent !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+.o-mail-Chatter .o-mail-Chatter-top {
+    margin: 0px !important;
+    padding: 0px !important;
+    position: static !important;
+}
+
+.o_ChatterTopbar,
+.o-mail-Chatter-top {
+    gap: 10px !important;
+
+    .btn,
+    button {
+        background: #ffffff !important;
+        border: 1px solid rgba(17, 74, 126, 0.14) !important;
+        border-radius: 14px !important;
+        box-shadow: none !important;
+        color: $primary-color !important;
+
+        &.btn-primary,
+        &.btn-primary:hover {
+            background: $warning-color !important;
+            border-color: $warning-color !important;
+            color: $primary-color-dark !important;
+        }
+    }
+}
+
+.o-mail-Message,
+.o-mail-Composer {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.09) !important;
+    border-radius: $radius-xl !important;
+    box-shadow: none !important;
+    color: $text-strong !important;
+}
+
+.o-mail-Chatter .o-mail-Message {
+    margin: 10px !important;
+    padding: 18px !important;
+}
+
+.o_form_view .o-mail-Chatter .o-mail-Composer {
+    border-top: 1px solid rgba(17, 74, 126, 0.1) !important;
+    background: #ffffff !important;
+    padding: 12px !important;
+}
+
+.o_form_view .o-mail-Chatter .o-mail-Composer-input,
+.o_form_view .o-mail-Chatter .o-mail-Composer-coreMain {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.14) !important;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+}
+
+.o_form_view .o-mail-Chatter .o-mail-Composer-actions {
+    gap: 8px !important;
+    padding-top: 8px !important;
+}
+
+.o_form_view .o-mail-Chatter .o-mail-Composer-send {
+    background: $primary-gradient !important;
+    border: 1px solid rgba(17, 74, 126, 0.18) !important;
+    border-radius: 14px !important;
+    color: #ffffff !important;
 }
