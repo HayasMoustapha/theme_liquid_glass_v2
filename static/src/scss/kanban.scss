@@ -62,3 +62,84 @@
 .o_kanban_dashboard .o_kanban_record button {
     border-radius: 14px !important;
 }
+
+// Wave7 first-pass rule: keep Liquid/Odoo Kanban structure, inject BAO palette only.
+.o_kanban_view {
+    @include transparent-bg;
+
+    .o_kanban_renderer {
+        @include transparent-bg;
+        border-top: 1px solid rgba(17, 74, 126, 0.1) !important;
+        gap: 0 !important;
+
+        .o_kanban_record {
+            background: #ffffff !important;
+            border: 1px solid rgba(17, 74, 126, 0.11) !important;
+            border-radius: $radius-md !important;
+            box-shadow: $shadow-medium !important;
+            margin-bottom: 10px !important;
+        }
+
+        .o_kanban_quick_create {
+            @include transparent-bg;
+            border: 1px dashed rgba(17, 74, 126, 0.18) !important;
+            border-radius: $radius-xl !important;
+            box-shadow: none !important;
+        }
+    }
+
+    .o_kanban_group {
+        @include transparent-bg;
+
+        .o_kanban_record {
+            background: #ffffff !important;
+            border: 1px solid rgba(17, 74, 126, 0.11) !important;
+            border-radius: $radius-md !important;
+            box-shadow: $shadow-medium !important;
+            margin-bottom: 5px !important;
+
+            &:hover {
+                background: #f7fbff !important;
+                box-shadow: $shadow-medium !important;
+                transform: none !important;
+            }
+        }
+    }
+
+    .o_kanban_ungrouped {
+        .o_kanban_record {
+            background: #ffffff !important;
+            border: 1px solid rgba(17, 74, 126, 0.11) !important;
+            border-radius: $radius-md !important;
+            box-shadow: $shadow-medium !important;
+            margin-top: 5px !important;
+
+            &:hover {
+                background: #f7fbff !important;
+            }
+        }
+    }
+}
+
+.o_kanban_record_title,
+.o_kanban_primary_left,
+.o_kanban_counter,
+.o_kanban_record_body,
+.o_kanban_record_subtitle {
+    color: $text-strong !important;
+}
+
+.o_kanban_dashboard .o_kanban_record,
+.o_kanban_renderer .o_kanban_record.oe_kanban_global_click {
+    min-height: auto !important;
+    padding: 18px !important;
+}
+
+.o_kanban_dashboard .o_kanban_record .btn,
+.o_kanban_dashboard .o_kanban_record button {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.14) !important;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+    color: $primary-color !important;
+}
