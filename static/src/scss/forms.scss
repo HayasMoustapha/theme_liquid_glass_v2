@@ -1433,7 +1433,7 @@
 
 .o-mail-Chatter {
     min-height: 100%;
-    padding: 14px;
+    padding: 0px !important;
 }
 
 .o_form_view .o-mail-Chatter {
@@ -2549,7 +2549,7 @@
     .o_form_sheet.position-relative > .oe_title {
         margin-bottom: 24px !important;
         padding-right: 170px !important;
-        min-height: 124px !important;
+        min-height: auto !important;
     }
 
     .o_form_sheet.position-relative > .oe_title > .o_form_label {
@@ -2564,8 +2564,8 @@
     .o_form_sheet.position-relative > .oe_title h1 {
         display: flex !important;
         align-items: flex-start !important;
-        gap: 14px !important;
-        max-width: 760px !important;
+        gap: 0px !important;
+        max-width: auto !important;
         margin: 0 !important;
     }
 
@@ -2614,5 +2614,122 @@
 
     .o_action_manager:has(.o_form_view) .o_form_view .o_form_statusbar .o_statusbar_status > .dropdown-toggle.o_last.o-dropdown.dropdown:not(.o_arrow_button) {
         display: none !important;
+    }
+}
+
+// Governor palette-only pass
+// Wave5 first-pass rule: keep Liquid-native form field structure and apply BAO tokens only.
+.o_form_view {
+    .form-control,
+    .o_input,
+    .o_field_widget input:not([type="checkbox"]):not([type="radio"]),
+    .o_field_widget textarea,
+    .o_field_widget select,
+    .o_field_many2one input {
+        background: #ffffff !important;
+        border: 1px solid rgba(17, 74, 126, 0.14) !important;
+        border-radius: 14px !important;
+        box-shadow: none !important;
+        color: $text-strong !important;
+        font-family: $bao-font-body !important;
+    }
+
+    .o_field_widget textarea {
+        min-height: 110px;
+    }
+}
+
+.o_form_sheet {
+    .o_wrap_input > :not(.o_field_x2many),
+    .o_cell_custom.null > :not(.o_field_x2many),
+    .o_address_format > *,
+    .o_field_widget .o_input,
+    .o_field_widget textarea,
+    .o_field_widget select,
+    .o_field_widget .o_many2one,
+    .o_field_widget .o_input_dropdown,
+    .o_field_widget .o-autocomplete,
+    .o_field_widget.o_field_datetime > .d-flex,
+    .o_required_modifier,
+    .o_many2one,
+    .o_field_many2one_selection,
+    .o_input_dropdown,
+    .o_field_input_buttons {
+        background: #ffffff !important;
+        border-color: rgba(17, 74, 126, 0.14) !important;
+        border-radius: 14px !important;
+        box-shadow: none !important;
+    }
+
+    .o_field_widget.o_field_datetime > .d-flex::after,
+    .o_field_widget .o_input_dropdown .o_dropdown_button,
+    .o_field_widget .o_input_dropdown .o_dropdown_button::before,
+    .o_field_input_buttons .btn,
+    .o_field_input_buttons button,
+    .o_external_button,
+    .o_datetime_button {
+        color: $primary-color !important;
+    }
+
+    .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html),
+    .o_field_widget.o_field_readonly,
+    .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html) > span,
+    .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html) > div:not(.o_field_x2many):not(.o_field_html),
+    .o_field_widget .o_field_many2one_selection,
+    .o_field_widget .o_field_many2many_selection,
+    .o_field_widget .o_tag_badge {
+        color: $text-strong !important;
+    }
+}
+
+// Wave5 notebook: keep Liquid tab structure, inject BAO palette only.
+.o_notebook {
+    .nav-tabs {
+        @include transparent-bg;
+        border-bottom: transparent !important;
+        gap: 0 !important;
+        margin-bottom: 0 !important;
+
+        .nav-item {
+            margin-bottom: 0 !important;
+        }
+
+        .nav-link {
+            background: #edf5fd !important;
+            border: 1px solid rgba(17, 74, 126, 0.12) !important;
+            border-radius: $radius-sm !important;
+            box-shadow: none !important;
+            color: $text-muted !important;
+            font-family: $bao-font-body !important;
+            font-weight: 600 !important;
+            margin-right: 18px !important;
+            margin-bottom: 18px !important;
+            padding: 10px 16px !important;
+
+            &:hover {
+                background: #ffffff !important;
+                border-color: rgba(17, 74, 126, 0.18) !important;
+                color: $primary-color !important;
+            }
+
+            &.active {
+                background: #ffffff !important;
+                border-color: rgba(17, 74, 126, 0.18) !important;
+                color: $primary-color !important;
+                box-shadow: none !important;
+            }
+        }
+    }
+
+    .tab-content {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+
+    .tab-pane {
+        background: transparent !important;
     }
 }
