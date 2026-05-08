@@ -1341,3 +1341,55 @@ select {
     box-shadow: none !important;
     color: $primary-color !important;
 }
+
+// Wave9 first-pass rule: keep Liquid/Odoo analytics structure, inject BAO palette only.
+.o_graph_renderer,
+.o_pivot_view,
+.o_cohort_view {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.11) !important;
+    border-radius: $radius-xl !important;
+    box-shadow: $shadow-medium !important;
+    color: $text-strong !important;
+}
+
+.o_graph_view {
+    .btn-group .btn,
+    .btn-group button,
+    .o_graph_buttons .btn,
+    .o_graph_buttons button {
+        background: #ffffff !important;
+        border: 1px solid rgba(17, 74, 126, 0.14) !important;
+        border-radius: 14px !important;
+        box-shadow: none !important;
+        color: $primary-color !important;
+    }
+}
+
+.o_content {
+    .o_activity_view_table,
+    .o_pivot table {
+        background: #ffffff !important;
+        border: 1px solid rgba(17, 74, 126, 0.11) !important;
+        border-radius: $radius-xl !important;
+        color: $text-strong !important;
+    }
+}
+
+.o_graph_canvas_container,
+.o_tooltip_legend,
+.o_graph_custom_tooltip {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.11) !important;
+    border-radius: $radius-xl !important;
+    box-shadow: $shadow-medium !important;
+    color: $text-strong !important;
+}
+
+.o_pivot_view table th,
+.o_pivot_view table td,
+.o_graph_renderer text,
+.o_cohort_view table th,
+.o_cohort_view table td {
+    color: $text-strong !important;
+}

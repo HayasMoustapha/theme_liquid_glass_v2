@@ -3,7 +3,7 @@
 import { patch } from "@web/core/utils/patch";
 import { GraphRenderer } from "@web/views/graph/graph_renderer";
 
-const FONT_COLOR = "#35567a";
+const FONT_COLOR = "#1e3c5a";
 
 patch(GraphRenderer.prototype, {
 
