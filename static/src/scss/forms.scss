@@ -1450,12 +1450,22 @@
 .o-mail-Chatter-top {
     background: transparent !important;
     border-bottom: none !important;
-    gap: 10px;
+    gap: 5px !important;
+    margin-bottom: 15px !important;
 
     .btn,
     button {
         @include bao-field-surface;
         color: $text-white !important;
+
+        &.text-action {
+            background: transparent !important;
+            border: none !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            font-size: 1.2rem !important;
+            padding-right: 0px !important;
+        }
 
         &.btn-primary,
         &.btn-primary:hover {
@@ -1463,11 +1473,27 @@
             border-color: $warning-color !important;
             color: $primary-color-dark !important;
         }
+
+        &.o-mail-Chatter-logNote {
+            border-right: none !important;
+            border-top-right-radius: 0px !important;
+            border-bottom-right-radius: 0px !important;
+            margin-right: 0px !important;
+            margin-left: 15px !important;
+            background: #d9dadd !important;
+        }
+
+        &.o-mail-Chatter-activity {
+            border-left: none !important;
+            border-top-left-radius: 0px !important;
+            border-bottom-left-radius: 0px !important;
+            background: #d9dadd !important;
+        }
     }
 }
 
 .o_form_view .o-mail-Chatter-top {
-    background: rgba(247, 251, 255, 0.96) !important;
+    background: transparent !important;
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 18px rgba(13, 41, 76, 0.05);
     padding-bottom: 0px !important;
@@ -1475,7 +1501,7 @@
 }
 
 .o_form_view .o-mail-Chatter-topbar {
-    gap: 10px;
+    gap: 0px !important;
 }
 
 .o-mail-Message,
@@ -2881,15 +2907,21 @@
 }
 
 .o-mail-Chatter {
-    background: #f7fbff !important;
-    border: 1px solid rgba(17, 74, 126, 0.12) !important;
-    border-radius: $radius-xl !important;
-    box-shadow: $shadow-medium !important;
-    color: $text-strong !important;
-    margin-left: 30px;
+    background: transparent !important;
+    border: none !important;
+    border-radius: none !important;
+    box-shadow: none !important;
+    color: none !important;
+    margin-left: 0px !important;
     min-height: auto !important;
     padding: 0 !important;
+    -webkit-border-radius: none !important;
+    -moz-border-radius: none !important;
+    -ms-border-radius: none !important;
+    -o-border-radius: none !important;
 }
+
+
 
 .o-mail-Chatter-content,
 .o-mail-Thread,
@@ -2900,6 +2932,13 @@
     border-bottom: none !important;
     box-shadow: none !important;
     backdrop-filter: none !important;
+}
+
+
+.o-mail-Chatter-content {
+    border-bottom: 1px solid rgba(17, 74, 126, 0.09) !important;
+    border: 1px solid rgba(17, 74, 126, 0.09) !important;
+    border-radius: 15px !important;
 }
 
 .o-mail-Chatter .o-mail-Chatter-top {
@@ -2931,16 +2970,21 @@
 
 .o-mail-Message,
 .o-mail-Composer {
-    background: #ffffff !important;
-    border: 1px solid rgba(17, 74, 126, 0.09) !important;
-    border-radius: $radius-xl !important;
+    background: transparent !important;
+    border: 0px solid rgba(17, 74, 126, 0.09) !important;
+    border-radius: none !important;
     box-shadow: none !important;
     color: $text-strong !important;
+    -webkit-border-radius: none !important;
+    -moz-border-radius: none !important;
+    -ms-border-radius: none !important;
+    -o-border-radius: none !important;
 }
 
 .o-mail-Chatter .o-mail-Message {
-    margin: 10px !important;
-    padding: 18px !important;
+    margin: 0px !important;
+    padding: 10px !important;
+    border: none !important;
 }
 
 .o_form_view .o-mail-Chatter .o-mail-Composer {

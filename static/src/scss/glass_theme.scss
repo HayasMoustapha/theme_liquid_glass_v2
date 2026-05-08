@@ -346,7 +346,7 @@ table {
             padding: 8px 16px !important;
             border-radius: 10px !important;
             font-size: 0.92rem !important;
-            font-weight: 600 !important;
+            font-weight: normal !important;
             box-shadow: none !important;
         }
 
@@ -805,6 +805,7 @@ input[type="radio"]:checked {
 
 .o-mail-ChatterContainer, .o-mail-Form-chatter {
     @include transparent-bg;
+    height: 100% !important;
     .bg-inherit {
         background-color: transparent !important;
      }

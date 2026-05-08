@@ -4,12 +4,16 @@ input[type="button"],
 input[type="submit"],
 .o_button {
     border: 1px solid transparent !important;
-    border-radius: $radius-sm;
+    border-radius: 10px !important;
     padding: 10px 18px;
     font-family: $bao-font-body;
-    font-weight: 600;
+    font-weight: normal;
     outline: none !important;
     transition: $transition-base;
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    -ms-border-radius: 10px !important;
+    -o-border-radius: 10px !important;
 }
 
 .btn-primary {
