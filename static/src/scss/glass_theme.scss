@@ -1393,3 +1393,85 @@ select {
 .o_cohort_view table td {
     color: $text-strong !important;
 }
+
+// Wave10 first-pass rule: keep Liquid/Odoo settings structure, inject BAO palette only.
+.o_base_settings_view {
+    .o_form_renderer {
+        @include transparent-bg;
+    }
+
+    .app_settings_block {
+        background: #ffffff !important;
+        border: 1px solid rgba(17, 74, 126, 0.11) !important;
+        border-radius: $radius-xl !important;
+        box-shadow: $shadow-medium !important;
+        overflow: visible !important;
+    }
+
+    .o_setting_container,
+    .settings {
+        background: #ffffff !important;
+        border: 1px solid rgba(17, 74, 126, 0.11) !important;
+        border-radius: $radius-xl !important;
+        box-shadow: $shadow-medium !important;
+        padding: 0 !important;
+    }
+
+    .settings_tab {
+        background: #edf5fd !important;
+        border: 1px solid rgba(17, 74, 126, 0.11) !important;
+        border-right-color: transparent !important;
+        border-radius: $radius-md !important;
+        box-shadow: none !important;
+        margin-right: 5px;
+
+        .tab {
+            display: block !important;
+            min-height: auto !important;
+            margin: 0 0 6px !important;
+            padding: 10px 14px !important;
+            background: #f7fbff !important;
+            border: 1px solid rgba(17, 74, 126, 0.08) !important;
+            border-radius: $radius-md !important;
+            box-shadow: none !important;
+            color: $text-strong !important;
+            font-weight: 600 !important;
+        }
+
+        .tab:hover {
+            background: #ffffff !important;
+            color: $primary-color !important;
+        }
+
+        .selected,
+        .active,
+        .tab.active {
+            background: #ffffff !important;
+            border-color: rgba(17, 74, 126, 0.16) !important;
+            color: $primary-color !important;
+            box-shadow: none !important;
+        }
+
+        .tab i,
+        .tab .fa,
+        .tab .oi,
+        .tab img,
+        .tab span {
+            color: inherit !important;
+            opacity: 1 !important;
+            filter: none !important;
+        }
+    }
+
+    .settings .app_settings_block h2,
+    .settings .settingSearchHeader {
+        background: #e6f0fb !important;
+        color: $text-strong !important;
+    }
+
+    .o_setting_box,
+    .row.mt16.o_settings_container {
+        border-top: 1px solid rgba(17, 74, 126, 0.08) !important;
+        color: $text-strong !important;
+    }
+}
