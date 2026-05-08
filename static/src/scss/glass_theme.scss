@@ -1303,3 +1303,41 @@ select {
 .offcanvas .dropdown-menu {
     border-radius: 0px;
 }
+
+// Wave8 first-pass rule: keep Liquid/Odoo dashboard composition, inject BAO palette only.
+.purchase-dashboard-card,
+.purchase-dashboard-card .card,
+.purchase-dashboard-card .card-body,
+.o_dashboard_bottom_block,
+.o_spreadsheet_dashboard_action {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.11) !important;
+    border-radius: $radius-xl !important;
+    box-shadow: $shadow-medium !important;
+    color: $text-strong !important;
+}
+
+.purchase-dashboard-card div,
+.purchase-dashboard-card span,
+.purchase-dashboard-card strong,
+.purchase-dashboard-card .o_stat_value,
+.purchase-dashboard-card .o_stat_text,
+.o_dashboard_bottom_block,
+.o_dashboard_bottom_block span,
+.o_spreadsheet_dashboard_action,
+.o_spreadsheet_dashboard_action span {
+    color: $text-strong !important;
+}
+
+.purchase-dashboard-card .btn,
+.purchase-dashboard-card button,
+.o_dashboard_bottom_block .btn,
+.o_dashboard_bottom_block button,
+.o_spreadsheet_dashboard_action .btn,
+.o_spreadsheet_dashboard_action button {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.14) !important;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+    color: $primary-color !important;
+}
