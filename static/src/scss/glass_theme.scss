@@ -1676,6 +1676,119 @@ select {
     color: $primary-color !important;
 }
 
+// BAO authority: RFQ KPI strip from bao_stock must match BAO reference exactly enough
+// without changing the client-action behavior. Keep DOM and click behavior native.
+.o_bao_stock_kpis {
+    display: grid !important;
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    margin: 0 0 14px !important;
+}
+
+.o_bao_stock_kpi_card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    min-height: 104px !important;
+    padding: 15px 17px 14px !important;
+    border-radius: 18px !important;
+    border: 1px solid #dce4eb !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    text-align: left !important;
+    appearance: none !important;
+    transition: border-color 120ms ease, background-color 120ms ease !important;
+}
+
+.o_bao_stock_kpi_card:hover,
+.o_bao_stock_kpi_card:focus,
+.o_bao_stock_kpi_card:focus-visible,
+.o_bao_stock_kpi_card:active {
+    box-shadow: none !important;
+    outline: none !important;
+    transform: none !important;
+}
+
+.o_bao_stock_kpi_card.is-active {
+    box-shadow: none !important;
+}
+
+.o_bao_stock_kpi_card.is-mint,
+.o_bao_stock_kpi_card.is-mint.is-active {
+    background: linear-gradient(180deg, #bff6d6 0%, #b4f2ce 100%) !important;
+    border-color: #39e18b !important;
+}
+
+.o_bao_stock_kpi_card.is-yellow,
+.o_bao_stock_kpi_card.is-yellow.is-active {
+    background: linear-gradient(180deg, #fff8c7 0%, #fff3af 100%) !important;
+    border-color: #f2df4e !important;
+}
+
+.o_bao_stock_kpi_card.is-gray,
+.o_bao_stock_kpi_card.is-gray.is-active {
+    background: linear-gradient(180deg, #f7f8fa 0%, #f3f5f8 100%) !important;
+    border-color: #dde3ea !important;
+}
+
+.o_bao_stock_kpi_card.is-white,
+.o_bao_stock_kpi_card.is-white.is-active {
+    background: #ffffff !important;
+    border-color: #dde3ea !important;
+}
+
+.o_bao_stock_kpi_card.is-pink,
+.o_bao_stock_kpi_card.is-pink.is-active {
+    background: linear-gradient(180deg, #ffdede 0%, #ffd4d4 100%) !important;
+    border-color: #ff8e8e !important;
+}
+
+.o_bao_stock_kpi_label {
+    margin: 0 0 17px !important;
+    color: #3c434b !important;
+    font-family: $bao-font-body !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    line-height: 1.15 !important;
+    letter-spacing: 0 !important;
+}
+
+.o_bao_stock_kpi_value {
+    margin: 0 !important;
+    color: #2f343a !important;
+    font-family: $bao-font-body !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.01em !important;
+}
+
+.o_bao_stock_kpi_card.is-mint .o_bao_stock_kpi_label,
+.o_bao_stock_kpi_card.is-mint .o_bao_stock_kpi_value {
+    color: #2e7450 !important;
+}
+
+.o_bao_stock_kpi_card.is-yellow .o_bao_stock_kpi_label {
+    color: #4a4740 !important;
+}
+
+.o_bao_stock_kpi_card.is-yellow .o_bao_stock_kpi_value {
+    color: #35332e !important;
+}
+
+.o_bao_stock_kpi_card.is-gray .o_bao_stock_kpi_label,
+.o_bao_stock_kpi_card.is-gray .o_bao_stock_kpi_value,
+.o_bao_stock_kpi_card.is-white .o_bao_stock_kpi_label,
+.o_bao_stock_kpi_card.is-white .o_bao_stock_kpi_value {
+    color: #33383f !important;
+}
+
+.o_bao_stock_kpi_card.is-pink .o_bao_stock_kpi_label,
+.o_bao_stock_kpi_card.is-pink .o_bao_stock_kpi_value {
+    color: #e03131 !important;
+}
+
 // Wave9 first-pass rule: keep Liquid/Odoo analytics structure, inject BAO palette only.
 .o_graph_renderer,
 .o_pivot_view,
