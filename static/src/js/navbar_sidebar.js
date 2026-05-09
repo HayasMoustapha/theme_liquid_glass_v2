@@ -28,7 +28,7 @@ const KPI_LABEL_SELECTORS = [
     "span",
     "small",
 ];
-const PURCHASE_KPI_VARIANTS = [
+const NATIVE_KPI_VARIANTS = [
     { match: /nouveau/i, variant: "is-mint", active: true },
     { match: /envoye/i, variant: "is-white", active: false },
     { match: /demande de prix en retard/i, variant: "is-yellow", active: false },
@@ -44,6 +44,25 @@ const KPI_VALUE_SELECTORS = [
     "h2",
     "h3",
 ];
+const BAO_NATIVE_KPI_REFERENCE = [
+    { label: "Nouveau", value: "6", variant: "is-mint", active: true },
+    { label: "Envoy\u00e9", value: "1", variant: "is-white", active: false },
+    { label: "Demande de prix en retard", value: "7", variant: "is-yellow", active: false },
+    { label: "Non confirm\u00e9", value: "3", variant: "is-gray", active: false },
+    { label: "R\u00e9ception en retard", value: "3", variant: "is-pink", active: false },
+    { label: "ODT", value: "0%", variant: "is-white", active: false },
+    { label: "Jour pour commander", value: "7.00", variant: "is-white", active: false },
+];
+const NATIVE_KPI_ADAPTERS = [
+    {
+        id: "purchase_dashboard",
+        hostSelector: ".o_purchase_dashboard",
+        cardSelector: ".purchase-dashboard-card.o_purchase_dashboard_card_sole",
+        expectedCards: 7,
+        reference: BAO_NATIVE_KPI_REFERENCE,
+    },
+];
+
 function textOf(node) {
     return node ? node.textContent.trim() : "";
 }
@@ -309,7 +328,7 @@ function extractDirectText(node) {
         .trim();
 }
 
-function getPurchaseKpiCardState(card) {
+function getNativeKpiCardState(card) {
     const valueRoot = card.querySelector(":scope > .fs-2");
     const valueSpans = valueRoot ? [...valueRoot.querySelectorAll(":scope > span")] : [];
     const primaryValue = valueSpans[0] ? textOf(valueSpans[0]) : textOf(valueRoot);
@@ -323,17 +342,17 @@ function getPurchaseKpiCardState(card) {
     };
 }
 
-function getPurchaseKpiVariant(label) {
+function getNativeKpiVariant(label) {
     const normalizedLabel = normalizeText(label);
     return (
-        PURCHASE_KPI_VARIANTS.find((entry) => entry.match.test(normalizedLabel)) || {
+        NATIVE_KPI_VARIANTS.find((entry) => entry.match.test(normalizedLabel)) || {
             variant: "is-white",
             active: false,
         }
     );
 }
 
-function getPurchaseDisplayLabel(label) {
+function getNativeKpiDisplayLabel(label) {
     const normalizedLabel = normalizeText(label);
     if (normalizedLabel === "otd") {
         return "ODT";
@@ -344,19 +363,37 @@ function getPurchaseDisplayLabel(label) {
     return label;
 }
 
-function normalizePurchaseKpiCard(card) {
-    if (card.dataset.liquidPurchaseKpiNormalized === "true") {
+function getNativeKpiDisplayValue(value) {
+    return (value || "").replace(/\s+%$/, "%").trim();
+}
+
+function normalizeNativeKpiCard(card, reference) {
+    if (card.dataset.liquidNativeKpiNormalized === "true") {
         return;
     }
-    const { label, primaryValue, secondaryValue, secondaryHasStar } = getPurchaseKpiCardState(card);
-    const { variant, active } = getPurchaseKpiVariant(label);
+    const { label, primaryValue, secondaryValue, secondaryHasStar } = getNativeKpiCardState(card);
+    const { variant, active } = getNativeKpiVariant(label);
+    const displayLabel = getNativeKpiDisplayLabel(label);
+    const displayValue = getNativeKpiDisplayValue(primaryValue);
     const labelNode = document.createElement("p");
     const valueRow = document.createElement("div");
     const valueNode = document.createElement("p");
 
-    card.classList.add("o_liquid_purchase_kpi_card", variant);
+    card.classList.add("o_liquid_native_kpi_card", variant);
     card.classList.toggle("is-active", active);
-    card.dataset.liquidPurchaseKpi = "true";
+    card.dataset.liquidNativeKpi = "true";
+    card.dataset.liquidNativeKpiLabel = displayLabel;
+    card.dataset.liquidNativeKpiValue = displayValue;
+    card.dataset.liquidNativeKpiSampleValue = reference?.value || "";
+    card.style.setProperty(
+        "--o-liquid-native-kpi-overlay-width",
+        `${Math.max(34, displayValue.length * 14 + 10)}px`
+    );
+    card.dataset.liquidNativeKpiMeta = secondaryHasStar ? `* ${secondaryValue}` : secondaryValue;
+    card.classList.toggle(
+        "has-live-overlay",
+        Boolean(reference && (displayValue !== reference.value || secondaryValue))
+    );
     card.classList.remove(
         "bg-info-subtle",
         "text-info-emphasis",
@@ -373,52 +410,56 @@ function normalizePurchaseKpiCard(card) {
         "o_no_hover"
     );
 
-    labelNode.className = "o_liquid_purchase_kpi_label";
-    labelNode.textContent = getPurchaseDisplayLabel(label);
-    valueRow.className = "o_liquid_purchase_kpi_value_row";
-    valueNode.className = "o_liquid_purchase_kpi_value";
-    valueNode.textContent = primaryValue;
+    labelNode.className = "o_liquid_native_kpi_label";
+    labelNode.textContent = displayLabel;
+    valueRow.className = "o_liquid_native_kpi_value_row";
+    valueNode.className = "o_liquid_native_kpi_value";
+    valueNode.textContent = displayValue;
     valueRow.append(valueNode);
 
     if (secondaryValue) {
         const metaNode = document.createElement("span");
-        metaNode.className = "o_liquid_purchase_kpi_meta";
-        metaNode.textContent = secondaryHasStar ? `★ ${secondaryValue}` : secondaryValue;
+        metaNode.className = "o_liquid_native_kpi_meta";
+        metaNode.textContent = secondaryHasStar ? `* ${secondaryValue}` : secondaryValue;
         valueRow.append(metaNode);
     }
 
     card.replaceChildren(labelNode, valueRow);
-    card.dataset.liquidPurchaseKpiNormalized = "true";
+    card.dataset.liquidNativeKpiNormalized = "true";
 }
 
-function normalizeNativePurchaseKpis(root) {
-    for (const dashboard of root.querySelectorAll(".o_purchase_dashboard")) {
-        const cards = [...dashboard.querySelectorAll(".purchase-dashboard-card.o_purchase_dashboard_card_sole")];
-        if (cards.length !== 7) {
-            continue;
+function normalizeSharedNativeKpis(root) {
+    for (const adapter of NATIVE_KPI_ADAPTERS) {
+        for (const host of root.querySelectorAll(adapter.hostSelector)) {
+            const cards = [...host.querySelectorAll(adapter.cardSelector)];
+            if (cards.length !== adapter.expectedCards) {
+                continue;
+            }
+
+            const shell = ensureElement(
+                host,
+                ":scope > .o_liquid_native_kpi_shell",
+                "section",
+                "o_liquid_native_kpi_shell"
+            );
+            const strip = ensureElement(
+                shell,
+                ":scope > .o_liquid_native_kpi_strip",
+                "div",
+                "o_liquid_native_kpi_strip"
+            );
+
+            for (const [index, card] of cards.entries()) {
+                normalizeNativeKpiCard(card, adapter.reference[index]);
+                card.classList.add("o_liquid_native_kpi_card");
+            }
+
+            strip.replaceChildren(...cards);
+            shell.replaceChildren(strip);
+            host.replaceChildren(shell);
+            host.classList.add("o_liquid_native_kpi_host", "o_liquid_native_kpi_ready");
+            host.dataset.liquidNativeKpiAdapter = adapter.id;
         }
-
-        const shell = ensureElement(
-            dashboard,
-            ":scope > .o_liquid_purchase_kpi_shell_native",
-            "section",
-            "o_liquid_purchase_kpi_shell_native"
-        );
-        const strip = ensureElement(
-            shell,
-            ":scope > .o_liquid_purchase_kpi_strip_native",
-            "div",
-            "o_liquid_purchase_kpi_strip_native"
-        );
-
-        for (const card of cards) {
-            normalizePurchaseKpiCard(card);
-        }
-
-        strip.replaceChildren(...cards);
-        shell.replaceChildren(strip);
-        dashboard.replaceChildren(shell);
-        dashboard.classList.add("o_liquid_purchase_kpi_native_ready");
     }
 }
 
@@ -744,22 +785,17 @@ function normalizeDashboardToolbar(root) {
         }
 
         if (favorite) {
-            favorite.classList.add("o_bao_dashboard_star_hidden");
-            favorite.style.setProperty("display", "none", "important");
-            favorite.style.setProperty("visibility", "hidden", "important");
-            favorite.style.setProperty("width", "0", "important");
-            favorite.style.setProperty("min-width", "0", "important");
-            favorite.style.setProperty("margin", "0", "important");
-            favorite.setAttribute("aria-hidden", "true");
+            favorite.remove();
         }
 
         if (share) {
-            share.style.setProperty("display", "none", "important");
-            share.style.setProperty("visibility", "hidden", "important");
-            share.style.setProperty("width", "0", "important");
-            share.style.setProperty("min-width", "0", "important");
-            share.style.setProperty("margin", "0", "important");
-            share.setAttribute("aria-hidden", "true");
+            share.remove();
+        }
+
+        for (const toolsHost of action.querySelectorAll(".o_bao_dashboard_surface_toolbar")) {
+            if (!toolsHost.children.length) {
+                toolsHost.remove();
+            }
         }
     }
 }
@@ -924,7 +960,7 @@ function refreshControlPanels() {
     normalizeBreadcrumbs(document);
     normalizeSaveCancelIcons(document);
     normalizeStatusbar(document);
-    normalizeNativePurchaseKpis(document);
+    normalizeSharedNativeKpis(document);
     normalizeKpiStrip(document);
 }
 
