@@ -330,3 +330,43 @@
 .o_list_renderer .o-mail-ActivityButton .text-success {
     color: inherit !important;
 }
+
+// Final badge authority for list surfaces.
+.o_list_view .badge,
+.o_list_view .o_tag,
+.o_list_view .o_field_badge .badge,
+.o_list_renderer .badge,
+.o_list_renderer .o_tag,
+.o_list_renderer .o_field_badge .badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 auto !important;
+    min-height: 1.3rem !important;
+    padding: 0.16rem 0.58rem !important;
+    border-radius: 999px !important;
+    font-size: 0.66rem !important;
+    font-weight: 600 !important;
+    line-height: 1.15 !important;
+    letter-spacing: 0.003em !important;
+    white-space: nowrap !important;
+    width: max-content !important;
+    max-width: none !important;
+    overflow: visible !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.o_list_view .o_field_badge,
+.o_list_renderer .o_field_badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: max-content !important;
+    max-width: none !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}

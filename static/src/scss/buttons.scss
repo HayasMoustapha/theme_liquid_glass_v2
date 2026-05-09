@@ -94,3 +94,130 @@ button span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon),
 .o-form-buttonbox .oe_stat_button {
     padding: 20px !important;
 }
+
+// Final BAO authority: propagate button palettes across app/cards/control-panel
+// without changing Odoo behavior.
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-light,
+.btn-success,
+.btn-danger,
+.btn-warning,
+.btn-info,
+.o_modules_kanban .btn,
+.o_modules_kanban button,
+.o_kanban_renderer .o_kanban_record .btn,
+.o_kanban_renderer .o_kanban_record button,
+.purchase-dashboard-card .btn,
+.purchase-dashboard-card button,
+.o_dashboard_bottom_block .btn,
+.o_dashboard_bottom_block button,
+.o_spreadsheet_dashboard_action .btn,
+.o_spreadsheet_dashboard_action button {
+    font-weight: 400 !important;
+    box-shadow: none !important;
+}
+
+.btn-outline-primary,
+.btn-info,
+.o_field_contact_statistics .btn-info,
+.o_modules_kanban .btn.btn-outline-primary,
+.o_modules_kanban .btn.btn-info {
+    background: $bao-brand-600 !important;
+    border-color: $bao-brand-600 !important;
+    color: #ffffff !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background: $bao-brand-700 !important;
+        border-color: $bao-brand-700 !important;
+        color: #ffffff !important;
+    }
+}
+
+.btn-outline-secondary,
+.btn-outline-light,
+.btn-success,
+.btn-danger,
+.btn-warning,
+.o_modules_kanban .btn.btn-secondary,
+.o_modules_kanban .btn.btn-light,
+.o_modules_kanban .btn.btn-outline-secondary,
+.o_kanban_renderer .o_kanban_record .btn.btn-secondary,
+.o_kanban_renderer .o_kanban_record .btn.btn-light,
+.o_kanban_renderer .o_kanban_record .btn.btn-outline-secondary {
+    background: $bao-surface-0 !important;
+    border: 1px solid $bao-border-200 !important;
+    color: $bao-text-700 !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background: $bao-surface-50 !important;
+        border-color: $bao-border-300 !important;
+        color: $bao-text-800 !important;
+    }
+}
+
+.btn-success {
+    background: $bao-success-50 !important;
+    border-color: $bao-success-border !important;
+    color: $bao-success-text !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background: #d8f2e4 !important;
+        border-color: $bao-success-border !important;
+        color: $bao-success-text !important;
+    }
+}
+
+.btn-danger {
+    background: $bao-danger-50 !important;
+    border-color: rgba(217, 79, 69, 0.28) !important;
+    color: $bao-danger-text !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background: #fbe2e0 !important;
+        border-color: rgba(217, 79, 69, 0.32) !important;
+        color: $bao-danger-text !important;
+    }
+}
+
+.btn-warning {
+    background: $bao-warning-50 !important;
+    border-color: rgba(230, 173, 53, 0.36) !important;
+    color: $bao-warning-text !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background: #ffe8bd !important;
+        border-color: rgba(230, 173, 53, 0.42) !important;
+        color: $bao-warning-text !important;
+    }
+}
+
+.o_cp_buttons .btn-primary,
+.o_control_panel .btn-primary,
+.o_modules_kanban .btn.btn-primary,
+.o_kanban_renderer .o_kanban_record .btn.btn-primary,
+.purchase-dashboard-card .btn.btn-primary,
+.o_dashboard_bottom_block .btn.btn-primary,
+.o_spreadsheet_dashboard_action .btn.btn-primary {
+    background: $bao-warning-action-bg !important;
+    border-color: $bao-warning-action-bg !important;
+    color: $bao-warning-action-text !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background: $bao-warning-action-hover !important;
+        border-color: $bao-warning-action-hover !important;
+        color: $bao-warning-action-text !important;
+    }
+}

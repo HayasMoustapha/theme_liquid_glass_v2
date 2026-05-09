@@ -216,6 +216,7 @@ function normalizeBreadcrumbs(root) {
             continue;
         }
 
+        const breadcrumbs = controlPanel.querySelector(".o_control_panel_breadcrumbs");
         const trailList = breadcrumb.querySelector(":scope > .breadcrumb");
         const sourceCluster = breadcrumb.querySelector(":scope > .d-flex.gap-1.text-truncate");
         const mainButtons = controlPanel.querySelector(".o_control_panel_main_buttons");
@@ -262,19 +263,19 @@ function normalizeBreadcrumbs(root) {
             "o_bao_breadcrumb_interactive d-inline-flex align-items-center"
         );
         const mainButtonsShell = ensureElement(
-            interactiveShell,
+            breadcrumbs,
             ":scope > .o_bao_header_main_buttons",
             "div",
             "o_bao_header_main_buttons d-inline-flex align-items-center"
         );
         const menuShell = ensureElement(
-            interactiveShell,
+            breadcrumbs,
             ":scope > .o_bao_header_menu_actions",
             "div",
             "o_bao_header_menu_actions d-inline-flex align-items-center"
         );
         const statusShell = ensureElement(
-            interactiveShell,
+            breadcrumbs,
             ":scope > .o_bao_header_status_actions",
             "div",
             "o_bao_header_status_actions d-inline-flex align-items-center"
@@ -324,6 +325,10 @@ function normalizeBreadcrumbs(root) {
         if (sourceCluster) {
             sourceCluster.classList.add("o_bao_breadcrumb_source");
             sourceCluster.setAttribute("aria-hidden", "true");
+        }
+
+        if (!interactiveShell.children.length) {
+            interactiveShell.remove();
         }
 
         normalizeSmartButtonRail(controlPanel);

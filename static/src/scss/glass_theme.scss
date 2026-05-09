@@ -666,19 +666,41 @@ table {
 
 .badge,
 .o_badge,
+.o_selection_badge,
 .badge.rounded-pill,
 .o_tag_badge,
 .o_tag {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    min-height: 24px;
-    padding: 4px 12px;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-height: 20px;
+    padding: 2px 8px;
     border-radius: 999px !important;
-    border: 1px solid $bao-border-200 !important;
-    background: $bao-surface-100 !important;
-    color: $bao-text-600 !important;
-    font-weight: 600;
+    border: 1px solid $bao-border-selected !important;
+    background: $bao-surface-200 !important;
+    color: $bao-text-800 !important;
+    font-size: 10px !important;
+    font-weight: 700;
+    line-height: 1.15 !important;
+    letter-spacing: 0 !important;
+    width: max-content !important;
+    max-width: none !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+}
+
+.o_field_badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: max-content !important;
+    max-width: none !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
     box-shadow: none !important;
 }
 
@@ -801,10 +823,73 @@ table {
 .badge.bg-light,
 .badge.text-bg-300,
 .badge.text-bg-light,
+.badge.text-bg-secondary,
 .o_field_badge.text-muted .badge {
     background: $bao-surface-100 !important;
     border-color: $bao-border-200 !important;
     color: $bao-text-600 !important;
+}
+
+.o_field_contact_statistics > .d-flex {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.35rem !important;
+    align-items: center !important;
+}
+
+.o_field_contact_statistics .badge,
+.o_field_contact_statistics .o_tag {
+    min-height: 1.18rem !important;
+    padding: 0.12rem 0.42rem !important;
+    font-size: 0.62rem !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
+}
+
+.o_field_contact_statistics .badge .fa,
+.o_field_contact_statistics .o_tag .fa {
+    font-size: 0.68rem !important;
+    margin-right: 0.16rem !important;
+}
+
+.o_field_contact_statistics .badge.bg-secondary.o_tag_color_3,
+.o_field_contact_statistics .o_tag.o_tag_color_3,
+.o_field_contact_statistics .o_tag_color_3 {
+    background: #ffe16a !important;
+    color: #786400 !important;
+    border-color: #ffe16a !important;
+}
+
+.o_field_contact_statistics .badge.bg-secondary.o_tag_color_9,
+.o_field_contact_statistics .o_tag.o_tag_color_9,
+.o_field_contact_statistics .o_tag_color_9 {
+    background: #ef7a7a !important;
+    color: #ffffff !important;
+    border-color: #ef7a7a !important;
+}
+
+.o_field_contact_statistics .badge.bg-secondary.o_tag_color_8,
+.o_field_contact_statistics .o_tag.o_tag_color_8,
+.o_field_contact_statistics .o_tag_color_8 {
+    background: #72a7eb !important;
+    color: #ffffff !important;
+    border-color: #72a7eb !important;
+}
+
+.o_field_contact_statistics .badge.bg-secondary.o_tag_color_5,
+.o_field_contact_statistics .o_tag.o_tag_color_5,
+.o_field_contact_statistics .o_tag_color_5 {
+    background: #16a34a !important;
+    color: #ffffff !important;
+    border-color: #16a34a !important;
+}
+
+.o_field_contact_statistics .badge.bg-secondary.o_tag_color_2,
+.o_field_contact_statistics .o_tag.o_tag_color_2,
+.o_field_contact_statistics .o_tag_color_2 {
+    background: #f5d44f !important;
+    color: #7b5b00 !important;
+    border-color: #f5d44f !important;
 }
 
 .o_base_settings_view {
@@ -1425,6 +1510,145 @@ select {
     border-radius: $radius-xl !important;
     box-shadow: $shadow-medium !important;
     color: $text-strong !important;
+}
+
+.card,
+.o_kanban_renderer .o_kanban_record,
+.o_kanban_dashboard .o_kanban_record,
+.o_dashboard_bottom_block,
+.o_spreadsheet_dashboard_action,
+.purchase-dashboard-card,
+.o_stat_box,
+.o_purchase_kpi_card,
+.o_stock_kpi_card {
+    background: #ffffff !important;
+    border: 1px solid $bao-border-soft !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 24px rgba(13, 79, 148, 0.08) !important;
+}
+
+.card-header,
+.purchase-dashboard-card__title,
+.o_stat_box .o_stat_text,
+.o_purchase_kpi_card .o_stat_text,
+.o_stock_kpi_card .o_stat_text,
+.o_kanban_renderer .o_kanban_record .text-muted,
+.o_kanban_renderer .o_kanban_record small {
+    color: $bao-text-600 !important;
+}
+
+.card-title,
+.o_kanban_renderer .o_kanban_record_title,
+.o_kanban_renderer .o_kanban_record strong,
+.purchase-dashboard-card__value,
+.o_stat_box .o_stat_value,
+.o_purchase_kpi_card .o_stat_value,
+.o_stock_kpi_card .o_stat_value,
+.o_stat_box > .fs-2,
+.o_purchase_kpi_card > .fs-2,
+.o_stock_kpi_card > .fs-2 {
+    color: $bao-text-800 !important;
+}
+
+.o_stat_box,
+.o_purchase_kpi_card,
+.o_stock_kpi_card,
+.purchase-dashboard-card {
+    min-height: 106px !important;
+    padding: 16px !important;
+}
+
+.o_stat_box:has(.text-success),
+.o_purchase_kpi_card:has(.text-success),
+.o_stock_kpi_card:has(.text-success),
+.purchase-dashboard-card:has(.text-success) {
+    background: $bao-success-50 !important;
+    border-color: $bao-success-border !important;
+}
+
+.o_stat_box:has(.text-danger),
+.o_purchase_kpi_card:has(.text-danger),
+.o_stock_kpi_card:has(.text-danger),
+.purchase-dashboard-card:has(.text-danger) {
+    background: $bao-danger-50 !important;
+    border-color: rgba(217, 79, 69, 0.28) !important;
+}
+
+.o_stat_box:has(.text-warning),
+.o_purchase_kpi_card:has(.text-warning),
+.o_stock_kpi_card:has(.text-warning),
+.purchase-dashboard-card:has(.text-warning) {
+    background: $bao-warning-50 !important;
+    border-color: rgba(230, 173, 53, 0.36) !important;
+}
+
+.o_stat_box .text-success,
+.o_purchase_kpi_card .text-success,
+.o_stock_kpi_card .text-success,
+.purchase-dashboard-card .text-success {
+    color: $bao-success-text !important;
+}
+
+.o_stat_box .text-danger,
+.o_purchase_kpi_card .text-danger,
+.o_stock_kpi_card .text-danger,
+.purchase-dashboard-card .text-danger {
+    color: $bao-danger-text !important;
+}
+
+.o_stat_box .text-warning,
+.o_purchase_kpi_card .text-warning,
+.o_stock_kpi_card .text-warning,
+.purchase-dashboard-card .text-warning {
+    color: $bao-warning-text !important;
+}
+
+.purchase-dashboard-card.btn,
+.purchase-dashboard-card {
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    padding: 16px !important;
+    min-height: 104px !important;
+    gap: 10px !important;
+}
+
+.purchase-dashboard-card.bg-info-subtle,
+.purchase-dashboard-card.text-info-emphasis {
+    background: $bao-success-50 !important;
+    border: 1px solid $bao-success-border !important;
+    color: $bao-success-text !important;
+}
+
+.purchase-dashboard-card.bg-warning-subtle,
+.purchase-dashboard-card.text-warning-emphasis {
+    background: $bao-warning-50 !important;
+    border: 1px solid rgba(230, 173, 53, 0.36) !important;
+    color: $bao-warning-text !important;
+}
+
+.purchase-dashboard-card.bg-danger-subtle,
+.purchase-dashboard-card.text-danger-emphasis {
+    background: $bao-danger-50 !important;
+    border: 1px solid rgba(217, 79, 69, 0.28) !important;
+    color: $bao-danger-text !important;
+}
+
+.purchase-dashboard-card .purchase-dashboard-card__title,
+.purchase-dashboard-card .o_stat_text,
+.purchase-dashboard-card small,
+.purchase-dashboard-card span:not(.fs-2):not(.o_stat_value) {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+}
+
+.purchase-dashboard-card .purchase-dashboard-card__value,
+.purchase-dashboard-card .o_stat_value,
+.purchase-dashboard-card .fs-2 {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
 }
 
 .purchase-dashboard-card div,

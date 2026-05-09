@@ -3902,3 +3902,69 @@
 .o_web_client .o_button span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon) {
     font-weight: inherit !important;
 }
+
+// Final BAO form control-panel structure:
+// breadcrumb, status-actions, action-menus, main-buttons live in parallel.
+.o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel {
+    .o_control_panel_breadcrumbs {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) auto auto auto;
+        align-items: start !important;
+        column-gap: 10px !important;
+        row-gap: 0 !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_breadcrumb {
+        grid-column: 1;
+        min-width: 0 !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_bao_header_status_actions {
+        grid-column: 2;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-self: end !important;
+        gap: 6px !important;
+        margin: 0 !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_bao_header_menu_actions {
+        grid-column: 3;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-self: end !important;
+        gap: 6px !important;
+        margin: 0 !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_bao_header_main_buttons {
+        grid-column: 4;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-self: end !important;
+        gap: 8px !important;
+        margin: 0 !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_bao_header_status_actions:empty,
+    .o_control_panel_breadcrumbs > .o_bao_header_menu_actions:empty,
+    .o_control_panel_breadcrumbs > .o_bao_header_main_buttons:empty {
+        display: none !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_bao_header_menu_actions .o_cp_action_menus,
+    .o_control_panel_breadcrumbs > .o_bao_header_menu_actions .o_control_panel_breadcrumbs_actions {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_bao_header_main_buttons .o_control_panel_main_buttons {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        margin: 0 !important;
+    }
+}
