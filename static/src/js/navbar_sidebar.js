@@ -102,7 +102,9 @@ function normalizeStatusbar(root) {
                 "o_bao_native_hidden_status",
                 "o_bao_statusbar_dropdown_proxy",
                 "o_bao_statusbar_step",
-                "o_bao_statusbar_current_visible"
+                "o_bao_statusbar_current_visible",
+                "o_bao_statusbar_first_visible",
+                "o_bao_statusbar_last_visible"
             );
         }
         for (const badge of statusRoot.querySelectorAll(".o_bao_statusbar_badge")) {
@@ -129,6 +131,12 @@ function normalizeStatusbar(root) {
             if (button.classList.contains("o_arrow_button_current") || button.getAttribute("aria-current") === "step") {
                 button.classList.add("o_bao_statusbar_current_visible");
             }
+        }
+
+        const visualOrder = [...stepButtons].reverse();
+        if (visualOrder.length) {
+            visualOrder[0].classList.add("o_bao_statusbar_first_visible");
+            visualOrder[visualOrder.length - 1].classList.add("o_bao_statusbar_last_visible");
         }
 
         for (const button of buttons) {
@@ -223,6 +231,8 @@ function normalizeBreadcrumbs(root) {
         const statusIndicator = controlPanel.querySelector(".o_form_status_indicator");
         const currentItem = sourceCluster?.querySelector(".o_last_breadcrumb_item span");
         const actions = sourceCluster?.querySelector(".o_control_panel_breadcrumbs_actions");
+        const isNewRecord = Boolean(statusIndicator?.classList.contains("o_form_status_indicator_new_record"));
+        controlPanel.classList.toggle("o_bao_form_control_panel_new_record", isNewRecord);
 
         const trailTexts = [...(trailList?.querySelectorAll(".breadcrumb-item") || [])]
             .map((item) => textOf(item.querySelector("a, span, button")) || textOf(item))
@@ -232,13 +242,14 @@ function normalizeBreadcrumbs(root) {
         const recordTitleText = getRecordTitleText();
         const titleFamilyText = getTitleFamilyText();
         const currentBreadcrumbText = textOf(currentItem);
-        const currentLabel =
-            (!looksLikeDocumentCode(recordTitleText) && recordTitleText !== "New" && recordTitleText) ||
-            (!looksLikeDocumentCode(currentBreadcrumbText) && currentBreadcrumbText !== "New" && currentBreadcrumbText) ||
-            titleFamilyText ||
-            currentBreadcrumbText ||
-            trailTexts[trailTexts.length - 1] ||
-            headerLabel;
+        const currentLabel = isNewRecord
+            ? currentBreadcrumbText || recordTitleText || "New"
+            : (!looksLikeDocumentCode(recordTitleText) && recordTitleText !== "New" && recordTitleText) ||
+              (!looksLikeDocumentCode(currentBreadcrumbText) && currentBreadcrumbText !== "New" && currentBreadcrumbText) ||
+              titleFamilyText ||
+              currentBreadcrumbText ||
+              trailTexts[trailTexts.length - 1] ||
+              headerLabel;
 
         breadcrumb.classList.add("o_bao_breadcrumb");
 
@@ -255,6 +266,9 @@ function normalizeBreadcrumbs(root) {
             "o_bao_breadcrumb_header_text min-w-0 text-truncate"
         );
         headerTextNode.textContent = headerLabel;
+        for (const legacyHeaderIcon of header.querySelectorAll(":scope > .o_bao_breadcrumb_header_icon")) {
+            legacyHeaderIcon.remove();
+        }
 
         const interactiveShell = ensureElement(
             header,
@@ -262,17 +276,17 @@ function normalizeBreadcrumbs(root) {
             "div",
             "o_bao_breadcrumb_interactive d-inline-flex align-items-center"
         );
-        const mainButtonsShell = ensureElement(
-            breadcrumbs,
-            ":scope > .o_bao_header_main_buttons",
-            "div",
-            "o_bao_header_main_buttons d-inline-flex align-items-center"
-        );
         const menuShell = ensureElement(
-            breadcrumbs,
+            interactiveShell,
             ":scope > .o_bao_header_menu_actions",
             "div",
             "o_bao_header_menu_actions d-inline-flex align-items-center"
+        );
+        const mainButtonsShell = ensureElement(
+            interactiveShell,
+            ":scope > .o_bao_header_main_buttons",
+            "div",
+            "o_bao_header_main_buttons d-inline-flex align-items-center"
         );
         const statusShell = ensureElement(
             breadcrumbs,
@@ -288,6 +302,22 @@ function normalizeBreadcrumbs(root) {
         }
         if (statusIndicator && statusIndicator.parentElement !== statusShell) {
             statusShell.append(statusIndicator);
+        }
+        if (statusIndicator) {
+            statusIndicator.classList.remove("o_bao_status_indicator_inline");
+        }
+        if (statusIndicator) {
+            const hasVisibleStatusButtons = [...statusIndicator.querySelectorAll("button, .btn")].some((button) => {
+                const style = window.getComputedStyle(button);
+                return style.display !== "none" && style.visibility !== "hidden";
+            });
+            statusIndicator.classList.toggle("o_bao_status_indicator_inert", !hasVisibleStatusButtons);
+        }
+        if (menuShell.parentElement === interactiveShell) {
+            interactiveShell.append(menuShell);
+        }
+        if (mainButtonsShell.parentElement === interactiveShell) {
+            interactiveShell.append(mainButtonsShell);
         }
 
         const trailRow = ensureElement(

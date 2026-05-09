@@ -166,6 +166,11 @@
     font-weight: 700 !important;
 }
 
+.o_kanban_renderer.o_kanban_ungrouped .o_kanban_record.o_kanban_ghost {
+    max-height: 0 !important;
+    opacity: 0 !important;
+}
+
 .o_kanban_renderer .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),
 .o_kanban_renderer .o_kanban_quick_create {
     background: $bao-surface-0 !important;
@@ -179,6 +184,8 @@
     box-shadow: 0 0 0 1px rgba(16, 80, 160, 0.18), 0 10px 24px rgba(13, 79, 148, 0.08) !important;
     transform: translateY(-1px);
 }
+
+
 
 .o_kanban_renderer .o_kanban_record,
 .o_kanban_renderer .o_kanban_record_title,

@@ -213,7 +213,7 @@
         .o_breadcrumb .breadcrumb-item a,
         .o_breadcrumb .breadcrumb-item span {
             font-family: $bao-font-body !important;
-            font-size: 0.88rem !important;
+            font-size: 0.8rem !important;
             font-weight: 500 !important;
             line-height: 1.15 !important;
             color: #ffffff !important;
@@ -267,7 +267,7 @@
         .o_bao_breadcrumb .breadcrumb-item,
         .o_bao_breadcrumb .breadcrumb-item a,
         .o_bao_breadcrumb .breadcrumb-item span {
-            font-size: 0.88rem !important;
+            font-size: 0.8rem !important;
             font-weight: 500 !important;
             line-height: 1.15 !important;
             color: #ffffff !important;
@@ -2133,7 +2133,7 @@
     .o_bao_live_trail .breadcrumb-item button {
         color: #ffffff !important;
         font-family: $bao-font-body !important;
-        font-size: 0.88rem !important;
+        font-size: 0.8rem !important;
         font-weight: 500 !important;
         line-height: 1.14 !important;
         text-decoration: none !important;
@@ -2350,7 +2350,7 @@
     .o_bao_live_trail .breadcrumb-item button {
         color: #ffffff !important;
         font-family: $bao-font-body !important;
-        font-size: 0.88rem !important;
+        font-size: 0.8rem !important;
         font-weight: 500 !important;
         line-height: 1.14 !important;
         text-decoration: none !important;
@@ -3674,7 +3674,7 @@
         align-items: center !important;
         justify-content: flex-end !important;
         flex-wrap: wrap !important;
-        gap: 14px !important;
+        gap: 18px !important;
         width: 100% !important;
     }
 
@@ -3694,22 +3694,29 @@
         border: none !important;
         border-radius: 0 !important;
         box-shadow: none !important;
-        color: $bao-text-400 !important;
-        font-size: 0.94rem !important;
+        color: #909397 !important;
+        font-size: 15px !important;
         font-weight: 400 !important;
-        line-height: 1.15 !important;
+        line-height: 1.2 !important;
         white-space: nowrap !important;
     }
 
-    .o_statusbar_status.o_bao_statusbar_forced_steps > .o_bao_statusbar_step:not(.o_last)::before {
+    .o_statusbar_status.o_bao_statusbar_forced_steps > .o_bao_statusbar_step:not(.o_bao_statusbar_first_visible)::before {
         content: "" !important;
+        display: block !important;
         position: absolute !important;
-        left: -14px !important;
+        left: -18px !important;
         top: 50% !important;
-        width: 12px !important;
-        height: 1px !important;
+        width: 15px !important;
+        height: 2px !important;
         transform: translateY(-50%) !important;
-        background: $bao-border-300 !important;
+        background: #c9ced4 !important;
+        border-radius: 999px !important;
+    }
+
+    .o_statusbar_status.o_bao_statusbar_forced_steps > .o_bao_statusbar_first_visible::before {
+        content: none !important;
+        display: none !important;
     }
 
     .o_statusbar_status > .o_arrow_button_current,
@@ -3721,13 +3728,13 @@
         display: inline-flex !important;
         flex-direction: row-reverse !important;
         align-items: center !important;
-        gap: 10px !important;
-        padding: 8px 16px !important;
+        gap: 8px !important;
+        padding: 9px 14px 9px 12px !important;
         background: $bao-success-50 !important;
-        border: 1px solid $bao-success-border !important;
-        border-radius: 12px !important;
+        border: 1px solid rgba(139, 207, 169, 0.45) !important;
+        border-radius: 10px !important;
         color: $bao-success-text !important;
-        font-weight: 400 !important;
+        font-weight: 600 !important;
         box-shadow: none !important;
     }
 
@@ -3737,12 +3744,12 @@
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
-        width: 18px !important;
-        height: 18px !important;
+        width: 20px !important;
+        height: 20px !important;
         border-radius: 999px !important;
         background: $bao-success-600 !important;
         color: #ffffff !important;
-        font-size: 0.72rem !important;
+        font-size: 0.7rem !important;
         font-weight: 700 !important;
         line-height: 1 !important;
     }
@@ -3753,15 +3760,15 @@
     .o_statusbar_status > .dropdown-toggle:not(.o_arrow_button):not(.d-none):not(.o_bao_native_hidden_status) {
         display: inline-flex !important;
         align-items: center !important;
-        gap: 10px !important;
-        padding: 8px 16px !important;
+        gap: 8px !important;
+        padding: 9px 14px 9px 12px !important;
         background: $bao-success-50 !important;
-        border: 1px solid $bao-success-border !important;
-        border-radius: 12px !important;
+        border: 1px solid rgba(139, 207, 169, 0.45) !important;
+        border-radius: 10px !important;
         color: $bao-success-text !important;
-        font-size: 0.94rem !important;
-        font-weight: 400 !important;
-        line-height: 1.15 !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        line-height: 1.2 !important;
         box-shadow: none !important;
     }
 
@@ -3777,12 +3784,12 @@
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
-        width: 18px !important;
-        height: 18px !important;
+        width: 20px !important;
+        height: 20px !important;
         border-radius: 999px !important;
         background: $bao-success-600 !important;
         color: #ffffff !important;
-        font-size: 0.72rem !important;
+        font-size: 0.7rem !important;
         font-weight: 700 !important;
         line-height: 1 !important;
     }
@@ -3908,52 +3915,61 @@
 .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel {
     .o_control_panel_breadcrumbs {
         display: grid !important;
-        grid-template-columns: minmax(0, 1fr) auto auto auto;
-        align-items: start !important;
-        column-gap: 10px !important;
+        grid-template-columns: fit-content(72%) auto;
+        align-items: center !important;
+        justify-content: start !important;
+        column-gap: 12px !important;
         row-gap: 0 !important;
     }
 
     .o_control_panel_breadcrumbs > .o_breadcrumb {
         grid-column: 1;
+        grid-row: 1;
         min-width: 0 !important;
+        width: fit-content !important;
+        max-width: 100% !important;
     }
 
     .o_control_panel_breadcrumbs > .o_bao_header_status_actions {
         grid-column: 2;
+        grid-row: 1;
         display: inline-flex !important;
         align-items: center !important;
-        justify-self: end !important;
-        gap: 6px !important;
+        justify-self: auto !important;
+        align-self: center !important;
+        gap: 8px !important;
         margin: 0 !important;
+        min-height: 36px !important;
     }
 
-    .o_control_panel_breadcrumbs > .o_bao_header_menu_actions {
-        grid-column: 3;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-self: end !important;
-        gap: 6px !important;
-        margin: 0 !important;
+    .o_control_panel_breadcrumbs > .o_bao_header_status_actions:empty,
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_menu_actions:empty,
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_main_buttons:empty {
+        display: none !important;
     }
 
-    .o_control_panel_breadcrumbs > .o_bao_header_main_buttons {
-        grid-column: 4;
+    .o_control_panel_breadcrumbs > .me-auto {
+        display: none !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_breadcrumb_interactive {
         display: inline-flex !important;
         align-items: center !important;
-        justify-self: end !important;
+        gap: 8px !important;
+        margin-left: 10px !important;
+        flex: 0 0 auto !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_menu_actions,
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_main_buttons {
+        display: inline-flex !important;
+        align-items: center !important;
         gap: 8px !important;
         margin: 0 !important;
     }
 
-    .o_control_panel_breadcrumbs > .o_bao_header_status_actions:empty,
-    .o_control_panel_breadcrumbs > .o_bao_header_menu_actions:empty,
-    .o_control_panel_breadcrumbs > .o_bao_header_main_buttons:empty {
-        display: none !important;
-    }
-
-    .o_control_panel_breadcrumbs > .o_bao_header_menu_actions .o_cp_action_menus,
-    .o_control_panel_breadcrumbs > .o_bao_header_menu_actions .o_control_panel_breadcrumbs_actions {
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_menu_actions .o_cp_action_menus,
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_menu_actions .o_control_panel_breadcrumbs_actions {
         display: inline-flex !important;
         align-items: center !important;
         gap: 4px !important;
@@ -3961,10 +3977,137 @@
         padding: 0 !important;
     }
 
-    .o_control_panel_breadcrumbs > .o_bao_header_main_buttons .o_control_panel_main_buttons {
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_main_buttons .o_control_panel_main_buttons {
         display: inline-flex !important;
         align-items: center !important;
         gap: 8px !important;
         margin: 0 !important;
+    }
+}
+
+.o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_new_record {
+    .o_control_panel_breadcrumbs {
+        grid-template-columns: fit-content(72%) auto !important;
+        column-gap: 10px !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_breadcrumb {
+        width: fit-content !important;
+        max-width: fit-content !important;
+    }
+
+    .o_bao_breadcrumb_header {
+        width: fit-content !important;
+        gap: 8px !important;
+        min-height: 36px !important;
+        align-items: center !important;
+    }
+
+    .o_bao_breadcrumb_header_text {
+        line-height: 1 !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.01em !important;
+    }
+
+    .o_bao_breadcrumb_trail .breadcrumb {
+        gap: 0 !important;
+    }
+
+    .o_bao_breadcrumb_trail .breadcrumb-item,
+    .o_bao_breadcrumb_trail .breadcrumb-item a,
+    .o_bao_breadcrumb_trail .breadcrumb-item span {
+        font-size: 12px !important;
+        line-height: 1.2 !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_main_buttons {
+        display: none !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_menu_actions {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0 !important;
+        margin: 0 !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_breadcrumb_interactive {
+        margin-left: 0 !important;
+        gap: 8px !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_menu_actions .o_control_panel_breadcrumbs_actions,
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_menu_actions .o_cp_action_menus {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_menu_actions .btn,
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_menu_actions button {
+        width: 16px !important;
+        min-width: 16px !important;
+        height: 16px !important;
+        min-height: 16px !important;
+        padding: 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        color: #ffffff !important;
+        line-height: 1 !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_menu_actions .btn i,
+    .o_control_panel_breadcrumbs > .o_breadcrumb .o_bao_header_menu_actions button i {
+        color: #ffffff !important;
+        font-size: 13px !important;
+        line-height: 1 !important;
+        opacity: 0.96 !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_bao_header_status_actions {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-self: start !important;
+        align-self: start !important;
+        min-height: 36px !important;
+        height: 36px !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_bao_header_status_actions .o_form_status_indicator,
+    .o_control_panel_breadcrumbs > .o_bao_header_status_actions .o_form_status_indicator_buttons {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        height: 36px !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_bao_header_status_actions .o_form_button_save,
+    .o_control_panel_breadcrumbs > .o_bao_header_status_actions .o_form_button_cancel {
+        width: 36px !important;
+        min-width: 36px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        padding: 0 !important;
+        border-radius: 8px !important;
+        border: 1px solid rgba(192, 220, 244, 0.38) !important;
+        background: linear-gradient(180deg, rgba(111, 164, 213, 0.5) 0%, rgba(82, 136, 190, 0.48) 100%) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+        color: #ffffff !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_bao_header_status_actions .o_form_button_save i,
+    .o_control_panel_breadcrumbs > .o_bao_header_status_actions .o_form_button_cancel i {
+        color: #ffffff !important;
+        font-size: 15px !important;
     }
 }
