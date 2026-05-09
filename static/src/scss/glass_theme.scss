@@ -667,34 +667,144 @@ table {
 .badge,
 .o_badge,
 .badge.rounded-pill,
-.o_tag_badge {
+.o_tag_badge,
+.o_tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 24px;
+    padding: 4px 12px;
     border-radius: 999px !important;
+    border: 1px solid $bao-border-200 !important;
+    background: $bao-surface-100 !important;
+    color: $bao-text-600 !important;
     font-weight: 600;
+    box-shadow: none !important;
 }
 
-.o_tag_badge,
-.badge.bg-success,
-.badge.text-bg-success {
-    background: #0b9244 !important;
+.badge.bg-primary,
+.badge.text-bg-primary,
+.text-bg-primary,
+.text-bg-action {
+    background: $bao-brand-600 !important;
+    border-color: $bao-brand-600 !important;
     color: #ffffff !important;
+}
+
+.o_tag.o_tag_color_0,
+.o_field_badge.o_tag_color_0 .badge,
+.o_field_many2many_tags .o_tag.o_tag_color_0,
+.o_field_many2many_selection .o_tag.o_tag_color_0 {
+    background: $bao-brand-600 !important;
+    border-color: $bao-brand-600 !important;
+    color: #ffffff !important;
+}
+
+.o_tag.o_tag_color_1,
+.o_field_badge.o_tag_color_1 .badge,
+.o_field_many2many_tags .o_tag.o_tag_color_1,
+.o_field_many2many_selection .o_tag.o_tag_color_1 {
+    background: #fbe2e0 !important;
+    border-color: #fbe2e0 !important;
+    color: #bf3c34 !important;
+}
+
+.o_tag.o_tag_color_2,
+.o_field_badge.o_tag_color_2 .badge,
+.o_field_many2many_tags .o_tag.o_tag_color_2,
+.o_field_many2many_selection .o_tag.o_tag_color_2 {
+    background: #0c974f !important;
+    border-color: #0c974f !important;
+    color: #ffffff !important;
+}
+
+.o_tag.o_tag_color_3,
+.o_field_badge.o_tag_color_3 .badge,
+.o_field_many2many_tags .o_tag.o_tag_color_3,
+.o_field_many2many_selection .o_tag.o_tag_color_3 {
+    background: #ececec !important;
+    border-color: #ececec !important;
+    color: #595f69 !important;
+}
+
+.o_tag.o_tag_color_4,
+.o_field_badge.o_tag_color_4 .badge,
+.o_field_many2many_tags .o_tag.o_tag_color_4,
+.o_field_many2many_selection .o_tag.o_tag_color_4 {
+    background: #1f6db5 !important;
+    border-color: #1f6db5 !important;
+    color: #ffffff !important;
+}
+
+.o_tag.o_tag_color_5,
+.o_field_badge.o_tag_color_5 .badge,
+.o_field_many2many_tags .o_tag.o_tag_color_5,
+.o_field_many2many_selection .o_tag.o_tag_color_5 {
+    background: #16a34a !important;
+    border-color: #16a34a !important;
+    color: #ffffff !important;
+}
+
+.o_tag.o_tag_color_8,
+.o_field_badge.o_tag_color_8 .badge,
+.o_field_many2many_tags .o_tag.o_tag_color_8,
+.o_field_many2many_selection .o_tag.o_tag_color_8 {
+    background: #72a7eb !important;
+    border-color: #72a7eb !important;
+    color: #ffffff !important;
+}
+
+.o_tag.o_tag_color_9,
+.o_field_badge.o_tag_color_9 .badge,
+.o_field_many2many_tags .o_tag.o_tag_color_9,
+.o_field_many2many_selection .o_tag.o_tag_color_9 {
+    background: #ef7a7a !important;
+    border-color: #ef7a7a !important;
+    color: #ffffff !important;
+}
+
+.badge.bg-success,
+.badge.text-success,
+.o_field_badge.text-success .badge {
+    background: $bao-success-50 !important;
+    border-color: $bao-success-border !important;
+    color: $bao-success-text !important;
 }
 
 .badge.bg-danger,
-.badge.text-bg-danger {
-    background: #df4a4d !important;
-    color: #ffffff !important;
+.badge.text-bg-danger,
+.badge.text-danger,
+.o_field_badge.text-danger .badge {
+    background: $bao-danger-50 !important;
+    border-color: rgba(217, 79, 69, 0.28) !important;
+    color: $bao-danger-text !important;
 }
 
 .badge.bg-warning,
-.badge.text-bg-warning {
-    background: #f2d85d !important;
-    color: #2e4968 !important;
+.badge.text-bg-warning,
+.badge.text-warning,
+.o_field_badge.text-warning .badge {
+    background: $bao-warning-50 !important;
+    border-color: rgba(230, 173, 53, 0.36) !important;
+    color: $bao-warning-text !important;
 }
 
 .badge.bg-info,
-.badge.text-bg-info {
-    background: #1da9c8 !important;
-    color: #ffffff !important;
+.badge.text-bg-info,
+.badge.text-info,
+.o_field_badge.text-info .badge {
+    background: $bao-info-50 !important;
+    border-color: $bao-border-selected !important;
+    color: $bao-info-text !important;
+}
+
+.badge.bg-light,
+.badge.text-bg-300,
+.badge.text-bg-light,
+.o_field_badge.text-muted .badge {
+    background: $bao-surface-100 !important;
+    border-color: $bao-border-200 !important;
+    color: $bao-text-600 !important;
 }
 
 .o_base_settings_view {
@@ -1015,12 +1125,11 @@ a.text-primary:hover,
     border-color: $primary-color !important;
 }
 
-.o_tag.o_tag_color_0,
-.text-bg-action {
-    background-color: $primary-color !important;
+.o_tag_badge_text {
+    color: inherit !important;
 }
 
-.o_tag_badge_text, .o_event_title {
+.o_event_title {
     color: black !important;
 }
 

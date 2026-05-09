@@ -112,7 +112,7 @@
 
 .o_list_sortable_icon {
     background: transparent !important;
-    color: #7b8ea7 !important;
+    color: $bao-text-900 !important;
 }
 
 .table-info {
@@ -188,7 +188,9 @@
     line-height: 1.1;
     letter-spacing: 0.01em;
     border-radius: $radius-pill !important;
-    border: none !important;
+    border: 1px solid $bao-border-200 !important;
+    background: $bao-surface-100 !important;
+    color: $bao-text-600 !important;
     box-shadow: none !important;
     transition: $transition-base;
 }
@@ -217,33 +219,38 @@
 
 .o_list_renderer .o_field_badge.text-success .badge,
 .o_list_renderer .badge.text-bg-success {
-    background: #129148 !important;
-    color: #ffffff !important;
+    background: $bao-success-50 !important;
+    border-color: $bao-success-border !important;
+    color: $bao-success-text !important;
 }
 
 .o_list_renderer .o_field_badge.text-info .badge,
 .o_list_renderer .badge.text-bg-info {
-    background: #1d78bb !important;
-    color: #ffffff !important;
+    background: $bao-info-50 !important;
+    border-color: $bao-border-selected !important;
+    color: $bao-info-text !important;
 }
 
 .o_list_renderer .o_field_badge.text-danger .badge,
 .o_list_renderer .badge.text-bg-danger {
-    background: #d94f4c !important;
-    color: #ffffff !important;
+    background: $bao-danger-50 !important;
+    border-color: rgba(217, 79, 69, 0.28) !important;
+    color: $bao-danger-text !important;
 }
 
 .o_list_renderer .o_field_badge.text-warning .badge,
 .o_list_renderer .badge.text-bg-warning {
-    background: #f3df86 !important;
-    color: $text-strong !important;
+    background: $bao-warning-50 !important;
+    border-color: rgba(230, 173, 53, 0.36) !important;
+    color: $bao-warning-text !important;
 }
 
 .o_list_renderer .o_field_badge.text-muted .badge,
 .o_list_renderer .badge.text-bg-300,
 .o_list_renderer .badge.bg-light {
-    background: #d8dde5 !important;
-    color: #51657d !important;
+    background: $bao-surface-100 !important;
+    border-color: $bao-border-200 !important;
+    color: $bao-text-600 !important;
 }
 
 .o_list_renderer .text-danger {

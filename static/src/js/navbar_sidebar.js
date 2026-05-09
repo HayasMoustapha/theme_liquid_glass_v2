@@ -94,6 +94,7 @@ function normalizeSaveCancelIcons(root) {
 function normalizeStatusbar(root) {
     for (const statusRoot of root.querySelectorAll(".o_form_statusbar .o_statusbar_status")) {
         const buttons = [...statusRoot.querySelectorAll(":scope > .btn, :scope > button")];
+        statusRoot.classList.remove("o_bao_statusbar_forced_steps");
 
         for (const button of buttons) {
             clearStatusButtonStyles(button);
@@ -109,6 +110,39 @@ function normalizeStatusbar(root) {
         }
         for (const visual of statusRoot.querySelectorAll(":scope > .o_bao_statusbar_visual")) {
             visual.remove();
+        }
+
+        const stepButtons = buttons.filter((button) => button.matches(".o_arrow_button[data-value]"));
+        if (!stepButtons.length) {
+            continue;
+        }
+
+        statusRoot.classList.add("o_bao_statusbar_forced_steps");
+
+        for (const button of stepButtons) {
+            button.classList.remove("d-none");
+            button.classList.add("o_bao_statusbar_step");
+            button.style.setProperty("display", "inline-flex");
+            button.style.setProperty("visibility", "visible");
+            button.style.setProperty("width", "auto");
+            button.style.setProperty("min-width", "0");
+            if (button.classList.contains("o_arrow_button_current") || button.getAttribute("aria-current") === "step") {
+                button.classList.add("o_bao_statusbar_current_visible");
+            }
+        }
+
+        for (const button of buttons) {
+            if (stepButtons.includes(button)) {
+                continue;
+            }
+            button.classList.add("o_bao_native_hidden_status");
+            button.style.setProperty("display", "none");
+            button.style.setProperty("visibility", "hidden");
+            button.style.setProperty("width", "0");
+            button.style.setProperty("min-width", "0");
+            button.style.setProperty("margin", "0");
+            button.style.setProperty("padding", "0");
+            button.style.setProperty("border", "0");
         }
     }
 }
@@ -310,7 +344,6 @@ function scheduleRefresh() {
     window.requestAnimationFrame(() => {
         refreshScheduled = false;
         refreshControlPanels();
-        window.dispatchEvent(new Event("resize"));
     });
 }
 

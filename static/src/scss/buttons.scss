@@ -7,7 +7,7 @@ input[type="submit"],
     border-radius: 10px !important;
     padding: 10px 18px;
     font-family: $bao-font-body;
-    font-weight: normal;
+    font-weight: normal !important;
     outline: none !important;
     transition: $transition-base;
     -webkit-border-radius: 10px !important;
@@ -16,18 +16,33 @@ input[type="submit"],
     -o-border-radius: 10px !important;
 }
 
+button .o_button_label,
+.btn .o_button_label,
+.o_button .o_button_label,
+button .o_stat_text,
+.btn .o_stat_text,
+.o_button .o_stat_text,
+button .o_button_text,
+.btn .o_button_text,
+.o_button .o_button_text,
+button span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon),
+.btn span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon),
+.o_button span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon) {
+    font-weight: 400 !important;
+}
+
 .btn-primary {
-    background: $warning-color !important;
-    border-color: $warning-color !important;
-    color: $primary-color-dark !important;
+    background: $bao-warning-action-bg !important;
+    border-color: $bao-warning-action-bg !important;
+    color: $bao-warning-action-text !important;
     box-shadow: none !important;
 
     &:hover,
     &:focus,
     &:active {
-        background: #ffe86f !important;
-        border-color: #ffe86f !important;
-        color: $primary-color-dark !important;
+        background: $bao-warning-action-hover !important;
+        border-color: $bao-warning-action-hover !important;
+        color: $bao-warning-action-text !important;
     }
 }
 
@@ -35,20 +50,23 @@ input[type="submit"],
 .btn-light,
 .o_form_button_edit,
 .o_form_button_create {
-    @include bao-field-surface;
-    color: $text-white !important;
+    background: $bao-surface-100 !important;
+    border: 1px solid $bao-border-200 !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+    color: $bao-text-700 !important;
 
     &:hover {
-        background: #eef5fd !important;
-        border-color: rgba(17, 74, 126, 0.18) !important;
-        color: $primary-color !important;
+        background: $bao-surface-50 !important;
+        border-color: $bao-border-300 !important;
+        color: $bao-text-800 !important;
     }
 }
 
 .btn-link {
     @include transparent-bg;
     border: none !important;
-    @include text-white-color;
+    color: $bao-brand-600 !important;
 }
 
 .oe_stat_button {

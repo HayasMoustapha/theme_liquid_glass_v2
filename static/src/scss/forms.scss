@@ -1060,7 +1060,7 @@
 .o_form_view .o_field_many2one input {
     background: #f1f1f17d !important;
     border: 1px solid rgba(214, 219, 227, 0.95) !important;
-    border-radius: 12px !important;
+    border-radius: 8px !important;
     box-shadow: none !important;
     color: #3a4047 !important;
     min-height: 40px;
@@ -1204,23 +1204,26 @@
     color: #3a4047 !important;
 }
 
-.o_form_sheet .o_field_many2many_tags .badge,
-.o_form_sheet .o_tag_badge,
-.o_form_sheet .o_field_many2many_selection .badge {
+.o_form_sheet .o_field_many2many_tags .badge:not([class*="o_tag_color_"]),
+.o_form_sheet .o_tag_badge:not([class*="o_tag_color_"]),
+.o_form_sheet .o_field_many2many_selection .badge:not([class*="o_tag_color_"]) {
     background: #eef2f5 !important;
     border: 1px solid rgba(205, 212, 220, 0.95) !important;
     border-radius: 10px !important;
     box-shadow: none !important;
     color: #4a5560 !important;
     font-size: 0.9rem !important;
-    font-weight: 600 !important;
+    font-weight: normal !important;
+    height: 25px !important;
 }
 
-.o_form_sheet .o_field_many2many_tags .badge .o_delete,
-.o_form_sheet .o_tag_badge .o_delete,
-.o_form_sheet .o_field_many2many_selection .badge .o_delete {
+.o_form_sheet .o_field_many2many_tags .badge:not([class*="o_tag_color_"]) .o_delete,
+.o_form_sheet .o_tag_badge:not([class*="o_tag_color_"]) .o_delete,
+.o_form_sheet .o_field_many2many_selection .badge:not([class*="o_tag_color_"]) .o_delete {
     color: #7b8793 !important;
 }
+
+
 
 .o_form_sheet .o_external_button,
 .o_form_sheet .o_field_input_buttons .btn,
@@ -2654,11 +2657,15 @@
     .o_field_many2one input {
         background: #ffffff !important;
         border: 1px solid rgba(17, 74, 126, 0.14) !important;
-        border-radius: 14px !important;
+        border-radius: 8px !important;
         box-shadow: none !important;
         color: $text-strong !important;
         font-family: $bao-font-body !important;
-    }
+        -webkit-border-radius: 8px !important;
+        -moz-border-radius: 8px !important;
+        -ms-border-radius: 8px !important;
+        -o-border-radius: 8px !important;
+}
 
     .o_field_widget textarea {
         min-height: 110px;
@@ -2685,7 +2692,11 @@
         border-color: rgba(17, 74, 126, 0.14) !important;
         border-radius: 14px !important;
         box-shadow: none !important;
-    }
+        -webkit-border-radius: 14px !important;
+        -moz-border-radius: 14px !important;
+        -ms-border-radius: 14px !important;
+        -o-border-radius: 14px !important;
+}
 
     .o_field_widget.o_field_datetime > .d-flex::after,
     .o_field_widget .o_input_dropdown .o_dropdown_button,
@@ -2855,10 +2866,14 @@
 .o_form_view .o_field_x2many .o_field_many2one input[role="combobox"] {
     background: #ffffff !important;
     border: 1px solid rgba(17, 74, 126, 0.14) !important;
-    border-radius: 14px !important;
+    border-radius: 8px !important;
     box-shadow: none !important;
     color: $text-strong !important;
     min-height: 38px;
+    -webkit-border-radius: 8px !important;
+    -moz-border-radius: 8px !important;
+    -ms-border-radius: 8px !important;
+    -o-border-radius: 8px !important;
 }
 
 .o_form_view .o_field_x2many .o-autocomplete--dropdown-menu,
@@ -2886,17 +2901,64 @@
 
 .o_form_sheet .oe_subtotal_footer,
 .o_form_sheet .oe_subtotal_footer_separator {
-    background: linear-gradient(180deg, rgba(247, 251, 255, 0.96) 0%, #ffffff 100%) !important;
-    border: 1px solid rgba(17, 74, 126, 0.12) !important;
-    border-radius: $radius-xl !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
     box-shadow: none !important;
     color: $text-strong !important;
+    padding: 0 !important;
 }
 
 .o_form_sheet .oe_subtotal_footer td,
 .o_form_sheet .oe_subtotal_footer .oe_currency_value,
 .o_form_sheet .oe_subtotal_footer .oe_subtotal_footer_separator {
     color: $text-strong !important;
+}
+
+.o_form_sheet .oe_subtotal_footer {
+    margin-top: 10px !important;
+    padding-top: 12px !important;
+    border-top: 1px solid $bao-border-200 !important;
+}
+
+.o_form_sheet .oe_subtotal_footer .o_field_account-tax-totals-field,
+.o_form_sheet .oe_subtotal_footer table {
+    width: 100% !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.o_form_sheet .oe_subtotal_footer tr,
+.o_form_sheet .oe_subtotal_footer td,
+.o_form_sheet .oe_subtotal_footer th {
+    background: transparent !important;
+    border: none !important;
+    padding: 2px 0 !important;
+    vertical-align: middle !important;
+}
+
+.o_form_sheet .oe_subtotal_footer .o_tax_total_label,
+.o_form_sheet .oe_subtotal_footer .o_form_label {
+    color: $bao-text-600 !important;
+    font-family: $bao-font-body !important;
+    font-size: 0.98rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+}
+
+.o_form_sheet .oe_subtotal_footer .oe_currency_value,
+.o_form_sheet .oe_subtotal_footer .o_field_monetary,
+.o_form_sheet .oe_subtotal_footer .o_field_widget {
+    color: $bao-text-800 !important;
+    font-family: $bao-font-body !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+}
+
+.o_form_sheet .oe_subtotal_footer .oe_subtotal_footer_separator {
+    height: 10px !important;
+    padding: 0 !important;
 }
 
 .o_form_sheet .oe_chatter,
@@ -2997,8 +3059,12 @@
 .o_form_view .o-mail-Chatter .o-mail-Composer-coreMain {
     background: #ffffff !important;
     border: 1px solid rgba(17, 74, 126, 0.14) !important;
-    border-radius: 14px !important;
+    border-radius: 8px !important;
     box-shadow: none !important;
+    -webkit-border-radius: 8px !important;
+    -moz-border-radius: 8px !important;
+    -ms-border-radius: 8px !important;
+    -o-border-radius: 8px !important;
 }
 
 .o_form_view .o-mail-Chatter .o-mail-Composer-actions {
@@ -3011,4 +3077,828 @@
     border: 1px solid rgba(17, 74, 126, 0.18) !important;
     border-radius: 14px !important;
     color: #ffffff !important;
+}
+
+// BAO slice recovery: wave5 C42-C46 notebook shell / tabs / panel.
+.o_form_view .o_notebook {
+    background: transparent !important;
+    box-shadow: none !important;
+
+    > .nav,
+    > .nav-tabs,
+    .nav.nav-tabs {
+        gap: 0 !important;
+        align-items: flex-end !important;
+        border-bottom: 1px solid $bao-border-200 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+    }
+
+    .nav-item {
+        margin-bottom: 0 !important;
+    }
+
+    .nav-link {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 10px 10px 0 0 !important;
+        box-shadow: none !important;
+        color: $bao-text-500 !important;
+        font-family: $bao-font-body !important;
+        font-size: 0.8125rem !important;
+        font-weight: 400 !important;
+        margin: 0 !important;
+        padding: 12px 16px !important;
+        transition: $transition-base;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+        background: $bao-surface-50 !important;
+        color: $bao-text-700 !important;
+    }
+
+    .nav-link.active,
+    .nav-item.show .nav-link,
+    .nav-tabs .nav-link.active {
+        background: $bao-surface-100 !important;
+        border: 1px solid $bao-border-200 !important;
+        border-bottom-color: $bao-surface-100 !important;
+        border-radius: 10px 10px 0 0 !important;
+        color: $bao-text-800 !important;
+        font-weight: 400 !important;
+        margin-bottom: -1px !important;
+        position: relative;
+        top: 1px;
+    }
+
+    .tab-content,
+    .o_notebook_content,
+    .tab-pane {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+}
+
+// Wave5 notebook content contract:
+// - notebook fields keep the Liquid initial shell
+// - notebook tables use the BAO table palette
+.o_form_view .o_notebook {
+    // Field shell inheritance is handled by the final authoritative notebook block
+    // lower in this file. Keep only the table/x2many contract here.
+
+    .o_field_x2many,
+    .o_x2m_control_panel,
+    .o_x2m_control_panel .o_cp_buttons {
+        @include transparent-bg;
+    }
+
+    .o_field_x2many {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+
+    .o_field_x2many_list {
+        .o_x2m_control_panel {
+            margin-bottom: 10px !important;
+        }
+
+        .o_field_x2many_list_row_add {
+            padding-top: 8px !important;
+        }
+
+        .o_field_x2many_list_row_add,
+        .o_field_x2many_list_row_add a,
+        .o_field_x2many_list_row_add .btn-link {
+            color: $primary-color !important;
+            font-weight: 600 !important;
+        }
+    }
+
+    .o_field_x2many .o_list_renderer,
+    .o_field_x2many .o_kanban_renderer {
+        padding: 0 !important;
+        background: #ffffff !important;
+        border: 1px solid rgba(21, 58, 99, 0.1) !important;
+        border-radius: 0px !important;
+        box-shadow: 0 16px 38px rgba(12, 41, 73, 0.05) !important;
+        gap: 8px !important;
+        margin: 0 !important;
+            border-left: none !important;
+    border-right: none !important;
+        overflow: hidden !important;
+        -webkit-border-radius: 0px !important;
+        -moz-border-radius: 0px !important;
+        -ms-border-radius: 0px !important;
+        -o-border-radius: 0px !important;
+}
+
+    .o_field_x2many .o_list_table {
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+        border-radius: 26px !important;
+        margin-bottom: 0 !important;
+
+        thead {
+            background: #ffffff !important;
+            border-bottom: 1px solid rgba(20, 60, 102, 0.11) !important;
+        }
+
+        thead th {
+            background: #ffffff !important;
+            border-bottom: 1px solid rgba(20, 60, 102, 0.11) !important;
+            color: #46607d !important;
+            font-size: 11.5px !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.01em !important;
+            text-transform: none !important;
+            line-height: 1.2 !important;
+            padding: 13px 16px !important;
+            white-space: nowrap !important;
+        }
+
+        tbody tr {
+            background: #ffffff !important;
+            border-bottom: 1px solid rgba(22, 63, 109, 0.08) !important;
+
+            &:hover {
+                background: #f7fbff !important;
+            }
+        }
+
+        tbody td {
+            background: transparent !important;
+            color: #314a67 !important;
+            font-size: 13px !important;
+            font-weight: 400 !important;
+            line-height: 1.35 !important;
+            padding: 10px 16px !important;
+            vertical-align: middle !important;
+        }
+
+        tfoot,
+        tfoot.o_list_footer {
+            background: #ffffff !important;
+            border-top: 1px solid rgba(18, 63, 111, 0.1) !important;
+            box-shadow: none !important;
+            position: static !important;
+        }
+
+        tfoot td,
+        tfoot th {
+            background: #ffffff !important;
+            color: $text-strong !important;
+            font-weight: 700 !important;
+            padding: 14px 16px !important;
+        }
+    }
+
+    .o_field_x2many .o_list_renderer .o_list_number,
+    .o_field_x2many .o_list_renderer .o_row_handle,
+    .o_field_x2many .o_row_handle,
+    .o_field_x2many .oi-draggable,
+    .o_field_x2many .o_optional_columns_dropdown_toggle,
+    .o_field_x2many .dropdown-toggle {
+        color: #7b8ea7 !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .o_field_x2many .o_handle_cell,
+    .o_field_x2many .o_list_controller,
+    .o_field_x2many .o_list_controller .dropdown-toggle {
+        background: #ffffff !important;
+    }
+}
+
+// Settings fields: inherit the same field and label contract as the main form sheet.
+.o_base_settings_view {
+    .o_setting_box,
+    .row.mt16.o_settings_container {
+        .o_cell,
+        .o_wrap_label,
+        .o_wrap_input {
+            background: transparent !important;
+            border: none !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+        }
+
+        .o_wrap_label {
+            margin-bottom: 6px;
+        }
+
+        .o_wrap_input,
+        .o_cell_custom:not(.o_wrap_label),
+        .o_inner_group > .null {
+            margin-bottom: 14px !important;
+        }
+
+        .o_wrap_input,
+        .o_cell_custom.null,
+        .o_field_widget,
+        .o_field_widget > div:not(.o_field_x2many) {
+            min-width: 0;
+        }
+
+        .o_wrap_input > .d-flex,
+        .o_cell_custom.null > .d-flex,
+        .o_cell_custom.null > .row {
+            flex-wrap: wrap;
+            gap: 8px 12px;
+        }
+
+        .o_td_label .col-form-label,
+        .o_wrap_label .col-form-label {
+            display: inline-flex;
+            align-items: center;
+            min-height: auto;
+            padding: 0 0 6px !important;
+            background: transparent !important;
+            border: none !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+
+        .o_wrap_input > :not(.o_field_x2many),
+        .o_cell_custom.null > :not(.o_field_x2many),
+        .o_address_format > *,
+        .o_field_widget .o_input,
+        .o_field_widget textarea,
+        .o_field_widget select,
+        .o_field_widget .o_many2one,
+        .o_field_widget .o_input_dropdown,
+        .o_field_widget .o-autocomplete,
+        .o_field_widget.o_field_datetime > .d-flex {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .o_required_modifier,
+        .o_many2one,
+        .o_field_many2one_selection,
+        .o_input_dropdown,
+        .o-autocomplete,
+        .o_field_input_buttons {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            --o-input-border-color: rgba(214, 219, 227, 0.95);
+            --o-caret-color: #3a4047;
+        }
+
+        .o_field_widget .o_input_dropdown,
+        .o_field_widget.o_field_datetime > .d-flex {
+            position: relative;
+            align-items: center !important;
+        }
+
+        .o_field_widget.o_field_datetime > .d-flex::after {
+            content: "\f073";
+            position: absolute;
+            top: 50%;
+            right: 14px;
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            transform: translateY(-50%);
+            font-family: FontAwesome;
+            font-size: 0.92rem;
+            color: #8f97a0;
+            pointer-events: none;
+        }
+
+        .o_field_widget.o_field_datetime .o_input,
+        .o_field_widget.o_field_datetime button.o_input,
+        .o_field_widget .o_input_dropdown .o_input,
+        .o_field_widget .o_input_dropdown .o-autocomplete--input {
+            width: 100% !important;
+            padding-right: 42px !important;
+        }
+
+        .o_field_widget .o_input_dropdown .o_dropdown_button {
+            position: absolute;
+            inset: 0 0 0 auto;
+            width: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            color: transparent !important;
+            pointer-events: auto;
+        }
+
+        .o_field_widget .o_input_dropdown .o_dropdown_button::before {
+            content: "\f107";
+            font-family: FontAwesome;
+            font-size: 0.95rem;
+            color: #8f97a0;
+        }
+
+        .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html),
+        .o_field_widget.o_field_readonly,
+        .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html) > span,
+        .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html) > div:not(.o_field_x2many):not(.o_field_html),
+        .o_field_widget .o_field_many2one_selection,
+        .o_field_widget .o_field_many2many_selection,
+        .o_field_widget .o_tag_badge {
+            color: #3a4047 !important;
+        }
+
+        .o_external_button,
+        .o_field_input_buttons .btn,
+        .o_field_input_buttons button {
+            border: none !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            color: #8f97a0 !important;
+        }
+    }
+}
+
+// Chatter fields: reuse the main form field shell instead of a dedicated chatter field skin.
+.o_form_view .o-mail-Chatter {
+    .o-mail-Composer-input,
+    .o-mail-Composer-coreMain,
+    .o-mail-Composer-bg {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+
+    .o-mail-AutoresizeInput,
+    textarea,
+    input:not([type="checkbox"]):not([type="radio"]),
+    [contenteditable="true"] {
+        background: #f1f1f17d !important;
+        border: 1px solid rgba(214, 219, 227, 0.95) !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        color: #3a4047 !important;
+        font-size: 0.96rem !important;
+        font-weight: 400 !important;
+        line-height: 1.3 !important;
+        min-height: 40px;
+        padding: 8px 14px !important;
+    }
+
+    .o-mail-AutoresizeInput::placeholder,
+    textarea::placeholder,
+    input::placeholder,
+    [contenteditable="true"]::placeholder {
+        color: #b4b9bf !important;
+    }
+}
+
+// Shared form field dropdowns: keep the Liquid field contract in the sheet and only
+// apply BAO palette details to the autocomplete affordances.
+.o_field_tags {
+    align-items: center !important;
+}
+
+.o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet {
+    .o_field_widget .o_many2one,
+    .o_field_widget .o_input_dropdown,
+    .o_field_widget .o-autocomplete,
+    .o_many2one,
+    .o_input_dropdown,
+    .o-autocomplete,
+    .o_field_input_buttons {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        --o-input-border-color: #{$bao-border-200};
+        --o-caret-color: #{$bao-text-700};
+    }
+
+    .o_field_widget .o_input_dropdown,
+    .o_field_widget.o_field_datetime > .d-flex {
+        position: relative;
+        align-items: center !important;
+    }
+
+    .o_field_widget .o_input_dropdown .o_input,
+    .o_field_widget .o_input_dropdown .o-autocomplete--input {
+        width: 100% !important;
+        padding-right: 42px !important;
+    }
+
+    .o_field_widget .o_input_dropdown .o_dropdown_button {
+        position: absolute;
+        inset: 0 0 0 auto;
+        width: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        color: transparent !important;
+        pointer-events: auto;
+    }
+
+    .o_field_widget .o_input_dropdown .o_dropdown_button::before {
+        content: "\f107";
+        font-family: FontAwesome;
+        font-size: 0.95rem;
+        color: $bao-text-400 !important;
+    }
+}
+
+.ui-autocomplete,
+.o-autocomplete--dropdown-menu {
+    background: $bao-surface-0 !important;
+    border: 1px solid $bao-border-200 !important;
+    border-radius: 12px !important;
+    box-shadow: $bao-shadow-popover !important;
+}
+
+.ui-autocomplete .dropdown-item,
+.ui-autocomplete a,
+.ui-autocomplete button,
+.o-autocomplete--dropdown-item {
+    background: transparent !important;
+    color: $bao-text-700 !important;
+}
+
+.ui-autocomplete .dropdown-item:hover,
+.ui-autocomplete .dropdown-item:focus,
+.ui-autocomplete a:hover,
+.ui-autocomplete a:focus,
+.ui-autocomplete button:hover,
+.ui-autocomplete button:focus,
+.o-autocomplete--dropdown-item:hover,
+.o-autocomplete--dropdown-item:focus,
+.o-autocomplete--dropdown-item.o-hover {
+    background: $bao-blue-050 !important;
+    color: $bao-text-800 !important;
+}
+
+// Notebook field inheritance: notebook autocomplete/many2one controls must reuse the
+// exact same Liquid+BAO shell contract as the main form sheet, without introducing a
+// notebook-only field skin.
+.o_form_view .o_notebook {
+    .tab-content,
+    .o_notebook_content,
+    .tab-pane {
+        .o_wrap_input > :not(.o_field_x2many),
+        .o_cell_custom.null > :not(.o_field_x2many),
+        .o_address_format > *,
+        .o_field_widget .o_input,
+        .o_field_widget textarea,
+        .o_field_widget select,
+        .o_field_widget .o_many2one,
+        .o_field_widget .o_input_dropdown,
+        .o_field_widget .o-autocomplete,
+        .o_field_widget.o_field_datetime > .d-flex {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .o_required_modifier,
+        .o_many2one,
+        .o_field_many2one_selection,
+        .o_input_dropdown,
+        .o-autocomplete,
+        .o_field_input_buttons {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            --o-input-border-color: rgba(214, 219, 227, 0.95);
+            --o-caret-color: #3a4047;
+        }
+
+        .o_field_widget .o_input_dropdown,
+        .o_field_widget.o_field_datetime > .d-flex {
+            position: relative;
+            align-items: center !important;
+        }
+
+        .o_field_widget.o_field_datetime > .d-flex::after {
+            content: "\f073";
+            position: absolute;
+            top: 50%;
+            right: 14px;
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            transform: translateY(-50%);
+            font-family: FontAwesome;
+            font-size: 0.92rem;
+            color: #8f97a0;
+            pointer-events: none;
+        }
+
+        .o_field_widget.o_field_datetime .o_input,
+        .o_field_widget.o_field_datetime button.o_input,
+        .o_field_widget .o_input_dropdown .o_input,
+        .o_field_widget .o_input_dropdown .o-autocomplete--input {
+            width: 100% !important;
+            padding-right: 42px !important;
+        }
+
+        .o_field_widget .o_input_dropdown .o_dropdown_button {
+            position: absolute;
+            inset: 0 0 0 auto;
+            width: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            color: transparent !important;
+            pointer-events: auto;
+        }
+
+        .o_field_widget .o_input_dropdown .o_dropdown_button::before {
+            content: "\f107";
+            font-family: FontAwesome;
+            font-size: 0.95rem;
+            color: #8f97a0;
+        }
+
+        .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html),
+        .o_field_widget.o_field_readonly,
+        .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html) > span,
+        .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html) > div:not(.o_field_x2many):not(.o_field_html),
+        .o_field_widget .o_field_many2one_selection,
+        .o_field_widget .o_field_many2many_selection,
+        .o_field_widget .o_tag_badge {
+            color: #3a4047 !important;
+        }
+
+        .o_external_button,
+        .o_field_input_buttons .btn,
+        .o_field_input_buttons button {
+            border: none !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            color: #8f97a0 !important;
+        }
+    }
+}
+
+// Final authoritative BAO statusbar pass from the atlas component.
+.o_action_manager:has(.o_form_view) .o_form_view .o_form_statusbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 20px !important;
+    margin: 0 0 14px !important;
+    padding: 0 0 8px !important;
+
+    > .o_field_widget {
+        width: auto !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        margin-left: auto !important;
+    }
+
+    .o_statusbar_status {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        flex-wrap: wrap !important;
+        gap: 14px !important;
+        width: 100% !important;
+    }
+
+    .o_statusbar_status.o_bao_statusbar_forced_steps {
+        flex-direction: row-reverse !important;
+    }
+
+    .o_statusbar_status > .o_arrow_button,
+    .o_statusbar_status > .dropdown-toggle.o_arrow_button,
+    .o_statusbar_status > .o_bao_statusbar_step {
+        display: inline-flex !important;
+        align-items: center !important;
+        position: relative !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        color: $bao-text-400 !important;
+        font-size: 0.94rem !important;
+        font-weight: 400 !important;
+        line-height: 1.15 !important;
+        white-space: nowrap !important;
+    }
+
+    .o_statusbar_status.o_bao_statusbar_forced_steps > .o_bao_statusbar_step:not(.o_last)::before {
+        content: "" !important;
+        position: absolute !important;
+        left: -14px !important;
+        top: 50% !important;
+        width: 12px !important;
+        height: 1px !important;
+        transform: translateY(-50%) !important;
+        background: $bao-border-300 !important;
+    }
+
+    .o_statusbar_status > .o_arrow_button_current,
+    .o_statusbar_status > .o_arrow_button_current:hover,
+    .o_statusbar_status > .o_arrow_button_current:focus,
+    .o_statusbar_status > .o_bao_statusbar_current_visible,
+    .o_statusbar_status > .o_bao_statusbar_current_visible:hover,
+    .o_statusbar_status > .o_bao_statusbar_current_visible:focus {
+        display: inline-flex !important;
+        flex-direction: row-reverse !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding: 8px 16px !important;
+        background: $bao-success-50 !important;
+        border: 1px solid $bao-success-border !important;
+        border-radius: 12px !important;
+        color: $bao-success-text !important;
+        font-weight: 400 !important;
+        box-shadow: none !important;
+    }
+
+    .o_statusbar_status > .o_arrow_button_current::after,
+    .o_statusbar_status > .o_bao_statusbar_current_visible::after {
+        content: "\2713" !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 18px !important;
+        height: 18px !important;
+        border-radius: 999px !important;
+        background: $bao-success-600 !important;
+        color: #ffffff !important;
+        font-size: 0.72rem !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
+    }
+
+    // Compact/native fallback: when Odoo exposes only one visible status button,
+    // BAO only skins that exposed button instead of reintroducing hidden states.
+    .o_statusbar_status > button:not(.o_arrow_button):not(.d-none):not(.o_bao_native_hidden_status),
+    .o_statusbar_status > .dropdown-toggle:not(.o_arrow_button):not(.d-none):not(.o_bao_native_hidden_status) {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding: 8px 16px !important;
+        background: $bao-success-50 !important;
+        border: 1px solid $bao-success-border !important;
+        border-radius: 12px !important;
+        color: $bao-success-text !important;
+        font-size: 0.94rem !important;
+        font-weight: 400 !important;
+        line-height: 1.15 !important;
+        box-shadow: none !important;
+    }
+
+    .o_statusbar_status > button:not(.o_arrow_button):not(.d-none):not(.o_bao_native_hidden_status)::before,
+    .o_statusbar_status > .dropdown-toggle:not(.o_arrow_button):not(.d-none):not(.o_bao_native_hidden_status)::before {
+        display: none !important;
+        content: none !important;
+    }
+
+    .o_statusbar_status > button:not(.o_arrow_button):not(.d-none):not(.o_bao_native_hidden_status)::after,
+    .o_statusbar_status > .dropdown-toggle:not(.o_arrow_button):not(.d-none):not(.o_bao_native_hidden_status)::after {
+        content: "\2713" !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 18px !important;
+        height: 18px !important;
+        border-radius: 999px !important;
+        background: $bao-success-600 !important;
+        color: #ffffff !important;
+        font-size: 0.72rem !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
+    }
+
+    .o_statusbar_status > .d-none,
+    .o_statusbar_status > button.d-none,
+    .o_statusbar_status > .btn.d-none,
+    .o_statusbar_status > .o_arrow_button.d-none,
+    .o_statusbar_status > .o_bao_native_hidden_status {
+        display: none !important;
+        visibility: hidden !important;
+        width: 0 !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+    }
+}
+
+// Chatter topbar: BAO color pass only, no structural DOM changes.
+.o_form_view .o-mail-Chatter {
+    .o_ChatterTopbar,
+    .o-mail-Chatter-top,
+    .o-mail-Chatter-topbar {
+        background: transparent !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+    }
+
+    .o_ChatterTopbar,
+    .o-mail-Chatter-top {
+        gap: 10px !important;
+    }
+
+    .o_ChatterTopbar .btn,
+    .o_ChatterTopbar button,
+    .o-mail-Chatter-top .btn,
+    .o-mail-Chatter-top button {
+        font-weight: 400 !important;
+        box-shadow: none !important;
+    }
+
+    .o_ChatterTopbar .btn-primary,
+    .o_ChatterTopbar .btn-primary:hover,
+    .o_ChatterTopbar .btn-primary:focus,
+    .o-mail-Chatter-top .btn-primary,
+    .o-mail-Chatter-top .btn-primary:hover,
+    .o-mail-Chatter-top .btn-primary:focus {
+        background: $bao-warning-action-bg !important;
+        border-color: $bao-warning-action-bg !important;
+        color: $bao-warning-action-text !important;
+    }
+
+    .o_ChatterTopbar .o-mail-Chatter-logNote,
+    .o_ChatterTopbar .o-mail-Chatter-activity,
+    .o-mail-Chatter-top .o-mail-Chatter-logNote,
+    .o-mail-Chatter-top .o-mail-Chatter-activity {
+        background: $bao-border-200 !important;
+        border-color: $bao-border-200 !important;
+        color: $bao-text-700 !important;
+    }
+
+    .o_ChatterTopbar .o-mail-Chatter-logNote,
+    .o-mail-Chatter-top .o-mail-Chatter-logNote {
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .o_ChatterTopbar .o-mail-Chatter-activity,
+    .o-mail-Chatter-top .o-mail-Chatter-activity {
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    .o_ChatterTopbar .btn:has(i:first-child:last-child),
+    .o_ChatterTopbar button:has(i:first-child:last-child),
+    .o-mail-Chatter-top .btn:has(i:first-child:last-child),
+    .o-mail-Chatter-top button:has(i:first-child:last-child) {
+        background: transparent !important;
+        border-color: transparent !important;
+        color: $bao-text-400 !important;
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+    }
+
+    .o_ChatterTopbar .btn:has(i:first-child:last-child) i,
+    .o_ChatterTopbar button:has(i:first-child:last-child) i,
+    .o-mail-Chatter-top .btn:has(i:first-child:last-child) i,
+    .o-mail-Chatter-top button:has(i:first-child:last-child) i {
+        color: $bao-text-400 !important;
+    }
+}
+
+// Final global button label weight pass after legacy form overrides.
+.o_web_client button,
+.o_web_client .btn,
+.o_web_client input[type="button"],
+.o_web_client input[type="submit"],
+.o_web_client .o_button {
+    font-weight: 400 !important;
+}
+
+.o_web_client button .o_button_label,
+.o_web_client .btn .o_button_label,
+.o_web_client .o_button .o_button_label,
+.o_web_client button .o_stat_text,
+.o_web_client .btn .o_stat_text,
+.o_web_client .o_button .o_stat_text,
+.o_web_client button .o_button_text,
+.o_web_client .btn .o_button_text,
+.o_web_client .o_button .o_button_text,
+.o_web_client button span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon),
+.o_web_client .btn span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon),
+.o_web_client .o_button span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon) {
+    font-weight: inherit !important;
 }
