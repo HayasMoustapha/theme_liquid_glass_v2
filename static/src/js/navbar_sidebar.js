@@ -367,11 +367,20 @@ function getNativeKpiDisplayValue(value) {
     return (value || "").replace(/\s+%$/, "%").trim();
 }
 
-function normalizeNativeKpiCard(card, reference) {
-    if (card.dataset.liquidNativeKpiNormalized === "true") {
-        return;
+function getNativeKpiCarrier(sourceCard) {
+    const parent = sourceCard.parentElement;
+    if (parent && parent !== sourceCard.closest(".o_liquid_native_kpi_host, .o_purchase_dashboard")) {
+        return parent;
     }
-    const { label, primaryValue, secondaryValue, secondaryHasStar } = getNativeKpiCardState(card);
+    return sourceCard;
+}
+
+function normalizeNativeKpiCard(sourceCard, reference) {
+    const card = getNativeKpiCarrier(sourceCard);
+    if (card.dataset.liquidNativeKpiNormalized === "true") {
+        return card;
+    }
+    const { label, primaryValue, secondaryValue, secondaryHasStar } = getNativeKpiCardState(sourceCard);
     const { variant, active } = getNativeKpiVariant(label);
     const displayLabel = getNativeKpiDisplayLabel(label);
     const displayValue = getNativeKpiDisplayValue(primaryValue);
@@ -407,7 +416,10 @@ function normalizeNativeKpiCard(card, reference) {
         "text-center",
         "text-truncate",
         "text-wrap",
-        "o_no_hover"
+        "o_no_hover",
+        "g-col-12",
+        "g-col-6",
+        "p-0"
     );
 
     labelNode.className = "o_liquid_native_kpi_label";
@@ -424,8 +436,40 @@ function normalizeNativeKpiCard(card, reference) {
         valueRow.append(metaNode);
     }
 
-    card.replaceChildren(labelNode, valueRow);
+    if (sourceCard !== card) {
+        sourceCard.classList.add("o_liquid_native_kpi_source_card");
+        sourceCard.setAttribute("aria-hidden", "true");
+        card.replaceChildren(labelNode, valueRow, sourceCard);
+    } else {
+        card.replaceChildren(labelNode, valueRow);
+    }
     card.dataset.liquidNativeKpiNormalized = "true";
+    return card;
+}
+
+function syncNativeKpiBackdrop(host, shell, adapter) {
+    const actionRoot = host.closest(".o_action_manager");
+    if (!actionRoot || !shell) {
+        return;
+    }
+    const selector = `:scope > .o_liquid_native_kpi_backdrop[data-liquid-native-kpi-adapter="${adapter.id}"]`;
+    let backdrop = actionRoot.querySelector(selector);
+    if (!backdrop) {
+        backdrop = document.createElement("div");
+        backdrop.className = "o_liquid_native_kpi_backdrop";
+        backdrop.dataset.liquidNativeKpiAdapter = adapter.id;
+        actionRoot.prepend(backdrop);
+    }
+    actionRoot.classList.add("o_liquid_native_kpi_backdrop_root");
+
+    const updateBackdropPosition = () => {
+        const shellRect = shell.getBoundingClientRect();
+        backdrop.style.setProperty("--o-liquid-native-kpi-backdrop-top", `${shellRect.top}px`);
+        backdrop.style.setProperty("--o-liquid-native-kpi-backdrop-height", `${shellRect.height}px`);
+    };
+
+    updateBackdropPosition();
+    window.requestAnimationFrame(updateBackdropPosition);
 }
 
 function normalizeSharedNativeKpis(root) {
@@ -449,16 +493,14 @@ function normalizeSharedNativeKpis(root) {
                 "o_liquid_native_kpi_strip"
             );
 
-            for (const [index, card] of cards.entries()) {
-                normalizeNativeKpiCard(card, adapter.reference[index]);
-                card.classList.add("o_liquid_native_kpi_card");
-            }
+            const normalizedCards = cards.map((card, index) => normalizeNativeKpiCard(card, adapter.reference[index]));
 
-            strip.replaceChildren(...cards);
+            strip.replaceChildren(...normalizedCards);
             shell.replaceChildren(strip);
             host.replaceChildren(shell);
             host.classList.add("o_liquid_native_kpi_host", "o_liquid_native_kpi_ready");
             host.dataset.liquidNativeKpiAdapter = adapter.id;
+            syncNativeKpiBackdrop(host, shell, adapter);
         }
     }
 }
