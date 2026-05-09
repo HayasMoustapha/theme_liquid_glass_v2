@@ -63,6 +63,33 @@ button span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon),
     }
 }
 
+// Shared view switchers live inside the global control panel and must not
+// fall back to generic btn-secondary styling in graph/pivot/dashboard modules.
+.o_control_panel .o_cp_switch_buttons .o_switch_view,
+.o_control_panel .o_control_panel_navigation .o_switch_view {
+    @include bao-blue-pill;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 8px 12px !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    color: #ffffff !important;
+
+    &:hover,
+    &:focus {
+        background: rgba(255, 255, 255, 0.22) !important;
+        border-color: transparent !important;
+        color: #ffffff !important;
+    }
+
+    &:active,
+    &.active {
+        background: #ffffff !important;
+        border-color: #ffffff !important;
+        color: $primary-color !important;
+    }
+}
+
 .btn-link {
     @include transparent-bg;
     border: none !important;

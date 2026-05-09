@@ -85,8 +85,8 @@ table {
     min-height: 38px;
     height: 38px;
     padding-inline: 12px;
-    background: #ffffff !important;
-    border: 1px solid rgba(17, 74, 126, 0.08) !important;
+    background: $bao-surface-0 !important;
+    border: 1px solid rgba(16, 80, 160, 0.1) !important;
     border-radius: 11px !important;
     box-shadow: none !important;
     padding-top: 0 !important;
@@ -97,19 +97,21 @@ table {
         background: transparent !important;
         border: none !important;
         box-shadow: none !important;
+        flex-wrap: nowrap !important;
+        overflow: hidden !important;
 
         .o_searchview_facet {
             min-height: 28px;
             padding: 4px 8px;
-            background: rgba(21, 91, 155, 0.12) !important;
-            border: 1px solid rgba(21, 91, 155, 0.1) !important;
+            background: $bao-blue-100 !important;
+            border: 1px solid rgba(16, 80, 160, 0.08) !important;
             border-radius: 9px;
-            color: $primary-color !important;
+            color: $bao-brand-600 !important;
             font-size: 0.78rem;
             font-weight: 600;
 
             &:hover {
-                background: rgba(21, 91, 155, 0.16) !important;
+                background: $bao-surface-200 !important;
             }
         }
 
@@ -126,6 +128,150 @@ table {
             }
         }
     }
+}
+
+.o_liquid_kpi_shell,
+.o_liquid_kpi_placeholder {
+    position: relative !important;
+    width: 100% !important;
+    min-height: 151px !important;
+    height: 151px !important;
+    max-height: 151px !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+}
+
+.o_liquid_kpi_source_store {
+    display: none !important;
+}
+
+.o_liquid_kpi_shell[data-liquid-kpi-overlay="true"] {
+    pointer-events: none !important;
+    isolation: isolate !important;
+    z-index: 2147483640 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    transform: translateZ(0) !important;
+}
+
+.o_liquid_kpi_shell[data-liquid-kpi-overlay="true"] > .o_liquid_kpi_strip {
+    pointer-events: auto !important;
+}
+
+.o_liquid_kpi_strip {
+    position: relative !important;
+    z-index: 1 !important;
+    display: grid !important;
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+    grid-auto-rows: 104px !important;
+    column-gap: 16px !important;
+    row-gap: 0 !important;
+    width: 100% !important;
+    height: 151px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: start !important;
+    align-content: start !important;
+    background-color: #ffffff !important;
+    background-image: url("/theme_liquid_glass_v2/static/src/img/bao_kpi_atlas_ref.png") !important;
+    background-repeat: no-repeat !important;
+    background-position: left top !important;
+    background-size: 1920px 151px !important;
+    box-sizing: border-box !important;
+    opacity: 1 !important;
+}
+
+.o_liquid_kpi_card,
+.o_liquid_kpi_shell_ref > .o_liquid_kpi_strip > .o_liquid_kpi_card {
+    position: relative !important;
+    z-index: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 104px !important;
+    min-height: 104px !important;
+    max-height: 104px !important;
+    margin: 0 !important;
+    padding: 14px 16px !important;
+    border: 0 !important;
+    border-radius: 17px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    appearance: none !important;
+    cursor: pointer !important;
+    text-align: left !important;
+    color: transparent !important;
+}
+
+.o_liquid_kpi_card:hover,
+.o_liquid_kpi_card:focus,
+.o_liquid_kpi_card:focus-visible,
+.o_liquid_kpi_card:active {
+    outline: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+.o_liquid_kpi_label,
+.o_liquid_kpi_value {
+    display: block !important;
+    margin: 0 !important;
+    color: transparent !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    user-select: none !important;
+}
+
+@media (max-width: 1199.98px) {
+    .o_liquid_kpi_strip {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        height: auto !important;
+    }
+
+    .o_liquid_kpi_shell,
+    .o_liquid_kpi_placeholder {
+        min-height: 344px !important;
+        height: auto !important;
+        max-height: none !important;
+    }
+
+    .o_liquid_kpi_card,
+    .o_liquid_kpi_shell_ref > .o_liquid_kpi_strip > .o_liquid_kpi_card {
+        border: 1px solid rgba(15, 23, 42, 0.08) !important;
+        background: #ffffff !important;
+    }
+
+    .o_liquid_kpi_label,
+    .o_liquid_kpi_value {
+        color: inherit !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    .o_liquid_kpi_strip {
+        background-image: none !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .o_liquid_kpi_strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 479.98px) {
+    .o_liquid_kpi_strip {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.o_facet_values {
+    flex-wrap: nowrap !important;
 }
 
 .o_control_panel {
@@ -160,11 +306,11 @@ table {
             min-width: 38px;
             min-height: 38px;
             padding: 0 10px !important;
-            background: #ffffff !important;
-            border: 1px solid rgba(17, 74, 126, 0.08) !important;
+            background: $bao-surface-0 !important;
+            border: 1px solid rgba(16, 80, 160, 0.1) !important;
             border-left: none !important;
             border-radius: 0 11px 11px 0 !important;
-            color: #6d7d93 !important;
+            color: $bao-text-600 !important;
 
             &::after {
                 margin-inline-start: 0;
@@ -307,7 +453,7 @@ table {
             font-size: 0.84rem !important;
             font-weight: 600 !important;
             line-height: 1 !important;
-            color: $warning-color !important;
+            color: $bao-warning-action-bg !important;
         }
 
         .o_last_breadcrumb_item,
@@ -351,22 +497,22 @@ table {
         }
 
         .btn-primary {
-            background: $warning-color !important;
-            border-color: $warning-color !important;
-            color: $primary-color-dark !important;
+            background: $bao-warning-action-bg !important;
+            border-color: $bao-warning-action-bg !important;
+            color: $bao-warning-action-text !important;
         }
 
         .btn-secondary,
         .o_form_button_edit,
         .o_form_button_create {
-            background: rgba(179, 211, 244, 0.9) !important;
-            border-color: rgba(179, 211, 244, 0.96) !important;
+            background: $bao-surface-200 !important;
+            border-color: $bao-surface-200 !important;
             color: $primary-color-dark !important;
 
             &:hover,
             &:focus {
-                background: #c4def7 !important;
-                border-color: #c4def7 !important;
+                background: $bao-blue-100 !important;
+                border-color: $bao-blue-100 !important;
                 color: $primary-color-dark !important;
             }
         }
@@ -441,6 +587,30 @@ table {
         }
     }
 
+    .o_control_panel_navigation {
+        .o_switch_view {
+            @include bao-blue-pill;
+            min-width: 40px;
+            min-height: 40px;
+            padding: 8px 12px !important;
+            border-radius: 10px !important;
+            box-shadow: none !important;
+            color: #ffffff !important;
+
+            &:hover,
+            &:focus {
+                background: rgba(255, 255, 255, 0.22) !important;
+                color: #ffffff !important;
+            }
+
+            &.active {
+                background: #ffffff !important;
+                border-color: #ffffff !important;
+                color: $primary-color !important;
+            }
+        }
+    }
+
     .o_cp_buttons {
         .btn:not(.btn-primary):not(.o_searchview_dropdown_toggler),
         .dropdown-toggle:not(.o_searchview_dropdown_toggler) {
@@ -455,7 +625,7 @@ table {
 }
 
 @media (min-width: 1200px) {
-    .o_control_panel {
+    .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel) {
         .o_control_panel_main {
             display: grid !important;
             grid-template-columns: minmax(0, 1fr) minmax(320px, 468px) minmax(0, 1fr);
@@ -466,6 +636,8 @@ table {
         .o_control_panel_breadcrumbs {
             grid-column: 1;
             justify-self: start;
+            min-width: 0 !important;
+            width: 100%;
         }
 
         .o_control_panel_breadcrumbs.o_bao_cp_upgraded {
@@ -506,7 +678,69 @@ table {
             grid-column: 3;
             justify-self: end;
             margin-left: 0 !important;
+            min-width: 0 !important;
             order: initial !important;
+        }
+    }
+
+    .o_control_panel:not(.o_bao_form_control_panel):not(.o_bao_center_search_panel) {
+        .o_control_panel_main {
+            display: flex !important;
+            align-items: center !important;
+            flex-wrap: wrap !important;
+            column-gap: 24px;
+            row-gap: 12px;
+        }
+
+        .o_control_panel_breadcrumbs {
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+        }
+
+        .o_control_panel_actions {
+            width: auto !important;
+            justify-content: flex-start !important;
+            order: initial !important;
+        }
+
+        .o_control_panel_navigation {
+            margin-left: auto !important;
+            min-width: 0 !important;
+            order: initial !important;
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .o_pivot_view > .o_control_panel,
+    .o_graph_view > .o_control_panel {
+        .o_control_panel_main {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 468px) minmax(0, 1fr);
+            align-items: center !important;
+            column-gap: 24px;
+        }
+
+        .o_control_panel_breadcrumbs {
+            grid-column: 1;
+            justify-self: start;
+            min-width: 0 !important;
+            width: 100%;
+        }
+
+        .o_control_panel_actions {
+            grid-column: 2;
+            width: 100% !important;
+            justify-self: center;
+            justify-content: center !important;
+        }
+
+        .o_control_panel_navigation {
+            grid-column: 3;
+            justify-self: end;
+            margin-left: 0 !important;
+            min-width: 0 !important;
         }
     }
 }
@@ -890,69 +1124,6 @@ table {
     background: #f5d44f !important;
     color: #7b5b00 !important;
     border-color: #f5d44f !important;
-}
-
-.o_base_settings_view {
-    .o_form_renderer {
-        @include transparent-bg;
-    }
-
-    .app_settings_block {
-        @include bao-panel-shell;
-        overflow: hidden;
-        margin-bottom: 18px;
-    }
-
-    .o_setting_container,
-    .settings {
-        @include bao-panel-shell;
-        padding: 0 !important;
-    }
-
-    .settings_tab {
-        background: #eef5fd !important;
-        border-radius: 24px 0 0 24px !important;
-        border-right: none !important;
-        box-shadow: none !important;
-
-        .tab {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-height: 46px;
-            margin: 6px;
-            padding: 10px 14px;
-            border-radius: 16px;
-            color: $text-white !important;
-            font-weight: 600;
-            transition: $transition-base;
-
-            &:hover {
-                background: #ffffff !important;
-                color: $primary-color !important;
-            }
-        }
-
-        .selected,
-        .active,
-        .tab.active {
-            background: #ffffff !important;
-            color: $primary-color !important;
-            box-shadow: 0 10px 22px rgba(13, 41, 76, 0.06);
-        }
-    }
-
-    .settings .app_settings_block h2,
-    .settings .settingSearchHeader {
-        background: #e6f0fb !important;
-        color: $text-strong !important;
-    }
-
-    .o_setting_box,
-    .row.mt16.o_settings_container {
-        padding: 18px 22px;
-        border-top: 1px solid rgba(17, 74, 126, 0.08);
-    }
 }
 
 .o_graph_renderer,
@@ -1503,8 +1674,7 @@ select {
 .purchase-dashboard-card,
 .purchase-dashboard-card .card,
 .purchase-dashboard-card .card-body,
-.o_dashboard_bottom_block,
-.o_spreadsheet_dashboard_action {
+.o_dashboard_bottom_block {
     background: #ffffff !important;
     border: 1px solid rgba(17, 74, 126, 0.11) !important;
     border-radius: $radius-xl !important;
@@ -1516,7 +1686,6 @@ select {
 .o_kanban_renderer .o_kanban_record,
 .o_kanban_dashboard .o_kanban_record,
 .o_dashboard_bottom_block,
-.o_spreadsheet_dashboard_action,
 .purchase-dashboard-card,
 .o_stat_box,
 .o_purchase_kpi_card,
@@ -1657,18 +1826,14 @@ select {
 .purchase-dashboard-card .o_stat_value,
 .purchase-dashboard-card .o_stat_text,
 .o_dashboard_bottom_block,
-.o_dashboard_bottom_block span,
-.o_spreadsheet_dashboard_action,
-.o_spreadsheet_dashboard_action span {
+.o_dashboard_bottom_block span {
     color: $text-strong !important;
 }
 
 .purchase-dashboard-card .btn,
 .purchase-dashboard-card button,
 .o_dashboard_bottom_block .btn,
-.o_dashboard_bottom_block button,
-.o_spreadsheet_dashboard_action .btn,
-.o_spreadsheet_dashboard_action button {
+.o_dashboard_bottom_block button {
     background: #ffffff !important;
     border: 1px solid rgba(17, 74, 126, 0.14) !important;
     border-radius: 14px !important;
@@ -1676,122 +1841,126 @@ select {
     color: $primary-color !important;
 }
 
-// BAO authority: RFQ KPI strip from bao_stock must match BAO reference exactly enough
-// without changing the client-action behavior. Keep DOM and click behavior native.
-.o_bao_stock_kpis {
-    display: grid !important;
-    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
-    gap: 14px !important;
-    margin: 0 0 14px !important;
+.o_purchase_dashboard.o_liquid_purchase_kpi_native_ready {
+    position: relative !important;
+    padding: 24px 0 28px !important;
+    border-bottom: 0 !important;
+    background: transparent !important;
 }
 
-.o_bao_stock_kpi_card {
+.o_liquid_purchase_kpi_shell_native {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    padding-inline: 10px !important;
+    box-sizing: border-box !important;
+}
+
+.o_liquid_purchase_kpi_strip_native {
+    display: grid !important;
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+    column-gap: 16px !important;
+    row-gap: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.o_purchase_dashboard.o_liquid_purchase_kpi_native_ready .purchase-dashboard-card.o_purchase_dashboard_card_sole {
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
-    justify-content: flex-start !important;
+    justify-content: space-between !important;
+    min-width: 0 !important;
     min-height: 104px !important;
-    padding: 15px 17px 14px !important;
-    border-radius: 18px !important;
-    border: 1px solid #dce4eb !important;
-    background: #ffffff !important;
-    box-shadow: none !important;
-    text-align: left !important;
-    appearance: none !important;
-    transition: border-color 120ms ease, background-color 120ms ease !important;
-}
-
-.o_bao_stock_kpi_card:hover,
-.o_bao_stock_kpi_card:focus,
-.o_bao_stock_kpi_card:focus-visible,
-.o_bao_stock_kpi_card:active {
-    box-shadow: none !important;
-    outline: none !important;
-    transform: none !important;
-}
-
-.o_bao_stock_kpi_card.is-active {
-    box-shadow: none !important;
-}
-
-.o_bao_stock_kpi_card.is-mint,
-.o_bao_stock_kpi_card.is-mint.is-active {
-    background: linear-gradient(180deg, #bff6d6 0%, #b4f2ce 100%) !important;
-    border-color: #39e18b !important;
-}
-
-.o_bao_stock_kpi_card.is-yellow,
-.o_bao_stock_kpi_card.is-yellow.is-active {
-    background: linear-gradient(180deg, #fff8c7 0%, #fff3af 100%) !important;
-    border-color: #f2df4e !important;
-}
-
-.o_bao_stock_kpi_card.is-gray,
-.o_bao_stock_kpi_card.is-gray.is-active {
-    background: linear-gradient(180deg, #f7f8fa 0%, #f3f5f8 100%) !important;
-    border-color: #dde3ea !important;
-}
-
-.o_bao_stock_kpi_card.is-white,
-.o_bao_stock_kpi_card.is-white.is-active {
-    background: #ffffff !important;
-    border-color: #dde3ea !important;
-}
-
-.o_bao_stock_kpi_card.is-pink,
-.o_bao_stock_kpi_card.is-pink.is-active {
-    background: linear-gradient(180deg, #ffdede 0%, #ffd4d4 100%) !important;
-    border-color: #ff8e8e !important;
-}
-
-.o_bao_stock_kpi_label {
-    margin: 0 0 17px !important;
-    color: #3c434b !important;
-    font-family: $bao-font-body !important;
-    font-size: 13px !important;
-    font-weight: 400 !important;
-    line-height: 1.15 !important;
-    letter-spacing: 0 !important;
-}
-
-.o_bao_stock_kpi_value {
+    height: 104px !important;
     margin: 0 !important;
-    color: #2f343a !important;
-    font-family: $bao-font-body !important;
-    font-size: 24px !important;
+    padding: 14px 16px !important;
+    border-radius: 17px !important;
+    text-align: left !important;
+    box-shadow: none !important;
+    white-space: normal !important;
+}
+
+.o_purchase_dashboard.o_liquid_purchase_kpi_native_ready .purchase-dashboard-card.o_purchase_dashboard_card_sole.is-mint {
+    background: #d7fae8 !important;
+    border-color: #7edaa2 !important;
+}
+
+.o_purchase_dashboard.o_liquid_purchase_kpi_native_ready .purchase-dashboard-card.o_purchase_dashboard_card_sole.is-white,
+.o_purchase_dashboard.o_liquid_purchase_kpi_native_ready .purchase-dashboard-card.o_purchase_dashboard_card_sole.is-gray {
+    background: #ffffff !important;
+    border-color: rgba(17, 74, 126, 0.12) !important;
+}
+
+.o_purchase_dashboard.o_liquid_purchase_kpi_native_ready .purchase-dashboard-card.o_purchase_dashboard_card_sole.is-yellow {
+    background: #fff8d8 !important;
+    border-color: rgba(230, 173, 53, 0.34) !important;
+}
+
+.o_purchase_dashboard.o_liquid_purchase_kpi_native_ready .purchase-dashboard-card.o_purchase_dashboard_card_sole.is-pink {
+    background: #fde6e6 !important;
+    border-color: rgba(217, 79, 69, 0.28) !important;
+}
+
+.o_purchase_dashboard.o_liquid_purchase_kpi_native_ready .purchase-dashboard-card.o_purchase_dashboard_card_sole.is-active {
+    box-shadow: none !important;
+}
+
+.o_liquid_purchase_kpi_label {
+    display: block !important;
+    margin: 0 !important;
+    color: $bao-text-600 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.18 !important;
+}
+
+.o_liquid_purchase_kpi_value_row {
+    display: inline-flex !important;
+    align-items: baseline !important;
+    gap: 10px !important;
+    margin-top: auto !important;
+}
+
+.o_liquid_purchase_kpi_value {
+    margin: 0 !important;
+    color: $bao-text-800 !important;
+    font-size: 23px !important;
     font-weight: 700 !important;
+    line-height: 1.05 !important;
+}
+
+.o_liquid_purchase_kpi_meta {
+    color: $bao-text-600 !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
     line-height: 1 !important;
-    letter-spacing: -0.01em !important;
+    letter-spacing: 0.01em !important;
 }
 
-.o_bao_stock_kpi_card.is-mint .o_bao_stock_kpi_label,
-.o_bao_stock_kpi_card.is-mint .o_bao_stock_kpi_value {
-    color: #2e7450 !important;
+@media (max-width: 1399.98px) {
+    .o_liquid_purchase_kpi_strip_native {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        row-gap: 16px !important;
+    }
 }
 
-.o_bao_stock_kpi_card.is-yellow .o_bao_stock_kpi_label {
-    color: #4a4740 !important;
+@media (max-width: 991.98px) {
+    .o_liquid_purchase_kpi_strip_native {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
 }
 
-.o_bao_stock_kpi_card.is-yellow .o_bao_stock_kpi_value {
-    color: #35332e !important;
+@media (max-width: 575.98px) {
+    .o_liquid_purchase_kpi_strip_native {
+        grid-template-columns: 1fr !important;
+    }
 }
 
-.o_bao_stock_kpi_card.is-gray .o_bao_stock_kpi_label,
-.o_bao_stock_kpi_card.is-gray .o_bao_stock_kpi_value,
-.o_bao_stock_kpi_card.is-white .o_bao_stock_kpi_label,
-.o_bao_stock_kpi_card.is-white .o_bao_stock_kpi_value {
-    color: #33383f !important;
-}
-
-.o_bao_stock_kpi_card.is-pink .o_bao_stock_kpi_label,
-.o_bao_stock_kpi_card.is-pink .o_bao_stock_kpi_value {
-    color: #e03131 !important;
-}
-
-// Wave9 first-pass rule: keep Liquid/Odoo analytics structure, inject BAO palette only.
+// Wave9 first-pass rule: keep Liquid/Odoo analytics structure, inject BAO
+// palette on the real content renderers instead of wrapping the shared header.
 .o_graph_renderer,
-.o_pivot_view,
 .o_cohort_view {
     background: #ffffff !important;
     border: 1px solid rgba(17, 74, 126, 0.11) !important;
@@ -1801,10 +1970,10 @@ select {
 }
 
 .o_graph_view {
-    .btn-group .btn,
-    .btn-group button,
-    .o_graph_buttons .btn,
-    .o_graph_buttons button {
+    .o_graph_renderer .btn-group .btn,
+    .o_graph_renderer .btn-group button,
+    .o_graph_renderer .o_graph_buttons .btn,
+    .o_graph_renderer .o_graph_buttons button {
         background: #ffffff !important;
         border: 1px solid rgba(17, 74, 126, 0.14) !important;
         border-radius: 14px !important;
@@ -1841,6 +2010,290 @@ select {
     color: $text-strong !important;
 }
 
+.o_pivot_view.o_bao_shared_cp_surface > .o_content > div:first-child {
+    @include bao-panel-shell;
+    padding: 18px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+.o_bao_surface_toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.o_bao_surface_toolbar_group {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    margin: 0 !important;
+}
+
+.o_pivot_view.o_bao_shared_cp_surface > .o_content .o_pivot {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    overflow: auto;
+}
+
+.o_pivot_view.o_bao_shared_cp_surface > .o_content .o_pivot table {
+    background: #ffffff !important;
+    border: 1px solid rgba(17, 74, 126, 0.11) !important;
+    border-radius: 16px !important;
+    box-shadow: none !important;
+}
+
+.o_pivot_view.o_bao_shared_cp_surface > .o_content > div:first-child > .o_bao_pivot_surface_toolbar {
+    margin-bottom: 14px;
+    justify-content: flex-end;
+}
+
+.o_bao_pivot_surface_toolbar .o_pivot_buttons,
+.o_bao_pivot_surface_toolbar .o_bao_surface_toolbar_group {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    margin: 0 !important;
+}
+
+.o_bao_pivot_surface_toolbar .btn-group {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+}
+
+.o_bao_pivot_surface_toolbar .btn {
+    min-height: 40px;
+    border-radius: 10px !important;
+    background: #f7fbff !important;
+    border: 1px solid rgba(17, 74, 126, 0.14) !important;
+    color: $primary-color !important;
+    box-shadow: none !important;
+}
+
+.o_bao_pivot_surface_toolbar .btn-primary {
+    background: #f7fbff !important;
+    border-color: rgba(17, 74, 126, 0.14) !important;
+    color: $primary-color !important;
+}
+
+.o_bao_pivot_surface_toolbar .btn-secondary {
+    background: #f7fbff !important;
+    border-color: rgba(17, 74, 126, 0.14) !important;
+    color: $primary-color !important;
+}
+
+.o_action_manager:has(.o_base_settings_view) .o_control_panel {
+    .o_control_panel_main {
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: space-between !important;
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .o_control_panel_breadcrumbs {
+        display: flex !important;
+        flex: 1 1 320px;
+        min-width: 280px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .o_control_panel_actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px;
+        order: 0 !important;
+        width: auto !important;
+        justify-content: flex-start !important;
+        margin-left: 0 !important;
+    }
+
+    .o_control_panel_navigation {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 12px;
+        margin-left: auto !important;
+        width: auto !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .o_action_manager:has(.o_base_settings_view) .o_control_panel {
+        .o_control_panel_main {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 468px) minmax(0, 1fr);
+            align-items: center !important;
+            column-gap: 24px;
+        }
+
+        .o_control_panel_breadcrumbs {
+            grid-column: 1;
+            justify-self: start;
+            width: 100%;
+        }
+
+        .o_control_panel_actions {
+            grid-column: 2;
+            justify-self: center;
+            width: 100% !important;
+            min-width: 320px;
+            max-width: 468px;
+            margin-left: 0 !important;
+            justify-content: center !important;
+        }
+
+        .o_control_panel_navigation {
+            grid-column: 3;
+            justify-self: end;
+            width: 100% !important;
+            min-width: 0;
+        }
+    }
+}
+
+// Shared non-form control-panel surfaces keep the universal BAO blue header,
+// but the shell belongs to the body renderer, not the parent view container.
+.o_bao_shared_cp_surface,
+.o_action.o_bao_shared_cp_surface,
+.o_view_controller.o_bao_shared_cp_surface {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+}
+
+.o_bao_shared_cp_surface > .o_content,
+.o_action.o_bao_shared_cp_surface > .o_content,
+.o_view_controller.o_bao_shared_cp_surface > .o_content {
+    padding: 18px !important;
+}
+
+.o_action.o_spreadsheet_dashboard_action.o_bao_shared_cp_surface > .o_content > .o_renderer {
+    @include transparent-bg;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+}
+
+@media (min-width: 1200px) {
+    .o_control_panel.o_bao_center_search_panel:has(.o_sp_dashboard_search),
+    .o_spreadsheet_dashboard_action > .o_control_panel {
+        .o_control_panel_main {
+            grid-template-columns: minmax(0, 1fr) minmax(520px, 800px) minmax(0, auto);
+        }
+
+        .o_control_panel_actions {
+            max-width: 800px !important;
+            overflow: visible !important;
+        }
+
+        .o_control_panel_navigation {
+            width: auto !important;
+        }
+    }
+}
+
+.o_spreadsheet_dashboard_action > .o_control_panel .o_sp_dashboard_search {
+    .input-group {
+        position: relative;
+        flex-wrap: nowrap !important;
+        align-items: center;
+        gap: 0 !important;
+        overflow: visible !important;
+    }
+
+    .o_searchview {
+        background: rgba(255, 255, 255, 0.15) !important;
+        backdrop-filter: blur(35px) saturate(180%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        border-radius: 18px !important;
+        color: #ffffff !important;
+        padding-right: 30px !important;
+        overflow: hidden !important;
+    }
+
+    .o_searchview_input_container .o_searchview_facet {
+        background: rgba(255, 255, 255, 0.18) !important;
+        color: #ffffff !important;
+    }
+
+    .o_searchview_input {
+        color: #ffffff !important;
+    }
+
+    .o_searchview_dropdown_toggler {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        z-index: 3;
+        width: 16px;
+        min-width: 16px;
+        height: 16px;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        backdrop-filter: blur(35px) saturate(180%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        box-shadow: none !important;
+        color: #ffffff !important;
+        transform: translateY(-50%);
+    }
+
+    .o_searchview_dropdown_toggler::after {
+        margin: 0 !important;
+    }
+
+}
+
+.o_spreadsheet_dashboard_action > .o_content > .o_renderer > .o_bao_dashboard_surface_toolbar {
+    margin-bottom: 2px;
+}
+
+.o_bao_dashboard_surface_toolbar .o_sp_date_filter_button,
+.o_bao_dashboard_surface_toolbar .o_bao_dashboard_surface_toolbar_group {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+}
+
+.o_bao_dashboard_surface_toolbar .o_sp_date_filter_button .btn {
+    min-height: 40px;
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(35px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+.o_spreadsheet_dashboard_action > .o_control_panel {
+    .o_bao_dashboard_nav_tools,
+    .o_bao_dashboard_date_tools,
+    .o_dashboard_star_hidden,
+    .o_control_panel_navigation > .btn.btn-light.o-dropdown {
+        display: none !important;
+    }
+}
+
 // Wave10 first-pass rule: keep Liquid/Odoo settings structure, inject BAO palette only.
 .o_base_settings_view {
     .o_form_renderer {
@@ -1871,14 +2324,17 @@ select {
         border-radius: $radius-md !important;
         box-shadow: none !important;
         margin-right: 5px;
+        padding: 12px 10px !important;
 
         .tab {
-            display: block !important;
-            min-height: auto !important;
+            display: flex !important;
+            align-items: center;
+            gap: 10px;
+            min-height: 44px !important;
             margin: 0 0 6px !important;
             padding: 10px 14px !important;
-            background: #f7fbff !important;
-            border: 1px solid rgba(17, 74, 126, 0.08) !important;
+            background: transparent !important;
+            border: 1px solid transparent !important;
             border-radius: $radius-md !important;
             box-shadow: none !important;
             color: $text-strong !important;
@@ -1886,7 +2342,8 @@ select {
         }
 
         .tab:hover {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.9) !important;
+            border-color: rgba(17, 74, 126, 0.12) !important;
             color: $primary-color !important;
         }
 
@@ -1896,14 +2353,33 @@ select {
             background: #ffffff !important;
             border-color: rgba(17, 74, 126, 0.16) !important;
             color: $primary-color !important;
-            box-shadow: none !important;
+            box-shadow: 0 10px 22px rgba(13, 41, 76, 0.06) !important;
+        }
+
+        .tab .icon {
+            display: block !important;
+            width: 23px !important;
+            min-width: 23px !important;
+            height: 23px !important;
+            min-height: 23px !important;
+            margin: 0 !important;
+            flex: 0 0 23px;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-size: contain !important;
+            align-self: center;
+        }
+
+        .tab .app_name {
+            flex: 1 1 auto;
+            min-width: 0;
         }
 
         .tab i,
         .tab .fa,
         .tab .oi,
         .tab img,
-        .tab span {
+        .tab .app_name {
             color: inherit !important;
             opacity: 1 !important;
             filter: none !important;

@@ -1,6 +1,43 @@
 .o_content {
     margin: 26px;
 }
+// Settings control panel must keep native Odoo behavior while centering search
+// like the other non-form control panels on desktop.
+.o_action_manager:has(.o_base_settings_view) .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel) {
+    @media (min-width: 1200px) {
+        .o_control_panel_main {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 468px) minmax(0, 1fr);
+            align-items: center !important;
+            column-gap: 24px !important;
+        }
+
+        .o_control_panel_breadcrumbs {
+            grid-column: 1 !important;
+            // justify-self: center !important;
+            align-items: center !important;
+            width: fit-content !important;
+            flex-direction: row-reverse !important;
+        }
+
+        .o_control_panel_actions {
+            grid-column: 2 !important;
+            justify-self: center !important;
+            width: 100% !important;
+            min-width: 320px !important;
+            max-width: 468px !important;
+            margin-left: 0 !important;
+            justify-content: center !important;
+        }
+
+        .o_control_panel_navigation {
+            grid-column: 3 !important;
+            justify-self: end !important;
+            width: 100% !important;
+            min-width: 0 !important;
+        }
+    }
+}
 
 .o_action_manager:has(.o_form_view) {
     .o_content {
@@ -1223,8 +1260,6 @@
     color: #7b8793 !important;
 }
 
-
-
 .o_form_sheet .o_external_button,
 .o_form_sheet .o_field_input_buttons .btn,
 .o_form_sheet .o_field_input_buttons button {
@@ -1741,7 +1776,7 @@
     }
 
     .o_control_panel_main_buttons {
-        align-self: flex-start !important;
+        align-self: center !important;
         margin-top: 1px !important;
     }
 
@@ -2983,8 +3018,6 @@
     -o-border-radius: none !important;
 }
 
-
-
 .o-mail-Chatter-content,
 .o-mail-Thread,
 .o_FormRenderer_chatterContainer,
@@ -2995,8 +3028,6 @@
     box-shadow: none !important;
     backdrop-filter: none !important;
 }
-
-
 .o-mail-Chatter-content {
     border-bottom: 1px solid rgba(17, 74, 126, 0.09) !important;
     border: 1px solid rgba(17, 74, 126, 0.09) !important;
@@ -3276,156 +3307,6 @@
     }
 }
 
-// Settings fields: inherit the same field and label contract as the main form sheet.
-.o_base_settings_view {
-    .o_setting_box,
-    .row.mt16.o_settings_container {
-        .o_cell,
-        .o_wrap_label,
-        .o_wrap_input {
-            background: transparent !important;
-            border: none !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
-            padding: 0 !important;
-        }
-
-        .o_wrap_label {
-            margin-bottom: 6px;
-        }
-
-        .o_wrap_input,
-        .o_cell_custom:not(.o_wrap_label),
-        .o_inner_group > .null {
-            margin-bottom: 14px !important;
-        }
-
-        .o_wrap_input,
-        .o_cell_custom.null,
-        .o_field_widget,
-        .o_field_widget > div:not(.o_field_x2many) {
-            min-width: 0;
-        }
-
-        .o_wrap_input > .d-flex,
-        .o_cell_custom.null > .d-flex,
-        .o_cell_custom.null > .row {
-            flex-wrap: wrap;
-            gap: 8px 12px;
-        }
-
-        .o_td_label .col-form-label,
-        .o_wrap_label .col-form-label {
-            display: inline-flex;
-            align-items: center;
-            min-height: auto;
-            padding: 0 0 6px !important;
-            background: transparent !important;
-            border: none !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
-        }
-
-        .o_wrap_input > :not(.o_field_x2many),
-        .o_cell_custom.null > :not(.o_field_x2many),
-        .o_address_format > *,
-        .o_field_widget .o_input,
-        .o_field_widget textarea,
-        .o_field_widget select,
-        .o_field_widget .o_many2one,
-        .o_field_widget .o_input_dropdown,
-        .o_field_widget .o-autocomplete,
-        .o_field_widget.o_field_datetime > .d-flex {
-            width: 100%;
-            min-width: 0;
-        }
-
-        .o_required_modifier,
-        .o_many2one,
-        .o_field_many2one_selection,
-        .o_input_dropdown,
-        .o-autocomplete,
-        .o_field_input_buttons {
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            --o-input-border-color: rgba(214, 219, 227, 0.95);
-            --o-caret-color: #3a4047;
-        }
-
-        .o_field_widget .o_input_dropdown,
-        .o_field_widget.o_field_datetime > .d-flex {
-            position: relative;
-            align-items: center !important;
-        }
-
-        .o_field_widget.o_field_datetime > .d-flex::after {
-            content: "\f073";
-            position: absolute;
-            top: 50%;
-            right: 14px;
-            display: inline-flex !important;
-            align-items: center;
-            justify-content: center;
-            width: 16px;
-            height: 16px;
-            transform: translateY(-50%);
-            font-family: FontAwesome;
-            font-size: 0.92rem;
-            color: #8f97a0;
-            pointer-events: none;
-        }
-
-        .o_field_widget.o_field_datetime .o_input,
-        .o_field_widget.o_field_datetime button.o_input,
-        .o_field_widget .o_input_dropdown .o_input,
-        .o_field_widget .o_input_dropdown .o-autocomplete--input {
-            width: 100% !important;
-            padding-right: 42px !important;
-        }
-
-        .o_field_widget .o_input_dropdown .o_dropdown_button {
-            position: absolute;
-            inset: 0 0 0 auto;
-            width: 40px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            color: transparent !important;
-            pointer-events: auto;
-        }
-
-        .o_field_widget .o_input_dropdown .o_dropdown_button::before {
-            content: "\f107";
-            font-family: FontAwesome;
-            font-size: 0.95rem;
-            color: #8f97a0;
-        }
-
-        .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html),
-        .o_field_widget.o_field_readonly,
-        .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html) > span,
-        .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html) > div:not(.o_field_x2many):not(.o_field_html),
-        .o_field_widget .o_field_many2one_selection,
-        .o_field_widget .o_field_many2many_selection,
-        .o_field_widget .o_tag_badge {
-            color: #3a4047 !important;
-        }
-
-        .o_external_button,
-        .o_field_input_buttons .btn,
-        .o_field_input_buttons button {
-            border: none !important;
-            background: transparent !important;
-            box-shadow: none !important;
-            color: #8f97a0 !important;
-        }
-    }
-}
-
 // Chatter fields: reuse the main form field shell instead of a dedicated chatter field skin.
 .o_form_view .o-mail-Chatter {
     .o-mail-Composer-input,
@@ -3680,6 +3561,7 @@
 
     .o_statusbar_status.o_bao_statusbar_forced_steps {
         flex-direction: row-reverse !important;
+        flex-wrap: nowrap !important;
     }
 
     .o_statusbar_status > .o_arrow_button,

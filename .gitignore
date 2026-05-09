@@ -1,2 +1,6 @@
 # AI Dev System project-local copy
 .ai-dev-system/
+.vscode/
+__pycache__/
+*.pyc
+bao_theme.windows.conf

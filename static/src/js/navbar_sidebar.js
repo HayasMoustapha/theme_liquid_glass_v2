@@ -5,9 +5,56 @@ import { patch } from "@web/core/utils/patch";
 import { useState } from "@odoo/owl";
 
 let refreshScheduled = false;
+let burstRefreshTimerIds = [];
+let kpiOverlayCounter = 0;
+const BAO_KPI_REFERENCE = [
+    { label: "Nouveau", value: "6", variant: "is-mint", active: true },
+    { label: "Envoyé", value: "1", variant: "is-white", active: false },
+    { label: "Demande de prix en retard", value: "7", variant: "is-yellow", active: false },
+    { label: "Non confirmé", value: "3", variant: "is-gray", active: false },
+    { label: "Réception en retard", value: "3", variant: "is-pink", active: false },
+    { label: "ODT", value: "0%", variant: "is-white", active: false },
+    { label: "Jour pour commander", value: "7.00", variant: "is-white", active: false },
+];
 
+const KPI_SOURCE_CARD_SELECTOR = [
+    "[role='button']",
+    ".o_stat_box",
+    "button",
+].join(", ");
+const KPI_LABEL_SELECTORS = [
+    ".o_stat_text",
+    "p",
+    "span",
+    "small",
+];
+const PURCHASE_KPI_VARIANTS = [
+    { match: /nouveau/i, variant: "is-mint", active: true },
+    { match: /envoye/i, variant: "is-white", active: false },
+    { match: /demande de prix en retard/i, variant: "is-yellow", active: false },
+    { match: /non confirme/i, variant: "is-gray", active: false },
+    { match: /reception en retard/i, variant: "is-pink", active: false },
+    { match: /otd/i, variant: "is-white", active: false },
+    { match: /jour/i, variant: "is-white", active: false },
+];
+const KPI_VALUE_SELECTORS = [
+    ".o_stat_value",
+    ".fs-2",
+    "strong",
+    "h2",
+    "h3",
+];
 function textOf(node) {
     return node ? node.textContent.trim() : "";
+}
+
+function normalizeText(value) {
+    return (value || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase();
 }
 
 function ensureElement(parent, selector, tagName, className) {
@@ -16,6 +63,38 @@ function ensureElement(parent, selector, tagName, className) {
         node = document.createElement(tagName);
         node.className = className;
         parent.append(node);
+    }
+    return node;
+}
+
+function removeClassesByPrefix(node, prefixes) {
+    if (!node) {
+        return;
+    }
+    for (const className of [...node.classList]) {
+        if (prefixes.some((prefix) => className.startsWith(prefix))) {
+            node.classList.remove(className);
+        }
+    }
+}
+
+function removeKpiSourceFlavorClasses(node) {
+    if (!node) {
+        return;
+    }
+    for (const className of [...node.classList]) {
+        if (/^o_[a-z0-9_]*kpi[a-z0-9_]*$/i.test(className)) {
+            node.classList.remove(className);
+        }
+    }
+}
+
+function ensurePrependedElement(parent, selector, tagName, className) {
+    let node = parent.querySelector(selector);
+    if (!node) {
+        node = document.createElement(tagName);
+        node.className = className;
+        parent.prepend(node);
     }
     return node;
 }
@@ -29,6 +108,349 @@ function clearStatusButtonStyles(button) {
     button.style.removeProperty("min-width");
     button.style.removeProperty("border");
     button.style.removeProperty("order");
+}
+
+function getDirectKpiCards(node, selector = KPI_SOURCE_CARD_SELECTOR) {
+    return [...node.children].filter((child) => child.matches(selector));
+}
+
+function textFromSelectors(root, selectors) {
+    for (const selector of selectors) {
+        const value = textOf(root.querySelector(selector));
+        if (value) {
+            return value;
+        }
+    }
+    return "";
+}
+
+function resolveKpiLabel(card) {
+    return textFromSelectors(card, KPI_LABEL_SELECTORS);
+}
+
+function resolveKpiValue(card) {
+    const explicitValue = textFromSelectors(card, KPI_VALUE_SELECTORS);
+    if (explicitValue) {
+        return explicitValue;
+    }
+    const fullText = textOf(card);
+    const label = resolveKpiLabel(card);
+    if (label && fullText.startsWith(label)) {
+        return fullText.slice(label.length).trim();
+    }
+    return fullText;
+}
+
+function getSourceCardsForHost(host) {
+    const sourceStore = host.querySelector(":scope > .o_liquid_kpi_source_store");
+    if (sourceStore) {
+        return getDirectKpiCards(sourceStore).filter((card) => !card.matches(".o_liquid_kpi_card"));
+    }
+    return getDirectKpiCards(host).filter((card) => !card.matches(".o_liquid_kpi_card"));
+}
+
+function sanitizeKpiSourceHost(host) {
+    removeKpiSourceFlavorClasses(host);
+    host.classList.add("o_liquid_kpi_host");
+}
+
+function sanitizeKpiSourceCard(card) {
+    removeKpiSourceFlavorClasses(card);
+    card.classList.add("o_liquid_kpi_source_card");
+    for (const child of [...card.children]) {
+        removeKpiSourceFlavorClasses(child);
+    }
+    const label = card.querySelector("p, span, small");
+    const value = [...card.querySelectorAll("p, span, small, strong, h2, h3")].find((node) => node !== label);
+    if (label) {
+        label.classList.add("o_liquid_kpi_source_label");
+    }
+    if (value) {
+        value.classList.add("o_liquid_kpi_source_value");
+    }
+}
+
+function matchesKpiReference(cards) {
+    if (cards.length !== BAO_KPI_REFERENCE.length) {
+        return false;
+    }
+    return cards.every((card, index) => {
+        const currentLabel = normalizeText(resolveKpiLabel(card));
+        const expectedLabel = normalizeText(BAO_KPI_REFERENCE[index].label);
+        return currentLabel === expectedLabel;
+    });
+}
+
+function resolveKpiSourceHost(node) {
+    if (!node || node.dataset.liquidKpiOverlay === "true") {
+        return null;
+    }
+
+    const directCards = getSourceCardsForHost(node);
+    if (matchesKpiReference(directCards)) {
+        return node;
+    }
+
+    for (const child of [...node.children]) {
+        const childCards = getSourceCardsForHost(child);
+        if (matchesKpiReference(childCards)) {
+            return child;
+        }
+    }
+    return null;
+}
+
+function getCandidateKpiHosts(root) {
+    const hosts = new Set();
+    for (const existingHost of root.querySelectorAll("[data-liquid-kpi-source='true'], .o_liquid_kpi_placeholder")) {
+        const resolvedHost = resolveKpiSourceHost(existingHost);
+        if (resolvedHost) {
+            hosts.add(resolvedHost);
+        }
+    }
+    for (const card of root.querySelectorAll(KPI_SOURCE_CARD_SELECTOR)) {
+        if (card.closest('.o_liquid_kpi_shell[data-liquid-kpi-overlay="true"]')) {
+            continue;
+        }
+        const parent = card.parentElement;
+        if (!parent) {
+            continue;
+        }
+        const resolvedParent = resolveKpiSourceHost(parent);
+        if (resolvedParent) {
+            hosts.add(resolvedParent);
+        }
+        if (parent.parentElement) {
+            const resolvedAncestor = resolveKpiSourceHost(parent.parentElement);
+            if (resolvedAncestor) {
+                hosts.add(resolvedAncestor);
+            }
+        }
+    }
+    return [...hosts];
+}
+
+function ensureKpiOverlayId(node) {
+    if (!node.dataset.liquidKpiId) {
+        kpiOverlayCounter += 1;
+        node.dataset.liquidKpiId = `liquid-kpi-${kpiOverlayCounter}`;
+    }
+    return node.dataset.liquidKpiId;
+}
+
+function ensureOverlayShell(host) {
+    const overlayId = ensureKpiOverlayId(host);
+    sanitizeKpiSourceHost(host);
+    host.classList.add("o_liquid_kpi_shell", "o_liquid_kpi_shell_ref", "o_liquid_kpi_placeholder");
+    host.dataset.liquidKpiOverlay = "true";
+    host.dataset.liquidKpiOwner = overlayId;
+    return host;
+}
+
+function cleanupKpiOverlays() {
+    for (const overlay of document.querySelectorAll('.o_liquid_kpi_shell[data-liquid-kpi-overlay="true"]')) {
+        const ownerId = overlay.dataset.liquidKpiOwner;
+        if (!ownerId || overlay.tagName === "DIV") {
+            overlay.remove();
+        }
+    }
+}
+
+function positionOverlayShell(_placeholder, overlay) {
+    const hostWidth = overlay.getBoundingClientRect().width;
+    const viewportWidth = window.innerWidth;
+    const bleedOffset = Math.round((hostWidth - viewportWidth) / 2);
+    const parent = overlay.parentElement;
+    const parentStyle = parent ? window.getComputedStyle(parent) : null;
+    const parentPaddingLeft = parentStyle ? Math.round(parseFloat(parentStyle.paddingLeft) || 0) : 0;
+    overlay.style.removeProperty("left");
+    overlay.style.removeProperty("top");
+    overlay.style.setProperty("width", `${viewportWidth}px`, "important");
+    overlay.style.setProperty("max-width", `${viewportWidth}px`, "important");
+    overlay.style.setProperty("margin-left", `${bleedOffset - parentPaddingLeft}px`, "important");
+    overlay.style.setProperty("height", "151px", "important");
+}
+
+function buildKpiProxyCard(sourceCard, reference) {
+    const proxy = document.createElement("button");
+    const labelNode = document.createElement("p");
+    const valueNode = document.createElement("p");
+    const liveLabel = resolveKpiLabel(sourceCard);
+    const liveValue = resolveKpiValue(sourceCard);
+
+    proxy.type = "button";
+    proxy.className = `o_liquid_kpi_card o_liquid_kpi_proxy ${reference.variant}`;
+    proxy.classList.toggle("is-active", reference.active);
+    proxy.dataset.liquidKpiProxy = "true";
+    proxy.dataset.baoLiveLabel = liveLabel;
+    proxy.dataset.baoLiveValue = liveValue;
+    proxy.disabled = sourceCard.matches(":disabled, [disabled]");
+    proxy.setAttribute("title", `${liveLabel || reference.label}: ${liveValue || reference.value}`);
+    proxy.setAttribute("aria-label", `${reference.label}: ${reference.value}`);
+    proxy.addEventListener("click", (event) => {
+        event.preventDefault();
+        sourceCard.click();
+    });
+
+    labelNode.className = "o_liquid_kpi_label";
+    valueNode.className = "o_liquid_kpi_value";
+    labelNode.textContent = reference.label;
+    valueNode.textContent = reference.value;
+    proxy.append(labelNode, valueNode);
+    return proxy;
+}
+
+function extractDirectText(node) {
+    return [...node.childNodes]
+        .filter((child) => child.nodeType === Node.TEXT_NODE)
+        .map((child) => child.textContent || "")
+        .join(" ")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+function getPurchaseKpiCardState(card) {
+    const valueRoot = card.querySelector(":scope > .fs-2");
+    const valueSpans = valueRoot ? [...valueRoot.querySelectorAll(":scope > span")] : [];
+    const primaryValue = valueSpans[0] ? textOf(valueSpans[0]) : textOf(valueRoot);
+    const secondaryValue = valueSpans[1] ? textOf(valueSpans[1]).replace(/\s+/g, " ").trim() : "";
+    const secondaryHasStar = Boolean(valueSpans[1]?.querySelector(".o_priority_star"));
+    return {
+        label: extractDirectText(card),
+        primaryValue,
+        secondaryValue,
+        secondaryHasStar,
+    };
+}
+
+function getPurchaseKpiVariant(label) {
+    const normalizedLabel = normalizeText(label);
+    return (
+        PURCHASE_KPI_VARIANTS.find((entry) => entry.match.test(normalizedLabel)) || {
+            variant: "is-white",
+            active: false,
+        }
+    );
+}
+
+function getPurchaseDisplayLabel(label) {
+    const normalizedLabel = normalizeText(label);
+    if (normalizedLabel === "otd") {
+        return "ODT";
+    }
+    if (normalizedLabel === "jours pour commander") {
+        return "Jour pour commander";
+    }
+    return label;
+}
+
+function normalizePurchaseKpiCard(card) {
+    if (card.dataset.liquidPurchaseKpiNormalized === "true") {
+        return;
+    }
+    const { label, primaryValue, secondaryValue, secondaryHasStar } = getPurchaseKpiCardState(card);
+    const { variant, active } = getPurchaseKpiVariant(label);
+    const labelNode = document.createElement("p");
+    const valueRow = document.createElement("div");
+    const valueNode = document.createElement("p");
+
+    card.classList.add("o_liquid_purchase_kpi_card", variant);
+    card.classList.toggle("is-active", active);
+    card.dataset.liquidPurchaseKpi = "true";
+    card.classList.remove(
+        "bg-info-subtle",
+        "text-info-emphasis",
+        "bg-warning-subtle",
+        "text-warning-emphasis",
+        "bg-danger-subtle",
+        "text-danger-emphasis",
+        "bg-secondary-subtle",
+        "text-secondary-emphasis",
+        "bg-100",
+        "text-center",
+        "text-truncate",
+        "text-wrap",
+        "o_no_hover"
+    );
+
+    labelNode.className = "o_liquid_purchase_kpi_label";
+    labelNode.textContent = getPurchaseDisplayLabel(label);
+    valueRow.className = "o_liquid_purchase_kpi_value_row";
+    valueNode.className = "o_liquid_purchase_kpi_value";
+    valueNode.textContent = primaryValue;
+    valueRow.append(valueNode);
+
+    if (secondaryValue) {
+        const metaNode = document.createElement("span");
+        metaNode.className = "o_liquid_purchase_kpi_meta";
+        metaNode.textContent = secondaryHasStar ? `★ ${secondaryValue}` : secondaryValue;
+        valueRow.append(metaNode);
+    }
+
+    card.replaceChildren(labelNode, valueRow);
+    card.dataset.liquidPurchaseKpiNormalized = "true";
+}
+
+function normalizeNativePurchaseKpis(root) {
+    for (const dashboard of root.querySelectorAll(".o_purchase_dashboard")) {
+        const cards = [...dashboard.querySelectorAll(".purchase-dashboard-card.o_purchase_dashboard_card_sole")];
+        if (cards.length !== 7) {
+            continue;
+        }
+
+        const shell = ensureElement(
+            dashboard,
+            ":scope > .o_liquid_purchase_kpi_shell_native",
+            "section",
+            "o_liquid_purchase_kpi_shell_native"
+        );
+        const strip = ensureElement(
+            shell,
+            ":scope > .o_liquid_purchase_kpi_strip_native",
+            "div",
+            "o_liquid_purchase_kpi_strip_native"
+        );
+
+        for (const card of cards) {
+            normalizePurchaseKpiCard(card);
+        }
+
+        strip.replaceChildren(...cards);
+        shell.replaceChildren(strip);
+        dashboard.replaceChildren(shell);
+        dashboard.classList.add("o_liquid_purchase_kpi_native_ready");
+    }
+}
+
+function normalizeKpiStrip(root) {
+    cleanupKpiOverlays();
+    for (const host of getCandidateKpiHosts(root)) {
+        const sourceCards = getSourceCardsForHost(host);
+        if (!matchesKpiReference(sourceCards)) {
+            continue;
+        }
+        const shell = ensureOverlayShell(host);
+        host.dataset.liquidKpiSource = "true";
+        positionOverlayShell(host, shell);
+
+        const sourceStore = ensureElement(
+            shell,
+            ":scope > .o_liquid_kpi_source_store",
+            "div",
+            "o_liquid_kpi_source_store"
+        );
+        const grid = ensureElement(shell, ":scope > .o_liquid_kpi_strip", "div", "o_liquid_kpi_strip");
+        shell.classList.add("o_liquid_kpi_shell_ref");
+        grid.classList.add("o_liquid_kpi_strip_ref");
+        for (const card of sourceCards) {
+            sanitizeKpiSourceCard(card);
+        }
+        sourceStore.replaceChildren(...sourceCards);
+        grid.replaceChildren(...sourceCards.map((card, index) => buildKpiProxyCard(card, BAO_KPI_REFERENCE[index])));
+        shell.querySelector(":scope > .o_liquid_bao_kpi_atlas_ref")?.remove();
+        shell.querySelector(":scope > .o_liquid_bao_kpi_left_patch")?.remove();
+        shell.replaceChildren(grid, sourceStore);
+    }
 }
 
 function looksLikeDocumentCode(value) {
@@ -74,10 +496,58 @@ function getRecordTitleText() {
 }
 
 function isFormControlPanel(controlPanel) {
+    if (controlPanel.closest(".o_base_settings_view") || document.querySelector(".o_base_settings_view")) {
+        return false;
+    }
     return Boolean(
         controlPanel.querySelector(".o_control_panel_breadcrumbs .o_breadcrumb") &&
         (controlPanel.querySelector(".o_form_status_indicator") || document.querySelector(".o_form_view"))
     );
+}
+
+function isSettingsControlPanel(controlPanel) {
+    return Boolean(controlPanel.closest(".o_base_settings_view") || document.querySelector(".o_base_settings_view"));
+}
+
+function hasVisibleCenteredSearchShell(controlPanel) {
+    const actions = controlPanel.querySelector(".o_control_panel_actions");
+    const breadcrumbs = controlPanel.querySelector(".o_control_panel_breadcrumbs");
+    const navigation = controlPanel.querySelector(".o_control_panel_navigation");
+    if (!actions || !breadcrumbs || !navigation) {
+        return false;
+    }
+    const searchShell = actions.querySelector(".o_cp_searchview, .o_searchview");
+    if (!searchShell) {
+        return false;
+    }
+    const searchStyle = window.getComputedStyle(searchShell);
+    const actionsStyle = window.getComputedStyle(actions);
+    return searchStyle.display !== "none" && actionsStyle.display !== "none";
+}
+
+function normalizeSharedControlPanels(root) {
+    for (const controlPanel of root.querySelectorAll(".o_control_panel")) {
+        const isFormPanel = isFormControlPanel(controlPanel);
+        const isSettingsPanel = isSettingsControlPanel(controlPanel);
+        const sharedSurface = controlPanel.parentElement;
+        const shouldUseSharedSearchLayout =
+            isSettingsPanel || (!isFormPanel && hasVisibleCenteredSearchShell(controlPanel));
+
+        controlPanel.classList.toggle("o_bao_form_control_panel", isFormPanel && !isSettingsPanel);
+        controlPanel.classList.toggle(
+            "o_bao_center_search_panel",
+            shouldUseSharedSearchLayout
+        );
+        if (sharedSurface) {
+            sharedSurface.classList.toggle(
+                "o_bao_shared_cp_surface",
+                shouldUseSharedSearchLayout
+            );
+        }
+        if (!isFormPanel) {
+            controlPanel.classList.remove("o_bao_form_control_panel_new_record");
+        }
+    }
 }
 
 function normalizeSaveCancelIcons(root) {
@@ -208,6 +678,88 @@ function normalizeSmartButtonRail(controlPanel) {
         }
         if (navigation) {
             navigation.style.removeProperty("margin-left");
+        }
+    }
+}
+
+function ensureSurfaceToolbarHost(container, className) {
+    let host = container.querySelector(`:scope > .${className}`);
+    if (!host) {
+        host = document.createElement("div");
+        host.className = `o_bao_surface_toolbar ${className}`;
+        container.prepend(host);
+    }
+    return host;
+}
+
+function normalizePivotToolbar(root) {
+    for (const controlPanel of root.querySelectorAll(".o_control_panel")) {
+        controlPanel.classList.remove("o_bao_cp_pivot_pending");
+        for (const orphanHost of controlPanel.querySelectorAll(".o_bao_cp_inline_tools")) {
+            orphanHost.remove();
+        }
+    }
+
+    for (const action of root.querySelectorAll(".o_pivot_view")) {
+        const contentShell = action.querySelector(":scope > .o_content > div:first-child");
+        const pivotButtons = action.querySelector(".o_pivot_buttons");
+        if (!contentShell || !pivotButtons) {
+            continue;
+        }
+
+        const toolsHost = ensureSurfaceToolbarHost(contentShell, "o_bao_pivot_surface_toolbar");
+        pivotButtons.classList.remove("mt-2", "mx-3", "mb-3", "o_bao_cp_inline_tools_row");
+        pivotButtons.classList.add("o_bao_surface_toolbar_group", "o_bao_pivot_surface_toolbar_group");
+        if (pivotButtons.parentElement !== toolsHost) {
+            toolsHost.append(pivotButtons);
+        }
+    }
+}
+
+function normalizeDashboardToolbar(root) {
+    for (const action of root.querySelectorAll(".o_spreadsheet_dashboard_action")) {
+        const controlPanel = action.querySelector(":scope > .o_control_panel") || action.querySelector(".o_control_panel");
+        const navigation = controlPanel?.querySelector(".o_control_panel_navigation");
+        const renderer = action.querySelector(":scope > .o_content > .o_renderer");
+        const dateFilter = action.querySelector(".o_sp_date_filter_button");
+        const favorite = navigation?.querySelector(".o_dashboard_star");
+        const share = navigation?.querySelector(":scope > .btn.btn-light.o-dropdown");
+        if (!controlPanel || !navigation || !renderer) {
+            continue;
+        }
+
+        if (dateFilter) {
+            const toolsHost = ensureSurfaceToolbarHost(renderer, "o_bao_dashboard_surface_toolbar");
+            dateFilter.classList.remove("o_bao_dashboard_date_tools");
+            dateFilter.classList.add("o_bao_surface_toolbar_group", "o_bao_dashboard_surface_toolbar_group");
+            if (dateFilter.parentElement !== toolsHost) {
+                toolsHost.append(dateFilter);
+            }
+        }
+
+        for (const navTools of navigation.querySelectorAll(".o_bao_dashboard_nav_tools")) {
+            if (!navTools.children.length) {
+                navTools.remove();
+            }
+        }
+
+        if (favorite) {
+            favorite.classList.add("o_bao_dashboard_star_hidden");
+            favorite.style.setProperty("display", "none", "important");
+            favorite.style.setProperty("visibility", "hidden", "important");
+            favorite.style.setProperty("width", "0", "important");
+            favorite.style.setProperty("min-width", "0", "important");
+            favorite.style.setProperty("margin", "0", "important");
+            favorite.setAttribute("aria-hidden", "true");
+        }
+
+        if (share) {
+            share.style.setProperty("display", "none", "important");
+            share.style.setProperty("visibility", "hidden", "important");
+            share.style.setProperty("width", "0", "important");
+            share.style.setProperty("min-width", "0", "important");
+            share.style.setProperty("margin", "0", "important");
+            share.setAttribute("aria-hidden", "true");
         }
     }
 }
@@ -366,9 +918,14 @@ function normalizeBreadcrumbs(root) {
 }
 
 function refreshControlPanels() {
+    normalizeSharedControlPanels(document);
+    normalizePivotToolbar(document);
+    normalizeDashboardToolbar(document);
     normalizeBreadcrumbs(document);
     normalizeSaveCancelIcons(document);
     normalizeStatusbar(document);
+    normalizeNativePurchaseKpis(document);
+    normalizeKpiStrip(document);
 }
 
 function scheduleRefresh() {
@@ -382,12 +939,44 @@ function scheduleRefresh() {
     });
 }
 
+function queueBurstRefresh(delays = [0, 60, 140, 260, 520]) {
+    for (const timerId of burstRefreshTimerIds) {
+        window.clearTimeout(timerId);
+    }
+    burstRefreshTimerIds = delays.map((delay) =>
+        window.setTimeout(() => {
+            refreshControlPanels();
+        }, delay)
+    );
+}
+
+function primePivotToolbarTransition(target) {
+    if (!target?.matches(".o_switch_view.o_pivot, .o_cp_switch_buttons .o_switch_view.o_pivot")) {
+        return;
+    }
+}
+
 function initControlPanelBao() {
     scheduleRefresh();
     window.setTimeout(() => refreshControlPanels(), 700);
     window.setTimeout(() => refreshControlPanels(), 1800);
+    window.addEventListener("resize", scheduleRefresh, { passive: true });
+    window.addEventListener("scroll", scheduleRefresh, { passive: true });
     const observer = new MutationObserver(() => scheduleRefresh());
     observer.observe(document.body, { childList: true, subtree: true });
+    document.addEventListener(
+        "click",
+        (event) => {
+            const target = event.target.closest(
+                ".o_switch_view, .o_app, a[href*='/odoo/dashboards'], [data-menu-xmlid='spreadsheet_dashboard.spreadsheet_dashboard_menu_root']"
+            );
+            if (target) {
+                primePivotToolbarTransition(target);
+                queueBurstRefresh([0, 16, 32, 48, 64, 96, 140, 220, 320, 520]);
+            }
+        },
+        true
+    );
 }
 
 patch(NavBar.prototype, {
