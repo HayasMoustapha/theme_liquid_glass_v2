@@ -3534,94 +3534,168 @@
     }
 }
 
-// Final authoritative BAO statusbar pass from the atlas component.
+// Final authoritative BAO statusbar pass from atlas v3 C02_04.
 .o_action_manager:has(.o_form_view) .o_form_view .o_form_statusbar {
     display: flex !important;
     align-items: center !important;
-    justify-content: flex-end !important;
-    gap: 20px !important;
+    justify-content: space-between !important;
+    gap: 18px !important;
+    min-height: 40px !important;
     margin: 0 0 14px !important;
     padding: 0 0 8px !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
 
-    > .o_field_widget {
-        width: auto !important;
+    .o_statusbar_buttons {
         display: flex !important;
+        flex: 1 1 auto !important;
+        align-items: center !important;
+        align-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        min-width: 0 !important;
+    }
+
+    .o_statusbar_buttons .btn,
+    .o_statusbar_buttons button {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-width: 0 !important;
+        min-height: 36px !important;
+        height: 36px !important;
+        padding: 0 12px !important;
+        border: 1px solid #d7d9dc !important;
+        border-radius: 8px !important;
+        background: #d9dadd !important;
+        color: #626870 !important;
+        box-shadow: none !important;
+        font-family: $bao-font-body !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        line-height: 1 !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+        white-space: nowrap !important;
+    }
+
+    .o_statusbar_buttons .btn-primary,
+    .o_statusbar_buttons button.btn-primary,
+    .o_statusbar_buttons .oe_highlight {
+        background: #e01017 !important;
+        border-color: #e01017 !important;
+        color: #ffffff !important;
+    }
+
+    .o_statusbar_buttons .btn:disabled,
+    .o_statusbar_buttons button:disabled,
+    .o_statusbar_buttons .disabled {
+        opacity: 1 !important;
+        color: #74787d !important;
+    }
+
+    > .o_field_widget,
+    .o_field_statusbar {
+        display: flex !important;
+        flex: 0 1 475px !important;
         justify-content: flex-end !important;
+        min-width: 300px !important;
+        max-width: 475px !important;
         margin-left: auto !important;
     }
 
     .o_statusbar_status {
         display: flex !important;
+        flex-flow: row-reverse nowrap !important;
         align-items: center !important;
-        justify-content: flex-end !important;
-        flex-wrap: wrap !important;
-        gap: 18px !important;
-        width: 100% !important;
+        align-content: center !important;
+        justify-content: flex-start !important;
+        gap: 16px !important;
+        width: auto !important;
+        max-width: 100% !important;
+        min-height: 32px !important;
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
     }
 
-    .o_statusbar_status.o_bao_statusbar_forced_steps {
-        flex-direction: row-reverse !important;
-        flex-wrap: nowrap !important;
-    }
-
-    .o_statusbar_status > .o_arrow_button,
-    .o_statusbar_status > .dropdown-toggle.o_arrow_button,
-    .o_statusbar_status > .o_bao_statusbar_step {
+    .o_statusbar_status > .o_arrow_button:not(.d-none),
+    .o_statusbar_status > .dropdown-toggle:not(.d-none) {
         display: inline-flex !important;
         align-items: center !important;
+        justify-content: center !important;
         position: relative !important;
+        min-width: 0 !important;
+        min-height: 32px !important;
+        height: 32px !important;
         margin: 0 !important;
         padding: 0 !important;
         background: transparent !important;
-        border: none !important;
+        border: 0 !important;
         border-radius: 0 !important;
         box-shadow: none !important;
-        color: #909397 !important;
-        font-size: 15px !important;
-        font-weight: 400 !important;
-        line-height: 1.2 !important;
+        clip-path: none !important;
+        color: #8e8f92 !important;
+        font-family: $bao-font-body !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        line-height: 1 !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
         white-space: nowrap !important;
+        opacity: 1 !important;
     }
 
-    .o_statusbar_status.o_bao_statusbar_forced_steps > .o_bao_statusbar_step:not(.o_bao_statusbar_first_visible)::before {
+    .o_statusbar_status > .o_arrow_button:not(.d-none):not(.o_last)::before {
         content: "" !important;
         display: block !important;
         position: absolute !important;
-        left: -18px !important;
+        left: -15px !important;
         top: 50% !important;
-        width: 15px !important;
+        width: 13px !important;
         height: 2px !important;
         transform: translateY(-50%) !important;
-        background: #c9ced4 !important;
+        border: 0 !important;
         border-radius: 999px !important;
+        background: #d6d7d9 !important;
+        clip-path: none !important;
     }
 
-    .o_statusbar_status.o_bao_statusbar_forced_steps > .o_bao_statusbar_first_visible::before {
+    .o_statusbar_status > .o_arrow_button.o_last::before,
+    .o_statusbar_status > .o_arrow_button.dropdown-toggle::after {
         content: none !important;
         display: none !important;
     }
 
     .o_statusbar_status > .o_arrow_button_current,
+    .o_statusbar_status > button.btn.o_arrow_button.o_arrow_button_current:not(.d-none),
+    .o_statusbar_status > button.btn.o_arrow_button.o_arrow_button_current:disabled:not(.d-none),
     .o_statusbar_status > .o_arrow_button_current:hover,
     .o_statusbar_status > .o_arrow_button_current:focus,
-    .o_statusbar_status > .o_bao_statusbar_current_visible,
-    .o_statusbar_status > .o_bao_statusbar_current_visible:hover,
-    .o_statusbar_status > .o_bao_statusbar_current_visible:focus {
+    .o_statusbar_status > button:not(.o_arrow_button):not(.d-none),
+    .o_statusbar_status > button:not(.o_arrow_button):not(.d-none):hover,
+    .o_statusbar_status > button:not(.o_arrow_button):not(.d-none):focus {
         display: inline-flex !important;
         flex-direction: row-reverse !important;
         align-items: center !important;
+        justify-content: center !important;
         gap: 8px !important;
-        padding: 9px 14px 9px 12px !important;
-        background: $bao-success-50 !important;
-        border: 1px solid rgba(139, 207, 169, 0.45) !important;
-        border-radius: 10px !important;
-        color: $bao-success-text !important;
-        font-weight: 600 !important;
+        height: 32px !important;
+        min-height: 32px !important;
+        padding: 0 11px 0 9px !important;
+        background: #ddfae9 !important;
+        border: 1px solid #d5f2e2 !important;
+        border-radius: 8px !important;
+        color: #009a49 !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
         box-shadow: none !important;
     }
 
     .o_statusbar_status > .o_arrow_button_current::after,
-    .o_statusbar_status > .o_bao_statusbar_current_visible::after {
+    .o_statusbar_status > button:not(.o_arrow_button):not(.d-none)::after {
         content: "\2713" !important;
         display: inline-flex !important;
         align-items: center !important;
@@ -3629,49 +3703,10 @@
         width: 20px !important;
         height: 20px !important;
         border-radius: 999px !important;
-        background: $bao-success-600 !important;
+        background: #00a957 !important;
         color: #ffffff !important;
-        font-size: 0.7rem !important;
-        font-weight: 700 !important;
-        line-height: 1 !important;
-    }
-
-    // Compact/native fallback: when Odoo exposes only one visible status button,
-    // BAO only skins that exposed button instead of reintroducing hidden states.
-    .o_statusbar_status > button:not(.o_arrow_button):not(.d-none):not(.o_bao_native_hidden_status),
-    .o_statusbar_status > .dropdown-toggle:not(.o_arrow_button):not(.d-none):not(.o_bao_native_hidden_status) {
-        display: inline-flex !important;
-        align-items: center !important;
-        gap: 8px !important;
-        padding: 9px 14px 9px 12px !important;
-        background: $bao-success-50 !important;
-        border: 1px solid rgba(139, 207, 169, 0.45) !important;
-        border-radius: 10px !important;
-        color: $bao-success-text !important;
-        font-size: 15px !important;
-        font-weight: 600 !important;
-        line-height: 1.2 !important;
-        box-shadow: none !important;
-    }
-
-    .o_statusbar_status > button:not(.o_arrow_button):not(.d-none):not(.o_bao_native_hidden_status)::before,
-    .o_statusbar_status > .dropdown-toggle:not(.o_arrow_button):not(.d-none):not(.o_bao_native_hidden_status)::before {
-        display: none !important;
-        content: none !important;
-    }
-
-    .o_statusbar_status > button:not(.o_arrow_button):not(.d-none):not(.o_bao_native_hidden_status)::after,
-    .o_statusbar_status > .dropdown-toggle:not(.o_arrow_button):not(.d-none):not(.o_bao_native_hidden_status)::after {
-        content: "\2713" !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 20px !important;
-        height: 20px !important;
-        border-radius: 999px !important;
-        background: $bao-success-600 !important;
-        color: #ffffff !important;
-        font-size: 0.7rem !important;
+        font-family: $bao-font-body !important;
+        font-size: 12px !important;
         font-weight: 700 !important;
         line-height: 1 !important;
     }
@@ -3679,15 +3714,8 @@
     .o_statusbar_status > .d-none,
     .o_statusbar_status > button.d-none,
     .o_statusbar_status > .btn.d-none,
-    .o_statusbar_status > .o_arrow_button.d-none,
-    .o_statusbar_status > .o_bao_native_hidden_status {
+    .o_statusbar_status > .o_arrow_button.d-none {
         display: none !important;
-        visibility: hidden !important;
-        width: 0 !important;
-        min-width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        border: 0 !important;
     }
 }
 
