@@ -7,6 +7,8 @@ import { useState } from "@odoo/owl";
 let refreshScheduled = false;
 let burstRefreshTimerIds = [];
 let pivotPrimeTimerIds = [];
+let deferredRefreshTimerId = null;
+let controlPanelInteractionUntil = 0;
 function textOf(node) {
     return node ? node.textContent.trim() : "";
 }
@@ -102,6 +104,22 @@ function hasVisibleCenteredActionsShell(controlPanel) {
     const centeredStyle = window.getComputedStyle(centeredShell);
     const actionsStyle = window.getComputedStyle(actions);
     return centeredStyle.display !== "none" && actionsStyle.display !== "none";
+}
+
+function markControlPanelInteraction() {
+    controlPanelInteractionUntil = performance.now() + 800;
+}
+
+function hasOpenNativeOverlay() {
+    return Boolean(
+        document.querySelector(
+            ".dropdown-menu.show, .o-dropdown--menu, .o_popover, .modal.show, .o-autocomplete--dropdown-menu"
+        )
+    );
+}
+
+function shouldDeferControlPanelRefresh() {
+    return performance.now() < controlPanelInteractionUntil || hasOpenNativeOverlay();
 }
 
 function normalizeSharedControlPanels(root) {
@@ -441,7 +459,7 @@ function normalizeBreadcrumbs(root) {
 
         if (sourceCluster) {
             sourceCluster.classList.add("o_bao_breadcrumb_source");
-            sourceCluster.setAttribute("aria-hidden", "true");
+            sourceCluster.removeAttribute("aria-hidden");
         }
 
         if (!interactiveShell.children.length) {
@@ -462,6 +480,15 @@ function refreshControlPanels() {
 }
 
 function scheduleRefresh() {
+    if (shouldDeferControlPanelRefresh()) {
+        if (!deferredRefreshTimerId) {
+            deferredRefreshTimerId = window.setTimeout(() => {
+                deferredRefreshTimerId = null;
+                scheduleRefresh();
+            }, 220);
+        }
+        return;
+    }
     if (refreshScheduled) {
         return;
     }
@@ -545,6 +572,32 @@ function initControlPanelBao() {
     window.addEventListener("scroll", scheduleRefresh, { passive: true });
     const observer = new MutationObserver(() => scheduleRefresh());
     observer.observe(document.body, { childList: true, subtree: true });
+    document.addEventListener(
+        "pointerdown",
+        (event) => {
+            if (
+                event.target.closest(
+                    ".o_control_panel button, .o_control_panel a, .o_control_panel [role='button'], .dropdown-menu, .o-dropdown--menu"
+                )
+            ) {
+                markControlPanelInteraction();
+            }
+        },
+        true
+    );
+    document.addEventListener(
+        "keydown",
+        (event) => {
+            if (
+                event.target.closest(
+                    ".o_control_panel button, .o_control_panel a, .o_control_panel [role='button'], .dropdown-menu, .o-dropdown--menu"
+                )
+            ) {
+                markControlPanelInteraction();
+            }
+        },
+        true
+    );
     document.addEventListener(
         "click",
         (event) => {
