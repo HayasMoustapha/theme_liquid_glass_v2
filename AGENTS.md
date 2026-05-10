@@ -8,6 +8,10 @@ Mandatory baseline:
 - before acting, determine whether `.ai-dev-system/governor/sessions/` already contains a Governor session for the work;
 - if a Governor session exists, use that session as the governing frame and do not continue the project work outside the active Governor session artifacts;
 - if several sessions could match and the active one is unclear, ask for clarification instead of bypassing Governor.
+- if exactly one active Governor session is an obvious match, open its `START-HERE.md` and follow its session artifacts before reopening generic bootstrap docs;
+- in that case, treat `.ai-dev-system/BOOTSTRAP-README.md`, `.ai-dev-system/PROJECT-LOCAL-ADAPTER.md` and `.ai-dev-system/docs/getting-started/commandes-conversationnelles.md` as fallback references only.
+- if direct Codex startup is needed in this project, prefer `.ai-dev-system/bin/codex-safe.cmd` or `.ai-dev-system/bin/codex-safe.ps1` so optional MCP servers stay disabled by default for that session only;
+- these launchers rely on ephemeral `-c` overrides instead of writing a managed `.codex/config.toml`, so they do not corrupt project-local Codex config parsing.
 
 Maximum autonomy continuity:
 - if the user explicitly asks for maximum autonomy, `until-done`, or says to chain every step/lot without stopping, do not stop at the end of a tranche;
@@ -28,6 +32,8 @@ If the command targets this current project, use project-local mode and pass `.`
 
 If a Governor runtime/session artifact is already provided (`runtime-prompt.md`, `execution-handoff.md` or `execution-prompt.md`), treat that artifact as the active step contract.
 In that case, do not reopen `.ai-dev-system/PROJECT-LOCAL-ADAPTER.md`, `.ai-dev-system/BOOTSTRAP-README.md` or `.ai-dev-system/docs/getting-started/commandes-conversationnelles.md` unless you need a missing command syntax or reference detail.
+
+If no runtime artifact is already provided but a single active Governor session already exists and clearly matches the work, read that session's `START-HERE.md` first and follow the session artifacts before reopening the generic project-local bootstrap docs.
 
 Otherwise, read first:
 - `.ai-dev-system/PROJECT-LOCAL-ADAPTER.md`

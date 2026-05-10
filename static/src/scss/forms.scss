@@ -61,7 +61,7 @@
             justify-content: space-between !important;
             gap: 16px;
             min-width: 0;
-            width: 100%;
+            width: 100% !important;
             order: 1;
             flex: 1 1 auto !important;
             align-self: center !important;
@@ -3138,7 +3138,7 @@
         font-family: $bao-font-body !important;
         font-size: 0.8125rem !important;
         font-weight: 400 !important;
-        margin: 0 !important;
+        margin: 10px !important;
         padding: 12px 16px !important;
         transition: $transition-base;
     }
@@ -3433,7 +3433,7 @@
 
     .o_form_renderer,
     .o_form_sheet_bg {
-        background: #f9f9f9 !important;
+        background: #ffffff !important;
     }
 
     .o_form_sheet,

@@ -407,11 +407,11 @@
     }
 
     &:has(.o_kanban_record .o_kanban_image, .o_kanban_record .o_kanban_image_fill, .o_kanban_record img) {
-        --bao-kanban-card-min-height: 204px;
+        --bao-kanban-card-min-height: 100px;
 
         .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new) {
-            height: auto !important;
-            min-height: 204px !important;
+            height: 100% !important;
+            min-height: 100px !important;
         }
     }
 }
