@@ -605,20 +605,18 @@
     --bao-kanban-total-gap: 48px;
     --bao-kanban-card-basis: calc((100% - var(--bao-kanban-total-gap)) / var(--bao-kanban-columns));
     gap: 24px !important;
-    width: calc(100% + 56px) !important;
+    width: 100% !important;
     min-height: calc(100vh - 156px) !important;
     height: calc(100vh - 156px) !important;
     margin: -26px -28px 0 !important;
     padding: 11px !important;
-    background: #ffffff !important;
-    border: 1px solid #e1e1e1 !important;
-    border-radius: 15px !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: none !important;
     box-shadow: none !important;
     overflow: hidden !important;
-        font-family: "CreightonPro", "Open Sans", sans-serif !important;
-
-    .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),
-    .o_kanban_quick_create {
+    font-family: "CreightonPro", "Open Sans", sans-serif !important;
+    .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),    .o_kanban_quick_create{
         flex: 0 0 var(--bao-kanban-card-basis) !important;
         max-width: var(--bao-kanban-card-basis) !important;
         height: 312px !important;
