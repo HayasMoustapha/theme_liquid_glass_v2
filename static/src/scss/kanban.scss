@@ -444,6 +444,114 @@
     }
 }
 
+// Partner notebook contact cards stay separate from full-screen kanban boards.
+// This block intentionally repeats the critical geometry after the generic kanban rules
+// because kanban.scss is loaded after forms.scss in the backend asset bundle.
+.o_form_view .o_field_widget[name="child_ids"] .o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
+    --bao-kanban-columns: 3;
+    --bao-kanban-total-gap: 16px;
+    --bao-kanban-card-basis: calc((100% - var(--bao-kanban-total-gap)) / var(--bao-kanban-columns));
+    display: flex !important;
+    align-content: flex-start !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+
+    .o_kanban_record:not(.o_kanban_ghost),
+    .o_kanban_record.o-kanban-button-new {
+        flex: 0 0 var(--bao-kanban-card-basis) !important;
+        max-width: var(--bao-kanban-card-basis) !important;
+        min-width: 0 !important;
+        width: auto !important;
+        height: 120px !important;
+        min-height: 120px !important;
+        margin: 0 !important;
+        padding: 8px !important;
+        background: #ffffff !important;
+        border: 1px solid #d9dde2 !important;
+        border-radius: 6px !important;
+        box-shadow: none !important;
+        overflow: hidden !important;
+    }
+
+    .o_kanban_aside_full,
+    .o_kanban_record > aside {
+        flex: 0 0 105px !important;
+        width: 105px !important;
+        height: 105px !important;
+        min-width: 105px !important;
+        min-height: 105px !important;
+        margin: 0 9px 0 0 !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
+    }
+
+    .o_kanban_aside_full .o_field_image,
+    .o_kanban_aside_full .o_kanban_image_fill,
+    .o_kanban_record > aside .o_field_image,
+    .o_kanban_record > aside .o_kanban_image_fill {
+        position: static !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 105px !important;
+        height: 105px !important;
+        min-width: 105px !important;
+        min-height: 105px !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
+        background-size: cover !important;
+        background-position: center !important;
+    }
+
+    .o_kanban_aside_full img,
+    .o_kanban_record > aside img {
+        display: block !important;
+        width: 105px !important;
+        height: 105px !important;
+        min-width: 105px !important;
+        min-height: 105px !important;
+        object-fit: cover !important;
+        border-radius: 4px !important;
+    }
+
+    .o_kanban_record.o-kanban-button-new {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        color: #666666 !important;
+        font-size: 16px !important;
+        font-weight: 400 !important;
+        line-height: 20px !important;
+        text-align: center !important;
+        text-decoration: none !important;
+    }
+}
+
+@media (max-width: 1099.98px) {
+    .o_form_view .o_field_widget[name="child_ids"] .o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
+        --bao-kanban-columns: 2;
+        --bao-kanban-total-gap: 8px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .o_form_view .o_field_widget[name="child_ids"] .o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
+        --bao-kanban-columns: 1;
+        --bao-kanban-total-gap: 0px;
+    }
+}
+
 .o_modules_kanban .o_kanban_record {
     min-height: 7rem !important;
     padding: 18px !important;
