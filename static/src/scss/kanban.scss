@@ -210,6 +210,190 @@
     max-width: max-content;
 }
 
+// BAO atlas v3 card_kanban: compact ungrouped purchase-style cards, native data/actions.
+.o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
+    display: flex !important;
+    align-content: flex-start !important;
+    align-items: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    width: calc(100% + 56px) !important;
+    margin: -19px -28px 0 !important;
+    padding: 16px !important;
+    background: #ffffff !important;
+    border: 1px solid #e1e1e1 !important;
+    border-radius: 16px !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+
+    .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),
+    .o_kanban_quick_create {
+        flex: 0 0 calc((100% - 32px) / 5) !important;
+        max-width: calc((100% - 32px) / 5) !important;
+        min-width: 0 !important;
+        width: auto !important;
+        height: 72px !important;
+        min-height: 72px !important;
+        margin: 0 !important;
+        padding: 8px !important;
+        background: #ffffff !important;
+        border: 1px solid #e1e1e1 !important;
+        border-radius: 6px !important;
+        box-shadow: none !important;
+        color: #303030 !important;
+        font-family: $bao-font-body !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        line-height: 20px !important;
+        overflow: hidden !important;
+        transform: none !important;
+    }
+
+    .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new):hover {
+        background: #ffffff !important;
+        border-color: #d4d4d4 !important;
+        box-shadow: none !important;
+        transform: none !important;
+    }
+
+    .o_kanban_record > .d-flex:first-child {
+        align-items: center !important;
+        min-height: 22px !important;
+        line-height: 18px !important;
+    }
+
+    .o_kanban_record .fw-bolder,
+    .o_kanban_record .fw-bold,
+    .o_kanban_record .o_kanban_record_title,
+    .o_kanban_record strong {
+        color: #303030 !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        line-height: 18px !important;
+        margin-top: 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .o_kanban_record .ms-auto,
+    .o_kanban_record [name="amount_total"] {
+        color: #303030 !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        line-height: 18px !important;
+        white-space: nowrap !important;
+    }
+
+    .o_kanban_record footer {
+        display: flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        height: 28px !important;
+        min-height: 28px !important;
+        padding: 8px 0 0 !important;
+        color: #303030 !important;
+        font-size: 14px !important;
+        line-height: 18px !important;
+    }
+
+    .o_kanban_record footer > .d-flex {
+        align-items: center !important;
+        gap: 5px !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .o_kanban_record .o_priority_star {
+        color: #c9c9c9 !important;
+        font-size: 18px !important;
+        line-height: 18px !important;
+        margin: 0 8px 0 0 !important;
+    }
+
+    .o_kanban_record .o_priority_star.fa-star {
+        color: #f3cc00 !important;
+    }
+
+    .o_kanban_record .o-mail-ActivityButton,
+    .o_kanban_record .o_activity,
+    .o_kanban_record [name="activity_ids"],
+    .o_kanban_record .fa-clock-o {
+        color: #8a8a8a !important;
+        font-size: 18px !important;
+        line-height: 18px !important;
+    }
+
+    .o_kanban_record .badge,
+    .o_kanban_record .o_badge,
+    .o_kanban_record .o_label_selection,
+    .o_kanban_record .o_status,
+    .o_kanban_record .rounded-pill {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 18px !important;
+        height: 18px !important;
+        padding: 0 8px !important;
+        border: 0 !important;
+        border-radius: 999px !important;
+        box-shadow: none !important;
+        font-size: 10px !important;
+        font-weight: 400 !important;
+        line-height: 18px !important;
+        white-space: nowrap !important;
+    }
+
+    .o_kanban_record .text-bg-success,
+    .o_kanban_record .bg-success,
+    .o_kanban_record .o_status.o_status_green {
+        background: #027f3d !important;
+        color: #ffffff !important;
+    }
+
+    .o_kanban_record .text-bg-info,
+    .o_kanban_record .bg-info,
+    .o_kanban_record .text-bg-primary,
+    .o_kanban_record .bg-primary {
+        background: #1357a0 !important;
+        color: #ffffff !important;
+    }
+
+    .o_kanban_record .text-bg-secondary,
+    .o_kanban_record .bg-secondary,
+    .o_kanban_record .text-bg-light,
+    .o_kanban_record .bg-light,
+    .o_kanban_record .text-bg-default,
+    .o_kanban_record .bg-200,
+    .o_kanban_record .o_status.o_status_grey {
+        background: #dedede !important;
+        color: #8a8a8a !important;
+    }
+
+    .o_kanban_record .badge[raw-value="purchase"],
+    .o_kanban_record .badge[raw-value="done"] {
+        background: #027f3d !important;
+        color: #ffffff !important;
+    }
+
+    .o_kanban_record .badge[raw-value="sent"],
+    .o_kanban_record .badge[raw-value="approved"],
+    .o_kanban_record .badge[raw-value="to approve"] {
+        background: #1357a0 !important;
+        color: #ffffff !important;
+    }
+
+    .o_kanban_record .badge[raw-value="draft"] {
+        background: #dedede !important;
+        color: #8a8a8a !important;
+    }
+
+    .o_kanban_record .badge[raw-value="cancel"] {
+        background: #f19091 !important;
+        color: #303030 !important;
+    }
+}
+
 .o_modules_kanban .o_kanban_record {
     min-height: 7rem !important;
     padding: 18px !important;
