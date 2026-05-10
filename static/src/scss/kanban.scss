@@ -615,6 +615,7 @@
     border-radius: 15px !important;
     box-shadow: none !important;
     overflow: hidden !important;
+        font-family: "CreightonPro", "Open Sans", sans-serif !important;
 
     .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),
     .o_kanban_quick_create {
@@ -628,6 +629,7 @@
         border-radius: 14px !important;
         box-shadow: none !important;
         overflow: hidden !important;
+            font-family: "CreightonPro", "Open Sans", sans-serif !important;
     }
 
     .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new):hover {
@@ -649,6 +651,7 @@
         font-size: 14px !important;
         font-weight: 400 !important;
         line-height: 22px !important;
+        font-family: "CreightonPro", "Open Sans", sans-serif !important;
     }
 
     .o_kanban_record .btn.btn-primary.oe_kanban_action:hover,
