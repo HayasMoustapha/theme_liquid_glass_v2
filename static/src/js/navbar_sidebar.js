@@ -6,6 +6,7 @@ import { useState } from "@odoo/owl";
 
 let refreshScheduled = false;
 let burstRefreshTimerIds = [];
+let pivotPrimeTimerIds = [];
 let kpiOverlayCounter = 0;
 const BAO_KPI_REFERENCE = [
     { label: "Nouveau", value: "6", variant: "is-mint", active: true },
@@ -1032,6 +1033,54 @@ function primePivotToolbarTransition(target) {
     if (!target?.matches(".o_switch_view.o_pivot, .o_cp_switch_buttons .o_switch_view.o_pivot")) {
         return;
     }
+
+    for (const timerId of pivotPrimeTimerIds) {
+        window.clearTimeout(timerId);
+    }
+
+    const actionManager = document.querySelector(".o_action_manager");
+    const currentAction =
+        target.closest(".o_action, .o_view_controller") ||
+        document.querySelector(".o_action_manager > .o_action:not(.d-none), .o_action_manager > .o_view_controller:not(.d-none)");
+
+    document.documentElement.classList.add("o_bao_cp_switching_pivot");
+    document.body.classList.add("o_bao_cp_switching_pivot");
+    actionManager?.classList.add("o_bao_cp_switching_pivot");
+    currentAction?.classList.add("o_bao_cp_switching_pivot");
+
+    const candidatePanels = new Set([
+        target.closest(".o_control_panel"),
+        ...(actionManager ? actionManager.querySelectorAll(".o_control_panel") : []),
+    ]);
+    for (const controlPanel of candidatePanels) {
+        if (!controlPanel) {
+            continue;
+        }
+        controlPanel.classList.add(
+            "o_bao_cp_pivot_pending",
+            "o_bao_center_search_panel",
+            "o_bao_transition_control_panel"
+        );
+        controlPanel.parentElement?.classList.add("o_bao_shared_cp_surface");
+    }
+
+    refreshControlPanels();
+
+    pivotPrimeTimerIds = [240, 520, 920, 1400].map((delay) =>
+        window.setTimeout(() => {
+            refreshControlPanels();
+            const hasPivotView = Boolean(document.querySelector(".o_pivot_view"));
+            if (delay >= 920 || hasPivotView) {
+                document.documentElement.classList.remove("o_bao_cp_switching_pivot");
+                document.body.classList.remove("o_bao_cp_switching_pivot");
+                actionManager?.classList.remove("o_bao_cp_switching_pivot");
+                currentAction?.classList.remove("o_bao_cp_switching_pivot");
+                for (const controlPanel of document.querySelectorAll(".o_bao_transition_control_panel")) {
+                    controlPanel.classList.remove("o_bao_transition_control_panel", "o_bao_cp_pivot_pending");
+                }
+            }
+        }, delay)
+    );
 }
 
 function initControlPanelBao() {

@@ -713,6 +713,13 @@ table {
 }
 
 @media (min-width: 1200px) {
+    .o_action_manager.o_bao_cp_switching_pivot .o_control_panel,
+    .o_bao_cp_switching_pivot .o_action_manager .o_control_panel,
+    .o_action.o_bao_cp_switching_pivot > .o_control_panel,
+    .o_view_controller.o_bao_cp_switching_pivot > .o_control_panel,
+    .o_control_panel.o_bao_transition_control_panel,
+    .o_action:has(.o_pivot_view) > .o_control_panel,
+    .o_view_controller:has(.o_pivot_view) > .o_control_panel,
     .o_pivot_view > .o_control_panel,
     .o_graph_view > .o_control_panel {
         .o_control_panel_main {
@@ -742,6 +749,24 @@ table {
             margin-left: 0 !important;
             min-width: 0 !important;
         }
+    }
+}
+
+.o_bao_cp_switching_pivot .o_control_panel,
+.o_control_panel.o_bao_transition_control_panel,
+.o_action:has(.o_pivot_view) > .o_control_panel,
+.o_view_controller:has(.o_pivot_view) > .o_control_panel {
+    display: block !important;
+    min-height: 64px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: #155b9b !important;
+    transform: none !important;
+
+    .o_control_panel_main {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
     }
 }
 
