@@ -1,14 +1,14 @@
 .list-group-item-action {
     background: transparent !important;
-    color: #23415f !important;
+    color: #303030 !important;
     border-radius: 14px;
     margin-bottom: 6px;
     border: none !important;
 
     &:hover,
     &.active {
-        background: #eef4fb !important;
-        color: #163f71 !important;
+        background: #f1f1f1 !important;
+        color: #303030 !important;
     }
 }
 
@@ -19,15 +19,15 @@
 .o_list_renderer {
     padding: 0;
     background: #ffffff !important;
-    border: 1px solid rgba(21, 58, 99, 0.1);
+    border: 1px solid #e1e1e1;
     border-radius: 26px;
     margin: 0;
     overflow: hidden;
-    box-shadow: 0 16px 38px rgba(12, 41, 73, 0.05);
+    box-shadow: none;
 
     .o_many2many_avatar_user_cell {
         .o_tag_badge_text {
-            color: #23415f !important;
+            color: #303030 !important;
         }
     }
 }
@@ -39,17 +39,17 @@
 
     thead {
         background: #ffffff !important;
-        border-bottom: 1px solid rgba(20, 60, 102, 0.11) !important;
+        border-bottom: 1px solid #e1e1e1 !important;
 
         th {
             background: #ffffff !important;
-            color: #46607d !important;
+            color: #4a4a4a !important;
             font-size: 11.5px;
             font-weight: 600;
             letter-spacing: 0.01em;
             text-transform: none;
             padding: 13px 16px !important;
-            border-bottom: 1px solid rgba(20, 60, 102, 0.11) !important;
+            border-bottom: 1px solid #e1e1e1 !important;
             white-space: nowrap;
             line-height: 1.2;
         }
@@ -57,17 +57,21 @@
 
     tbody {
         tr {
-            border-bottom: 1px solid rgba(22, 63, 109, 0.08) !important;
+            border-bottom: 1px solid #f1f1f1 !important;
             background: #ffffff !important;
-            color: #314a67 !important;
+            color: #303030 !important;
+
+            &:nth-child(even) {
+                background: #f9f9f9 !important;
+            }
 
             &:hover {
-                background: #f7fbff !important;
+                background: #f1f1f1 !important;
             }
         }
 
         td {
-            color: #314a67 !important;
+            color: #303030 !important;
             font-size: 13px;
             font-weight: 400;
             line-height: 1.35;
@@ -79,7 +83,7 @@
 
     tfoot {
         background: #ffffff !important;
-        border-top: 1px solid rgba(18, 63, 111, 0.1) !important;
+        border-top: 1px solid #e1e1e1 !important;
 
         td,
         th {
@@ -116,9 +120,9 @@
 }
 
 .table-info {
-    --table-hover-bg: #f7fbff !important;
-    --table-striped-bg: #f7fbff !important;
-    color: #314a67 !important;
+    --table-hover-bg: #f1f1f1 !important;
+    --table-striped-bg: #f9f9f9 !important;
+    color: #303030 !important;
 }
 
 .o_input:focus,
@@ -155,7 +159,7 @@
     width: 19px;
     height: 19px;
     margin: 0 auto !important;
-    border: 1px solid rgba(92, 118, 149, 0.28) !important;
+    border: 1px solid #c9c9c9 !important;
     border-radius: 6px !important;
     background-color: #ffffff !important;
     box-shadow: none !important;
@@ -168,14 +172,14 @@
 
 .o_list_renderer .o_list_record_selector .form-check-input:checked,
 .o_list_renderer .o_list_record_selector input.form-check-input:checked {
-    background-color: #118b4a !important;
-    border-color: #118b4a !important;
+    background-color: #027f3d !important;
+    border-color: #027f3d !important;
 }
 
 .o_list_renderer .o_list_record_selector .form-check-input:focus,
 .o_list_renderer .o_list_record_selector input.form-check-input:focus {
-    border-color: #118b4a !important;
-    box-shadow: 0 0 0 3px rgba(17, 139, 74, 0.14) !important;
+    border-color: #027f3d !important;
+    box-shadow: 0 0 0 3px rgba(3, 167, 80, 0.14) !important;
 }
 
 .o_list_renderer .badge,
@@ -369,4 +373,49 @@
     border-radius: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
+}
+
+.o_list_view .o_tag.o_tag_color_2,
+.o_list_view .o_field_badge.o_tag_color_2 .badge,
+.o_list_renderer .o_tag.o_tag_color_2,
+.o_list_renderer .o_field_badge.o_tag_color_2 .badge {
+    background: #fff476 !important;
+    border-color: #fff476 !important;
+    color: #303030 !important;
+}
+
+.o_list_view .o_tag.o_tag_color_3,
+.o_list_view .o_field_badge.o_tag_color_3 .badge,
+.o_list_renderer .o_tag.o_tag_color_3,
+.o_list_renderer .o_field_badge.o_tag_color_3 .badge {
+    background: #fff476 !important;
+    border-color: #fff476 !important;
+    color: #303030 !important;
+}
+
+.o_list_view .o_tag.o_tag_color_5,
+.o_list_view .o_field_badge.o_tag_color_5 .badge,
+.o_list_renderer .o_tag.o_tag_color_5,
+.o_list_renderer .o_field_badge.o_tag_color_5 .badge {
+    background: #03a750 !important;
+    border-color: #03a750 !important;
+    color: #ffffff !important;
+}
+
+.o_list_view .o_tag.o_tag_color_8,
+.o_list_view .o_field_badge.o_tag_color_8 .badge,
+.o_list_renderer .o_tag.o_tag_color_8,
+.o_list_renderer .o_field_badge.o_tag_color_8 .badge {
+    background: #72aff0 !important;
+    border-color: #72aff0 !important;
+    color: #303030 !important;
+}
+
+.o_list_view .o_tag.o_tag_color_9,
+.o_list_view .o_field_badge.o_tag_color_9 .badge,
+.o_list_renderer .o_tag.o_tag_color_9,
+.o_list_renderer .o_field_badge.o_tag_color_9 .badge {
+    background: #f19091 !important;
+    border-color: #f19091 !important;
+    color: #303030 !important;
 }

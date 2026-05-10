@@ -3427,6 +3427,114 @@
     color: $bao-text-800 !important;
 }
 
+// Final BAO palette authority for form surfaces, without changing native widgets.
+.o_action_manager:has(.o_form_view) .o_form_view {
+    color: #303030 !important;
+
+    .o_form_renderer,
+    .o_form_sheet_bg {
+        background: #f9f9f9 !important;
+    }
+
+    .o_form_sheet,
+    .o_form_sheet_bg .o_form_sheet {
+        background: #ffffff !important;
+        border-color: #e1e1e1 !important;
+        color: #303030 !important;
+    }
+
+    .o_form_label,
+    .o_td_label .col-form-label,
+    .o_wrap_label .col-form-label,
+    label {
+        color: #3f3f3f !important;
+    }
+
+    .form-control,
+    .o_input,
+    .o_field_widget input:not([type="checkbox"]):not([type="radio"]),
+    .o_field_widget textarea,
+    .o_field_widget select,
+    .o_field_many2one input {
+        background: #fafafa !important;
+        border-color: #dedede !important;
+        color: #3a4047 !important;
+    }
+
+    .form-control::placeholder,
+    .o_input::placeholder,
+    .o_field_widget input::placeholder,
+    .o_field_widget textarea::placeholder {
+        color: #a4a4a4 !important;
+    }
+
+    .o_notebook {
+        > .nav,
+        > .nav-tabs,
+        .nav.nav-tabs {
+            border-bottom-color: #dedede !important;
+        }
+
+        .nav-link {
+            background: transparent !important;
+            border-color: transparent !important;
+            color: #8a8a8a !important;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            background: #f9f9f9 !important;
+            color: #3f3f3f !important;
+        }
+
+        .nav-link.active,
+        .nav-item.show .nav-link,
+        .nav-tabs .nav-link.active {
+            background: #f1f1f1 !important;
+            border-color: #dedede !important;
+            color: #303030 !important;
+        }
+    }
+
+    .o_field_x2many:not([name="child_ids"]) .o_list_renderer,
+    .o_field_x2many:not([name="child_ids"]) .o_kanban_renderer {
+        background: #ffffff !important;
+        border-color: #e1e1e1 !important;
+        box-shadow: none !important;
+    }
+
+    .o_field_x2many:not([name="child_ids"]) .o_list_table {
+        thead,
+        thead th {
+            background: #ffffff !important;
+            border-bottom-color: #e1e1e1 !important;
+            color: #4a4a4a !important;
+        }
+
+        tbody tr {
+            background: #ffffff !important;
+            border-bottom-color: #f1f1f1 !important;
+
+            &:nth-child(even) {
+                background: #f9f9f9 !important;
+            }
+
+            &:hover {
+                background: #f1f1f1 !important;
+            }
+        }
+
+        tbody td {
+            color: #303030 !important;
+        }
+
+        tfoot,
+        tfoot.o_list_footer {
+            border-top-color: #e1e1e1 !important;
+        }
+    }
+}
+
 // Notebook field inheritance: notebook autocomplete/many2one controls must reuse the
 // exact same Liquid+BAO shell contract as the main form sheet, without introducing a
 // notebook-only field skin.

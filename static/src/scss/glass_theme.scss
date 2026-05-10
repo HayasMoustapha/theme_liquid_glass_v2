@@ -1,9 +1,7 @@
 .o_web_client {
-    background:
-        radial-gradient(circle at left center, rgba(222, 234, 246, 0.85) 0, rgba(222, 234, 246, 0.2) 18%, transparent 28%),
-        linear-gradient(180deg, #f9fcff 0%, #eef5fd 100%);
+    background: #f9f9f9 !important;
     background-attachment: fixed;
-    color: $text-white;
+    color: $bao-text-800;
 }
 
 body,
@@ -78,7 +76,7 @@ table {
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(21, 91, 155, 0.26) transparent;
+    scrollbar-color: rgba(19, 87, 160, 0.26) transparent;
 }
 
 .o_searchview {
@@ -86,7 +84,7 @@ table {
     height: 38px;
     padding-inline: 12px;
     background: $bao-surface-0 !important;
-    border: 1px solid rgba(16, 80, 160, 0.1) !important;
+    border: 1px solid $bao-border-200 !important;
     border-radius: 11px !important;
     box-shadow: none !important;
     padding-top: 0 !important;
@@ -103,8 +101,8 @@ table {
         .o_searchview_facet {
             min-height: 28px;
             padding: 4px 8px;
-            background: $bao-blue-100 !important;
-            border: 1px solid rgba(16, 80, 160, 0.08) !important;
+            background: $bao-surface-100 !important;
+            border: 1px solid $bao-border-200 !important;
             border-radius: 9px;
             color: $bao-brand-600 !important;
             font-size: 0.78rem;
@@ -167,7 +165,7 @@ table {
             min-height: 38px;
             padding: 0 10px !important;
             background: $bao-surface-0 !important;
-            border: 1px solid rgba(16, 80, 160, 0.1) !important;
+            border: 1px solid $bao-border-200 !important;
             border-left: none !important;
             border-radius: 0 11px 11px 0 !important;
             color: $bao-text-600 !important;
@@ -188,7 +186,7 @@ table {
 
 .o_control_panel {
     border: none !important;
-    background: #155b9b !important;
+    background: $bao-brand-600 !important;
     box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08) !important;
     color: #ffffff;
     padding: 10px 24px 12px !important;
@@ -736,7 +734,7 @@ table {
     min-height: 64px !important;
     opacity: 1 !important;
     visibility: visible !important;
-    background: #155b9b !important;
+    background: $bao-brand-600 !important;
     transform: none !important;
 
     .o_control_panel_main {
@@ -809,7 +807,7 @@ table {
 
         &:hover,
         &.active {
-            background: #eef5fd !important;
+            background: $bao-surface-100 !important;
             color: $primary-color !important;
         }
     }
@@ -839,7 +837,7 @@ table {
 
         &:hover,
         &:focus {
-            background: #eef5fd !important;
+            background: $bao-surface-100 !important;
             color: $primary-color !important;
         }
     }
@@ -889,7 +887,7 @@ table {
 
         &:hover,
         &:focus {
-            background: #eef5fd !important;
+            background: $bao-surface-100 !important;
             color: $primary-color !important;
         }
     }
@@ -961,44 +959,44 @@ table {
 .o_field_badge.o_tag_color_1 .badge,
 .o_field_many2many_tags .o_tag.o_tag_color_1,
 .o_field_many2many_selection .o_tag.o_tag_color_1 {
-    background: #fbe2e0 !important;
-    border-color: #fbe2e0 !important;
-    color: #bf3c34 !important;
+    background: #f19091 !important;
+    border-color: #f19091 !important;
+    color: #303030 !important;
 }
 
 .o_tag.o_tag_color_2,
 .o_field_badge.o_tag_color_2 .badge,
 .o_field_many2many_tags .o_tag.o_tag_color_2,
 .o_field_many2many_selection .o_tag.o_tag_color_2 {
-    background: #0c974f !important;
-    border-color: #0c974f !important;
-    color: #ffffff !important;
+    background: #fff476 !important;
+    border-color: #fff476 !important;
+    color: #303030 !important;
 }
 
 .o_tag.o_tag_color_3,
 .o_field_badge.o_tag_color_3 .badge,
 .o_field_many2many_tags .o_tag.o_tag_color_3,
 .o_field_many2many_selection .o_tag.o_tag_color_3 {
-    background: #ececec !important;
-    border-color: #ececec !important;
-    color: #595f69 !important;
+    background: #fff476 !important;
+    border-color: #fff476 !important;
+    color: #303030 !important;
 }
 
 .o_tag.o_tag_color_4,
 .o_field_badge.o_tag_color_4 .badge,
 .o_field_many2many_tags .o_tag.o_tag_color_4,
 .o_field_many2many_selection .o_tag.o_tag_color_4 {
-    background: #1f6db5 !important;
-    border-color: #1f6db5 !important;
-    color: #ffffff !important;
+    background: #72aff0 !important;
+    border-color: #72aff0 !important;
+    color: #303030 !important;
 }
 
 .o_tag.o_tag_color_5,
 .o_field_badge.o_tag_color_5 .badge,
 .o_field_many2many_tags .o_tag.o_tag_color_5,
 .o_field_many2many_selection .o_tag.o_tag_color_5 {
-    background: #16a34a !important;
-    border-color: #16a34a !important;
+    background: #03a750 !important;
+    border-color: #03a750 !important;
     color: #ffffff !important;
 }
 
@@ -1006,18 +1004,18 @@ table {
 .o_field_badge.o_tag_color_8 .badge,
 .o_field_many2many_tags .o_tag.o_tag_color_8,
 .o_field_many2many_selection .o_tag.o_tag_color_8 {
-    background: #72a7eb !important;
-    border-color: #72a7eb !important;
-    color: #ffffff !important;
+    background: #72aff0 !important;
+    border-color: #72aff0 !important;
+    color: #303030 !important;
 }
 
 .o_tag.o_tag_color_9,
 .o_field_badge.o_tag_color_9 .badge,
 .o_field_many2many_tags .o_tag.o_tag_color_9,
 .o_field_many2many_selection .o_tag.o_tag_color_9 {
-    background: #ef7a7a !important;
-    border-color: #ef7a7a !important;
-    color: #ffffff !important;
+    background: #f19091 !important;
+    border-color: #f19091 !important;
+    color: #303030 !important;
 }
 
 .badge.bg-success,
@@ -1090,41 +1088,41 @@ table {
 .o_field_contact_statistics .badge.bg-secondary.o_tag_color_3,
 .o_field_contact_statistics .o_tag.o_tag_color_3,
 .o_field_contact_statistics .o_tag_color_3 {
-    background: #ffe16a !important;
-    color: #786400 !important;
-    border-color: #ffe16a !important;
+    background: #fff476 !important;
+    color: #303030 !important;
+    border-color: #fff476 !important;
 }
 
 .o_field_contact_statistics .badge.bg-secondary.o_tag_color_9,
 .o_field_contact_statistics .o_tag.o_tag_color_9,
 .o_field_contact_statistics .o_tag_color_9 {
-    background: #ef7a7a !important;
-    color: #ffffff !important;
-    border-color: #ef7a7a !important;
+    background: #f19091 !important;
+    color: #303030 !important;
+    border-color: #f19091 !important;
 }
 
 .o_field_contact_statistics .badge.bg-secondary.o_tag_color_8,
 .o_field_contact_statistics .o_tag.o_tag_color_8,
 .o_field_contact_statistics .o_tag_color_8 {
-    background: #72a7eb !important;
-    color: #ffffff !important;
-    border-color: #72a7eb !important;
+    background: #72aff0 !important;
+    color: #303030 !important;
+    border-color: #72aff0 !important;
 }
 
 .o_field_contact_statistics .badge.bg-secondary.o_tag_color_5,
 .o_field_contact_statistics .o_tag.o_tag_color_5,
 .o_field_contact_statistics .o_tag_color_5 {
-    background: #16a34a !important;
+    background: #03a750 !important;
     color: #ffffff !important;
-    border-color: #16a34a !important;
+    border-color: #03a750 !important;
 }
 
 .o_field_contact_statistics .badge.bg-secondary.o_tag_color_2,
 .o_field_contact_statistics .o_tag.o_tag_color_2,
 .o_field_contact_statistics .o_tag_color_2 {
-    background: #f5d44f !important;
-    color: #7b5b00 !important;
-    border-color: #f5d44f !important;
+    background: #fff476 !important;
+    color: #303030 !important;
+    border-color: #fff476 !important;
 }
 
 .o_graph_renderer,
@@ -2104,21 +2102,21 @@ select {
 .o_bao_pivot_surface_toolbar .btn {
     min-height: 40px;
     border-radius: 10px !important;
-    background: #f7fbff !important;
-    border: 1px solid rgba(17, 74, 126, 0.14) !important;
+    background: $bao-surface-50 !important;
+    border: 1px solid $bao-border-200 !important;
     color: $primary-color !important;
     box-shadow: none !important;
 }
 
 .o_bao_pivot_surface_toolbar .btn-primary {
-    background: #f7fbff !important;
-    border-color: rgba(17, 74, 126, 0.14) !important;
+    background: $bao-surface-50 !important;
+    border-color: $bao-border-200 !important;
     color: $primary-color !important;
 }
 
 .o_bao_pivot_surface_toolbar .btn-secondary {
-    background: #f7fbff !important;
-    border-color: rgba(17, 74, 126, 0.14) !important;
+    background: $bao-surface-50 !important;
+    border-color: $bao-border-200 !important;
     color: $primary-color !important;
 }
 

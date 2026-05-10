@@ -98,12 +98,12 @@ button span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon),
 
 .oe_stat_button {
     @include bao-panel-shell;
-    color: #23415f !important;
+    color: $bao-text-800 !important;
     min-height: 80px;
 
     &:hover {
-        background: #eef4fb !important;
-        border-color: rgba(21, 91, 155, 0.18) !important;
+        background: $bao-surface-50 !important;
+        border-color: $bao-border-300 !important;
     }
 }
 
@@ -115,7 +115,7 @@ button span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon),
 .oe_stat_button .o_stat_info,
 .oe_stat_button .o_stat_text,
 .oe_stat_button .o_stat_value {
-    color: #23415f !important;
+    color: $bao-text-800 !important;
 }
 
 .o-form-buttonbox .oe_stat_button {
@@ -195,7 +195,7 @@ button span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon),
     &:hover,
     &:focus,
     &:active {
-        background: #d8f2e4 !important;
+        background: $bao-success-50 !important;
         border-color: $bao-success-border !important;
         color: $bao-success-text !important;
     }
@@ -209,7 +209,7 @@ button span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon),
     &:hover,
     &:focus,
     &:active {
-        background: #fbe2e0 !important;
+        background: $bao-danger-50 !important;
         border-color: rgba(217, 79, 69, 0.32) !important;
         color: $bao-danger-text !important;
     }
@@ -223,7 +223,7 @@ button span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon),
     &:hover,
     &:focus,
     &:active {
-        background: #ffe8bd !important;
+        background: $bao-warning-50 !important;
         border-color: rgba(230, 173, 53, 0.42) !important;
         color: $bao-warning-text !important;
     }
