@@ -3719,6 +3719,175 @@
     }
 }
 
+// Partner form contact cards: BAO atlas v3 cards_contact while preserving native x2many kanban.
+.o_form_view .o_field_widget[name="child_ids"] {
+    display: block !important;
+    width: calc(100% + 48px) !important;
+    margin: 0 0 5px !important;
+    margin-left: -16px !important;
+
+    .o_kanban_view,
+    .o_field_x2many_kanban,
+    .o_kanban_renderer {
+        width: 100% !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+        background: transparent !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+
+    .o_kanban_renderer {
+        display: flex !important;
+        align-content: flex-start !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .o_kanban_record:not(.o_kanban_ghost),
+    .o_kanban_record.o-kanban-button-new {
+        flex: 0 0 calc((100% - 16px) / 3) !important;
+        max-width: calc((100% - 16px) / 3) !important;
+        min-width: 0 !important;
+        height: 120px !important;
+        min-height: 120px !important;
+        margin: 0 !important;
+        padding: 8px !important;
+        background: #ffffff !important;
+        border: 1px solid #d9dde2 !important;
+        border-radius: 6px !important;
+        box-shadow: none !important;
+        color: #333333 !important;
+        font-family: $bao-font-body !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        line-height: 1.35 !important;
+        overflow: hidden !important;
+    }
+
+    .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new):hover {
+        border-color: #cfd5dc !important;
+        box-shadow: none !important;
+        transform: none !important;
+    }
+
+    .o_kanban_aside_full,
+    .o_kanban_record > aside {
+        flex: 0 0 105px !important;
+        width: 105px !important;
+        height: 105px !important;
+        min-width: 105px !important;
+        margin: 0 9px 0 0 !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
+    }
+
+    .o_kanban_aside_full .o_field_image,
+    .o_kanban_aside_full .o_kanban_image_fill,
+    .o_kanban_record > aside .o_field_image,
+    .o_kanban_record > aside .o_kanban_image_fill {
+        position: static !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 105px !important;
+        height: 105px !important;
+        min-width: 105px !important;
+        min-height: 105px !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
+        background-size: cover !important;
+        background-position: center !important;
+        color: #ffffff !important;
+        font-size: 56px !important;
+        font-weight: 400 !important;
+        line-height: 1 !important;
+    }
+
+    .o_kanban_aside_full img,
+    .o_kanban_record > aside img {
+        display: block !important;
+        width: 105px !important;
+        height: 105px !important;
+        min-width: 105px !important;
+        min-height: 105px !important;
+        object-fit: cover !important;
+        border-radius: 4px !important;
+    }
+
+    .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new) > div:not(.o_kanban_aside_full),
+    .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new) > main {
+        min-width: 0 !important;
+        padding: 3px 0 0 !important;
+        overflow: hidden !important;
+    }
+
+    .o_kanban_record .fw-bold,
+    .o_kanban_record strong,
+    .o_kanban_record [name="name"] {
+        display: block !important;
+        margin: 0 0 5px !important;
+        color: #333333 !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        line-height: 20px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .o_kanban_record div,
+    .o_kanban_record span,
+    .o_kanban_record small {
+        color: #333333 !important;
+        font-size: 14px !important;
+        line-height: 21px !important;
+    }
+
+    .o_kanban_record .fa,
+    .o_kanban_record .text-primary {
+        color: #e01017 !important;
+    }
+
+    .o_kanban_record .fa {
+        width: 18px !important;
+        min-width: 18px !important;
+        margin-right: 6px !important;
+        font-size: 18px !important;
+        line-height: 18px !important;
+        text-align: center !important;
+        vertical-align: -2px !important;
+    }
+
+    .o_kanban_record.o-kanban-button-new {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 8px !important;
+        color: #666666 !important;
+        font-size: 16px !important;
+        font-weight: 400 !important;
+        line-height: 20px !important;
+        text-align: center !important;
+        text-decoration: none !important;
+    }
+
+    .o_kanban_record.o_kanban_ghost {
+        max-height: 0 !important;
+        min-height: 0 !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        opacity: 0 !important;
+    }
+}
+
 // Chatter topbar: BAO color pass only, no structural DOM changes.
 .o_form_view .o-mail-Chatter {
     .o_ChatterTopbar,
