@@ -130,146 +130,6 @@ table {
     }
 }
 
-.o_liquid_kpi_shell,
-.o_liquid_kpi_placeholder {
-    position: relative !important;
-    width: 100% !important;
-    min-height: 151px !important;
-    height: 151px !important;
-    max-height: 151px !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    background: #ffffff !important;
-}
-
-.o_liquid_kpi_source_store {
-    display: none !important;
-}
-
-.o_liquid_kpi_shell[data-liquid-kpi-overlay="true"] {
-    pointer-events: none !important;
-    isolation: isolate !important;
-    z-index: 2147483640 !important;
-    width: 100vw !important;
-    max-width: 100vw !important;
-    margin-left: calc(50% - 50vw) !important;
-    transform: translateZ(0) !important;
-}
-
-.o_liquid_kpi_shell[data-liquid-kpi-overlay="true"] > .o_liquid_kpi_strip {
-    pointer-events: auto !important;
-}
-
-.o_liquid_kpi_strip {
-    position: relative !important;
-    z-index: 1 !important;
-    display: grid !important;
-    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
-    grid-auto-rows: 104px !important;
-    column-gap: 16px !important;
-    row-gap: 0 !important;
-    width: 100% !important;
-    height: 151px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    align-items: start !important;
-    align-content: start !important;
-    background-color: #ffffff !important;
-    background-image: url("/theme_liquid_glass_v2/static/src/img/bao_kpi_atlas_ref.png") !important;
-    background-repeat: no-repeat !important;
-    background-position: left top !important;
-    background-size: 1920px 151px !important;
-    box-sizing: border-box !important;
-    opacity: 1 !important;
-}
-
-.o_liquid_kpi_card,
-.o_liquid_kpi_shell_ref > .o_liquid_kpi_strip > .o_liquid_kpi_card {
-    position: relative !important;
-    z-index: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    justify-content: space-between !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    height: 104px !important;
-    min-height: 104px !important;
-    max-height: 104px !important;
-    margin: 0 !important;
-    padding: 14px 16px !important;
-    border: 0 !important;
-    border-radius: 17px !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    appearance: none !important;
-    cursor: pointer !important;
-    text-align: left !important;
-    color: transparent !important;
-}
-
-.o_liquid_kpi_card:hover,
-.o_liquid_kpi_card:focus,
-.o_liquid_kpi_card:focus-visible,
-.o_liquid_kpi_card:active {
-    outline: none !important;
-    box-shadow: none !important;
-    transform: none !important;
-}
-
-.o_liquid_kpi_label,
-.o_liquid_kpi_value {
-    display: block !important;
-    margin: 0 !important;
-    color: transparent !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    user-select: none !important;
-}
-
-@media (max-width: 1199.98px) {
-    .o_liquid_kpi_strip {
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-        height: auto !important;
-    }
-
-    .o_liquid_kpi_shell,
-    .o_liquid_kpi_placeholder {
-        min-height: 344px !important;
-        height: auto !important;
-        max-height: none !important;
-    }
-
-    .o_liquid_kpi_card,
-    .o_liquid_kpi_shell_ref > .o_liquid_kpi_strip > .o_liquid_kpi_card {
-        border: 1px solid rgba(15, 23, 42, 0.08) !important;
-        background: #ffffff !important;
-    }
-
-    .o_liquid_kpi_label,
-    .o_liquid_kpi_value {
-        color: inherit !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-
-    .o_liquid_kpi_strip {
-        background-image: none !important;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .o_liquid_kpi_strip {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-}
-
-@media (max-width: 479.98px) {
-    .o_liquid_kpi_strip {
-        grid-template-columns: 1fr !important;
-    }
-}
-
 .o_facet_values {
     flex-wrap: nowrap !important;
 }
@@ -1866,243 +1726,150 @@ select {
     color: $primary-color !important;
 }
 
-.o_liquid_native_kpi_backdrop_root {
-    position: relative !important;
-}
-
-.o_liquid_native_kpi_backdrop {
-    position: fixed !important;
-    z-index: 2147480000 !important;
-    top: var(--o-liquid-native-kpi-backdrop-top, 130px) !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: var(--o-liquid-native-kpi-backdrop-height, 151px) !important;
-    background: url("/theme_liquid_glass_v2/static/src/img/bao_kpi_atlas_ref.png") no-repeat left top !important;
-    background-size: 1920px 151px !important;
-    pointer-events: none !important;
-}
-
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready {
-    position: relative !important;
-    z-index: 21 !important;
-    padding: 24px 0 28px !important;
-    border-bottom: 0 !important;
-    background: transparent !important;
-}
-
-.o_liquid_native_kpi_shell {
-    display: block !important;
-    position: relative !important;
-    top: -0.078125px !important;
-    width: 100vw !important;
-    max-width: 100vw !important;
-    margin-left: calc(50% - 50vw) !important;
-    height: 151px !important;
-    min-height: 151px !important;
-    max-height: 151px !important;
-    padding-inline: 10px !important;
-    box-sizing: border-box !important;
-    background: url("/theme_liquid_glass_v2/static/src/img/bao_kpi_atlas_ref.png") no-repeat left top !important;
-    background-size: 1920px 151px !important;
-    background-origin: border-box !important;
-    background-clip: border-box !important;
-    overflow: hidden !important;
-}
-
-.o_liquid_native_kpi_strip {
+.o_purchase_dashboard.container-fluid {
     display: grid !important;
     grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
     column-gap: 16px !important;
     row-gap: 0 !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-height: 129px !important;
+    margin: -16px 0 0 calc(50% - 50vw) !important;
+    padding: 8px 12px 16px !important;
+    box-sizing: border-box !important;
+    border-bottom: 0 !important;
+    background: #f3f6fb !important;
+    overflow: visible !important;
 }
 
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card {
+.o_purchase_dashboard.container-fluid > .row,
+.o_purchase_dashboard.container-fluid > .row > [class*="col-"],
+.o_purchase_dashboard.container-fluid .grid,
+.o_purchase_dashboard.container-fluid .g-col-12.p-0,
+.o_purchase_dashboard.container-fluid .g-col-6.p-0 {
+    display: contents !important;
+}
+
+.o_purchase_dashboard.container-fluid .g-col-12.g-col-lg-1,
+.o_purchase_dashboard.container-fluid .g-col-1,
+.o_purchase_dashboard.container-fluid .d-lg-none.g-col-12,
+.o_purchase_dashboard.container-fluid .o_purchase_dashboard_card_bottom {
+    display: none !important;
+}
+
+.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: column-reverse !important;
     align-items: flex-start !important;
     justify-content: space-between !important;
     min-width: 0 !important;
-    min-height: 104px !important;
-    height: 104px !important;
-    position: relative !important;
+    width: auto !important;
+    height: 105px !important;
+    min-height: 105px !important;
+    max-height: 105px !important;
     margin: 0 !important;
-    padding: 14px 16px !important;
-    border-radius: 17px !important;
-    text-align: left !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+    border: 1px solid #d9dde4 !important;
+    border-radius: 15px !important;
+    background: #ffffff !important;
     box-shadow: none !important;
-    white-space: normal !important;
-    color: transparent !important;
-    text-decoration: none !important;
-    background: transparent !important;
-    border-color: transparent !important;
-}
-
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-mint {
-    background: transparent !important;
-    border-color: transparent !important;
-}
-
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-white,
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-gray {
-    background: transparent !important;
-    border-color: transparent !important;
-}
-
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-yellow {
-    background: transparent !important;
-    border-color: transparent !important;
-}
-
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-pink {
-    background: transparent !important;
-    border-color: transparent !important;
-}
-
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-active {
-    box-shadow: none !important;
-}
-
-.o_liquid_native_kpi_label {
-    display: block !important;
-    margin: 0 !important;
-    color: #3b3e45 !important;
-    font-size: 13px !important;
+    color: #32363d !important;
+    font-size: 14px !important;
     font-weight: 400 !important;
     line-height: 1.15 !important;
-    opacity: 0 !important;
+    text-align: left !important;
+    text-decoration: none !important;
+    white-space: normal !important;
+    overflow: hidden !important;
 }
 
-.o_liquid_native_kpi_value_row {
-    display: inline-flex !important;
+.o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(1) > .purchase-dashboard-card.o_purchase_dashboard_card_top {
+    background: #c3fad8 !important;
+    border-color: #35e979 !important;
+}
+
+.o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(3) > .purchase-dashboard-card.o_purchase_dashboard_card_top {
+    background: #fff8c9 !important;
+    border-color: #ffe34d !important;
+}
+
+.o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(6) > .purchase-dashboard-card.o_purchase_dashboard_card_top {
+    background: #f8d6d6 !important;
+    border-color: #ff8787 !important;
+    color: #e00000 !important;
+}
+
+.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top > .fs-2 {
+    display: flex !important;
     align-items: baseline !important;
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
     gap: 0 !important;
-    margin-top: auto !important;
-}
-
-.o_liquid_native_kpi_value {
-    margin: 0 !important;
+    width: 100% !important;
+    margin: auto 0 0 !important;
+    padding: 0 !important;
     color: #33363c !important;
-    font-size: 22px !important;
+    font-size: 30px !important;
     font-weight: 700 !important;
     line-height: 1 !important;
-    opacity: 0 !important;
+    letter-spacing: 0 !important;
+    min-height: 30px !important;
 }
 
-.o_liquid_native_kpi_meta {
-    display: none !important;
+.o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(6) > .purchase-dashboard-card.o_purchase_dashboard_card_top > .fs-2 {
+    color: #e00000 !important;
 }
 
-.o_liquid_native_kpi_source_card {
-    display: none !important;
+.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top > .fs-2 > span {
+    color: inherit !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
 }
 
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-pink .o_liquid_native_kpi_label,
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-pink .o_liquid_native_kpi_value {
-    color: #de2f26 !important;
+.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top > .fs-2 > .ps-4 {
+    display: inline-flex !important;
+    align-items: baseline !important;
+    gap: 4px !important;
+    padding-left: 12px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
 }
 
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.has-live-overlay::before {
-    content: "" !important;
-    display: none !important;
+.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top > .fs-2 .o_priority_star {
+    font-size: 15px !important;
+    line-height: 1 !important;
 }
 
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-pink.has-live-overlay::before {
-    background: #fde6e6 !important;
-}
-
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-mint.has-live-overlay::before {
-    background: #d7fae8 !important;
-}
-
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-yellow.has-live-overlay::before {
-    background: #fff8d8 !important;
-}
-
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.has-live-overlay .o_liquid_native_kpi_value_row {
-    position: absolute !important;
-    left: 16px !important;
-    bottom: 14px !important;
-    z-index: 1 !important;
-}
-
-.o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.has-live-overlay .o_liquid_native_kpi_value {
-    opacity: 0 !important;
+.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top:hover,
+.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top:focus,
+.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top:active {
+    transform: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
 }
 
 @media (max-width: 1399.98px) {
-    .o_liquid_native_kpi_backdrop {
-        display: none !important;
-    }
-
-    .o_liquid_native_kpi_shell {
-        width: 100% !important;
-        max-width: 100% !important;
-        height: auto !important;
-        min-height: 0 !important;
-        max-height: none !important;
-        margin-left: 0 !important;
-        padding-inline: 16px !important;
-        background: transparent !important;
-        overflow: visible !important;
-    }
-
-    .o_liquid_native_kpi_strip {
+    body.o_web_client .o_action_manager .o_purchase_dashboard.container-fluid {
         grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
         row-gap: 16px !important;
-    }
-
-    .o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card {
-        background: #ffffff !important;
-        border: 1px solid rgba(17, 74, 126, 0.12) !important;
-        color: #31343a !important;
-    }
-
-    .o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-mint {
-        background: #d7fae8 !important;
-        border-color: #7edaa2 !important;
-    }
-
-    .o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-white,
-    .o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-gray {
-        background: #ffffff !important;
-        border-color: rgba(17, 74, 126, 0.12) !important;
-    }
-
-    .o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-yellow {
-        background: #fff8d8 !important;
-        border-color: rgba(230, 173, 53, 0.34) !important;
-    }
-
-    .o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.is-pink {
-        background: #fde6e6 !important;
-        border-color: rgba(217, 79, 69, 0.28) !important;
-    }
-
-    .o_liquid_native_kpi_label,
-    .o_liquid_native_kpi_value {
-        opacity: 1 !important;
-    }
-
-    .o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.has-live-overlay .o_liquid_native_kpi_value_row {
-        position: static !important;
-    }
-
-    .o_liquid_native_kpi_host.o_liquid_native_kpi_ready .o_liquid_native_kpi_card.has-live-overlay .o_liquid_native_kpi_value {
-        opacity: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        padding-inline: 16px !important;
     }
 }
 
 @media (max-width: 991.98px) {
-    .o_liquid_native_kpi_strip {
+    body.o_web_client .o_action_manager .o_purchase_dashboard.container-fluid {
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     }
 }
 
 @media (max-width: 575.98px) {
-    .o_liquid_native_kpi_strip {
+    body.o_web_client .o_action_manager .o_purchase_dashboard.container-fluid {
         grid-template-columns: 1fr !important;
     }
 }
