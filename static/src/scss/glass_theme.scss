@@ -380,23 +380,17 @@ table {
 
     .o_cp_action_menus {
         color: #ffffff !important;
-        gap: 0 !important;
+        align-items: center !important;
+        gap: 6px !important;
 
         .btn,
         button,
         .o-dropdown button {
-            min-width: 20px;
-            min-height: 20px;
-            padding: 0 !important;
-            background: transparent !important;
-            border: none !important;
-            border-radius: 0 !important;
             box-shadow: none !important;
             color: rgba(255, 255, 255, 0.92) !important;
 
             &:hover,
             &:focus {
-                background: transparent !important;
                 color: #ffffff !important;
             }
         }
@@ -419,6 +413,96 @@ table {
             min-width: 16px !important;
             min-height: 16px !important;
             padding: 0 !important;
+        }
+    }
+
+    .o_control_panel_actions {
+        .o_selection_container {
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 6px !important;
+            margin: 0 !important;
+            max-width: 100%;
+            min-height: 40px;
+        }
+
+        .o_selection_box {
+            align-items: center !important;
+            height: 40px;
+        }
+
+        .o_selection_box .list-group-item.active {
+            @include bao-blue-pill;
+            min-height: 38px;
+            padding: 0 10px !important;
+            border-radius: 10px !important;
+            font-family: $bao-font-body;
+            font-size: 0.86rem;
+            font-weight: 600;
+            line-height: 1;
+            box-shadow: none !important;
+            white-space: nowrap;
+        }
+
+        .o_selection_box .o_unselect_all {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 26px;
+            min-width: 26px;
+            height: 26px;
+            min-height: 26px;
+            margin-left: 8px !important;
+            padding: 0 !important;
+            border: 0 !important;
+            color: #ffffff !important;
+        }
+
+        .o_selection_container > button,
+        .o_selection_container > div > span > button,
+        .o_selection_container .o_cp_action_menus .btn,
+        .o_selection_container .o_cp_action_menus button {
+            @include bao-blue-pill;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-width: 38px;
+            min-height: 38px;
+            padding: 8px 12px !important;
+            border-radius: 10px !important;
+            font-family: $bao-font-body;
+            font-size: 0.86rem !important;
+            font-weight: 600 !important;
+            line-height: 1.1 !important;
+            box-shadow: none !important;
+            white-space: nowrap;
+
+            &:hover,
+            &:focus {
+                background: rgba(255, 255, 255, 0.22) !important;
+                border-color: rgba(255, 255, 255, 0.26) !important;
+                color: #ffffff !important;
+            }
+        }
+
+        .o_selection_container .o_cp_action_menus {
+            align-items: center !important;
+            gap: 6px !important;
+            padding-right: 0 !important;
+        }
+
+        .o_selection_container .o_cp_action_menus > div {
+            display: inline-flex !important;
+            align-items: center !important;
+        }
+
+        .o_selection_container .o_cp_action_menus .dropdown-toggle::after {
+            margin-left: 6px;
+        }
+
+        .o_selection_container .o_dropdown_title,
+        .o_selection_container span {
+            font-weight: 600 !important;
         }
     }
 
@@ -534,6 +618,22 @@ table {
             order: initial !important;
         }
 
+        &:has(.o_selection_container) {
+            .o_control_panel_main {
+                grid-template-columns: minmax(0, 1fr) minmax(0, 600px) minmax(0, 1fr);
+            }
+
+            .o_control_panel_actions {
+                width: 100% !important;
+                max-width: 600px !important;
+                min-width: 0 !important;
+            }
+
+            .o_selection_container {
+                flex-wrap: wrap !important;
+            }
+        }
+
         .o_control_panel_navigation {
             grid-column: 3;
             justify-self: end;
@@ -568,6 +668,22 @@ table {
             margin-left: auto !important;
             min-width: 0 !important;
             order: initial !important;
+        }
+    }
+}
+
+@media (min-width: 1600px) {
+    .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):has(.o_selection_container) {
+        .o_control_panel_main {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 760px) minmax(0, 1fr);
+        }
+
+        .o_control_panel_actions {
+            max-width: 760px !important;
+        }
+
+        .o_selection_container {
+            flex-wrap: nowrap !important;
         }
     }
 }

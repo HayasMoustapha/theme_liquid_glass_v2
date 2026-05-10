@@ -88,20 +88,20 @@ function isSettingsControlPanel(controlPanel) {
     return Boolean(controlPanel.closest(".o_base_settings_view") || document.querySelector(".o_base_settings_view"));
 }
 
-function hasVisibleCenteredSearchShell(controlPanel) {
+function hasVisibleCenteredActionsShell(controlPanel) {
     const actions = controlPanel.querySelector(".o_control_panel_actions");
     const breadcrumbs = controlPanel.querySelector(".o_control_panel_breadcrumbs");
     const navigation = controlPanel.querySelector(".o_control_panel_navigation");
     if (!actions || !breadcrumbs || !navigation) {
         return false;
     }
-    const searchShell = actions.querySelector(".o_cp_searchview, .o_searchview");
-    if (!searchShell) {
+    const centeredShell = actions.querySelector(".o_cp_searchview, .o_searchview, .o_selection_container");
+    if (!centeredShell) {
         return false;
     }
-    const searchStyle = window.getComputedStyle(searchShell);
+    const centeredStyle = window.getComputedStyle(centeredShell);
     const actionsStyle = window.getComputedStyle(actions);
-    return searchStyle.display !== "none" && actionsStyle.display !== "none";
+    return centeredStyle.display !== "none" && actionsStyle.display !== "none";
 }
 
 function normalizeSharedControlPanels(root) {
@@ -110,7 +110,7 @@ function normalizeSharedControlPanels(root) {
         const isSettingsPanel = isSettingsControlPanel(controlPanel);
         const sharedSurface = controlPanel.parentElement;
         const shouldUseSharedSearchLayout =
-            isSettingsPanel || (!isFormPanel && hasVisibleCenteredSearchShell(controlPanel));
+            isSettingsPanel || (!isFormPanel && hasVisibleCenteredActionsShell(controlPanel));
 
         controlPanel.classList.toggle("o_bao_form_control_panel", isFormPanel && !isSettingsPanel);
         controlPanel.classList.toggle(
