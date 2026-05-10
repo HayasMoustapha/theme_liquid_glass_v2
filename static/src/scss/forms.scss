@@ -508,6 +508,7 @@
 .o_form_view {
     .o_form_renderer {
         @include transparent-bg;
+        background-color: transparent !important;
     }
 
     .oe_title h1,
@@ -3079,6 +3080,7 @@
     margin: 0px !important;
     padding: 10px !important;
     border: none !important;
+    background: transparent !important;
 }
 
 .o_form_view .o-mail-Chatter .o-mail-Composer {
