@@ -4073,6 +4073,114 @@
     }
 }
 
+// BAO chatter shell: final geometry pass, CSS-only to preserve native mail behavior.
+.o_form_view .o_form_renderer:has(.o_FormRenderer_chatterContainer),
+.o_form_view .o_form_renderer:has(.o-mail-Chatter) {
+    --bao-chatter-width: clamp(400px, 24vw, 454px);
+    grid-template-columns: minmax(0, 1fr) var(--bao-chatter-width) !important;
+    gap: 24px !important;
+}
+
+.o_form_view .o_form_renderer:has(.o_FormRenderer_chatterContainer) > .o_FormRenderer_chatterContainer,
+.o_form_view .o_form_renderer:has(.o-mail-Chatter) > .o_FormRenderer_chatterContainer,
+.o_form_view .o_form_renderer:has(.o-mail-Chatter) > .oe_chatter,
+.o_form_view .o_form_renderer:has(.o-mail-Chatter) > .o-mail-Chatter {
+    width: var(--bao-chatter-width) !important;
+    max-width: var(--bao-chatter-width) !important;
+}
+
+.o_form_view .o-mail-Chatter {
+    border-radius: 16px !important;
+    overflow: auto !important;
+
+    .o-mail-Chatter-top {
+        display: block !important;
+        height: 44px !important;
+        min-height: 44px !important;
+        margin: 0 0 8px !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+    }
+
+    .o-mail-Chatter-topbar {
+        align-items: center !important;
+        height: 44px !important;
+        min-height: 44px !important;
+        gap: 0 !important;
+        padding: 0 !important;
+        overflow-y: hidden !important;
+    }
+
+    .o-mail-Chatter-topbar .btn,
+    .o-mail-Chatter-topbar button {
+        height: 44px !important;
+        min-height: 44px !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 10px 18px !important;
+        border-radius: 14px !important;
+        line-height: 22px !important;
+        box-shadow: none !important;
+    }
+
+    .o-mail-Chatter-topbar .o-mail-Chatter-sendMessage {
+        margin-right: 4px !important;
+    }
+
+    .o-mail-Chatter-topbar .o-mail-Chatter-logNote {
+        margin-left: 14px !important;
+        margin-right: 0 !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+
+    .o-mail-Chatter-topbar .o-mail-Chatter-activity {
+        margin-left: 0 !important;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+    }
+
+    .o-mail-Chatter-topbar .btn-link.text-action,
+    .o-mail-Chatter-topbar button.btn-link.text-action {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 32px !important;
+        min-width: 32px !important;
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+        background: transparent !important;
+        border-color: transparent !important;
+        color: $bao-text-400 !important;
+    }
+
+    .o-mail-Chatter-content {
+        background: #f1f1f1 !important;
+        border: 1px solid rgba(17, 74, 126, 0.09) !important;
+        border-radius: 15px !important;
+        box-shadow: none !important;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .o_form_view .o_form_renderer:has(.o_FormRenderer_chatterContainer),
+    .o_form_view .o_form_renderer:has(.o-mail-Chatter) {
+        --bao-chatter-width: 100%;
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 16px !important;
+    }
+
+    .o_form_view .o_form_renderer:has(.o_FormRenderer_chatterContainer) > .o_FormRenderer_chatterContainer,
+    .o_form_view .o_form_renderer:has(.o-mail-Chatter) > .o_FormRenderer_chatterContainer,
+    .o_form_view .o_form_renderer:has(.o-mail-Chatter) > .oe_chatter,
+    .o_form_view .o_form_renderer:has(.o-mail-Chatter) > .o-mail-Chatter {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
 // Final global button label weight pass after legacy form overrides.
 .o_web_client button,
 .o_web_client .btn,
