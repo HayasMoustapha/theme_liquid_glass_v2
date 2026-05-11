@@ -2,7 +2,7 @@
 
 import { NavBar } from "@web/webclient/navbar/navbar";
 import { patch } from "@web/core/utils/patch";
-import { useState } from "@odoo/owl";
+import { useExternalListener, useState } from "@odoo/owl";
 
 let refreshScheduled = false;
 let burstRefreshTimerIds = [];
@@ -616,15 +616,28 @@ function initControlPanelBao() {
 patch(NavBar.prototype, {
     setup() {
         super.setup();
-        this.sidebarState = useState({ isOpen: false });
+        this.enterpriseLauncherState = useState({ isOpen: false });
+        useExternalListener(document, "keydown", (event) => {
+            if (event.key === "Escape") {
+                this.closeEnterpriseLauncher();
+            }
+        });
+        useExternalListener(document, "click", (event) => {
+            if (
+                !event.target.closest(".o_enterprise_app_launcher") &&
+                !event.target.closest(".o_enterprise_launcher_toggle")
+            ) {
+                this.closeEnterpriseLauncher();
+            }
+        });
         initControlPanelBao();
     },
 
-    toggleSidebar() {
-        this.sidebarState.isOpen = !this.sidebarState.isOpen;
+    toggleEnterpriseLauncher() {
+        this.enterpriseLauncherState.isOpen = !this.enterpriseLauncherState.isOpen;
     },
 
-    closeSidebar() {
-        this.sidebarState.isOpen = false;
+    closeEnterpriseLauncher() {
+        this.enterpriseLauncherState.isOpen = false;
     },
 });

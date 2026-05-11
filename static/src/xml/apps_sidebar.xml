@@ -3,47 +3,37 @@
 
     <t t-inherit="web.NavBar" t-inherit-mode="extension">
         <xpath expr="//header" position="after">
-            <div class="o_apps_sidebar" t-att-class="{ 'o_sidebar_open': sidebarState.isOpen }">
-                <div class="o_sidebar_header mb-4 d-flex align-items-center justify-content-between">
-                    <h3 class="m-0 fw-bold">Applications</h3>
-                    <button class="btn d-inline-flex align-items-center justify-content-center o_sidebar_close"
-                            type="button"
-                            aria-label="Fermer le menu des applications"
-                            t-on-click="closeSidebar">
-                        <i class="fa fa-close fs-4"/>
-                    </button>
-                </div>
-                <div class="o_sidebar_content">
-                    <div class="row o_apps_sidebar_grid">
-                        <t t-foreach="menuService.getApps()" t-as="app" t-key="app.id">
-                            <div class="col-6">
-                                <a t-att-href="getMenuItemHref(app)"
-                                   class="o_apps_sidebar_item d-flex flex-column align-items-center p-3 text-decoration-none"
-                                   t-on-click="closeSidebar">
-                                    <div class="o_app_icon_container mb-2">
-                                        <img t-if="app.webIconData"
-                                             t-attf-src="{{app.webIconData}}"
-                                             class="o_app_icon"
-                                             alt=""/>
-                                        <t t-elif="app.webIcon">
-                                            <t t-set="webIconParts" t-value="app.webIcon.split(',')"/>
-                                            <div class="o_app_icon d-flex align-items-center justify-content-center"
-                                                 t-att-style="'background-color:' + webIconParts[2]">
-                                                <i t-att-class="webIconParts[0]"
-                                                   t-att-style="'color:' + webIconParts[1]"/>
-                                            </div>
-                                        </t>
-                                    </div>
-                                    <span class="o_app_name text-center fw-medium" t-esc="app.name"/>
-                                </a>
-                            </div>
-                        </t>
-                    </div>
+            <div t-if="enterpriseLauncherState.isOpen and !env.isSmall and !isScopedApp"
+                 class="o_enterprise_app_launcher"
+                 t-on-click.self="closeEnterpriseLauncher">
+                <div class="o_enterprise_app_launcher_grid" role="menu" aria-label="Applications">
+                    <t t-foreach="menuService.getApps()" t-as="app" t-key="app.id">
+                        <a t-att-href="getMenuItemHref(app)"
+                           t-att-data-menu-xmlid="app.xmlid"
+                           t-att-data-section="app.id"
+                           role="menuitem"
+                           t-att-class="{ 'o_app': true, 'o_enterprise_app_launcher_item': true, focus: menuService.getCurrentApp() === app }"
+                           t-on-click.prevent="() => { this.onNavBarDropdownItemSelection(app); this.closeEnterpriseLauncher(); }">
+                            <span class="o_enterprise_app_launcher_icon">
+                                <t t-if="app.webIconData">
+                                    <img t-attf-src="{{app.webIconData}}"
+                                         class="o_app_icon"
+                                         alt=""/>
+                                </t>
+                                <t t-if="!app.webIconData and app.webIcon">
+                                    <t t-set="webIconParts" t-value="app.webIcon.split(',')"/>
+                                    <span class="o_app_icon o_enterprise_app_icon_fallback"
+                                          t-att-style="'background-color:' + webIconParts[2]">
+                                        <i t-att-class="webIconParts[0]"
+                                           t-att-style="'color:' + webIconParts[1]"/>
+                                    </span>
+                                </t>
+                            </span>
+                            <span class="o_enterprise_app_launcher_label" t-esc="app.name"/>
+                        </a>
+                    </t>
                 </div>
             </div>
-            <div class="o_sidebar_overlay"
-                 t-if="sidebarState.isOpen"
-                 t-on-click="closeSidebar"/>
         </xpath>
     </t>
 
@@ -51,12 +41,14 @@
         <xpath expr="//div[contains(@class, 'o_navbar_apps_menu')]" position="replace">
             <div t-if="!isScopedApp" class="o_navbar_apps_menu">
                 <button
-                    class="btn btn-light o_navbar_sidebar_toggle d-flex align-items-center justify-content-center"
+                    data-hotkey="h"
+                    title="Home Menu"
                     type="button"
-                    aria-label="Ouvrir le menu des applications"
-                    t-on-click="toggleSidebar"
-                    >
-                    <i class="fa fa-bars fs-5"/>
+                    aria-label="Home Menu"
+                    t-att-aria-expanded="enterpriseLauncherState.isOpen ? 'true' : 'false'"
+                    t-att-class="{ 'o_enterprise_launcher_toggle': true, show: enterpriseLauncherState.isOpen }"
+                    t-on-click="toggleEnterpriseLauncher">
+                    <i class="oi oi-apps"/>
                 </button>
             </div>
         </xpath>

@@ -38,6 +38,17 @@ Fallback structural source:
 
 - `C:\Users\moust\Documents\Work\sf-group\GinuTech\Bao\theme_liquid_glass`
 
+Launcher / App Selector exception:
+
+- classification: `ENTERPRISE_STRUCTURE_KEEP_BAO_STYLE`
+- policy: `doc/LAUNCHER_APP_SELECTOR_GOVERNOR_POLICY.md`
+- auto-pilot plan: `doc/LAUNCHER_APP_SELECTOR_AUTOPILOT_PLAN.md`
+- structural truth: Odoo Enterprise only
+- functional truth: Odoo Enterprise only
+- visual truth: BAO palette and typography only
+- forbidden claims: BAO pixel-perfect launcher, BAO strict launcher, launcher
+  structurally BAO, launcher cloned from BAO
+
 ## Decision Summary
 
 The previous Governor routing drifted because the slices were too wide:

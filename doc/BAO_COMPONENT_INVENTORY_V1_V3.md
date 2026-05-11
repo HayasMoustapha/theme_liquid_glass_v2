@@ -24,6 +24,15 @@ Fallback structural source explicitly retained by user decision:
 
 - `../../theme_liquid_glass`
 
+Launcher / App Selector exception:
+
+- the launcher is classified as `ENTERPRISE_STRUCTURE_KEEP_BAO_STYLE`
+- `doc/LAUNCHER_APP_SELECTOR_GOVERNOR_POLICY.md` is the governing policy for this
+  surface
+- Odoo Enterprise is the only structural and functional truth for the launcher
+- BAO is limited to palette and typography for the launcher
+- Liquid is not an authorized structural fallback for the launcher
+
 Interpretation rule:
 
 - `theme_globale_bao/2_Tableau_de_bord` is the visual truth set for atlas v1

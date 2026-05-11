@@ -1469,8 +1469,7 @@ select.date_filter_values,
     @include transparent-bg;
 }
 
-.o_app_menu_sidebar .o_burger_menu_content.o_burger_menu_app, .o_sidebar_topbar, .o-mail-Message.o-card,
-.o_burger_menu .o_burger_menu_content.o_burger_menu_app {
+.o-mail-Message.o-card {
     @include glass-effect($glass-bg-medium, $blur-medium);
     @include glass-border;
     border-radius: $radius-sm !important;
