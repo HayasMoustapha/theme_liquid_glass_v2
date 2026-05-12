@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="bao_theme_preset_default" model="bao.theme.preset">
+            <field name="name">BAO Default</field>
+            <field name="code">bao_default</field>
+            <field name="sequence">1</field>
+            <field name="readonly_preset">1</field>
+            <field name="color_primary">#1357a0</field>
+            <field name="color_primary_dark">#0f4e92</field>
+            <field name="color_primary_soft">#2f6aaa</field>
+            <field name="color_accent">#fde900</field>
+            <field name="color_accent_hover">#f4df00</field>
+            <field name="bg_app">#f9f9f9</field>
+            <field name="surface_base">#ffffff</field>
+            <field name="surface_muted">#f9f9f9</field>
+            <field name="surface_subtle">#f1f1f1</field>
+            <field name="surface_raised">#e5e5e5</field>
+            <field name="border_subtle">#e1e1e1</field>
+            <field name="border_default">#c9c9c9</field>
+            <field name="border_selected">#b1b1b1</field>
+            <field name="border_soft">#dedede</field>
+            <field name="border_strong">#c9c9c9</field>
+            <field name="text_primary">#303030</field>
+            <field name="text_heading">#1f1f1f</field>
+            <field name="text_secondary">#3f3f3f</field>
+            <field name="text_muted">#8a8a8a</field>
+            <field name="text_soft">#a4a4a4</field>
+            <field name="text_disabled">#c9c9c9</field>
+            <field name="font_body">"Open Sans", sans-serif</field>
+            <field name="font_display">"CreightonPro", "Open Sans", sans-serif</field>
+            <field name="radius_sm">10px</field>
+            <field name="radius_md">16px</field>
+            <field name="radius_lg">20px</field>
+            <field name="radius_xl">28px</field>
+            <field name="radius_pill">999px</field>
+            <field name="shadow_soft">0 10px 24px rgba(13, 79, 148, 0.08)</field>
+            <field name="shadow_panel">0 14px 30px rgba(13, 79, 148, 0.10)</field>
+            <field name="shadow_popover">0 12px 28px rgba(15, 23, 42, 0.12)</field>
+            <field name="shadow_medium">0 18px 40px rgba(13, 41, 76, 0.08)</field>
+            <field name="shadow_heavy">0 24px 56px rgba(13, 41, 76, 0.14)</field>
+        </record>
+
+        <record id="bao_theme_config_default" model="bao.theme.config">
+            <field name="name">BAO Backend Theme</field>
+            <field name="preset_id" ref="bao_theme_preset_default"/>
+            <field name="active">1</field>
+        </record>
+    </data>
+</odoo>

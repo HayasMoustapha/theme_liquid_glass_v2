@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bao_theme_preset_user,bao.theme.preset.user,model_bao_theme_preset,base.group_user,1,0,0,0
+access_bao_theme_preset_system,bao.theme.preset.system,model_bao_theme_preset,base.group_system,1,1,1,1
+access_bao_theme_config_user,bao.theme.config.user,model_bao_theme_config,base.group_user,1,0,0,0
+access_bao_theme_config_system,bao.theme.config.system,model_bao_theme_config,base.group_system,1,1,1,1
+access_bao_theme_family_override_user,bao.theme.family.override.user,model_bao_theme_family_override,base.group_user,1,0,0,0
+access_bao_theme_family_override_system,bao.theme.family.override.system,model_bao_theme_family_override,base.group_system,1,1,1,1
+access_bao_theme_component_override_user,bao.theme.component.override.user,model_bao_theme_component_override,base.group_user,1,0,0,0
+access_bao_theme_component_override_system,bao.theme.component.override.system,model_bao_theme_component_override,base.group_system,1,1,1,1

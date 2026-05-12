@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #############################################################################
+from . import models
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #

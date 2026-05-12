@@ -33,6 +33,8 @@
     'license': 'LGPL-3',
     'depends': ['web', 'base'],
     'data': [
+        'security/ir.model.access.csv',
+        'data/bao_theme_preset.xml',
         'data/theme_app_menu.xml',
     ],
     'assets': {
