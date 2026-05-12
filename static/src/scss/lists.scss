@@ -1,14 +1,14 @@
 .list-group-item-action {
     background: transparent !important;
-    color: #303030 !important;
+    color: $text-strong !important;
     border-radius: 14px;
     margin-bottom: 6px;
     border: none !important;
 
     &:hover,
     &.active {
-        background: #f1f1f1 !important;
-        color: #303030 !important;
+        background: $bao-surface-100 !important;
+        color: $text-strong !important;
     }
 }
 
@@ -18,8 +18,8 @@
 
 .o_list_renderer {
     padding: 0;
-    background: #ffffff !important;
-    border: 1px solid #e1e1e1;
+    background: $bao-surface-0 !important;
+    border: 1px solid $bao-border-200;
     border-radius: 26px;
     margin: 0;
     overflow: hidden;
@@ -27,7 +27,7 @@
 
     .o_many2many_avatar_user_cell {
         .o_tag_badge_text {
-            color: #303030 !important;
+            color: $text-strong !important;
         }
     }
 }
@@ -38,18 +38,18 @@
     border-spacing: 0;
 
     thead {
-        background: #ffffff !important;
-        border-bottom: 1px solid #e1e1e1 !important;
+        background: $bao-surface-0 !important;
+        border-bottom: 1px solid $bao-border-200 !important;
 
         th {
-            background: #ffffff !important;
-            color: #4a4a4a !important;
+            background: $bao-surface-0 !important;
+            color: $bao-text-700 !important;
             font-size: 11.5px;
             font-weight: 600;
             letter-spacing: 0.01em;
             text-transform: none;
             padding: 13px 16px !important;
-            border-bottom: 1px solid #e1e1e1 !important;
+            border-bottom: 1px solid $bao-border-200 !important;
             white-space: nowrap;
             line-height: 1.2;
         }
@@ -57,21 +57,21 @@
 
     tbody {
         tr {
-            border-bottom: 1px solid #f1f1f1 !important;
-            background: #ffffff !important;
-            color: #303030 !important;
+            border-bottom: 1px solid $bao-surface-100 !important;
+            background: $bao-surface-0 !important;
+            color: $text-strong !important;
 
             &:nth-child(even) {
-                background: #f9f9f9 !important;
+                background: $bao-surface-50 !important;
             }
 
             &:hover {
-                background: #f1f1f1 !important;
+                background: $bao-surface-100 !important;
             }
         }
 
         td {
-            color: #303030 !important;
+            color: $text-strong !important;
             font-size: 13px;
             font-weight: 400;
             line-height: 1.35;
@@ -82,8 +82,8 @@
     }
 
     tfoot {
-        background: #ffffff !important;
-        border-top: 1px solid #e1e1e1 !important;
+        background: $bao-surface-0 !important;
+        border-top: 1px solid $bao-border-200 !important;
 
         td,
         th {
@@ -120,9 +120,9 @@
 }
 
 .table-info {
-    --table-hover-bg: #f1f1f1 !important;
-    --table-striped-bg: #f9f9f9 !important;
-    color: #303030 !important;
+    --table-hover-bg: var(--bao-surface-subtle, #f1f1f1) !important;
+    --table-striped-bg: var(--bao-surface-muted, #f9f9f9) !important;
+    color: $text-strong !important;
 }
 
 .o_input:focus,
