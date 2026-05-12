@@ -79,6 +79,10 @@ table {
     scrollbar-color: rgba(19, 87, 160, 0.26) transparent;
 }
 
+.o-overlay-item {
+    z-index: 8000 !important;
+}
+
 .o_searchview {
     min-height: 38px;
     height: 38px;
