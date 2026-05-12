@@ -2,11 +2,13 @@
 <odoo>
     <data noupdate="0">
         <!--
-        Avoid overriding the global Apps action (base.open_module_tree).
-
-        That kind of override is brittle and can make modules "disappear" depending on
-        context/search defaults. Module visibility in Apps should be driven by the
-        addon manifest (application/installable) and normal module list refresh.
+        Odoo hides every module whose technical name starts with theme_ from the
+        Apps catalog. This backend addon intentionally keeps that prefix, so the
+        standard Apps action needs one precise exception while preserving the
+        default exclusion for website themes.
         -->
+        <record id="base.open_module_tree" model="ir.actions.act_window">
+            <field name="domain">['|', ('name', '=', 'theme_liquid_glass_v2'), '!', ('name', '=like', 'theme_%')]</field>
+        </record>
     </data>
 </odoo>

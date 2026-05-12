@@ -20,13 +20,13 @@
 #
 #############################################################################
 {
-    'name': 'Liquid Glass Backend Theme V2',
+    'name': 'BAO Backend Theme',
     'version': '19.0.1.0.0',
     'category': 'Theme/Backend',
-    'summary': 'Modern glassmorphism backend theme for Odoo',
+    'summary': 'Configurable BAO backend theme for Odoo',
     'description': """
-        Liquid Glass Backend Theme V2
-        A modern, elegant glassmorphism design for Odoo backend
+        BAO Backend Theme
+        A configurable Odoo backend theme based on Liquid Glass Backend Theme V2.
     """,
     'author': 'Cybrosys Techno Solutions',
     'website': 'https://www.cybrosys.com',
@@ -34,6 +34,7 @@
     'depends': ['web', 'base'],
     'data': [
         'security/ir.model.access.csv',
+        'data/module_visibility.xml',
         'data/bao_theme_preset.xml',
         'views/bao_theme_config_views.xml',
         'views/res_config_settings_views.xml',

@@ -2,6 +2,7 @@
 
 from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.tests import TransactionCase, tagged
+from odoo.tools.safe_eval import safe_eval
 
 
 @tagged("post_install", "-at_install")
@@ -184,3 +185,21 @@ class TestBaoThemeConfig(TransactionCase):
             settings.with_user(user).action_reset_bao_theme_global()
         with self.assertRaises(AccessError):
             settings.with_user(user).action_reset_bao_theme_all()
+
+    def test_apps_action_keeps_backend_theme_visible(self):
+        action = self.env.ref("base.open_module_tree")
+        domain = safe_eval(action.domain or "[]")
+        module = self.env["ir.module.module"].search(
+            domain + [("name", "=", "theme_liquid_glass_v2")]
+        )
+        self.assertEqual(module.name, "theme_liquid_glass_v2")
+        self.assertEqual(module.shortdesc, "BAO Backend Theme")
+
+        hidden_theme = self.env["ir.module.module"].search([
+            ("name", "=like", "theme_%"),
+            ("name", "!=", "theme_liquid_glass_v2"),
+        ], limit=1)
+        if hidden_theme:
+            self.assertFalse(
+                self.env["ir.module.module"].search(domain + [("id", "=", hidden_theme.id)])
+            )
