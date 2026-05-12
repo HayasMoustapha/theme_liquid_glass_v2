@@ -148,6 +148,19 @@ FAMILY_SELECTORS = {
     "floating_surfaces": ".modal, .o_dialog, .dropdown-menu, .o-dropdown--menu, .o_popover",
 }
 
+COMPONENT_SELECTORS = {
+    "navbar": ".o_main_navbar, .o_navbar",
+    "app_launcher": ".o_app_menu, .o_home_menu, .o_bao_apps_sidebar",
+    "control_panel": ".o_control_panel",
+    "search_bar": ".o_searchview, .o_cp_searchview",
+    "smart_buttons": ".o_form_view .oe_button_box, .o_form_view .oe_stat_button",
+    "form_sheet": ".o_form_view .o_form_sheet, .o_form_view .o_form_sheet_bg",
+    "list_renderer": ".o_list_renderer, .o_list_table",
+    "kanban_card": ".o_kanban_record, .o_kanban_renderer .o_kanban_record",
+    "dropdown_menu": ".dropdown-menu, .o-dropdown--menu",
+    "modal_dialog": ".modal, .o_dialog",
+}
+
 
 class BaoThemeTokenMixin(models.AbstractModel):
     _name = "bao.theme.token.mixin"
@@ -351,6 +364,10 @@ class BaoThemeConfig(models.Model):
             override = self._find_family_override(family_key)
             if override:
                 rules.append(self._render_css_rule(selector, self.resolve_css_variables(family_key=family_key)))
+        for component_key, selector in COMPONENT_SELECTORS.items():
+            override = self._find_component_override(component_key)
+            if override:
+                rules.append(self._render_css_rule(selector, self.resolve_css_variables(component_key=component_key)))
         return "\n\n".join(rule for rule in rules if rule) + "\n"
 
     def action_reset_global(self):

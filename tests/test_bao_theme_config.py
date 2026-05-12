@@ -88,3 +88,27 @@ class TestBaoThemeConfig(TransactionCase):
         self.config.write({"font_body": "Arial; body { display: none }"})
         css = self.config.render_runtime_css()
         self.assertNotIn("display: none", css)
+
+    def test_component_runtime_css_uses_component_selector(self):
+        self.env["bao.theme.component.override"].create({
+            "config_id": self.config.id,
+            "component_key": "modal_dialog",
+            "surface_base": "#eeeeee",
+        })
+        css = self.config.render_runtime_css()
+        self.assertIn(".o_dialog", css)
+        self.assertIn("--bao-surface-base: #eeeeee;", css)
+
+    def test_component_inherits_family_before_component_override(self):
+        self.env["bao.theme.family.override"].create({
+            "config_id": self.config.id,
+            "family_key": "floating_surfaces",
+            "surface_base": "#dddddd",
+        })
+        self.env["bao.theme.component.override"].create({
+            "config_id": self.config.id,
+            "component_key": "modal_dialog",
+            "surface_base": "#eeeeee",
+        })
+        values = self.config.resolve_css_variables(component_key="modal_dialog")
+        self.assertEqual(values["--bao-surface-base"], "#eeeeee")

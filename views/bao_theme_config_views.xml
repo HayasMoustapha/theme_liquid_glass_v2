@@ -59,4 +59,64 @@
         <field name="domain" eval="[('config_id', '=', ref('theme_liquid_glass_v2.bao_theme_config_default'))]"/>
         <field name="context" eval="{'default_config_id': ref('theme_liquid_glass_v2.bao_theme_config_default')}"/>
     </record>
+
+    <record id="bao_theme_component_override_view_list" model="ir.ui.view">
+        <field name="name">bao.theme.component.override.list</field>
+        <field name="model">bao.theme.component.override</field>
+        <field name="arch" type="xml">
+            <list string="BAO Component Overrides">
+                <field name="component_key"/>
+                <field name="family_key"/>
+                <field name="color_primary"/>
+                <field name="color_accent"/>
+                <field name="surface_base"/>
+                <field name="text_primary"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="bao_theme_component_override_view_form" model="ir.ui.view">
+        <field name="name">bao.theme.component.override.form</field>
+        <field name="model">bao.theme.component.override</field>
+        <field name="arch" type="xml">
+            <form string="BAO Component Override">
+                <sheet>
+                    <group>
+                        <field name="config_id" invisible="1"/>
+                        <field name="component_key"/>
+                        <field name="family_key"/>
+                    </group>
+                    <group string="Colors">
+                        <field name="color_primary"/>
+                        <field name="color_primary_dark"/>
+                        <field name="color_accent"/>
+                        <field name="color_accent_hover"/>
+                    </group>
+                    <group string="Surfaces">
+                        <field name="surface_base"/>
+                        <field name="surface_muted"/>
+                        <field name="surface_subtle"/>
+                        <field name="surface_raised"/>
+                        <field name="border_default"/>
+                    </group>
+                    <group string="Text">
+                        <field name="text_primary"/>
+                        <field name="text_secondary"/>
+                        <field name="text_muted"/>
+                    </group>
+                    <footer>
+                        <button name="action_reset_component" type="object" string="Reset Component" class="btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_bao_theme_component_overrides" model="ir.actions.act_window">
+        <field name="name">BAO Component Overrides</field>
+        <field name="res_model">bao.theme.component.override</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain" eval="[('config_id', '=', ref('theme_liquid_glass_v2.bao_theme_config_default'))]"/>
+        <field name="context" eval="{'default_config_id': ref('theme_liquid_glass_v2.bao_theme_config_default')}"/>
+    </record>
 </odoo>

@@ -88,6 +88,11 @@
                             <button name="action_open_bao_family_overrides" type="object" string="Manage Family Overrides" icon="oi-arrow-right" class="btn-link"/>
                         </setting>
                     </block>
+                    <block title="Targeted Components" name="bao_component_theme">
+                        <setting string="Component Overrides" help="Configure only the approved BAO component token overrides. Components inherit their family by default.">
+                            <button name="action_open_bao_component_overrides" type="object" string="Manage Component Overrides" icon="oi-arrow-right" class="btn-link"/>
+                        </setting>
+                    </block>
                 </app>
             </xpath>
         </field>
