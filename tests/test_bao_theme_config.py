@@ -11,6 +11,12 @@ class TestBaoThemeConfig(TransactionCase):
         super().setUp()
         self.config = self.env["bao.theme.config"]._get_active_config()
 
+    def _non_system_user(self):
+        user = self.env.ref("base.user_demo", raise_if_not_found=False)
+        if user:
+            return user
+        return self.env.ref("base.public_user")
+
     def test_resolve_uses_preset_without_overrides(self):
         values = self.config.resolve_css_variables()
         self.assertEqual(values["--bao-color-primary"], "#1357a0")
@@ -56,9 +62,7 @@ class TestBaoThemeConfig(TransactionCase):
             self.config.resolve_css_variables(component_key="unknown")
 
     def test_non_admin_cannot_write_configuration(self):
-        user = self.env.ref("base.user_demo")
-        if not user:
-            self.skipTest("Demo user is unavailable.")
+        user = self._non_system_user()
         with self.assertRaises(AccessError):
             self.config.with_user(user).write({"color_primary": "#111111"})
 
@@ -112,3 +116,71 @@ class TestBaoThemeConfig(TransactionCase):
         })
         values = self.config.resolve_css_variables(component_key="modal_dialog")
         self.assertEqual(values["--bao-surface-base"], "#eeeeee")
+
+    def test_reset_all_restores_preset_chain(self):
+        self.config.write({"color_primary": "#111111"})
+        self.env["bao.theme.family.override"].create({
+            "config_id": self.config.id,
+            "family_key": "control_navigation",
+            "color_primary": "#222222",
+        })
+        self.env["bao.theme.component.override"].create({
+            "config_id": self.config.id,
+            "component_key": "control_panel",
+            "color_primary": "#333333",
+        })
+        self.config.action_reset_all()
+        self.assertFalse(self.config.family_override_ids)
+        self.assertFalse(self.config.component_override_ids)
+        self.assertEqual(self.config.resolve_css_variables()["--bao-color-primary"], "#1357a0")
+
+    def test_contrast_warning_detects_low_contrast_pair(self):
+        self.config.write({
+            "text_primary": "#ffffff",
+            "surface_base": "#ffffff",
+        })
+        warnings = self.config.get_contrast_warnings()
+        self.assertTrue(any("Primary text on base surface" in warning for warning in warnings))
+
+    def test_contrast_warning_supports_short_hex_and_rgb_colors(self):
+        self.config.write({
+            "text_primary": "#fff",
+            "surface_base": "rgb(255, 255, 255)",
+        })
+        warnings = self.config.get_contrast_warnings()
+        self.assertTrue(any("Primary text on base surface" in warning for warning in warnings))
+
+    def test_settings_preview_recomputes_for_all_exposed_fields(self):
+        settings = self.env["res.config.settings"].create({})
+        self.assertIn("--bao-surface-raised: #e5e5e5;", settings.bao_preview_css)
+        settings.bao_surface_raised = "#abcdef"
+        self.assertIn("--bao-surface-raised: #abcdef;", settings.bao_preview_css)
+
+    def test_settings_reset_actions_restore_bao_tokens(self):
+        settings = self.env["res.config.settings"].create({})
+        settings.bao_color_primary = "#112233"
+        self.assertIn("--bao-color-primary: #112233;", settings.bao_preview_css)
+        settings.action_reset_bao_theme_global()
+        self.assertEqual(self.config.resolve_css_variables()["--bao-color-primary"], "#1357a0")
+
+        self.env["bao.theme.family.override"].create({
+            "config_id": self.config.id,
+            "family_key": "control_navigation",
+            "color_primary": "#222222",
+        })
+        self.env["bao.theme.component.override"].create({
+            "config_id": self.config.id,
+            "component_key": "control_panel",
+            "color_primary": "#333333",
+        })
+        settings.action_reset_bao_theme_all()
+        self.assertFalse(self.config.family_override_ids)
+        self.assertFalse(self.config.component_override_ids)
+
+    def test_non_admin_cannot_use_settings_reset_actions(self):
+        user = self._non_system_user()
+        settings = self.env["res.config.settings"].create({})
+        with self.assertRaises(AccessError):
+            settings.with_user(user).action_reset_bao_theme_global()
+        with self.assertRaises(AccessError):
+            settings.with_user(user).action_reset_bao_theme_all()

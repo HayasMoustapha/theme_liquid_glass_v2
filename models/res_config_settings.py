@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class ResConfigSettings(models.TransientModel):
@@ -82,6 +82,44 @@ class ResConfigSettings(models.TransientModel):
         readonly=False,
         groups="base.group_system",
     )
+    bao_preview_css = fields.Text(
+        string="Computed Token Preview",
+        compute="_compute_bao_preview",
+        groups="base.group_system",
+    )
+    bao_contrast_warnings = fields.Text(
+        string="Contrast Warnings",
+        compute="_compute_bao_preview",
+        groups="base.group_system",
+    )
+
+    @api.depends(
+        "bao_theme_config_id",
+        "bao_color_primary",
+        "bao_color_primary_dark",
+        "bao_color_accent",
+        "bao_bg_app",
+        "bao_surface_base",
+        "bao_surface_raised",
+        "bao_border_default",
+        "bao_text_primary",
+        "bao_text_secondary",
+        "bao_text_muted",
+        "bao_font_body",
+        "bao_font_display",
+        "bao_radius_md",
+        "bao_shadow_panel",
+    )
+    def _compute_bao_preview(self):
+        for settings in self:
+            config = settings.bao_theme_config_id or self.env["bao.theme.config"]._get_active_config()
+            variables = config.resolve_css_variables()
+            settings.bao_preview_css = "\n".join(
+                f"{name}: {value};"
+                for name, value in sorted(variables.items())
+            )
+            warnings = config.get_contrast_warnings()
+            settings.bao_contrast_warnings = "\n".join(warnings) if warnings else "No contrast warning."
 
     def action_open_bao_family_overrides(self):
         config = self.bao_theme_config_id or self.env["bao.theme.config"]._get_active_config()
@@ -106,3 +144,13 @@ class ResConfigSettings(models.TransientModel):
             "context": {"default_config_id": config.id},
             "target": "current",
         }
+
+    def action_reset_bao_theme_global(self):
+        config = self.bao_theme_config_id or self.env["bao.theme.config"]._get_active_config()
+        config.action_reset_global()
+        return {"type": "ir.actions.client", "tag": "reload"}
+
+    def action_reset_bao_theme_all(self):
+        config = self.bao_theme_config_id or self.env["bao.theme.config"]._get_active_config()
+        config.action_reset_all()
+        return {"type": "ir.actions.client", "tag": "reload"}

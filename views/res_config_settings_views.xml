@@ -93,6 +93,20 @@
                             <button name="action_open_bao_component_overrides" type="object" string="Manage Component Overrides" icon="oi-arrow-right" class="btn-link"/>
                         </setting>
                     </block>
+                    <block title="Preview And Reset" name="bao_preview_reset">
+                        <setting string="Computed Tokens" help="Preview the active global token resolution before runtime CSS emission.">
+                            <field name="bao_preview_css" nolabel="1" readonly="1"/>
+                        </setting>
+                        <setting string="Contrast Warnings" help="Warnings are advisory; invalid color syntax is rejected before saving.">
+                            <field name="bao_contrast_warnings" nolabel="1" readonly="1"/>
+                        </setting>
+                        <setting string="Reset To BAO" help="Reset overrides while keeping the protected BAO preset as fallback.">
+                            <div class="content-group">
+                                <button name="action_reset_bao_theme_global" type="object" string="Reset Global" class="btn-secondary"/>
+                                <button name="action_reset_bao_theme_all" type="object" string="Full Reset To BAO" class="btn-primary ms-2"/>
+                            </div>
+                        </setting>
+                    </block>
                 </app>
             </xpath>
         </field>

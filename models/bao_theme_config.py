@@ -370,6 +370,104 @@ class BaoThemeConfig(models.Model):
                 rules.append(self._render_css_rule(selector, self.resolve_css_variables(component_key=component_key)))
         return "\n\n".join(rule for rule in rules if rule) + "\n"
 
+    @api.model
+    def _hex_to_rgb(self, value):
+        return self._css_color_to_rgb(value)
+
+    @api.model
+    def _css_color_to_rgb(self, value):
+        value = (value or "").strip()
+        hex_match = re.match(r"^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$", value)
+        if hex_match:
+            hex_value = hex_match.group(1)
+            if len(hex_value) == 3:
+                hex_value = "".join(channel * 2 for channel in hex_value)
+            return tuple(int(hex_value[index:index + 2], 16) for index in (0, 2, 4))
+
+        rgb_match = re.match(r"^rgba?\(([^)]+)\)$", value, re.I)
+        if rgb_match:
+            parts = [part.strip() for part in rgb_match.group(1).split(",")]
+            if len(parts) < 3:
+                return False
+            channels = []
+            try:
+                for part in parts[:3]:
+                    if part.endswith("%"):
+                        channels.append(round(float(part[:-1]) * 2.55))
+                    else:
+                        channels.append(round(float(part)))
+            except ValueError:
+                return False
+            if all(0 <= channel <= 255 for channel in channels):
+                return tuple(channels)
+            return False
+
+        hsl_match = re.match(r"^hsla?\(([^)]+)\)$", value, re.I)
+        if hsl_match:
+            parts = [part.strip() for part in hsl_match.group(1).split(",")]
+            if len(parts) < 3 or not parts[1].endswith("%") or not parts[2].endswith("%"):
+                return False
+            try:
+                hue = float(parts[0].rstrip("deg")) % 360
+                saturation = float(parts[1][:-1]) / 100.0
+                lightness = float(parts[2][:-1]) / 100.0
+            except ValueError:
+                return False
+            chroma = (1 - abs(2 * lightness - 1)) * saturation
+            x_value = chroma * (1 - abs((hue / 60.0) % 2 - 1))
+            match_value = lightness - chroma / 2
+            if hue < 60:
+                rgb_prime = (chroma, x_value, 0)
+            elif hue < 120:
+                rgb_prime = (x_value, chroma, 0)
+            elif hue < 180:
+                rgb_prime = (0, chroma, x_value)
+            elif hue < 240:
+                rgb_prime = (0, x_value, chroma)
+            elif hue < 300:
+                rgb_prime = (x_value, 0, chroma)
+            else:
+                rgb_prime = (chroma, 0, x_value)
+            return tuple(round((channel + match_value) * 255) for channel in rgb_prime)
+
+        return False
+
+    @api.model
+    def _relative_luminance(self, rgb):
+        channels = []
+        for channel in rgb:
+            channel = channel / 255.0
+            channels.append(channel / 12.92 if channel <= 0.03928 else ((channel + 0.055) / 1.055) ** 2.4)
+        return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2]
+
+    @api.model
+    def _contrast_ratio(self, foreground, background):
+        fg_rgb = self._hex_to_rgb(foreground)
+        bg_rgb = self._hex_to_rgb(background)
+        if not fg_rgb or not bg_rgb:
+            return False
+        fg_luminance = self._relative_luminance(fg_rgb)
+        bg_luminance = self._relative_luminance(bg_rgb)
+        light = max(fg_luminance, bg_luminance)
+        dark = min(fg_luminance, bg_luminance)
+        return (light + 0.05) / (dark + 0.05)
+
+    def get_contrast_warnings(self):
+        self.ensure_one()
+        values = self.resolve_token_fields()
+        pairs = [
+            ("Primary text on base surface", values.get("text_primary"), values.get("surface_base")),
+            ("Secondary text on base surface", values.get("text_secondary"), values.get("surface_base")),
+            ("Primary color on base surface", values.get("color_primary"), values.get("surface_base")),
+            ("Accent color on primary text", values.get("color_accent"), values.get("text_primary")),
+        ]
+        warnings = []
+        for label, foreground, background in pairs:
+            ratio = self._contrast_ratio(foreground, background)
+            if ratio is not False and ratio < 4.5:
+                warnings.append(_("%s contrast is %.2f:1, below the 4.5:1 target.") % (label, ratio))
+        return warnings
+
     def action_reset_global(self):
         self.write({field_name: False for field_name in TOKEN_FIELDS})
         return True
