@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.bao.theme</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="20"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="BAO Backend Theme" string="BAO Backend Theme" name="bao_backend_theme" groups="base.group_system" logo="/theme_liquid_glass_v2/static/description/icon.png">
+                    <field name="bao_theme_config_id" invisible="1"/>
+                    <block title="Global Theme" name="bao_global_theme">
+                        <setting string="Brand Colors" help="Configure the approved global BAO brand colors. Empty fields inherit the default BAO preset.">
+                            <div class="content-group">
+                                <div class="row mt8">
+                                    <label for="bao_color_primary" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_color_primary" placeholder="#1357a0"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="bao_color_primary_dark" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_color_primary_dark" placeholder="#0f4e92"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="bao_color_accent" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_color_accent" placeholder="#fde900"/>
+                                </div>
+                            </div>
+                        </setting>
+                        <setting string="Surfaces" help="Configure backend background, panel, and border tokens.">
+                            <div class="content-group">
+                                <div class="row mt8">
+                                    <label for="bao_bg_app" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_bg_app" placeholder="#f9f9f9"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="bao_surface_base" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_surface_base" placeholder="#ffffff"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="bao_surface_raised" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_surface_raised" placeholder="#e5e5e5"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="bao_border_default" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_border_default" placeholder="#c9c9c9"/>
+                                </div>
+                            </div>
+                        </setting>
+                        <setting string="Text" help="Configure approved text colors.">
+                            <div class="content-group">
+                                <div class="row mt8">
+                                    <label for="bao_text_primary" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_text_primary" placeholder="#303030"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="bao_text_secondary" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_text_secondary" placeholder="#3f3f3f"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="bao_text_muted" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_text_muted" placeholder="#8a8a8a"/>
+                                </div>
+                            </div>
+                        </setting>
+                        <setting string="Typography And Shape" help="Keep typography, radius, and shadow values inside the approved BAO token contract.">
+                            <div class="content-group">
+                                <div class="row mt8">
+                                    <label for="bao_font_body" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_font_body" placeholder="&quot;Open Sans&quot;, sans-serif"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="bao_font_display" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_font_display" placeholder="&quot;CreightonPro&quot;, &quot;Open Sans&quot;, sans-serif"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="bao_radius_md" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_radius_md" placeholder="16px"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="bao_shadow_panel" class="col-lg-4 o_light_label"/>
+                                    <field name="bao_shadow_panel" placeholder="0 14px 30px rgba(13, 79, 148, 0.10)"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_bao_theme_settings" model="ir.actions.act_window">
+        <field name="name">BAO Backend Theme</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="res_config_settings_view_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'module': 'theme_liquid_glass_v2', 'bin_size': False}</field>
+    </record>
+</odoo>

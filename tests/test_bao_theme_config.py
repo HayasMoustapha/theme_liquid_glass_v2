@@ -61,3 +61,15 @@ class TestBaoThemeConfig(TransactionCase):
             self.skipTest("Demo user is unavailable.")
         with self.assertRaises(AccessError):
             self.config.with_user(user).write({"color_primary": "#111111"})
+
+    def test_settings_bridge_updates_active_config(self):
+        settings = self.env["res.config.settings"].create({
+            "bao_color_primary": "#445566",
+            "bao_surface_base": "#ffffff",
+        })
+        settings.execute()
+        self.assertEqual(self.config.color_primary, "#445566")
+        self.assertEqual(
+            self.config.resolve_css_variables()["--bao-color-primary"],
+            "#445566",
+        )

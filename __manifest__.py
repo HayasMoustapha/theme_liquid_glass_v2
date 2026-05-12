@@ -35,6 +35,7 @@
     'data': [
         'security/ir.model.access.csv',
         'data/bao_theme_preset.xml',
+        'views/res_config_settings_views.xml',
         'data/theme_app_menu.xml',
     ],
     'assets': {
