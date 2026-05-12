@@ -3434,7 +3434,10 @@
 .o_action_manager:has(.o_form_view) .o_form_view {
     color: #303030 !important;
 
-    .o_form_renderer,
+    .o_form_renderer {
+        background: transparent !important;
+    }
+    
     .o_form_sheet_bg {
         background: #ffffff !important;
     }

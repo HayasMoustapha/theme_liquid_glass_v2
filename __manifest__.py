@@ -32,7 +32,9 @@
     'website': 'https://www.cybrosys.com',
     'license': 'LGPL-3',
     'depends': ['web', 'base'],
-    'data': [],
+    'data': [
+        'data/theme_app_menu.xml',
+    ],
     'assets': {
         'web.assets_backend': [
             'theme_liquid_glass_v2/static/src/scss/variables.scss',

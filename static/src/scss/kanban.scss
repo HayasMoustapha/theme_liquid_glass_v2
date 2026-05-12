@@ -221,13 +221,13 @@
     align-items: flex-start !important;
     flex-wrap: wrap !important;
     gap: 8px !important;
-    width: calc(100% + 56px) !important;
-    margin: -19px -28px 0 !important;
+    width: 100% !important;
+    margin: none !important;
     padding: 16px !important;
     background: #ffffff !important;
-    border: none !important;
+    border: 1px solid #e1e1e1 !important;
     border-radius: 16px !important;
-    box-shadow: none !important;
+    box-shadow: 1px 2px 4px rgba(13, 79, 148, 0.08) !important;
     overflow: hidden !important;
 
     .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),
@@ -243,15 +243,19 @@
         background: #ffffff !important;
         border: 1px solid #e1e1e1 !important;
         border-radius: 6px !important;
-        box-shadow: none !important;
+        box-shadow: 1px 2px 4px rgba(13, 79, 148, 0.08) !important;
         color: #303030 !important;
         font-family: $bao-font-body !important;
         font-size: 14px !important;
         font-weight: 400 !important;
         line-height: 20px !important;
         overflow: hidden !important;
-        transform: none !important;
-    }
+        transform:  !important;
+        -webkit-transform: none !important;
+        -moz-transform: none !important;
+        -ms-transform: none !important;
+        -o-transform: none !important;
+}
 
     .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new):hover {
         background: #ffffff !important;
