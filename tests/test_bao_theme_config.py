@@ -73,3 +73,18 @@ class TestBaoThemeConfig(TransactionCase):
             self.config.resolve_css_variables()["--bao-color-primary"],
             "#445566",
         )
+
+    def test_family_runtime_css_uses_family_selector(self):
+        self.env["bao.theme.family.override"].create({
+            "config_id": self.config.id,
+            "family_key": "control_navigation",
+            "color_primary": "#224466",
+        })
+        css = self.config.render_runtime_css()
+        self.assertIn(".o_control_panel", css)
+        self.assertIn("--bao-color-primary: #224466;", css)
+
+    def test_css_renderer_drops_unsafe_values(self):
+        self.config.write({"font_body": "Arial; body { display: none }"})
+        css = self.config.render_runtime_css()
+        self.assertNotIn("display: none", css)

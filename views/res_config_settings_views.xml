@@ -83,6 +83,11 @@
                             </div>
                         </setting>
                     </block>
+                    <block title="Families" name="bao_family_theme">
+                        <setting string="Family Overrides" help="Configure only the approved BAO family token overrides. Empty fields inherit global values.">
+                            <button name="action_open_bao_family_overrides" type="object" string="Manage Family Overrides" icon="oi-arrow-right" class="btn-link"/>
+                        </setting>
+                    </block>
                 </app>
             </xpath>
         </field>

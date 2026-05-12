@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bao_theme_runtime_css_link" model="ir.ui.view">
+        <field name="name">bao.theme.runtime.css.link</field>
+        <field name="type">qweb</field>
+        <field name="inherit_id" ref="web.webclient_bootstrap"/>
+        <field name="arch" type="xml">
+            <xpath expr="//t[@t-call='web.conditional_assets_tests']" position="before">
+                <link rel="stylesheet" type="text/css" href="/bao/theme/runtime.css"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
