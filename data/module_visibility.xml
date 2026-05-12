@@ -1,25 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="0">
-        <record id="base.open_module_tree" model="ir.actions.act_window">
-            <field name="domain">['|', ('name', '=', 'theme_liquid_glass_v2'), '!', ('name', '=like', 'theme_%')]</field>
-        </record>
+        <!--
+        Avoid overriding the global Apps action (base.open_module_tree).
 
-        <record id="action_open_theme_liquid_glass_v2_module" model="ir.actions.act_window">
-            <field name="name">BAO Backend Theme Module</field>
-            <field name="res_model">ir.module.module</field>
-            <field name="view_mode">kanban,list,form</field>
-            <field name="domain">[('name', '=', 'theme_liquid_glass_v2')]</field>
-            <field name="context">{'search_default_installed': 1}</field>
-        </record>
-
-        <menuitem
-            id="menu_theme_liquid_glass_v2_module"
-            name="BAO Backend Theme Module"
-            parent="base.menu_apps"
-            action="action_open_theme_liquid_glass_v2_module"
-            sequence="15"
-            groups="base.group_system"
-        />
+        That kind of override is brittle and can make modules "disappear" depending on
+        context/search defaults. Module visibility in Apps should be driven by the
+        addon manifest (application/installable) and normal module list refresh.
+        -->
     </data>
 </odoo>
