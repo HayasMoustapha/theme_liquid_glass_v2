@@ -641,6 +641,40 @@
         transform: none !important;
     }
 
+    .o_kanban_record > .px-2 > a,
+    .o_kanban_record > .px-2 > a:hover,
+    .o_kanban_record > .px-2 > a:focus {
+        color: #303030 !important;
+        text-decoration: none !important;
+    }
+
+    .o_kanban_record > .px-2 > a .fw-bold.fs-4,
+    .o_kanban_record [name="stock_picking"] > a .fw-bold.fs-4,
+    .o_kanban_record [name="stock_picking"] > .fw-bold.fs-4 {
+        display: block !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        color: #303030 !important;
+        font-family: $bao-font-display !important;
+        font-size: 30px !important;
+        font-weight: 500 !important;
+        line-height: 36px !important;
+        letter-spacing: 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .o_kanban_record [name="stock_picking"] > .d-block {
+        margin-top: 2px !important;
+        color: #6f6f6f !important;
+        font-family: $bao-font-body !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        line-height: 20px !important;
+        letter-spacing: 0 !important;
+    }
+
     .o_kanban_record .btn.btn-primary.oe_kanban_action {
         min-height: 40px !important;
         height: 40px !important;
@@ -650,10 +684,32 @@
         background: #027f3d !important;
         box-shadow: none !important;
         color: #ffffff !important;
-        font-size: 14px !important;
+        font-size: 16px !important;
         font-weight: 400 !important;
         line-height: 22px !important;
         font-family: "Open Sans", sans-serif !important;
+    }
+
+    .o_kanban_record .btn.btn-primary.oe_kanban_action span {
+        font-family: inherit !important;
+        font-size: inherit !important;
+        font-weight: inherit !important;
+        line-height: inherit !important;
+        letter-spacing: 0 !important;
+    }
+
+    .o_kanban_record .stock-overview-links a,
+    .o_kanban_record .stock-overview-links a span {
+        font-family: $bao-font-body !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        line-height: 20px !important;
+        letter-spacing: 0 !important;
+    }
+
+    .o_kanban_record .stock-overview-links a span.text-end,
+    .o_kanban_record .stock-overview-links a .text-end {
+        font-weight: 700 !important;
     }
 
     .o_kanban_record .btn.btn-primary.oe_kanban_action:hover,
