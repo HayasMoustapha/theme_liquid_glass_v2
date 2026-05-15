@@ -4502,3 +4502,69 @@
         font-size: 15px !important;
     }
 }
+
+// Price/amount fields keep Odoo's native monetary input and currency
+// hierarchy. This final override removes BAO wrapper surfaces that can sit
+// above the real input without changing any Odoo DOM structure.
+.o_form_view,
+.o_list_renderer {
+    .o_field_widget.o_field_monetary,
+    .o_field_widget.o_field_monetary > div:not(.o_field_x2many):not(.o_field_html),
+    .o_field_widget.o_field_monetary > span,
+    .o_field_widget.o_field_monetary .o_input_dropdown,
+    .o_field_widget.o_field_monetary .o-autocomplete,
+    .o_field_widget.o_field_monetary .o_field_input,
+    .o_field_widget.o_field_monetary .o_field_currency,
+    .o_field_widget.o_field_monetary .o_monetary_cell,
+    .o_field_widget[name*="price"],
+    .o_field_widget[name*="price"] > div:not(.o_field_x2many):not(.o_field_html),
+    .o_field_widget[name*="price"] > span,
+    .o_field_widget[name*="amount"],
+    .o_field_widget[name*="amount"] > div:not(.o_field_x2many):not(.o_field_html),
+    .o_field_widget[name*="amount"] > span,
+    .o_field_monetary,
+    .oe_subtotal_footer .o_field_widget,
+    .oe_subtotal_footer .oe_currency_value,
+    .oe_subtotal_footer .o_field_account-tax-totals-field {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        color: $text-strong !important;
+        pointer-events: auto !important;
+    }
+
+    .o_field_widget.o_field_monetary::before,
+    .o_field_widget.o_field_monetary::after,
+    .o_field_widget.o_field_monetary > div:not(.o_field_x2many):not(.o_field_html)::before,
+    .o_field_widget.o_field_monetary > div:not(.o_field_x2many):not(.o_field_html)::after,
+    .o_field_widget[name*="price"]::before,
+    .o_field_widget[name*="price"]::after,
+    .o_field_widget[name*="amount"]::before,
+    .o_field_widget[name*="amount"]::after {
+        content: none !important;
+        display: none !important;
+        pointer-events: none !important;
+    }
+
+    .o_field_widget.o_field_monetary .o_input,
+    .o_field_widget.o_field_monetary input,
+    .o_field_widget[name*="price"] .o_input,
+    .o_field_widget[name*="price"] input,
+    .o_field_widget[name*="amount"] .o_input,
+    .o_field_widget[name*="amount"] input {
+        position: relative;
+        z-index: 2;
+        pointer-events: auto !important;
+        color: $text-strong !important;
+    }
+
+    .o_field_widget.o_field_monetary .o_input_dropdown .o_dropdown_button {
+        position: static !important;
+        width: auto !important;
+        min-width: 0 !important;
+        inset: auto !important;
+        pointer-events: none !important;
+    }
+}
