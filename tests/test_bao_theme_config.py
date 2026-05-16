@@ -3,6 +3,7 @@
 from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.tests import TransactionCase, tagged
 from odoo.tools.safe_eval import safe_eval
+from lxml import etree
 
 
 @tagged("post_install", "-at_install")
@@ -203,3 +204,16 @@ class TestBaoThemeConfig(TransactionCase):
             self.assertFalse(
                 self.env["ir.module.module"].search(domain + [("id", "=", hidden_theme.id)])
             )
+
+    def test_rh01_fixture_action_is_editable_with_eight_notebook_tabs(self):
+        action = self.env.ref("theme_liquid_glass_v2.action_bao_theme_rh01_fixture")
+        fixture_view = self.env.ref("theme_liquid_glass_v2.bao_theme_rh01_fixture_view_form")
+
+        self.assertEqual(action.res_model, "bao.theme.config")
+        self.assertEqual(action.res_id, self.config.id)
+        self.assertEqual(action.view_id, fixture_view)
+        self.assertTrue(self.config.has_access("write"))
+
+        arch = etree.fromstring(fixture_view.arch_db.encode())
+        pages = arch.xpath("//notebook/page")
+        self.assertGreaterEqual(len(pages), 8)

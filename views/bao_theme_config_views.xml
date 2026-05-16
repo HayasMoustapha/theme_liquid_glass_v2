@@ -119,4 +119,103 @@
         <field name="domain" eval="[('config_id', '=', ref('theme_liquid_glass_v2.bao_theme_config_default'))]"/>
         <field name="context" eval="{'default_config_id': ref('theme_liquid_glass_v2.bao_theme_config_default')}"/>
     </record>
+
+    <record id="bao_theme_rh01_fixture_view_form" model="ir.ui.view">
+        <field name="name">bao.theme.config.rh01.fixture.form</field>
+        <field name="model">bao.theme.config</field>
+        <field name="arch" type="xml">
+            <form string="BAO RH0.1 Fixture Readiness">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="preset_id"/>
+                        <field name="active"/>
+                    </group>
+                    <notebook>
+                        <page string="Global Colors">
+                            <group>
+                                <field name="color_primary"/>
+                                <field name="color_primary_dark"/>
+                                <field name="color_primary_soft"/>
+                                <field name="color_accent"/>
+                                <field name="color_accent_hover"/>
+                            </group>
+                        </page>
+                        <page string="Surfaces">
+                            <group>
+                                <field name="bg_app"/>
+                                <field name="surface_base"/>
+                                <field name="surface_muted"/>
+                                <field name="surface_subtle"/>
+                                <field name="surface_raised"/>
+                            </group>
+                        </page>
+                        <page string="Borders">
+                            <group>
+                                <field name="border_subtle"/>
+                                <field name="border_default"/>
+                                <field name="border_selected"/>
+                                <field name="border_soft"/>
+                                <field name="border_strong"/>
+                            </group>
+                        </page>
+                        <page string="Text">
+                            <group>
+                                <field name="text_primary"/>
+                                <field name="text_heading"/>
+                                <field name="text_secondary"/>
+                                <field name="text_muted"/>
+                                <field name="text_soft"/>
+                                <field name="text_disabled"/>
+                            </group>
+                        </page>
+                        <page string="Typography">
+                            <group>
+                                <field name="font_body"/>
+                                <field name="font_display"/>
+                            </group>
+                        </page>
+                        <page string="Radius">
+                            <group>
+                                <field name="radius_sm"/>
+                                <field name="radius_md"/>
+                                <field name="radius_lg"/>
+                                <field name="radius_xl"/>
+                                <field name="radius_pill"/>
+                            </group>
+                        </page>
+                        <page string="Shadows">
+                            <group>
+                                <field name="shadow_soft"/>
+                                <field name="shadow_panel"/>
+                                <field name="shadow_popover"/>
+                                <field name="shadow_medium"/>
+                                <field name="shadow_heavy"/>
+                            </group>
+                        </page>
+                        <page string="Overrides">
+                            <group>
+                                <field name="family_override_ids" readonly="1"/>
+                                <field name="component_override_ids" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_bao_theme_rh01_fixture" model="ir.actions.act_window">
+        <field name="name">BAO RH0.1 Fixture Readiness</field>
+        <field name="res_model">bao.theme.config</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bao_theme_rh01_fixture_view_form"/>
+        <field name="res_id" eval="ref('theme_liquid_glass_v2.bao_theme_config_default')"/>
+        <field name="target">current</field>
+        <field name="context">{'form_view_initial_mode': 'view', 'rh01_fixture': True}</field>
+    </record>
 </odoo>

@@ -630,10 +630,19 @@ patch(NavBar.prototype, {
                 this.closeEnterpriseLauncher();
             }
         });
+        useExternalListener(window, "resize", () => {
+            if (this.env.isSmall || this.isScopedApp) {
+                this.closeEnterpriseLauncher();
+            }
+        });
         initControlPanelBao();
     },
 
     toggleEnterpriseLauncher() {
+        if (this.env.isSmall || this.isScopedApp) {
+            this.closeEnterpriseLauncher();
+            return;
+        }
         this.enterpriseLauncherState.isOpen = !this.enterpriseLauncherState.isOpen;
     },
 
