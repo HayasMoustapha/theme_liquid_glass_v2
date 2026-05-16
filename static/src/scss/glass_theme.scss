@@ -831,13 +831,20 @@ table {
     @include glass-border;
     border-radius: $radius-md !important;
     box-shadow: $shadow-medium !important;
+    max-width: calc(100vw - 8px);
+    overflow-x: hidden;
 
     .dropdown-item,
+    .o-dropdown-item,
     a,
     button {
         @include text-white-color;
         @include transparent-bg;
         border-radius: 12px;
+        max-width: 100%;
+        min-width: 0;
+        overflow-wrap: anywhere;
+        white-space: normal;
 
         &:hover,
         &:focus {
