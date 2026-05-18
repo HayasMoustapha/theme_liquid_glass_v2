@@ -360,10 +360,11 @@
     justify-content: center;
     align-content: start;
     gap: 30px 34px;
-    width: calc(100vw - 48px);
+    box-sizing: border-box;
+    width: 100%;
     max-width: 920px;
     margin: 0 auto;
-    padding: 74px 0 48px;
+    padding: 74px 24px 48px;
 }
 
 .o_enterprise_app_launcher_item {
@@ -426,6 +427,7 @@
 }
 
 .o_enterprise_app_launcher_label {
+    min-width: 0;
     max-width: 100%;
     color: $glass-bg-light !important;
     font-family: $bao-font-body;
@@ -433,6 +435,7 @@
     font-weight: 600;
     line-height: 1.2;
     overflow: hidden;
+    overflow-wrap: anywhere;
     text-overflow: ellipsis;
     white-space: normal;
 }
@@ -513,8 +516,8 @@
     .o_enterprise_app_launcher_grid {
         grid-template-columns: repeat(auto-fit, minmax(92px, 104px));
         gap: 26px 28px;
-        width: calc(100vw - 40px);
         max-width: 760px;
+        padding-inline: 20px;
     }
 }
 
