@@ -76,7 +76,7 @@
             font-size: 0.96rem;
             line-height: 1;
             box-shadow: none !important;
-            transition: $transition-base;
+            transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
             display: inline-flex;
             align-items: center;
             flex: 0 1 auto;
@@ -92,6 +92,23 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
+            }
+
+            &.dropdown-toggle::after,
+            &.o-dropdown::after {
+                content: "\f107" !important;
+                display: inline-flex !important;
+                align-items: center;
+                flex: 0 0 auto;
+                margin: 1px 0 0 !important;
+                border: none !important;
+                color: currentColor !important;
+                font-family: "FontAwesome" !important;
+                font-size: 0.78rem;
+                line-height: 1;
+                text-rendering: auto;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
             }
 
             &:hover,
@@ -125,7 +142,7 @@
             min-height: 36px;
             padding: 0 8px !important;
             box-shadow: none !important;
-            transition: $transition-base;
+            transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
 
             &:hover,
             &:focus,

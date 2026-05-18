@@ -479,6 +479,16 @@ function refreshControlPanels() {
     normalizeStatusbar(document);
 }
 
+function refreshControlPanelsNow() {
+    if (deferredRefreshTimerId) {
+        window.clearTimeout(deferredRefreshTimerId);
+        deferredRefreshTimerId = null;
+    }
+    refreshScheduled = false;
+    refreshControlPanels();
+    window.requestAnimationFrame(() => refreshControlPanels());
+}
+
 function scheduleRefresh() {
     if (shouldDeferControlPanelRefresh()) {
         if (!deferredRefreshTimerId) {
@@ -566,9 +576,11 @@ function primePivotToolbarTransition(target) {
 
 function initControlPanelBao() {
     scheduleRefresh();
-    window.setTimeout(() => refreshControlPanels(), 700);
-    window.setTimeout(() => refreshControlPanels(), 1800);
-    window.addEventListener("resize", scheduleRefresh, { passive: true });
+    window.setTimeout(() => refreshControlPanelsNow(), 700);
+    window.setTimeout(() => refreshControlPanelsNow(), 1800);
+    window.addEventListener("resize", refreshControlPanelsNow, { passive: true });
+    window.addEventListener("orientationchange", refreshControlPanelsNow, { passive: true });
+    window.visualViewport?.addEventListener("resize", refreshControlPanelsNow, { passive: true });
     window.addEventListener("scroll", scheduleRefresh, { passive: true });
     const observer = new MutationObserver(() => scheduleRefresh());
     observer.observe(document.body, { childList: true, subtree: true });
@@ -617,6 +629,11 @@ patch(NavBar.prototype, {
     setup() {
         super.setup();
         this.enterpriseLauncherState = useState({ isOpen: false });
+        useExternalListener(window, "resize", () => this.syncBaoResponsiveNavbar());
+        useExternalListener(window, "orientationchange", () => this.syncBaoResponsiveNavbar());
+        if (window.visualViewport) {
+            useExternalListener(window.visualViewport, "resize", () => this.syncBaoResponsiveNavbar());
+        }
         useExternalListener(document, "keydown", (event) => {
             if (event.key === "Escape") {
                 this.closeEnterpriseLauncher();
@@ -631,6 +648,19 @@ patch(NavBar.prototype, {
             }
         });
         initControlPanelBao();
+    },
+
+    syncBaoResponsiveNavbar() {
+        if (!this.root?.el) {
+            return;
+        }
+        this.currentAppSectionsExtra = [];
+        this.render();
+        refreshControlPanelsNow();
+        window.requestAnimationFrame(() => {
+            this.adapt();
+            refreshControlPanelsNow();
+        });
     },
 
     toggleEnterpriseLauncher() {
