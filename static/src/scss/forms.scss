@@ -4692,3 +4692,379 @@
         pointer-events: none !important;
     }
 }
+
+@media (max-width: 1199.98px) {
+    .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel {
+        .o_control_panel_main {
+            flex-wrap: wrap !important;
+            align-items: flex-start !important;
+            row-gap: 10px !important;
+        }
+
+        .o_control_panel_breadcrumbs {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) !important;
+            row-gap: 8px !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            overflow: visible !important;
+            padding-right: 0 !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_breadcrumb,
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions {
+            grid-column: 1 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions,
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions .o_form_status_indicator,
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions .o_form_status_indicator_buttons {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            gap: 8px !important;
+        }
+
+        .o_breadcrumb,
+        .breadcrumb,
+        .o_bao_breadcrumb,
+        .o_bao_breadcrumb_header,
+        .o_bao_breadcrumb_trail,
+        .o_bao_generated_trail,
+        .o_bao_live_trail {
+            max-width: 100% !important;
+            min-width: 0 !important;
+            flex-wrap: wrap !important;
+        }
+
+        .o_bao_breadcrumb_header_text,
+        .o_bao_generated_trail .breadcrumb-item,
+        .o_bao_generated_trail .breadcrumb-item a,
+        .o_bao_generated_trail .breadcrumb-item span,
+        .o_bao_live_trail .breadcrumb-item,
+        .o_bao_live_trail .breadcrumb-item a,
+        .o_bao_live_trail .breadcrumb-item span {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            white-space: normal !important;
+            overflow-wrap: anywhere !important;
+        }
+
+        .o_control_panel_actions,
+        .o_control_panel_navigation,
+        .o_control_panel_main_buttons {
+            position: static !important;
+            left: auto !important;
+            transform: none !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            margin-left: 0 !important;
+        }
+
+        .o_control_panel_main_buttons,
+        .o_control_panel_breadcrumbs_actions,
+        .o_cp_action_menus {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+        }
+
+        .o_control_panel_main_buttons .btn,
+        .o_control_panel_main_buttons button,
+        .o_control_panel_breadcrumbs_actions .btn,
+        .o_control_panel_breadcrumbs_actions button,
+        .o_cp_action_menus .btn,
+        .o_cp_action_menus button {
+            max-width: 100% !important;
+            white-space: normal !important;
+            overflow-wrap: anywhere !important;
+            line-height: 1.15 !important;
+        }
+    }
+
+    .o_action_manager:has(.o_form_view) .o_form_view {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: visible !important;
+
+        .o_form_sheet_bg,
+        .o_form_sheet,
+        .o_group,
+        .o_inner_group,
+        .o_cell,
+        .o_wrap_label,
+        .o_wrap_input,
+        .o_field_widget,
+        .o_field_many2one,
+        .o_input_dropdown,
+        .o_row,
+        .row {
+            min-width: 0 !important;
+            max-width: 100% !important;
+        }
+
+        .o_form_sheet_bg {
+            overflow-x: visible !important;
+        }
+
+        .o_form_sheet {
+            width: calc(100% - 28px) !important;
+            margin-inline: 14px !important;
+            padding: 20px 16px !important;
+            overflow-x: visible !important;
+        }
+
+        .oe_title,
+        .o_form_view_header,
+        .o_form_renderer > .o_form_sheet_bg .oe_title {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            overflow-x: visible !important;
+        }
+
+        .oe_title h1,
+        .oe_title h2,
+        .oe_title h1 span,
+        .oe_title h2 span,
+        .o_form_view_header h1,
+        .o_form_view_header h2 {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            white-space: normal !important;
+            overflow-wrap: anywhere !important;
+            word-break: break-word !important;
+            line-height: 1.12 !important;
+        }
+
+        .o_form_label,
+        .o_td_label label,
+        .o_wrap_label label,
+        .col-form-label {
+            max-width: 100% !important;
+            white-space: normal !important;
+            overflow-wrap: anywhere !important;
+            line-height: 1.28 !important;
+        }
+
+        .o_group .o_td_label,
+        .o_inner_group .o_td_label {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+        }
+
+        .o_field_widget,
+        .o_field_widget > *,
+        .o_field_many2one,
+        .o_input_dropdown,
+        .o-autocomplete,
+        .o-autocomplete--input {
+            max-width: 100% !important;
+            min-width: 0 !important;
+        }
+
+        .o_input_dropdown,
+        .o_field_many2one .o_input_dropdown {
+            display: flex !important;
+            align-items: center !important;
+            width: 100% !important;
+            gap: 4px !important;
+        }
+
+        .o_input_dropdown .o_input,
+        .o_field_many2one .o_input,
+        .o_field_widget input:not([type="checkbox"]):not([type="radio"]),
+        .o_field_widget textarea,
+        .o_field_widget select {
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_external_button,
+        .o_input_dropdown .o_dropdown_button {
+            position: static !important;
+            flex: 0 0 auto !important;
+            inset: auto !important;
+            margin-left: 2px !important;
+        }
+
+        .o_notebook,
+        .o_notebook_headers,
+        .nav-tabs,
+        .o_field_x2many,
+        .o_field_x2many .o_list_renderer,
+        .o_field_x2many .o_kanban_renderer {
+            max-width: 100% !important;
+            min-width: 0 !important;
+        }
+
+        .o_form_statusbar {
+            flex-wrap: wrap !important;
+            align-items: flex-start !important;
+            justify-content: flex-start !important;
+            gap: 10px !important;
+        }
+
+        .o_form_statusbar > .o_field_widget {
+            flex: 1 1 100% !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            justify-content: flex-start !important;
+            margin-left: 0 !important;
+        }
+
+        .o_form_statusbar .o_statusbar_status,
+        .o_form_statusbar .o_statusbar_buttons,
+        .o_form_statusbar .o_statusbar_buttons > div {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            justify-content: flex-start !important;
+            align-items: center !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            gap: 8px !important;
+        }
+
+        .o_form_statusbar .o_statusbar_status > .o_arrow_button,
+        .o_form_statusbar .o_statusbar_status > .dropdown-toggle.o_arrow_button,
+        .o_form_statusbar .o_statusbar_buttons .btn,
+        .o_form_statusbar .o_statusbar_buttons button {
+            max-width: 100% !important;
+            min-width: 0 !important;
+            white-space: normal !important;
+            overflow-wrap: anywhere !important;
+            line-height: 1.15 !important;
+        }
+    }
+}
+
+@media (max-width: 575.98px) {
+    .o_action_manager:has(.o_form_view) .o_form_view {
+        .o_form_sheet,
+        .o_form_sheet_bg .o_form_sheet {
+            width: calc(100% - 24px) !important;
+            max-width: calc(100% - 24px) !important;
+            margin-inline: 12px !important;
+            padding: 20px 16px !important;
+        }
+
+        .o_form_sheet.position-relative > .o_field_image.oe_avatar {
+            position: static !important;
+            display: flex !important;
+            width: 96px !important;
+            height: 96px !important;
+            max-width: 96px !important;
+            max-height: 96px !important;
+            margin: 0 0 14px !important;
+        }
+
+        .o_form_sheet.position-relative > .oe_title,
+        .o_form_sheet > .oe_title,
+        .oe_title {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            padding-right: 0 !important;
+            margin-bottom: 18px !important;
+        }
+
+        .o_form_sheet.position-relative > .oe_title h1,
+        .o_form_sheet.position-relative > .oe_title h2,
+        .o_form_sheet > .oe_title h1,
+        .o_form_sheet > .oe_title h2,
+        .oe_title h1,
+        .oe_title h2 {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+            font-size: 1.2rem !important;
+            line-height: 1.16 !important;
+            letter-spacing: 0 !important;
+            white-space: normal !important;
+            overflow-wrap: anywhere !important;
+            word-break: normal !important;
+        }
+
+        .o_form_sheet.position-relative > .oe_title [name="name"],
+        .o_form_sheet > .oe_title [name="name"],
+        .oe_title [name="name"],
+        .oe_title .o_field_widget,
+        .oe_title .o_input,
+        .oe_title textarea.o_input,
+        .oe_title input.o_input {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            font-size: 1.05rem !important;
+            line-height: 1.2 !important;
+            letter-spacing: 0 !important;
+            white-space: normal !important;
+            overflow-wrap: anywhere !important;
+            word-break: normal !important;
+        }
+
+        .o_form_sheet .o_group,
+        .o_form_sheet .o_inner_group {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+        }
+
+        .o_form_sheet .o_group > tbody,
+        .o_form_sheet .o_group > tbody > tr,
+        .o_form_sheet .o_group > tbody > tr > td,
+        .o_form_sheet .o_inner_group > tbody,
+        .o_form_sheet .o_inner_group > tbody > tr,
+        .o_form_sheet .o_inner_group > tbody > tr > td {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+        }
+
+        .o_form_sheet .row {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            margin-inline: 0 !important;
+        }
+
+        .o_form_sheet [class^="col-"],
+        .o_form_sheet [class*=" col-"] {
+            flex: 0 0 100% !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            padding-inline: 0 !important;
+        }
+
+        .o_form_sheet .o_wrap_label,
+        .o_form_sheet .o_wrap_input,
+        .o_form_sheet .o_cell,
+        .o_form_sheet .o_cell_custom {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+        }
+    }
+}

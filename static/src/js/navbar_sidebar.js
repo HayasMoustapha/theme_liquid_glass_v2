@@ -2,6 +2,7 @@
 
 import { NavBar } from "@web/webclient/navbar/navbar";
 import { patch } from "@web/core/utils/patch";
+import { useBus, useService } from "@web/core/utils/hooks";
 import { useExternalListener, useState } from "@odoo/owl";
 
 let refreshScheduled = false;
@@ -9,6 +10,40 @@ let burstRefreshTimerIds = [];
 let pivotPrimeTimerIds = [];
 let deferredRefreshTimerId = null;
 let controlPanelInteractionUntil = 0;
+
+function getViewportSize() {
+    const width = window.innerWidth;
+    if (width < 576) {
+        return 0;
+    }
+    if (width < 768) {
+        return 1;
+    }
+    if (width < 992) {
+        return 2;
+    }
+    if (width < 1200) {
+        return 3;
+    }
+    if (width < 1400) {
+        return 4;
+    }
+    return 5;
+}
+
+function syncUiSizeNow(ui) {
+    if (!ui) {
+        return false;
+    }
+    const size = getViewportSize();
+    if (ui.size !== size) {
+        ui.size = size;
+        ui.isSmall = size <= 1;
+        return true;
+    }
+    return false;
+}
+
 function textOf(node) {
     return node ? node.textContent.trim() : "";
 }
@@ -658,12 +693,12 @@ function initControlPanelBao() {
 patch(NavBar.prototype, {
     setup() {
         super.setup();
+        this.ui = useService("ui");
+        this.baoRenderedViewportSize = getViewportSize();
         this.enterpriseLauncherState = useState({ isOpen: false });
         useExternalListener(window, "resize", () => this.syncBaoResponsiveNavbar());
         useExternalListener(window, "orientationchange", () => this.syncBaoResponsiveNavbar());
-        if (window.visualViewport) {
-            useExternalListener(window.visualViewport, "resize", () => this.syncBaoResponsiveNavbar());
-        }
+        useBus(this.ui.bus, "resize", () => this.syncBaoResponsiveNavbar());
         useExternalListener(document, "keydown", (event) => {
             if (event.key === "Escape") {
                 this.closeEnterpriseLauncher();
@@ -684,11 +719,14 @@ patch(NavBar.prototype, {
         if (!this.root?.el) {
             return;
         }
+        const viewportSize = getViewportSize();
+        syncUiSizeNow(this.ui);
+        if (this.baoRenderedViewportSize === viewportSize) {
+            return;
+        }
+        this.baoRenderedViewportSize = viewportSize;
         this.currentAppSectionsExtra = [];
         this.render();
-        Promise.resolve().then(() => {
-            this.adapt();
-        });
     },
 
     toggleEnterpriseLauncher() {
