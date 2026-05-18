@@ -349,8 +349,8 @@
     inset: 60px 0 0 0;
     z-index: 7020 !important;
     overflow: auto;
-    background: $primary-color !important;
-    color: $glass-bg-light !important;
+    background: $bao-bg-app !important;
+    color: $bao-text-800 !important;
     font-family: $bao-font-body;
 }
 
@@ -376,7 +376,7 @@
     min-height: 112px;
     padding: 10px 8px !important;
     border: 1px solid transparent !important;
-    border-radius: 10px !important;
+    border-radius: 8px !important;
     background: transparent !important;
     color: $bao-text-800 !important;
     font-family: $bao-font-body;
@@ -403,14 +403,18 @@
     justify-content: center;
     width: 68px;
     height: 68px;
+    border: 1px solid rgba(48, 48, 48, 0.08);
+    border-radius: 8px;
+    background: $bao-surface-0 !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.10);
 
     .o_app_icon,
     img {
         display: block;
-        width: 64px;
-        height: 64px;
+        width: 52px;
+        height: 52px;
         object-fit: contain;
-        border-radius: 12px;
+        border-radius: 7px;
         box-shadow: none !important;
     }
 }
@@ -419,9 +423,9 @@
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    width: 64px !important;
-    height: 64px !important;
-    border-radius: 12px !important;
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 7px !important;
     color: #ffffff !important;
     font-size: 1.8rem;
 }
@@ -429,7 +433,7 @@
 .o_enterprise_app_launcher_label {
     min-width: 0;
     max-width: 100%;
-    color: $glass-bg-light !important;
+    color: $bao-text-800 !important;
     font-family: $bao-font-body;
     font-size: 0.92rem;
     font-weight: 600;
