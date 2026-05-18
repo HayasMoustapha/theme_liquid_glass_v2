@@ -1453,6 +1453,14 @@
     overflow: hidden;
 }
 
+.o_form_view .o_field_x2many .o_list_renderer {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+}
+
 .o_form_view .o_field_x2many .o_list_table {
     margin-bottom: 0;
 
@@ -3314,12 +3322,21 @@
         margin: 0 !important;
             border-left: none !important;
     border-right: none !important;
-        overflow: hidden !important;
         -webkit-border-radius: 0px !important;
         -moz-border-radius: 0px !important;
         -ms-border-radius: 0px !important;
         -o-border-radius: 0px !important;
 }
+
+    .o_field_x2many .o_list_renderer {
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .o_field_x2many .o_kanban_renderer {
+        overflow: hidden !important;
+    }
 
     .o_field_x2many .o_list_table {
         border-collapse: separate !important;

@@ -22,7 +22,11 @@
     border: 1px solid $bao-border-200;
     border-radius: 26px;
     margin: 0;
-    overflow: hidden;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto !important;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
     box-shadow: none;
 
     .o_many2many_avatar_user_cell {
@@ -36,6 +40,7 @@
     border-radius: 26px;
     border-collapse: separate;
     border-spacing: 0;
+    min-width: 100%;
 
     thead {
         background: $bao-surface-0 !important;
@@ -354,9 +359,11 @@
     line-height: 1.15 !important;
     letter-spacing: 0.003em !important;
     white-space: nowrap !important;
-    width: max-content !important;
-    max-width: none !important;
-    overflow: visible !important;
+    width: auto !important;
+    max-width: clamp(8rem, 22vw, 24rem) !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
     border: 0 !important;
     box-shadow: none !important;
 }
@@ -365,8 +372,9 @@
 .o_list_renderer .o_field_badge {
     display: inline-flex !important;
     align-items: center !important;
-    width: max-content !important;
-    max-width: none !important;
+    width: auto !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
     padding: 0 !important;
     min-height: 0 !important;
     border: 0 !important;
