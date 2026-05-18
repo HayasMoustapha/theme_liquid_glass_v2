@@ -4321,6 +4321,43 @@
 // Final BAO form control-panel structure:
 // breadcrumb, status-actions, action-menus, main-buttons live in parallel.
 .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel {
+    .o_control_panel_actions > .o-form-buttonbox,
+    .o_control_panel_actions > .o_form_button_box {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        align-items: stretch !important;
+        gap: 8px !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        scrollbar-width: thin;
+    }
+
+    .o_control_panel_actions .oe_stat_button {
+        flex: 0 0 clamp(160px, 16vw, 232px) !important;
+        width: clamp(160px, 16vw, 232px) !important;
+        min-width: 0 !important;
+        max-width: 232px !important;
+        min-height: 42px !important;
+        height: 42px !important;
+        padding: 6px 10px !important;
+        overflow: hidden !important;
+    }
+
+    .o_control_panel_actions .oe_stat_button .o_stat_info,
+    .o_control_panel_actions .oe_stat_button .o_stat_text,
+    .o_control_panel_actions .oe_stat_button .o_stat_value,
+    .o_control_panel_actions .oe_stat_button span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon) {
+        display: block !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        line-height: 1.08 !important;
+    }
+
     .o_control_panel_breadcrumbs {
         display: grid !important;
         grid-template-columns: fit-content(72%) auto;
@@ -4438,13 +4475,16 @@
         max-width: 100% !important;
         min-width: 0 !important;
         margin: 0 !important;
-        justify-content: center !important;
+        justify-content: flex-start !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
     }
 
     .o_control_panel_actions .oe_stat_button {
-        flex: 1 1 0 !important;
+        flex: 0 0 clamp(150px, 32vw, 220px) !important;
+        width: clamp(150px, 32vw, 220px) !important;
         min-width: 0 !important;
-        max-width: 100% !important;
+        max-width: 220px !important;
     }
 
     .o_control_panel_navigation {
@@ -4500,13 +4540,16 @@
             max-width: 100% !important;
             min-width: 0 !important;
             margin: 0 !important;
-            justify-content: center !important;
+            justify-content: flex-start !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
         }
 
         .o_control_panel_actions .oe_stat_button {
-            flex: 1 1 0 !important;
+            flex: 0 0 clamp(150px, 32vw, 220px) !important;
+            width: clamp(150px, 32vw, 220px) !important;
             min-width: 0 !important;
-            max-width: 100% !important;
+            max-width: 220px !important;
         }
 
         .o_control_panel_navigation {
@@ -4713,8 +4756,12 @@
 @media (max-width: 1199.98px) {
     .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel {
         .o_control_panel_main {
+            flex: 0 0 auto !important;
             flex-wrap: wrap !important;
             align-items: flex-start !important;
+            align-content: flex-start !important;
+            height: auto !important;
+            min-height: 0 !important;
             row-gap: 10px !important;
         }
 
@@ -4779,10 +4826,19 @@
             position: static !important;
             left: auto !important;
             transform: none !important;
-            width: 100% !important;
+            height: auto !important;
             max-width: 100% !important;
             min-width: 0 !important;
             margin-left: 0 !important;
+        }
+
+        .o_control_panel_actions,
+        .o_control_panel_navigation {
+            width: 100% !important;
+        }
+
+        .o_control_panel_main_buttons {
+            width: auto !important;
         }
 
         .o_control_panel_main_buttons,
@@ -4790,6 +4846,8 @@
         .o_cp_action_menus {
             display: flex !important;
             flex-wrap: wrap !important;
+            align-items: center !important;
+            align-content: flex-start !important;
             gap: 8px !important;
         }
 
@@ -4799,6 +4857,8 @@
         .o_control_panel_breadcrumbs_actions button,
         .o_cp_action_menus .btn,
         .o_cp_action_menus button {
+            height: auto !important;
+            align-self: center !important;
             max-width: 100% !important;
             white-space: normal !important;
             overflow-wrap: anywhere !important;

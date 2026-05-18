@@ -519,6 +519,7 @@
             .o-dropdown,
             .o_nav_entry,
             .dropdown-toggle {
+                min-width: 28px;
                 max-width: clamp(7rem, 11vw, 10rem);
                 padding-inline: 6px !important;
             }
@@ -528,6 +529,16 @@
             gap: 6px;
             margin-left: 6px;
 
+            .dropdown-toggle,
+            .btn,
+            .o-dropdown,
+            .o-mail-DiscussSystray-class > button.o-dropdown.dropdown-toggle,
+            > button.o-dropdown.dropdown-toggle {
+                min-width: 28px !important;
+                min-height: 28px !important;
+                padding-inline: 4px !important;
+            }
+
             .oe_topbar_name {
                 max-width: clamp(5rem, 12vw, 9rem);
             }
@@ -535,9 +546,9 @@
     }
 
     .o_enterprise_app_launcher_grid {
-        grid-template-columns: repeat(auto-fit, minmax(92px, 104px));
-        gap: 26px 28px;
-        max-width: 760px;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 136px));
+        gap: 24px 24px;
+        max-width: 820px;
         padding-inline: 20px;
     }
 }
@@ -561,5 +572,39 @@
 
     .o_enterprise_app_launcher {
         display: none !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .o_main_navbar {
+        .o_menu_toggle,
+        .o_navbar_apps_menu button,
+        .o_enterprise_launcher_toggle {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-width: 40px !important;
+            min-height: 40px !important;
+            padding-inline: 8px !important;
+        }
+
+        .o_menu_systray {
+            .dropdown-toggle,
+            .btn,
+            .o-dropdown {
+                min-width: 40px !important;
+                min-height: 40px !important;
+                padding-inline: 6px !important;
+            }
+
+            .o-mail-DiscussSystray-class > button.o-dropdown.dropdown-toggle,
+            > button.o-dropdown.dropdown-toggle,
+            .bg-transparent.o-dropdown.dropdown-toggle {
+                min-width: 40px !important;
+                width: auto !important;
+                min-height: 40px !important;
+                padding-inline: 6px !important;
+            }
+        }
     }
 }
