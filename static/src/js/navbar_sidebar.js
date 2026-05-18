@@ -1,9 +1,11 @@
 /** @odoo-module **/
 
 import { NavBar } from "@web/webclient/navbar/navbar";
+import { ButtonBox } from "@web/views/form/button_box/button_box";
+import { StatusBarButtons } from "@web/views/form/status_bar_buttons/status_bar_buttons";
 import { patch } from "@web/core/utils/patch";
 import { useBus, useService } from "@web/core/utils/hooks";
-import { useExternalListener, useState } from "@odoo/owl";
+import { onWillRender, useExternalListener, useState } from "@odoo/owl";
 
 let refreshScheduled = false;
 let burstRefreshTimerIds = [];
@@ -179,7 +181,8 @@ function normalizeSharedControlPanels(root) {
         if (!isFormPanel) {
             controlPanel.classList.remove(
                 "o_bao_form_control_panel_new_record",
-                "o_bao_form_control_panel_actions_wrapped"
+                "o_bao_form_control_panel_actions_wrapped",
+                "o_bao_form_control_panel_smart_rail"
             );
         }
     }
@@ -253,55 +256,35 @@ function normalizeSmartButtonRail(controlPanel) {
         return;
     }
 
+    const hasSmartButtons = Boolean(smartBox && smartButtons.length);
+    const isDesktopSmartRail = window.innerWidth >= 1200 && hasSmartButtons;
     const shouldPrioritizeStatusActions =
-        smartBox && smartButtons.length && hasVisibleSaveCancelButtons(controlPanel);
+        hasSmartButtons && hasVisibleSaveCancelButtons(controlPanel);
+    const shouldUseSmartRail = isDesktopSmartRail && !shouldPrioritizeStatusActions;
     controlPanel.classList.toggle(
         "o_bao_form_control_panel_actions_wrapped",
         Boolean(shouldPrioritizeStatusActions)
     );
+    controlPanel.classList.toggle("o_bao_form_control_panel_smart_rail", Boolean(shouldUseSmartRail));
 
-    if (window.innerWidth >= 1200 && !shouldPrioritizeStatusActions && smartBox && smartButtons.length) {
-        const smartRailWidth = Math.ceil(actions.getBoundingClientRect().width || 0);
-        const reserveWidth = Math.min(Math.max(smartRailWidth + 48, 280), 520);
-        main.style.position = "relative";
-        actions.style.position = "absolute";
-        actions.style.left = "50%";
-        actions.style.transform = "translateX(-50%)";
-        actions.style.zIndex = "1";
-        actions.style.width = "max-content";
-        actions.style.maxWidth = `${Math.min(window.innerWidth * 0.46, 760)}px`;
-        actions.style.margin = "0";
-        actions.style.justifyContent = "center";
-        actions.style.alignItems = "center";
-        if (breadcrumbs) {
-            breadcrumbs.style.boxSizing = "border-box";
-            breadcrumbs.style.maxWidth = "100%";
-            breadcrumbs.style.overflow = "hidden";
-            breadcrumbs.style.paddingRight = `${reserveWidth}px`;
-        }
-        if (navigation) {
-            navigation.style.marginLeft = "auto";
-        }
-    } else {
-        main.style.removeProperty("position");
-        actions.style.removeProperty("position");
-        actions.style.removeProperty("left");
-        actions.style.removeProperty("transform");
-        actions.style.removeProperty("z-index");
-        actions.style.removeProperty("width");
-        actions.style.removeProperty("max-width");
-        actions.style.removeProperty("margin");
-        actions.style.removeProperty("justify-content");
-        actions.style.removeProperty("align-items");
-        if (breadcrumbs) {
-            breadcrumbs.style.removeProperty("box-sizing");
-            breadcrumbs.style.removeProperty("max-width");
-            breadcrumbs.style.removeProperty("overflow");
-            breadcrumbs.style.removeProperty("padding-right");
-        }
-        if (navigation) {
-            navigation.style.removeProperty("margin-left");
-        }
+    main.style.removeProperty("position");
+    actions.style.removeProperty("position");
+    actions.style.removeProperty("left");
+    actions.style.removeProperty("transform");
+    actions.style.removeProperty("z-index");
+    actions.style.removeProperty("width");
+    actions.style.removeProperty("max-width");
+    actions.style.removeProperty("margin");
+    actions.style.removeProperty("justify-content");
+    actions.style.removeProperty("align-items");
+    if (breadcrumbs) {
+        breadcrumbs.style.removeProperty("box-sizing");
+        breadcrumbs.style.removeProperty("max-width");
+        breadcrumbs.style.removeProperty("overflow");
+        breadcrumbs.style.removeProperty("padding-right");
+    }
+    if (navigation) {
+        navigation.style.removeProperty("margin-left");
     }
 }
 
@@ -453,7 +436,7 @@ function normalizeBreadcrumbs(root) {
             "o_bao_header_menu_actions d-inline-flex align-items-center"
         );
         const mainButtonsShell = ensureElement(
-            interactiveShell,
+            breadcrumbs,
             ":scope > .o_bao_header_main_buttons",
             "div",
             "o_bao_header_main_buttons d-inline-flex align-items-center"
@@ -485,9 +468,6 @@ function normalizeBreadcrumbs(root) {
         }
         if (menuShell.parentElement === interactiveShell) {
             interactiveShell.append(menuShell);
-        }
-        if (mainButtonsShell.parentElement === interactiveShell) {
-            interactiveShell.append(mainButtonsShell);
         }
 
         const trailRow = ensureElement(
@@ -689,6 +669,43 @@ function initControlPanelBao() {
         true
     );
 }
+
+patch(ButtonBox.prototype, {
+    setup() {
+        super.setup(...arguments);
+        const ui = useService("ui");
+        onWillRender(() => {
+            const maxVisibleButtons = [0, 0, 7, 4, 5, 7][ui.size] ?? 7;
+            const allVisibleButtons = Object.entries(this.props.slots)
+                .filter(([_, slot]) => this.isSlotVisible(slot))
+                .map(([slotName]) => slotName);
+            if (allVisibleButtons.length <= maxVisibleButtons) {
+                this.visibleButtons = allVisibleButtons;
+                this.additionalButtons = [];
+                this.isFull = allVisibleButtons.length === maxVisibleButtons;
+            } else {
+                const splitIndex = Math.max(maxVisibleButtons - 1, 0);
+                this.visibleButtons = allVisibleButtons.slice(0, splitIndex);
+                this.additionalButtons = allVisibleButtons.slice(splitIndex);
+                this.isFull = true;
+            }
+        });
+    },
+});
+
+patch(StatusBarButtons.prototype, {
+    setup() {
+        if (super.setup) {
+            super.setup(...arguments);
+        }
+        this.ui = useService("ui");
+    },
+
+    get shouldUseBaoDropdown() {
+        const size = this.ui?.size ?? getViewportSize();
+        return size <= 3 || this.visibleSlotNames.length > 3;
+    },
+});
 
 patch(NavBar.prototype, {
     setup() {

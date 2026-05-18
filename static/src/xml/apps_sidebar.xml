@@ -54,4 +54,10 @@
         </xpath>
     </t>
 
+    <t t-inherit="web.StatusBarButtons" t-inherit-mode="extension">
+        <xpath expr="//t[@t-if='env.isSmall']" position="attributes">
+            <attribute name="t-if">shouldUseBaoDropdown</attribute>
+        </xpath>
+    </t>
+
 </templates>
