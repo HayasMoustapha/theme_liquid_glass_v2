@@ -7,7 +7,9 @@
     border: none !important;
     border-radius: 0 !important;
     margin: 0 !important;
+    max-width: 100%;
     min-height: 60px;
+    overflow: hidden;
     padding: 0 12px !important;
     box-shadow: none !important;
 }
@@ -15,8 +17,14 @@
 .o_main_navbar {
     border-bottom: none !important;
     min-height: 60px;
+    min-width: 0;
+    width: 100%;
     gap: 10px;
     align-items: center;
+
+    > * {
+        min-width: 0;
+    }
 
     .o_menu_brand,
     .o_nav_entry,
@@ -40,12 +48,18 @@
         font-size: 1.2rem;
         line-height: 1;
         letter-spacing: 0;
+        max-width: clamp(9rem, 18vw, 18rem);
+        overflow: hidden;
+        text-overflow: ellipsis;
         white-space: nowrap;
     }
 
     .o_menu_sections {
         display: flex;
         align-items: center;
+        flex: 1 1 auto;
+        min-width: 0;
+        overflow: hidden;
         gap: 0;
         margin-left: 0;
 
@@ -65,23 +79,19 @@
             transition: $transition-base;
             display: inline-flex;
             align-items: center;
+            flex: 0 1 auto;
             gap: 7px;
+            max-width: clamp(8rem, 12vw, 14rem);
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
 
-            &::after {
-                content: "\f107" !important;
-                font-family: "FontAwesome" !important;
-                font-style: normal;
-                font-weight: normal;
-                text-rendering: auto;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-                display: inline-block !important;
-                margin: -1px 0 0 !important;
-                vertical-align: middle !important;
-                border: none !important;
-                font-size: 0.8rem;
-                line-height: 1;
-                opacity: 0.95;
+            > span {
+                min-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
             &:hover,
@@ -100,7 +110,9 @@
 
     .o_menu_systray {
         align-items: center;
-        gap: 10px;
+        flex: 0 0 auto;
+        min-width: 0;
+        gap: 8px;
         margin-left: 10px;
 
         .dropdown-toggle,
@@ -187,11 +199,18 @@
             .oe_topbar_name {
                 font-weight: 400;
                 font-size: 0.95rem;
-                max-width: 190px;
+                max-width: clamp(6rem, 14vw, 190px);
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
             }
+        }
+
+        .oe_topbar_name {
+            max-width: clamp(6rem, 14vw, 190px);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .o_user_menu {
@@ -465,6 +484,32 @@
 }
 
 @media (max-width: 1199.98px) {
+    .o_main_navbar {
+        gap: 6px;
+
+        .o_menu_brand {
+            max-width: clamp(8rem, 16vw, 12rem);
+        }
+
+        .o_menu_sections {
+            .o-dropdown,
+            .o_nav_entry,
+            .dropdown-toggle {
+                max-width: clamp(7rem, 11vw, 10rem);
+                padding-inline: 6px !important;
+            }
+        }
+
+        .o_menu_systray {
+            gap: 6px;
+            margin-left: 6px;
+
+            .oe_topbar_name {
+                max-width: clamp(5rem, 12vw, 9rem);
+            }
+        }
+    }
+
     .o_enterprise_app_launcher_grid {
         grid-template-columns: repeat(auto-fit, minmax(92px, 104px));
         gap: 26px 28px;
