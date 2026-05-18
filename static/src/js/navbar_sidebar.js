@@ -5,7 +5,7 @@ import { ButtonBox } from "@web/views/form/button_box/button_box";
 import { StatusBarButtons } from "@web/views/form/status_bar_buttons/status_bar_buttons";
 import { patch } from "@web/core/utils/patch";
 import { useBus, useService } from "@web/core/utils/hooks";
-import { onWillRender, useExternalListener, useState } from "@odoo/owl";
+import { onMounted, onPatched, onWillRender, useExternalListener, useRef, useState } from "@odoo/owl";
 
 let refreshScheduled = false;
 let burstRefreshTimerIds = [];
@@ -244,6 +244,209 @@ function hasVisibleSaveCancelButtons(controlPanel) {
     });
 }
 
+function getBaoSlotNames(slots) {
+    if (!slots) {
+        return [];
+    }
+    return Object.entries(slots)
+        .filter(([_, slot]) => !("isVisible" in slot) || slot.isVisible)
+        .map(([slotName]) => slotName);
+}
+
+function getPositiveWidth(element) {
+    const width = element?.getBoundingClientRect().width || 0;
+    return width > 0 ? width : 0;
+}
+
+function getButtonBoxAvailableWidth(root) {
+    if (!root) {
+        return 0;
+    }
+    const rootWidth = getPositiveWidth(root);
+    if (rootWidth) {
+        return rootWidth;
+    }
+    const owner =
+        root.closest(".o_control_panel_actions") ||
+        root.closest(".o_form_sheet") ||
+        root.closest(".o_form_view") ||
+        root.parentElement;
+    return getPositiveWidth(owner);
+}
+
+function getStatusButtonsAvailableWidth(root) {
+    if (!root) {
+        return 0;
+    }
+    const rootWidth = getPositiveWidth(root);
+    if (rootWidth) {
+        return rootWidth;
+    }
+    const owner =
+        root.closest(".o_form_statusbar") ||
+        root.closest(".o_control_panel_breadcrumbs") ||
+        root.parentElement;
+    return getPositiveWidth(owner);
+}
+
+function fallbackCapacityFromViewport(kind) {
+    const width = window.innerWidth;
+    if (kind === "status") {
+        if (width < 576) return 1;
+        if (width < 768) return 2;
+        if (width < 992) return 3;
+        if (width < 1200) return 4;
+        if (width < 1400) return 5;
+        return 7;
+    }
+    if (width < 576) return 1;
+    if (width < 768) return 2;
+    if (width < 992) return 4;
+    if (width < 1200) return 5;
+    if (width < 1400) return 6;
+    if (width < 1600) return 7;
+    return 9;
+}
+
+function capacityFromWidth(width, kind, total) {
+    if (!total) {
+        return 0;
+    }
+    if (!width) {
+        return Math.min(total, fallbackCapacityFromViewport(kind));
+    }
+    const gap = kind === "status" ? 6 : 8;
+    const itemWidth = kind === "status" ? 136 : 146;
+    return Math.max(1, Math.min(total, Math.floor((width + gap) / (itemWidth + gap))));
+}
+
+function splitSlotsForOverflow(slotNames, capacity) {
+    if (slotNames.length <= capacity) {
+        return { visible: slotNames, additional: [], isFull: slotNames.length === capacity };
+    }
+    const visibleCount = Math.max(capacity - 1, 1);
+    return {
+        visible: slotNames.slice(0, visibleCount),
+        additional: slotNames.slice(visibleCount),
+        isFull: true,
+    };
+}
+
+function getOverflowMetrics(kind) {
+    return kind === "status"
+        ? { gap: 6, estimatedItemWidth: 136, moreWidth: 48 }
+        : { gap: 8, estimatedItemWidth: 146, moreWidth: 56 };
+}
+
+function sumInlineWidths(widths, gap) {
+    return widths.reduce((total, width, index) => total + width + (index ? gap : 0), 0);
+}
+
+function isOverflowDropdownChild(child) {
+    return Boolean(
+        child?.matches?.(".dropdown, .o-dropdown") ||
+            child?.querySelector?.(".oi-ellipsis-v, .fa-ellipsis-v, .o_dropdown_more")
+    );
+}
+
+function getMeasuredChildren(root) {
+    if (!root) {
+        return [];
+    }
+    return [...root.children].filter((child) => {
+        const style = window.getComputedStyle(child);
+        const rect = child.getBoundingClientRect();
+        return style.display !== "none" && style.visibility !== "hidden" && rect.width > 0 && rect.height > 0;
+    });
+}
+
+function getChildrenWrap(root, children) {
+    if (!root || children.length < 2) {
+        return false;
+    }
+    const firstTop = Math.round(children[0].getBoundingClientRect().top);
+    return children.some((child) => Math.round(child.getBoundingClientRect().top) > firstTop + 4);
+}
+
+function measuredCapacityFromWidths(width, widths, kind, total) {
+    if (!total) {
+        return 0;
+    }
+    if (!width || widths.length !== total) {
+        return Math.min(total, fallbackCapacityFromViewport(kind));
+    }
+    const { gap, estimatedItemWidth, moreWidth } = getOverflowMetrics(kind);
+    const allInlineWidth = sumInlineWidths(widths, gap);
+    if (allInlineWidth <= width + 1) {
+        return total;
+    }
+
+    const availableForInline = Math.max(0, width - moreWidth - gap);
+    let used = 0;
+    let inlineCount = 0;
+    for (const itemWidth of widths) {
+        const nextUsed = used + itemWidth + (inlineCount ? gap : 0);
+        if (nextUsed > availableForInline + 1) {
+            break;
+        }
+        used = nextUsed;
+        inlineCount += 1;
+    }
+    if (!inlineCount && availableForInline >= estimatedItemWidth * 0.55) {
+        inlineCount = 1;
+    }
+    return Math.max(1, Math.min(total, inlineCount + 1));
+}
+
+function getOverflowLayoutState(root, kind, slotCount, previousWidths = []) {
+    const width = kind === "status" ? getStatusButtonsAvailableWidth(root) : getButtonBoxAvailableWidth(root);
+    if (!slotCount) {
+        return { width: Math.round(width), capacity: 0, useDropdown: false, wraps: false, slotWidths: [] };
+    }
+
+    const children = getMeasuredChildren(root);
+    const inlineChildren = children.filter((child) => !isOverflowDropdownChild(child));
+    const canMeasureAllSlots = inlineChildren.length >= slotCount;
+    const slotWidths = canMeasureAllSlots
+        ? inlineChildren.slice(0, slotCount).map((child) => child.getBoundingClientRect().width)
+        : previousWidths.length === slotCount
+          ? [...previousWidths]
+          : [];
+
+    // First paint and unknown-width states stay native so the browser can prove
+    // whether the controls actually degrade before we introduce a More menu.
+    if (slotWidths.length !== slotCount) {
+        return {
+            width: Math.round(width),
+            capacity: slotCount,
+            useDropdown: false,
+            wraps: false,
+            slotWidths,
+        };
+    }
+
+    const { gap } = getOverflowMetrics(kind);
+    const wraps = canMeasureAllSlots ? getChildrenWrap(root, inlineChildren.slice(0, slotCount)) : false;
+    const scrolls = Boolean(root && root.scrollWidth > root.clientWidth + 1);
+    const capacity = measuredCapacityFromWidths(width, slotWidths, kind, slotCount);
+    const allInlineFits = sumInlineWidths(slotWidths, gap) <= width + 1 && !wraps && !scrolls;
+
+    return {
+        width: Math.round(width),
+        capacity,
+        useDropdown: slotCount > 1 && !allInlineFits && slotCount > capacity,
+        wraps,
+        slotWidths,
+    };
+}
+
+function slotWidthsChanged(previousWidths = [], nextWidths = []) {
+    return (
+        previousWidths.length !== nextWidths.length ||
+        previousWidths.some((width, index) => Math.round(width) !== Math.round(nextWidths[index] || 0))
+    );
+}
+
 function normalizeSmartButtonRail(controlPanel) {
     const main = controlPanel.querySelector(".o_control_panel_main");
     const breadcrumbs = controlPanel.querySelector(".o_control_panel_breadcrumbs");
@@ -334,8 +537,27 @@ function normalizeDashboardToolbar(root) {
             continue;
         }
 
-        if (dateFilter) {
-            const toolsHost = ensureSurfaceToolbarHost(renderer, "o_bao_dashboard_surface_toolbar");
+        const shouldHostToolbar = Boolean(dateFilter || favorite || share);
+        const toolsHost = shouldHostToolbar
+            ? ensureSurfaceToolbarHost(renderer, "o_bao_dashboard_surface_toolbar")
+            : null;
+        let navTools = toolsHost?.querySelector(":scope > .o_bao_dashboard_nav_tools");
+
+        if (toolsHost && (favorite || share) && !navTools) {
+            navTools = document.createElement("div");
+            navTools.className = "o_bao_dashboard_nav_tools o_bao_surface_toolbar_group";
+            toolsHost.prepend(navTools);
+        }
+
+        if (navTools && favorite && favorite.parentElement !== navTools) {
+            navTools.append(favorite);
+        }
+
+        if (navTools && share && share.parentElement !== navTools) {
+            navTools.append(share);
+        }
+
+        if (dateFilter && toolsHost) {
             dateFilter.classList.remove("o_bao_dashboard_date_tools");
             dateFilter.classList.add("o_bao_surface_toolbar_group", "o_bao_dashboard_surface_toolbar_group");
             if (dateFilter.parentElement !== toolsHost) {
@@ -347,14 +569,6 @@ function normalizeDashboardToolbar(root) {
             if (!navTools.children.length) {
                 navTools.remove();
             }
-        }
-
-        if (favorite) {
-            favorite.remove();
-        }
-
-        if (share) {
-            share.remove();
         }
 
         for (const toolsHost of action.querySelectorAll(".o_bao_dashboard_surface_toolbar")) {
@@ -673,22 +887,56 @@ function initControlPanelBao() {
 patch(ButtonBox.prototype, {
     setup() {
         super.setup(...arguments);
-        const ui = useService("ui");
+        this.baoButtonBoxRef = useRef("baoButtonBox");
+        this.baoButtonBoxState = useState({
+            capacity: null,
+            useDropdown: false,
+            width: 0,
+            slotCount: 0,
+            slotWidths: [],
+        });
+        const measureCapacity = () => {
+            const slotCount = getBaoSlotNames(this.props.slots).length;
+            const layout = getOverflowLayoutState(
+                this.baoButtonBoxRef.el,
+                "buttonbox",
+                slotCount,
+                this.baoButtonBoxState.slotWidths
+            );
+            if (
+                this.baoButtonBoxState.capacity !== layout.capacity ||
+                this.baoButtonBoxState.useDropdown !== layout.useDropdown ||
+                this.baoButtonBoxState.width !== layout.width ||
+                this.baoButtonBoxState.slotCount !== slotCount ||
+                slotWidthsChanged(this.baoButtonBoxState.slotWidths, layout.slotWidths)
+            ) {
+                this.baoButtonBoxState.capacity = layout.capacity;
+                this.baoButtonBoxState.useDropdown = layout.useDropdown;
+                this.baoButtonBoxState.width = layout.width;
+                this.baoButtonBoxState.slotCount = slotCount;
+                this.baoButtonBoxState.slotWidths = layout.slotWidths;
+            }
+        };
+        onMounted(measureCapacity);
+        onPatched(measureCapacity);
+        useExternalListener(window, "resize", measureCapacity);
+        useExternalListener(window, "orientationchange", measureCapacity);
+        if (window.visualViewport) {
+            useExternalListener(window.visualViewport, "resize", measureCapacity);
+        }
         onWillRender(() => {
-            const maxVisibleButtons = [0, 0, 7, 4, 5, 7][ui.size] ?? 7;
-            const allVisibleButtons = Object.entries(this.props.slots)
-                .filter(([_, slot]) => this.isSlotVisible(slot))
-                .map(([slotName]) => slotName);
-            if (allVisibleButtons.length <= maxVisibleButtons) {
+            const allVisibleButtons = getBaoSlotNames(this.props.slots);
+            if (!this.baoButtonBoxState.useDropdown) {
                 this.visibleButtons = allVisibleButtons;
                 this.additionalButtons = [];
-                this.isFull = allVisibleButtons.length === maxVisibleButtons;
-            } else {
-                const splitIndex = Math.max(maxVisibleButtons - 1, 0);
-                this.visibleButtons = allVisibleButtons.slice(0, splitIndex);
-                this.additionalButtons = allVisibleButtons.slice(splitIndex);
-                this.isFull = true;
+                this.isFull = false;
+                return;
             }
+            const capacity = this.baoButtonBoxState.capacity ?? allVisibleButtons.length;
+            const split = splitSlotsForOverflow(allVisibleButtons, capacity);
+            this.visibleButtons = split.visible;
+            this.additionalButtons = split.additional;
+            this.isFull = split.isFull;
         });
     },
 });
@@ -698,12 +946,62 @@ patch(StatusBarButtons.prototype, {
         if (super.setup) {
             super.setup(...arguments);
         }
-        this.ui = useService("ui");
+        this.baoStatusButtonsRef = useRef("baoStatusButtons");
+        this.baoStatusButtonsState = useState({
+            capacity: null,
+            useDropdown: false,
+            wraps: false,
+            width: 0,
+            slotCount: 0,
+            slotWidths: [],
+        });
+        const measureCapacity = () => {
+            const root = this.baoStatusButtonsRef.el;
+            const slotCount = this.visibleSlotNames.length;
+            const layout = getOverflowLayoutState(root, "status", slotCount, this.baoStatusButtonsState.slotWidths);
+            if (
+                this.baoStatusButtonsState.capacity !== layout.capacity ||
+                this.baoStatusButtonsState.useDropdown !== layout.useDropdown ||
+                this.baoStatusButtonsState.wraps !== layout.wraps ||
+                this.baoStatusButtonsState.width !== layout.width ||
+                this.baoStatusButtonsState.slotCount !== slotCount ||
+                slotWidthsChanged(this.baoStatusButtonsState.slotWidths, layout.slotWidths)
+            ) {
+                this.baoStatusButtonsState.capacity = layout.capacity;
+                this.baoStatusButtonsState.useDropdown = layout.useDropdown;
+                this.baoStatusButtonsState.wraps = layout.wraps;
+                this.baoStatusButtonsState.width = layout.width;
+                this.baoStatusButtonsState.slotCount = slotCount;
+                this.baoStatusButtonsState.slotWidths = layout.slotWidths;
+            }
+        };
+        onMounted(measureCapacity);
+        onPatched(measureCapacity);
+        useExternalListener(window, "resize", measureCapacity);
+        useExternalListener(window, "orientationchange", measureCapacity);
+        if (window.visualViewport) {
+            useExternalListener(window.visualViewport, "resize", measureCapacity);
+        }
     },
 
     get shouldUseBaoDropdown() {
-        const size = this.ui?.size ?? getViewportSize();
-        return size <= 3 || this.visibleSlotNames.length > 3;
+        return Boolean(this.baoStatusButtonsState.useDropdown && this.visibleSlotNames.length > 1);
+    },
+
+    get baoInlineStatusSlotNames() {
+        const slots = this.visibleSlotNames;
+        if (!this.shouldUseBaoDropdown) {
+            return slots;
+        }
+        return splitSlotsForOverflow(slots, this.baoStatusButtonsState.capacity ?? slots.length).visible;
+    },
+
+    get baoOverflowStatusSlotNames() {
+        const slots = this.visibleSlotNames;
+        if (!this.shouldUseBaoDropdown) {
+            return [];
+        }
+        return splitSlotsForOverflow(slots, this.baoStatusButtonsState.capacity ?? slots.length).additional;
     },
 });
 

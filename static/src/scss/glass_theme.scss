@@ -602,20 +602,24 @@ table {
             width: 100%;
 
             .o_control_panel_main_buttons {
-                width: 100% !important;
-                max-width: 100% !important;
-                flex-wrap: wrap !important;
+                width: auto !important;
+                max-width: 360px !important;
+                flex-wrap: nowrap !important;
                 align-items: center !important;
                 align-content: flex-start !important;
+                gap: 8px !important;
 
                 .btn,
                 button,
                 > div {
-                    flex: 1 1 220px !important;
+                    flex: 0 1 auto !important;
                     max-width: 100% !important;
-                    white-space: normal !important;
-                    overflow-wrap: anywhere !important;
-                    line-height: 1.15 !important;
+                    min-height: 36px !important;
+                    padding: 7px 13px !important;
+                    white-space: nowrap !important;
+                    overflow: hidden !important;
+                    text-overflow: ellipsis !important;
+                    line-height: 1.1 !important;
                 }
             }
         }
@@ -765,20 +769,24 @@ table {
             width: 100%;
 
             .o_control_panel_main_buttons {
-                width: 100% !important;
-                max-width: 100% !important;
-                flex-wrap: wrap !important;
+                width: auto !important;
+                max-width: 360px !important;
+                flex-wrap: nowrap !important;
                 align-items: center !important;
                 align-content: flex-start !important;
+                gap: 8px !important;
 
                 .btn,
                 button,
                 > div {
-                    flex: 1 1 220px !important;
+                    flex: 0 1 auto !important;
                     max-width: 100% !important;
-                    white-space: normal !important;
-                    overflow-wrap: anywhere !important;
-                    line-height: 1.15 !important;
+                    min-height: 36px !important;
+                    padding: 7px 13px !important;
+                    white-space: nowrap !important;
+                    overflow: hidden !important;
+                    text-overflow: ellipsis !important;
+                    line-height: 1.1 !important;
                 }
             }
         }
@@ -795,6 +803,93 @@ table {
             justify-self: end;
             margin-left: 0 !important;
             min-width: 0 !important;
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .o_control_panel:not(.o_bao_form_control_panel) {
+        .o_control_panel_breadcrumbs {
+            display: grid !important;
+            grid-template-columns: minmax(0, auto) minmax(0, max-content);
+            grid-template-rows: auto;
+            align-items: center !important;
+            align-content: center !important;
+            justify-content: start !important;
+            column-gap: 10px !important;
+            row-gap: 2px !important;
+            flex-wrap: nowrap !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            min-height: 40px !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_breadcrumb,
+        .o_control_panel_breadcrumbs > .breadcrumb {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            align-self: center !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: 540px !important;
+            min-height: 36px !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_breadcrumb .breadcrumb,
+        .o_control_panel_breadcrumbs > .breadcrumb {
+            flex-wrap: nowrap !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_control_panel_main_buttons,
+        .o_control_panel_main_buttons,
+        .o_cp_buttons {
+            display: inline-flex !important;
+            align-items: center !important;
+            align-content: center !important;
+            justify-content: flex-start !important;
+            gap: 8px !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: 360px !important;
+            margin: 0 !important;
+            flex: 0 1 auto !important;
+            flex-wrap: nowrap !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_control_panel_main_buttons {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+            justify-self: start !important;
+            align-self: center !important;
+            order: initial !important;
+        }
+
+        .o_control_panel_main_buttons .btn,
+        .o_control_panel_main_buttons button,
+        .o_cp_buttons .btn,
+        .o_cp_buttons button {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex: 0 1 auto !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: 168px !important;
+            min-height: 36px !important;
+            padding: 7px 13px !important;
+            border-radius: 10px !important;
+            font-size: 0.88rem !important;
+            line-height: 1.1 !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
         }
     }
 }
@@ -1949,9 +2044,9 @@ select {
     justify-content: space-between !important;
     min-width: 0 !important;
     width: auto !important;
-    height: 105px !important;
+    height: auto !important;
     min-height: 105px !important;
-    max-height: 105px !important;
+    max-height: none !important;
     margin: 0 !important;
     padding: 16px !important;
     box-sizing: border-box !important;
@@ -1989,17 +2084,21 @@ select {
     display: flex !important;
     align-items: baseline !important;
     justify-content: flex-start !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important;
     gap: 0 !important;
     width: 100% !important;
     margin: auto 0 0 !important;
     padding: 0 !important;
     color: #33363c !important;
-    font-size: 30px !important;
+    font-size: clamp(22px, 2vw, 30px) !important;
     font-weight: 700 !important;
     line-height: 1 !important;
     letter-spacing: 0 !important;
     min-height: 30px !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
 }
 
 .o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(6) > .purchase-dashboard-card.o_purchase_dashboard_card_top > .fs-2 {
@@ -2007,20 +2106,30 @@ select {
 }
 
 .o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top > .fs-2 > span {
+    min-width: 0 !important;
+    max-width: 100% !important;
     color: inherit !important;
     font-size: inherit !important;
     font-weight: inherit !important;
     line-height: inherit !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 .o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top > .fs-2 > .ps-4 {
     display: inline-flex !important;
     align-items: baseline !important;
+    flex: 0 1 auto !important;
     gap: 4px !important;
-    padding-left: 12px !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding-left: 8px !important;
     font-size: 18px !important;
     font-weight: 600 !important;
     line-height: 1 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
 }
 
 .o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top > .fs-2 .o_priority_star {
@@ -2056,6 +2165,10 @@ select {
 @media (max-width: 575.98px) {
     body.o_web_client .o_action_manager .o_purchase_dashboard.container-fluid {
         grid-template-columns: 1fr !important;
+    }
+
+    .o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top > .fs-2 {
+        font-size: 24px !important;
     }
 }
 
@@ -2391,6 +2504,8 @@ select {
 
 .o_spreadsheet_dashboard_action > .o_content > .o_renderer > .o_bao_dashboard_surface_toolbar {
     justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
     margin-bottom: 14px;
 }
 
@@ -2400,6 +2515,26 @@ select {
     align-items: center !important;
     gap: 8px !important;
     margin: 0 !important;
+    min-width: 0 !important;
+}
+
+.o_bao_dashboard_surface_toolbar .o_bao_dashboard_nav_tools {
+    justify-content: flex-end !important;
+    flex-wrap: nowrap !important;
+}
+
+.o_bao_dashboard_surface_toolbar .o_bao_dashboard_nav_tools .btn,
+.o_bao_dashboard_surface_toolbar .o_bao_dashboard_nav_tools button,
+.o_bao_dashboard_surface_toolbar .o_dashboard_star {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 180px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 .o_bao_dashboard_surface_toolbar .o_sp_date_filter_button .btn {
@@ -2415,8 +2550,7 @@ select {
 .o_spreadsheet_dashboard_action > .o_control_panel {
     .o_bao_dashboard_nav_tools,
     .o_bao_dashboard_date_tools,
-    .o_dashboard_star_hidden,
-    .o_control_panel_navigation > .btn.btn-light.o-dropdown {
+    .o_dashboard_star_hidden {
         display: none !important;
     }
 }
@@ -2445,6 +2579,11 @@ select {
     }
 
     .settings_tab {
+        flex: 0 0 clamp(220px, 18vw, 280px) !important;
+        width: clamp(220px, 18vw, 280px) !important;
+        min-width: 0 !important;
+        max-width: 280px !important;
+        overflow-x: hidden !important;
         background: #edf5fd !important;
         border: 1px solid rgba(17, 74, 126, 0.11) !important;
         border-right-color: transparent !important;
@@ -2457,6 +2596,9 @@ select {
             display: flex !important;
             align-items: center;
             gap: 10px;
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
             min-height: 44px !important;
             margin: 0 0 6px !important;
             padding: 10px 14px !important;
@@ -2500,6 +2642,10 @@ select {
         .tab .app_name {
             flex: 1 1 auto;
             min-width: 0;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .tab i,
@@ -2523,6 +2669,34 @@ select {
     .row.mt16.o_settings_container {
         border-top: 1px solid rgba(17, 74, 126, 0.08) !important;
         color: $text-strong !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .o_base_settings_view {
+        .o_setting_container,
+        .settings {
+            display: block !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+        }
+
+        .settings_tab {
+            display: flex !important;
+            flex: 0 0 auto !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin-right: 0 !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            gap: 8px !important;
+        }
+
+        .settings_tab .tab {
+            flex: 0 0 clamp(112px, 42vw, 178px) !important;
+            width: clamp(112px, 42vw, 178px) !important;
+            margin-bottom: 0 !important;
+        }
     }
 }
 
@@ -2748,6 +2922,198 @@ select {
 
         .o_cp_searchview {
             max-width: calc(100vw - 24px) !important;
+        }
+    }
+}
+
+// RR8 global control-panel hierarchy:
+// tablet, laptop and desktop keep the same BAO order:
+// breadcrumb/header + compact actions, centered search, navigation on the right.
+@media (min-width: 768px) {
+    .o_control_panel:not(.o_bao_form_control_panel) {
+        --bao-cp-actions-width: clamp(300px, 34vw, 520px);
+        --bao-cp-breadcrumb-max: clamp(220px, 34vw, 560px);
+
+        .o_control_panel_main {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(280px, var(--bao-cp-actions-width)) minmax(0, auto) !important;
+            grid-template-rows: auto !important;
+            align-items: center !important;
+            column-gap: clamp(12px, 2vw, 24px) !important;
+            row-gap: 8px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+        }
+
+        .o_control_panel_breadcrumbs {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            display: grid !important;
+            grid-template-columns: minmax(0, auto) minmax(0, max-content) !important;
+            align-items: center !important;
+            justify-content: start !important;
+            column-gap: 10px !important;
+            row-gap: 2px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            min-height: 40px !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_breadcrumb,
+        .o_control_panel_breadcrumbs > .breadcrumb,
+        .o_control_panel_breadcrumbs .breadcrumb,
+        .o_control_panel_breadcrumbs .breadcrumb-item,
+        .o_control_panel_breadcrumbs .o_last_breadcrumb_item {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_breadcrumb,
+        .o_control_panel_breadcrumbs > .breadcrumb {
+            grid-column: 1 !important;
+            align-self: center !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            width: auto !important;
+            max-width: var(--bao-cp-breadcrumb-max) !important;
+            min-height: 36px !important;
+            margin: 0 !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_control_panel_main_buttons,
+        .o_control_panel_main_buttons,
+        .o_cp_buttons {
+            display: inline-flex !important;
+            align-items: center !important;
+            align-content: center !important;
+            justify-content: flex-start !important;
+            flex: 0 1 auto !important;
+            flex-wrap: nowrap !important;
+            gap: 8px !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: 360px !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_control_panel_main_buttons {
+            grid-column: 2 !important;
+            align-self: center !important;
+            justify-self: start !important;
+            order: initial !important;
+        }
+
+        .o_control_panel_main_buttons .btn,
+        .o_control_panel_main_buttons button,
+        .o_cp_buttons .btn,
+        .o_cp_buttons button {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex: 0 1 auto !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: 168px !important;
+            min-height: 36px !important;
+            padding: 7px 13px !important;
+            border-radius: 10px !important;
+            font-size: 0.88rem !important;
+            line-height: 1.1 !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_control_panel_actions {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+            justify-self: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: var(--bao-cp-actions-width) !important;
+            margin: 0 !important;
+            order: initial !important;
+        }
+
+        .o_control_panel_actions .o_cp_searchview,
+        .o_control_panel_actions .o_searchview,
+        .o_control_panel_actions .o_selection_container {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+        }
+
+        .o_control_panel_navigation {
+            grid-column: 3 !important;
+            grid-row: 1 !important;
+            justify-self: end !important;
+            align-self: center !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            flex-wrap: nowrap !important;
+            gap: 8px !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            margin-left: 0 !important;
+            order: initial !important;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .o_control_panel:not(.o_bao_form_control_panel) {
+        --bao-cp-actions-width: 100%;
+        --bao-cp-breadcrumb-max: 100%;
+
+        .o_control_panel_main {
+            grid-template-columns: minmax(0, 1fr) minmax(0, auto) !important;
+            grid-template-rows: auto auto !important;
+        }
+
+        .o_control_panel_breadcrumbs {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+        }
+
+        .o_control_panel_navigation {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+        }
+
+        .o_control_panel_actions {
+            grid-column: 1 / -1 !important;
+            grid-row: 2 !important;
+            justify-self: stretch !important;
+            max-width: 100% !important;
+        }
+    }
+}
+
+@media (max-width: 767.98px) {
+    .o_control_panel:not(.o_bao_form_control_panel) {
+        .o_control_panel_breadcrumbs,
+        .o_control_panel_breadcrumbs > .o_breadcrumb,
+        .o_control_panel_breadcrumbs > .breadcrumb,
+        .o_control_panel_main_buttons {
+            min-width: 0 !important;
+            max-width: 100% !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_breadcrumb,
+        .o_control_panel_breadcrumbs > .breadcrumb,
+        .o_control_panel_breadcrumbs .breadcrumb-item,
+        .o_control_panel_breadcrumbs .o_last_breadcrumb_item {
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
         }
     }
 }

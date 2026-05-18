@@ -55,8 +55,33 @@
     </t>
 
     <t t-inherit="web.StatusBarButtons" t-inherit-mode="extension">
-        <xpath expr="//t[@t-if='env.isSmall']" position="attributes">
-            <attribute name="t-if">shouldUseBaoDropdown</attribute>
+        <xpath expr="//div[contains(@class, 'o_statusbar_buttons')]" position="attributes">
+            <attribute name="t-ref">baoStatusButtons</attribute>
+        </xpath>
+        <xpath expr="//t[@t-if='env.isSmall']" position="replace">
+            <t t-if="shouldUseBaoDropdown">
+                <t t-foreach="baoInlineStatusSlotNames" t-as="slot" t-key="slot">
+                    <t t-slot="{{ slot }}" />
+                </t>
+                <Dropdown t-if="baoOverflowStatusSlotNames.length">
+                    <button class="btn btn-secondary" title="More">
+                        <i class="oi oi-fw oi-ellipsis-v" />
+                    </button>
+                    <t t-set-slot="content">
+                        <t t-foreach="baoOverflowStatusSlotNames" t-as="slot" t-key="slot">
+                            <DropdownItem class="'o-dropdown-item-unstyled-button'">
+                                <t t-slot="{{ slot }}" />
+                            </DropdownItem>
+                        </t>
+                    </t>
+                </Dropdown>
+            </t>
+        </xpath>
+    </t>
+
+    <t t-inherit="web.Form.ButtonBox" t-inherit-mode="extension">
+        <xpath expr="//div[contains(@class, 'o-form-buttonbox')]" position="attributes">
+            <attribute name="t-ref">baoButtonBox</attribute>
         </xpath>
     </t>
 

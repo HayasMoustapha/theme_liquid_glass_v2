@@ -14,10 +14,49 @@
 
         .o_control_panel_breadcrumbs {
             grid-column: 1 !important;
-            // justify-self: center !important;
+            justify-self: start !important;
+            align-items: flex-start !important;
+            justify-content: flex-start !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            flex-direction: column !important;
+            gap: 6px !important;
+        }
+
+        .o_control_panel_main_buttons {
+            display: flex !important;
+            flex: 0 1 auto !important;
+            flex-wrap: wrap !important;
             align-items: center !important;
-            width: fit-content !important;
-            flex-direction: row-reverse !important;
+            align-content: flex-start !important;
+            gap: 8px !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+        }
+
+        .o_control_panel_main_buttons .btn,
+        .o_control_panel_main_buttons button {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex: 0 1 auto !important;
+            min-width: 118px !important;
+            max-width: 176px !important;
+            min-height: 40px !important;
+            padding: 8px 14px !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_breadcrumb,
+        .breadcrumb {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
         }
 
         .o_control_panel_actions {
@@ -4487,6 +4526,378 @@
     }
 }
 
+// RR8 final form overflow contract. Dropdowns are overflow recovery only:
+// desktop/tablet/laptop show the normal inline controls while they fit.
+@media (min-width: 768px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel {
+        --bao-form-breadcrumb-max: clamp(260px, 38vw, 640px);
+        --bao-form-smart-rail: clamp(340px, 44vw, 760px);
+
+        height: auto !important;
+        min-height: 58px !important;
+        overflow: visible !important;
+
+        .o_control_panel_main {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, var(--bao-form-smart-rail)) minmax(0, auto) !important;
+            grid-template-rows: auto !important;
+            align-items: center !important;
+            column-gap: clamp(12px, 2vw, 24px) !important;
+            row-gap: 8px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            height: auto !important;
+            min-height: 0 !important;
+            overflow: visible !important;
+        }
+
+        .o_control_panel_breadcrumbs {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, auto) !important;
+            align-items: center !important;
+            justify-content: start !important;
+            column-gap: 10px !important;
+            row-gap: 4px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            height: auto !important;
+            min-height: 42px !important;
+            overflow: hidden !important;
+            padding-right: 0 !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_breadcrumb {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: var(--bao-form-breadcrumb-max) !important;
+            align-self: center !important;
+            overflow: hidden !important;
+        }
+
+        .o_bao_breadcrumb,
+        .o_bao_breadcrumb_header,
+        .o_bao_breadcrumb_header_text,
+        .o_bao_breadcrumb_trail,
+        .o_bao_breadcrumb_trail .breadcrumb,
+        .o_bao_breadcrumb_trail .breadcrumb-item,
+        .o_bao_breadcrumb_trail .breadcrumb-item a,
+        .o_bao_breadcrumb_trail .breadcrumb-item span,
+        .o_breadcrumb .o_last_breadcrumb_item,
+        .o_breadcrumb .o_last_breadcrumb_item span {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_bao_breadcrumb,
+        .o_bao_breadcrumb_header,
+        .o_bao_breadcrumb_trail .breadcrumb {
+            flex-wrap: nowrap !important;
+            white-space: nowrap !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_bao_header_main_buttons,
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions {
+            grid-row: 1 !important;
+            align-self: center !important;
+            justify-self: start !important;
+            min-width: 0 !important;
+            max-width: 320px !important;
+            overflow: hidden !important;
+            margin: 0 !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_bao_header_main_buttons {
+            grid-column: 2 !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions {
+            grid-column: 3 !important;
+        }
+
+        .o_bao_header_main_buttons .o_control_panel_main_buttons,
+        .o_bao_header_menu_actions .o_control_panel_breadcrumbs_actions,
+        .o_cp_action_menus,
+        .o_bao_header_status_actions,
+        .o_bao_header_status_actions .o_form_status_indicator,
+        .o_bao_header_status_actions .o_form_status_indicator_buttons {
+            display: inline-flex !important;
+            align-items: center !important;
+            align-content: center !important;
+            justify-content: flex-start !important;
+            flex-wrap: nowrap !important;
+            gap: 8px !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+        }
+
+        .o_bao_header_main_buttons .o_control_panel_main_buttons .btn,
+        .o_bao_header_main_buttons .o_control_panel_main_buttons button,
+        .o_control_panel_main_buttons .btn,
+        .o_control_panel_main_buttons button,
+        .o_bao_header_menu_actions .btn,
+        .o_bao_header_menu_actions button,
+        .o_bao_header_status_actions .btn,
+        .o_bao_header_status_actions button {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex: 0 1 auto !important;
+            width: auto !important;
+            min-width: 36px !important;
+            max-width: 156px !important;
+            min-height: 36px !important;
+            height: 36px !important;
+            padding: 0 10px !important;
+            border-radius: 8px !important;
+            font-size: 0.86rem !important;
+            line-height: 1 !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_control_panel_actions {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+            justify-self: center !important;
+            align-self: center !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            max-width: var(--bao-form-smart-rail) !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+            order: initial !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_navigation {
+            grid-column: 3 !important;
+            grid-row: 1 !important;
+            justify-self: end !important;
+            align-self: center !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            margin-left: 0 !important;
+            order: initial !important;
+        }
+
+        .o_control_panel_actions > .o-form-buttonbox,
+        .o_control_panel_actions > .o_form_button_box,
+        .o_form_view .o_form_button_box,
+        .o_form_view .o-form-buttonbox {
+            display: flex !important;
+            align-items: stretch !important;
+            justify-content: center !important;
+            flex-wrap: nowrap !important;
+            gap: 8px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: var(--bao-form-smart-rail) !important;
+            margin-inline: auto !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_actions > .o-form-buttonbox > .oe_stat_button,
+        .o_control_panel_actions > .o_form_button_box > .oe_stat_button,
+        .o_form_view .o_form_button_box > .oe_stat_button,
+        .o_form_view .o-form-buttonbox > .oe_stat_button {
+            display: inline-flex !important;
+            align-items: center !important;
+            flex: 0 1 138px !important;
+            width: 138px !important;
+            min-width: 112px !important;
+            max-width: 138px !important;
+            min-height: 48px !important;
+            height: 48px !important;
+            max-height: 52px !important;
+            padding: 7px 10px !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_actions .oe_stat_button .o_stat_info,
+        .o_control_panel_actions .oe_stat_button .o_stat_text,
+        .o_control_panel_actions .oe_stat_button .o_stat_value,
+        .o_form_view .o_form_button_box .oe_stat_button .o_stat_info,
+        .o_form_view .o_form_button_box .oe_stat_button .o_stat_text,
+        .o_form_view .o_form_button_box .oe_stat_button .o_stat_value {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
+            line-height: 1.08 !important;
+        }
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_statusbar {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+
+        .o_statusbar_buttons {
+            display: flex !important;
+            align-items: center !important;
+            align-content: center !important;
+            justify-content: flex-start !important;
+            flex-wrap: nowrap !important;
+            gap: 6px !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+        }
+
+        .o_statusbar_buttons > .btn,
+        .o_statusbar_buttons > button,
+        .o_statusbar_buttons > .dropdown,
+        .o_statusbar_buttons > .o-dropdown {
+            flex: 0 1 auto !important;
+            min-width: 36px !important;
+            max-width: 168px !important;
+        }
+
+        .o_statusbar_buttons .btn,
+        .o_statusbar_buttons button {
+            min-height: 36px !important;
+            height: 36px !important;
+            padding: 0 12px !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            line-height: 1 !important;
+        }
+
+        .o_statusbar_buttons .btn *,
+        .o_statusbar_buttons button * {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+            white-space: nowrap !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_statusbar_status,
+        .o_field_statusbar {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: visible !important;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel {
+        --bao-form-breadcrumb-max: 100%;
+        --bao-form-smart-rail: 100%;
+
+        .o_control_panel_main {
+            grid-template-columns: minmax(0, 1fr) minmax(0, auto) !important;
+            grid-template-rows: auto auto !important;
+        }
+
+        .o_control_panel_breadcrumbs {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+        }
+
+        .o_control_panel_navigation {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+        }
+
+        .o_control_panel_actions {
+            grid-column: 1 / -1 !important;
+            grid-row: 2 !important;
+            justify-self: stretch !important;
+            max-width: 100% !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_bao_header_main_buttons,
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions {
+            max-width: 220px !important;
+        }
+
+        .o_control_panel_actions > .o-form-buttonbox > .oe_stat_button,
+        .o_control_panel_actions > .o_form_button_box > .oe_stat_button,
+        .o_form_view .o_form_button_box > .oe_stat_button,
+        .o_form_view .o-form-buttonbox > .oe_stat_button {
+            flex-basis: 132px !important;
+            width: 132px !important;
+            max-width: 132px !important;
+        }
+    }
+}
+
+@media (max-width: 767.98px) {
+    .o_web_client .o_action_manager:has(.o_form_view) {
+        .o_control_panel.o_bao_form_control_panel .o_control_panel_actions > .o-form-buttonbox,
+        .o_control_panel.o_bao_form_control_panel .o_control_panel_actions > .o_form_button_box,
+        .o_form_view .o_form_button_box,
+        .o_form_view .o-form-buttonbox {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            overflow: hidden !important;
+        }
+    }
+}
+
+.o_web_client .o-form-buttonbox.o_dropdown_more,
+.o_web_client .o_form_button_box.o_dropdown_more,
+.o_web_client .o-dropdown--menu.o-form-buttonbox.o_dropdown_more {
+    width: 312px !important;
+    min-width: 0 !important;
+    max-width: calc(100vw - 24px) !important;
+    max-height: 440px !important;
+    padding: 6px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    border: 1px solid rgba(188, 219, 245, 0.34) !important;
+    border-radius: 14px !important;
+    background: linear-gradient(180deg, rgba(104, 158, 207, 0.86) 0%, rgba(69, 127, 184, 0.82) 100%) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 20px 48px rgba(9, 37, 64, 0.24) !important;
+    backdrop-filter: blur(10px) saturate(120%);
+}
+
+.o_web_client .o-form-buttonbox.o_dropdown_more .dropdown-item,
+.o_web_client .o_form_button_box.o_dropdown_more .dropdown-item,
+.o_web_client .o-dropdown--menu.o-form-buttonbox.o_dropdown_more .dropdown-item,
+.o_web_client .o-dropdown--menu.o-form-buttonbox.o_dropdown_more .o-dropdown-item {
+    min-width: 0 !important;
+    padding: 0 !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+}
+
+.o_web_client .o-form-buttonbox.o_dropdown_more .dropdown-item .oe_stat_button,
+.o_web_client .o_form_button_box.o_dropdown_more .dropdown-item .oe_stat_button,
+.o_web_client .o-dropdown--menu.o-form-buttonbox.o_dropdown_more .dropdown-item .oe_stat_button,
+.o_web_client .o-dropdown--menu.o-form-buttonbox.o_dropdown_more .o-dropdown-item .oe_stat_button {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 48px !important;
+    height: 48px !important;
+    padding: 7px 12px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.16) !important;
+    color: #ffffff !important;
+}
+
 .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_actions_wrapped,
 .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel:has(.o_form_status_indicator_buttons:not(.invisible)) {
     .o_control_panel_main {
@@ -4966,6 +5377,196 @@
             display: inline-flex !important;
             align-items: center !important;
             min-height: 36px !important;
+        }
+    }
+}
+
+// RR8 global form control-panel hierarchy:
+// long form breadcrumbs must shrink before action/status controls move.
+@media (min-width: 768px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel {
+        --bao-form-breadcrumb-max: clamp(260px, 40vw, 680px);
+        --bao-form-smart-rail: clamp(340px, 44vw, 760px);
+
+        .o_control_panel_main {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, var(--bao-form-smart-rail)) minmax(0, auto) !important;
+            grid-template-rows: auto !important;
+            align-items: center !important;
+            column-gap: clamp(12px, 2vw, 24px) !important;
+            row-gap: 8px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+        }
+
+        .o_control_panel_breadcrumbs {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(0, max-content) minmax(0, max-content) !important;
+            align-items: center !important;
+            justify-content: start !important;
+            column-gap: 10px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_breadcrumb {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: var(--bao-form-breadcrumb-max) !important;
+            align-self: center !important;
+            overflow: hidden !important;
+        }
+
+        .o_bao_breadcrumb,
+        .o_bao_breadcrumb_header,
+        .o_bao_breadcrumb_header_text,
+        .o_bao_breadcrumb_trail,
+        .o_bao_breadcrumb_trail .breadcrumb,
+        .o_bao_breadcrumb_trail .breadcrumb-item,
+        .o_bao_breadcrumb_trail .breadcrumb-item a,
+        .o_bao_breadcrumb_trail .breadcrumb-item span,
+        .o_breadcrumb .o_last_breadcrumb_item,
+        .o_breadcrumb .o_last_breadcrumb_item span {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_bao_breadcrumb_header,
+        .o_bao_breadcrumb_trail .breadcrumb {
+            flex-wrap: nowrap !important;
+            white-space: nowrap !important;
+        }
+
+        .o_bao_breadcrumb_header_text,
+        .o_bao_breadcrumb_trail .breadcrumb-item,
+        .o_breadcrumb .o_last_breadcrumb_item span {
+            white-space: nowrap !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_bao_header_main_buttons {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+            align-self: center !important;
+            justify-self: start !important;
+            min-width: 0 !important;
+            max-width: 320px !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions {
+            grid-column: 3 !important;
+            grid-row: 1 !important;
+            align-self: center !important;
+            justify-self: start !important;
+            min-width: 0 !important;
+            max-width: 320px !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+        }
+
+        .o_bao_header_main_buttons .o_control_panel_main_buttons,
+        .o_bao_header_menu_actions .o_control_panel_breadcrumbs_actions,
+        .o_cp_action_menus,
+        .o_bao_header_status_actions,
+        .o_bao_header_status_actions .o_form_status_indicator,
+        .o_bao_header_status_actions .o_form_status_indicator_buttons {
+            display: inline-flex !important;
+            align-items: center !important;
+            align-content: center !important;
+            flex-wrap: nowrap !important;
+            gap: 8px !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+        }
+
+        .o_bao_header_main_buttons .o_control_panel_main_buttons .btn,
+        .o_bao_header_main_buttons .o_control_panel_main_buttons button,
+        .o_control_panel_main_buttons .btn,
+        .o_control_panel_main_buttons button,
+        .o_bao_header_menu_actions .btn,
+        .o_bao_header_menu_actions button {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex: 0 1 auto !important;
+            width: auto !important;
+            min-width: 36px !important;
+            max-width: 156px !important;
+            min-height: 36px !important;
+            height: 36px !important;
+            padding: 0 10px !important;
+            border-radius: 8px !important;
+            font-size: 0.86rem !important;
+            line-height: 1 !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_control_panel_actions {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+            justify-self: center !important;
+            align-self: center !important;
+            width: 100% !important;
+            max-width: var(--bao-form-smart-rail) !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+            order: initial !important;
+        }
+
+        .o_control_panel_navigation {
+            grid-column: 3 !important;
+            grid-row: 1 !important;
+            justify-self: end !important;
+            align-self: center !important;
+            width: auto !important;
+            min-width: 0 !important;
+            margin-left: 0 !important;
+            order: initial !important;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel {
+        --bao-form-breadcrumb-max: 100%;
+        --bao-form-smart-rail: 100%;
+
+        .o_control_panel_main {
+            grid-template-columns: minmax(0, 1fr) minmax(0, auto) !important;
+            grid-template-rows: auto auto !important;
+        }
+
+        .o_control_panel_breadcrumbs {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+        }
+
+        .o_control_panel_navigation {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+        }
+
+        .o_control_panel_actions {
+            grid-column: 1 / -1 !important;
+            grid-row: 2 !important;
+            justify-self: stretch !important;
+            max-width: 100% !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_bao_header_main_buttons,
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions {
+            max-width: 220px !important;
         }
     }
 }
@@ -5779,6 +6380,522 @@
             width: 100% !important;
             max-width: 100% !important;
             min-width: 0 !important;
+        }
+    }
+}
+
+// RR8 final authority: form control-panels, smartbuttons and statusbar action
+// buttons use dropdowns only when the available space is exhausted.
+@media (min-width: 768px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_actions_wrapped {
+        --bao-form-breadcrumb-max: clamp(260px, 38vw, 640px);
+        --bao-form-smart-rail: clamp(340px, 44vw, 760px);
+
+        height: auto !important;
+        min-height: 58px !important;
+        overflow: visible !important;
+
+        .o_control_panel_main {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, var(--bao-form-smart-rail)) minmax(0, auto) !important;
+            grid-template-rows: auto !important;
+            align-items: center !important;
+            column-gap: clamp(12px, 2vw, 24px) !important;
+            row-gap: 8px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            height: auto !important;
+            min-height: 0 !important;
+            overflow: visible !important;
+        }
+
+        .o_control_panel_breadcrumbs {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, auto) !important;
+            align-items: center !important;
+            justify-content: start !important;
+            column-gap: 10px !important;
+            row-gap: 4px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            height: auto !important;
+            min-height: 42px !important;
+            overflow: hidden !important;
+            padding-right: 0 !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_breadcrumb {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: var(--bao-form-breadcrumb-max) !important;
+            align-self: center !important;
+            overflow: hidden !important;
+        }
+
+        .o_bao_breadcrumb,
+        .o_bao_breadcrumb_header,
+        .o_bao_breadcrumb_header_text,
+        .o_bao_breadcrumb_trail,
+        .o_bao_breadcrumb_trail .breadcrumb,
+        .o_bao_breadcrumb_trail .breadcrumb-item,
+        .o_bao_breadcrumb_trail .breadcrumb-item a,
+        .o_bao_breadcrumb_trail .breadcrumb-item span,
+        .o_breadcrumb .o_last_breadcrumb_item,
+        .o_breadcrumb .o_last_breadcrumb_item span {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_bao_breadcrumb,
+        .o_bao_breadcrumb_header,
+        .o_bao_breadcrumb_trail .breadcrumb {
+            flex-wrap: nowrap !important;
+            white-space: nowrap !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_bao_header_main_buttons,
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions {
+            grid-row: 1 !important;
+            align-self: center !important;
+            justify-self: start !important;
+            min-width: 0 !important;
+            max-width: 320px !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_bao_header_main_buttons {
+            grid-column: 2 !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions {
+            grid-column: 3 !important;
+        }
+
+        .o_bao_header_main_buttons .o_control_panel_main_buttons,
+        .o_bao_header_menu_actions .o_control_panel_breadcrumbs_actions,
+        .o_cp_action_menus,
+        .o_bao_header_status_actions,
+        .o_bao_header_status_actions .o_form_status_indicator,
+        .o_bao_header_status_actions .o_form_status_indicator_buttons {
+            display: inline-flex !important;
+            align-items: center !important;
+            align-content: center !important;
+            justify-content: flex-start !important;
+            flex-wrap: nowrap !important;
+            gap: 8px !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+        }
+
+        .o_bao_header_main_buttons .o_control_panel_main_buttons .btn,
+        .o_bao_header_main_buttons .o_control_panel_main_buttons button,
+        .o_control_panel_main_buttons .btn,
+        .o_control_panel_main_buttons button,
+        .o_bao_header_menu_actions .btn,
+        .o_bao_header_menu_actions button,
+        .o_bao_header_status_actions .btn,
+        .o_bao_header_status_actions button {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex: 0 1 auto !important;
+            width: auto !important;
+            min-width: 36px !important;
+            max-width: 156px !important;
+            min-height: 36px !important;
+            height: 36px !important;
+            padding: 0 10px !important;
+            border-radius: 8px !important;
+            font-size: 0.86rem !important;
+            line-height: 1 !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_control_panel_actions {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+            justify-self: center !important;
+            align-self: center !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            max-width: var(--bao-form-smart-rail) !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+            order: initial !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_navigation {
+            grid-column: 3 !important;
+            grid-row: 1 !important;
+            justify-self: end !important;
+            align-self: center !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            margin-left: 0 !important;
+            order: initial !important;
+        }
+
+        .o_control_panel_actions > .o-form-buttonbox,
+        .o_control_panel_actions > .o_form_button_box {
+            display: flex !important;
+            align-items: stretch !important;
+            justify-content: center !important;
+            flex-wrap: nowrap !important;
+            gap: 8px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: var(--bao-form-smart-rail) !important;
+            margin-inline: auto !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_actions > .o-form-buttonbox > .oe_stat_button,
+        .o_control_panel_actions > .o_form_button_box > .oe_stat_button {
+            display: inline-flex !important;
+            align-items: center !important;
+            flex: 0 1 138px !important;
+            width: 138px !important;
+            min-width: 112px !important;
+            max-width: 138px !important;
+            min-height: 48px !important;
+            height: 48px !important;
+            max-height: 52px !important;
+            padding: 7px 10px !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_actions .oe_stat_button .o_stat_info,
+        .o_control_panel_actions .oe_stat_button .o_stat_text,
+        .o_control_panel_actions .oe_stat_button .o_stat_value {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
+            line-height: 1.08 !important;
+        }
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_statusbar {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+
+        .o_statusbar_buttons {
+            display: flex !important;
+            align-items: center !important;
+            align-content: center !important;
+            justify-content: flex-start !important;
+            flex-wrap: nowrap !important;
+            gap: 6px !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+        }
+
+        .o_statusbar_buttons > .btn,
+        .o_statusbar_buttons > button,
+        .o_statusbar_buttons > .dropdown,
+        .o_statusbar_buttons > .o-dropdown {
+            flex: 0 1 auto !important;
+            min-width: 36px !important;
+            max-width: 168px !important;
+        }
+
+        .o_statusbar_buttons .btn,
+        .o_statusbar_buttons button {
+            min-height: 36px !important;
+            height: 36px !important;
+            padding: 0 12px !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            line-height: 1 !important;
+        }
+
+        .o_statusbar_status,
+        .o_field_statusbar {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: visible !important;
+        }
+
+        .o_statusbar_status {
+            align-items: center !important;
+            align-content: center !important;
+            gap: 6px !important;
+        }
+
+        .o_statusbar_status > .o_arrow_button:not(.d-none),
+        .o_statusbar_status > .dropdown-toggle:not(.d-none),
+        .o_statusbar_status > button:not(.d-none),
+        .o_statusbar_status > .btn:not(.d-none) {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            position: relative !important;
+            flex: 0 1 auto !important;
+            min-width: 44px !important;
+            max-width: 172px !important;
+            min-height: 34px !important;
+            height: 34px !important;
+            padding-inline: 10px !important;
+            border: 1px solid #d8dde5 !important;
+            border-radius: 8px !important;
+            background: #e9edf2 !important;
+            box-shadow: none !important;
+            color: #687382 !important;
+            overflow: hidden !important;
+            white-space: nowrap !important;
+            text-overflow: ellipsis !important;
+            clip-path: inset(0 round 8px) !important;
+        }
+
+        .o_statusbar_status > .o_arrow_button_current:not(.d-none),
+        .o_statusbar_status > .btn.active:not(.d-none),
+        .o_statusbar_status > button.active:not(.d-none) {
+            background: #d8f7e4 !important;
+            border-color: #a8e8c1 !important;
+            color: #10864d !important;
+            font-weight: 700 !important;
+        }
+
+        .o_statusbar_status > .o_arrow_button:not(.d-none) *,
+        .o_statusbar_status > .dropdown-toggle:not(.d-none) *,
+        .o_statusbar_status > button:not(.d-none) *,
+        .o_statusbar_status > .btn:not(.d-none) * {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+            white-space: nowrap !important;
+            text-overflow: ellipsis !important;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_actions_wrapped {
+        --bao-form-breadcrumb-max: 100%;
+        --bao-form-smart-rail: 100%;
+
+        .o_control_panel_main {
+            grid-template-columns: minmax(0, 1fr) minmax(0, auto) !important;
+            grid-template-rows: auto auto !important;
+        }
+
+        .o_control_panel_breadcrumbs {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+        }
+
+        .o_control_panel_navigation {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+        }
+
+        .o_control_panel_actions {
+            grid-column: 1 / -1 !important;
+            grid-row: 2 !important;
+            justify-self: stretch !important;
+            max-width: 100% !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_bao_header_main_buttons,
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions {
+            max-width: 220px !important;
+        }
+
+        .o_control_panel_actions > .o-form-buttonbox > .oe_stat_button,
+        .o_control_panel_actions > .o_form_button_box > .oe_stat_button {
+            flex-basis: 132px !important;
+            width: 132px !important;
+            max-width: 132px !important;
+        }
+    }
+}
+
+// RR8 final authority for non-form laptop/tablet control-panels: long
+// breadcrumbs/actions must not overlap search, pager or view switchers.
+@media (min-width: 768px) and (max-width: 1399.98px) {
+    .o_web_client .o_action_manager .o_control_panel:not(.o_bao_form_control_panel) {
+        .o_control_panel_main {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(0, auto) !important;
+            grid-template-rows: auto auto !important;
+            align-items: center !important;
+            column-gap: 12px !important;
+            row-gap: 8px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+        }
+
+        .o_control_panel_breadcrumbs {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) !important;
+            grid-template-rows: auto auto !important;
+            align-items: center !important;
+            justify-content: start !important;
+            row-gap: 6px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            min-height: 40px !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_breadcrumb,
+        .o_control_panel_breadcrumbs > .breadcrumb {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            min-height: 34px !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_control_panel_main_buttons,
+        .o_control_panel_main_buttons,
+        .o_cp_buttons {
+            grid-column: 1 !important;
+            grid-row: 2 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            flex-wrap: nowrap !important;
+            gap: 8px !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+        }
+
+        .o_control_panel_main_buttons .btn,
+        .o_control_panel_main_buttons button,
+        .o_cp_buttons .btn,
+        .o_cp_buttons button {
+            flex: 0 1 auto !important;
+            min-width: 36px !important;
+            max-width: 180px !important;
+            min-height: 36px !important;
+            height: 36px !important;
+            padding: 0 12px !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_control_panel_navigation {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+            justify-self: end !important;
+            align-self: start !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            margin-left: 0 !important;
+        }
+
+        .o_control_panel_actions {
+            grid-column: 1 / -1 !important;
+            grid-row: 2 !important;
+            justify-self: stretch !important;
+            justify-content: center !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+        }
+
+        .o_control_panel_actions .o_cp_searchview,
+        .o_control_panel_actions .o_searchview,
+        .o_control_panel_actions .o_selection_container {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+        }
+    }
+}
+
+// Mobile form statusbar: keep the surviving inline action compact; the More
+// dropdown owns surplus actions instead of allowing a tall wrapped button.
+@media (max-width: 767.98px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_statusbar {
+        .o_statusbar_buttons {
+            display: flex !important;
+            align-items: center !important;
+            align-content: center !important;
+            flex-wrap: nowrap !important;
+            gap: 8px !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+        }
+
+        .o_statusbar_buttons > .btn:not(.dropdown-toggle),
+        .o_statusbar_buttons > button:not(.dropdown-toggle) {
+            display: block !important;
+            flex: 1 1 112px !important;
+            min-width: 96px !important;
+            max-width: calc(100% - 52px) !important;
+            min-height: 40px !important;
+            height: 40px !important;
+            padding: 0 12px !important;
+            line-height: 40px !important;
+            text-align: center !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_statusbar_buttons > .dropdown,
+        .o_statusbar_buttons > .o-dropdown {
+            flex: 0 0 44px !important;
+            width: 44px !important;
+            min-width: 44px !important;
+            max-width: 44px !important;
+        }
+
+        .o_statusbar_buttons > .dropdown > .dropdown-toggle,
+        .o_statusbar_buttons > .o-dropdown > .btn,
+        .o_statusbar_buttons > .o-dropdown.dropdown-toggle,
+        .o_statusbar_buttons > .btn.dropdown-toggle {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 44px !important;
+            min-width: 44px !important;
+            max-width: 44px !important;
+            min-height: 40px !important;
+            height: 40px !important;
+            padding: 0 !important;
+            line-height: 1 !important;
         }
     }
 }
