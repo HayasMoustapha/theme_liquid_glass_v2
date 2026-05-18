@@ -179,6 +179,7 @@
 
     <record id="action_bao_theme_rh01_fixture" model="ir.actions.server">
         <field name="name">BAO RH01 Responsive Fixture</field>
+        <field name="path">bao-rh01-responsive-fixture</field>
         <field name="model_id" ref="model_bao_theme_config"/>
         <field name="state">code</field>
         <field name="group_ids" eval="[(4, ref('base.group_system'))]"/>

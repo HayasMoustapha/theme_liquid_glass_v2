@@ -219,7 +219,7 @@ function normalizeSmartButtonRail(controlPanel) {
     }
 
     const shouldPrioritizeStatusActions =
-        window.innerWidth < 1400 && smartBox && smartButtons.length && hasVisibleSaveCancelButtons(controlPanel);
+        smartBox && smartButtons.length && hasVisibleSaveCancelButtons(controlPanel);
     controlPanel.classList.toggle(
         "o_bao_form_control_panel_actions_wrapped",
         Boolean(shouldPrioritizeStatusActions)

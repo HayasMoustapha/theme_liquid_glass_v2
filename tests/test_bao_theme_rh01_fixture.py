@@ -17,6 +17,7 @@ class TestBaoThemeRh01Fixture(TransactionCase):
         self.assertEqual(action._name, "ir.actions.server")
         self.assertEqual(action.state, "code")
         self.assertEqual(action.model_id.model, "bao.theme.config")
+        self.assertEqual(action.path, "bao-rh01-responsive-fixture")
         self.assertIn(self.env.ref("base.group_system"), action.group_ids)
         self.assertEqual(action_result["type"], "ir.actions.act_window")
         self.assertEqual(action_result["res_model"], "bao.theme.config")
