@@ -12,6 +12,7 @@ let burstRefreshTimerIds = [];
 let pivotPrimeTimerIds = [];
 let deferredRefreshTimerId = null;
 let controlPanelInteractionUntil = 0;
+let controlPanelBaoInitialized = false;
 
 function getViewportSize() {
     const width = window.innerWidth;
@@ -144,7 +145,7 @@ function hasVisibleCenteredActionsShell(controlPanel) {
 }
 
 function markControlPanelInteraction() {
-    controlPanelInteractionUntil = performance.now() + 800;
+    controlPanelInteractionUntil = performance.now() + 140;
 }
 
 function hasOpenNativeOverlay() {
@@ -754,7 +755,7 @@ function scheduleRefresh() {
             deferredRefreshTimerId = window.setTimeout(() => {
                 deferredRefreshTimerId = null;
                 scheduleRefresh();
-            }, 220);
+            }, 80);
         }
         return;
     }
@@ -777,6 +778,11 @@ function queueBurstRefresh(delays = [0, 60, 140, 260, 520]) {
             refreshControlPanels();
         }, delay)
     );
+}
+
+function instantResponsiveRefresh() {
+    refreshControlPanelsNow();
+    queueBurstRefresh([16, 48, 120]);
 }
 
 function primePivotToolbarTransition(target) {
@@ -834,12 +840,15 @@ function primePivotToolbarTransition(target) {
 }
 
 function initControlPanelBao() {
-    scheduleRefresh();
-    window.setTimeout(() => refreshControlPanelsNow(), 700);
-    window.setTimeout(() => refreshControlPanelsNow(), 1800);
-    window.addEventListener("resize", refreshControlPanelsNow, { passive: true });
-    window.addEventListener("orientationchange", refreshControlPanelsNow, { passive: true });
-    window.visualViewport?.addEventListener("resize", refreshControlPanelsNow, { passive: true });
+    if (controlPanelBaoInitialized) {
+        instantResponsiveRefresh();
+        return;
+    }
+    controlPanelBaoInitialized = true;
+    instantResponsiveRefresh();
+    window.addEventListener("resize", instantResponsiveRefresh, { passive: true });
+    window.addEventListener("orientationchange", instantResponsiveRefresh, { passive: true });
+    window.visualViewport?.addEventListener("resize", instantResponsiveRefresh, { passive: true });
     window.addEventListener("scroll", scheduleRefresh, { passive: true });
     const observer = new MutationObserver(() => scheduleRefresh());
     observer.observe(document.body, { childList: true, subtree: true });
