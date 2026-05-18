@@ -4376,6 +4376,69 @@
     }
 }
 
+@media (max-width: 1399.98px) {
+    .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_actions_wrapped,
+    .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel:has(.o_form_status_indicator_buttons:not(.invisible)) {
+        .o_control_panel_main {
+            flex-wrap: wrap !important;
+            align-items: flex-start !important;
+            row-gap: 8px !important;
+        }
+
+        .o_control_panel_breadcrumbs {
+            order: 0 !important;
+            flex: 1 1 100% !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            overflow: visible !important;
+            padding-right: 0 !important;
+        }
+
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions,
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions .o_form_status_indicator,
+        .o_control_panel_breadcrumbs > .o_bao_header_status_actions .o_form_status_indicator_buttons {
+            position: relative !important;
+            z-index: 4 !important;
+            pointer-events: auto !important;
+        }
+
+        .o_control_panel_actions {
+            order: 2 !important;
+            flex: 1 0 100% !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            position: static !important;
+            left: auto !important;
+            transform: none !important;
+            margin: 0 !important;
+            justify-content: center !important;
+            z-index: auto !important;
+        }
+
+        .o_control_panel_actions > .o-form-buttonbox,
+        .o_control_panel_actions > .o_form_button_box {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+            justify-content: center !important;
+        }
+
+        .o_control_panel_actions .oe_stat_button {
+            flex: 1 1 0 !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+        }
+
+        .o_control_panel_navigation {
+            order: 1 !important;
+            flex: 0 0 auto !important;
+            margin-left: auto !important;
+        }
+    }
+}
+
 .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_new_record {
     .o_control_panel_breadcrumbs {
         grid-template-columns: fit-content(72%) auto !important;

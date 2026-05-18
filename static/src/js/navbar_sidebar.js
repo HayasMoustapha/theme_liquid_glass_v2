@@ -142,7 +142,10 @@ function normalizeSharedControlPanels(root) {
             );
         }
         if (!isFormPanel) {
-            controlPanel.classList.remove("o_bao_form_control_panel_new_record");
+            controlPanel.classList.remove(
+                "o_bao_form_control_panel_new_record",
+                "o_bao_form_control_panel_actions_wrapped"
+            );
         }
     }
 }
@@ -183,6 +186,26 @@ function normalizeStatusbar(root) {
     }
 }
 
+function hasVisibleSaveCancelButtons(controlPanel) {
+    const buttons = [
+        controlPanel.querySelector(".o_form_button_save"),
+        controlPanel.querySelector(".o_form_button_cancel"),
+    ].filter(Boolean);
+    if (!buttons.length) {
+        return false;
+    }
+    return buttons.every((button) => {
+        const style = window.getComputedStyle(button);
+        const rect = button.getBoundingClientRect();
+        return (
+            style.display !== "none" &&
+            style.visibility !== "hidden" &&
+            rect.width > 0 &&
+            rect.height > 0
+        );
+    });
+}
+
 function normalizeSmartButtonRail(controlPanel) {
     const main = controlPanel.querySelector(".o_control_panel_main");
     const breadcrumbs = controlPanel.querySelector(".o_control_panel_breadcrumbs");
@@ -195,7 +218,14 @@ function normalizeSmartButtonRail(controlPanel) {
         return;
     }
 
-    if (window.innerWidth >= 1200 && smartBox && smartButtons.length) {
+    const shouldPrioritizeStatusActions =
+        window.innerWidth < 1400 && smartBox && smartButtons.length && hasVisibleSaveCancelButtons(controlPanel);
+    controlPanel.classList.toggle(
+        "o_bao_form_control_panel_actions_wrapped",
+        Boolean(shouldPrioritizeStatusActions)
+    );
+
+    if (window.innerWidth >= 1200 && !shouldPrioritizeStatusActions && smartBox && smartButtons.length) {
         const smartRailWidth = Math.ceil(actions.getBoundingClientRect().width || 0);
         const reserveWidth = Math.min(Math.max(smartRailWidth + 48, 280), 520);
         main.style.position = "relative";
