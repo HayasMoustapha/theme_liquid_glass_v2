@@ -40,6 +40,7 @@
         'views/res_config_settings_views.xml',
         'views/runtime_templates.xml',
         'data/theme_app_menu.xml',
+        'views/bao_theme_rh01_fixture_views.xml',
     ],
     'assets': {
         'web.assets_backend': [

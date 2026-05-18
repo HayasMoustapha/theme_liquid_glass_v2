@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bao_theme_rh01_fixture_view_list" model="ir.ui.view">
+        <field name="name">bao.theme.rh01.fixture.list</field>
+        <field name="model">bao.theme.config</field>
+        <field name="arch" type="xml">
+            <list string="BAO RH01 Fixture Configurations" create="false" delete="false">
+                <field name="name"/>
+                <field name="active"/>
+                <field name="color_primary"/>
+                <field name="color_primary_dark"/>
+                <field name="color_accent"/>
+                <field name="bg_app"/>
+                <field name="surface_base"/>
+                <field name="surface_raised"/>
+                <field name="border_default"/>
+                <field name="text_primary"/>
+                <field name="text_secondary"/>
+                <field name="font_body"/>
+                <field name="radius_md"/>
+                <field name="shadow_panel"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="bao_theme_rh01_fixture_view_form" model="ir.ui.view">
+        <field name="name">bao.theme.rh01.fixture.form</field>
+        <field name="model">bao.theme.config</field>
+        <field name="arch" type="xml">
+            <form string="BAO RH01 Responsive Fixture" create="false" edit="false" delete="false" duplicate="false">
+                <header>
+                    <button name="%(theme_liquid_glass_v2.action_bao_theme_family_overrides)d" type="action" string="Open Family Overrides With A Very Long Header Label" class="btn-secondary"/>
+                    <button name="%(theme_liquid_glass_v2.action_bao_theme_component_overrides)d" type="action" string="Open Component Overrides With Another Long Header Label" class="btn-secondary"/>
+                    <button name="%(theme_liquid_glass_v2.action_bao_theme_settings)d" type="action" string="Return To BAO Theme Settings" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(theme_liquid_glass_v2.action_bao_theme_family_overrides)d" type="action" class="oe_stat_button" icon="fa-sitemap">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">123456</span>
+                                <span class="o_stat_text">Families With Long Responsive Label</span>
+                            </div>
+                        </button>
+                        <button name="%(theme_liquid_glass_v2.action_bao_theme_component_overrides)d" type="action" class="oe_stat_button" icon="fa-cubes">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">987654</span>
+                                <span class="o_stat_text">Components With Long Label</span>
+                            </div>
+                        </button>
+                        <button name="%(theme_liquid_glass_v2.action_bao_theme_settings)d" type="action" class="oe_stat_button" icon="fa-sliders">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">246810</span>
+                                <span class="o_stat_text">Settings Surface Stress</span>
+                            </div>
+                        </button>
+                        <button name="%(theme_liquid_glass_v2.action_bao_theme_family_overrides)d" type="action" class="oe_stat_button" icon="fa-paint-brush">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">135790</span>
+                                <span class="o_stat_text">Long Color Token Count</span>
+                            </div>
+                        </button>
+                        <button name="%(theme_liquid_glass_v2.action_bao_theme_component_overrides)d" type="action" class="oe_stat_button" icon="fa-table">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">112358</span>
+                                <span class="o_stat_text">Dense Table Scenario</span>
+                            </div>
+                        </button>
+                        <button name="%(theme_liquid_glass_v2.action_bao_theme_settings)d" type="action" class="oe_stat_button" icon="fa-window-maximize">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">314159</span>
+                                <span class="o_stat_text">Long Modal Scenario</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="preset_id" readonly="1"/>
+                        <field name="active" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Global Brand Colors With Long Tab Label">
+                            <group>
+                                <field name="color_primary" readonly="1"/>
+                                <field name="color_primary_dark" readonly="1"/>
+                                <field name="color_primary_soft" readonly="1"/>
+                                <field name="color_accent" readonly="1"/>
+                                <field name="color_accent_hover" readonly="1"/>
+                            </group>
+                        </page>
+                        <page string="Application Background And Surfaces">
+                            <group>
+                                <field name="bg_app" readonly="1"/>
+                                <field name="surface_base" readonly="1"/>
+                                <field name="surface_muted" readonly="1"/>
+                                <field name="surface_subtle" readonly="1"/>
+                                <field name="surface_raised" readonly="1"/>
+                            </group>
+                        </page>
+                        <page string="Borders And Selection Tokens">
+                            <group>
+                                <field name="border_subtle" readonly="1"/>
+                                <field name="border_default" readonly="1"/>
+                                <field name="border_selected" readonly="1"/>
+                                <field name="border_soft" readonly="1"/>
+                                <field name="border_strong" readonly="1"/>
+                            </group>
+                        </page>
+                        <page string="Typography Text Tokens And Muted Labels">
+                            <group>
+                                <field name="text_primary" readonly="1"/>
+                                <field name="text_heading" readonly="1"/>
+                                <field name="text_secondary" readonly="1"/>
+                                <field name="text_muted" readonly="1"/>
+                                <field name="text_soft" readonly="1"/>
+                                <field name="text_disabled" readonly="1"/>
+                            </group>
+                        </page>
+                        <page string="Fonts Radius And Long Shape Values">
+                            <group>
+                                <field name="font_body" readonly="1"/>
+                                <field name="font_display" readonly="1"/>
+                                <field name="radius_sm" readonly="1"/>
+                                <field name="radius_md" readonly="1"/>
+                                <field name="radius_lg" readonly="1"/>
+                                <field name="radius_xl" readonly="1"/>
+                                <field name="radius_pill" readonly="1"/>
+                            </group>
+                        </page>
+                        <page string="Shadow Tokens With Long Responsive Values">
+                            <group>
+                                <field name="shadow_soft" readonly="1"/>
+                                <field name="shadow_panel" readonly="1"/>
+                                <field name="shadow_popover" readonly="1"/>
+                                <field name="shadow_medium" readonly="1"/>
+                                <field name="shadow_heavy" readonly="1"/>
+                            </group>
+                        </page>
+                        <page string="Family Override Lines Stress Page">
+                            <field name="family_override_ids" readonly="1">
+                                <list>
+                                    <field name="family_key"/>
+                                    <field name="color_primary"/>
+                                    <field name="color_accent"/>
+                                    <field name="bg_app"/>
+                                    <field name="surface_base"/>
+                                    <field name="surface_raised"/>
+                                    <field name="text_primary"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Component Override Lines Stress Page">
+                            <field name="component_override_ids" readonly="1">
+                                <list>
+                                    <field name="component_key"/>
+                                    <field name="family_key"/>
+                                    <field name="color_primary"/>
+                                    <field name="color_accent"/>
+                                    <field name="surface_base"/>
+                                    <field name="surface_raised"/>
+                                    <field name="text_primary"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <delete id="action_bao_theme_rh01_fixture_view_form" model="ir.actions.act_window.view"/>
+    <delete id="action_bao_theme_rh01_fixture_view_list" model="ir.actions.act_window.view"/>
+    <delete id="action_bao_theme_rh01_fixture" model="ir.actions.act_window"/>
+
+    <record id="action_bao_theme_rh01_fixture" model="ir.actions.server">
+        <field name="name">BAO RH01 Responsive Fixture</field>
+        <field name="model_id" ref="model_bao_theme_config"/>
+        <field name="state">code</field>
+        <field name="group_ids" eval="[(4, ref('base.group_system'))]"/>
+        <field name="code"><![CDATA[
+if not env.user.has_group('base.group_system'):
+    raise UserError("Only administrators can open the BAO RH01 responsive fixture.")
+
+action = {
+    'type': 'ir.actions.act_window',
+    'name': 'BAO RH01 Responsive Fixture',
+    'res_model': 'bao.theme.config',
+    'res_id': env.ref('theme_liquid_glass_v2.bao_theme_config_default').id,
+    'view_mode': 'form,list',
+    'views': [
+        (env.ref('theme_liquid_glass_v2.bao_theme_rh01_fixture_view_form').id, 'form'),
+        (env.ref('theme_liquid_glass_v2.bao_theme_rh01_fixture_view_list').id, 'list'),
+    ],
+    'target': 'current',
+    'context': {'create': False, 'delete': False, 'edit': False, 'duplicate': False},
+}
+        ]]></field>
+    </record>
+
+    <menuitem
+        id="menu_bao_theme_rh01_fixture"
+        name="BAO RH01 Fixture"
+        parent="theme_liquid_glass_v2.menu_theme_liquid_glass_v2_root"
+        action="theme_liquid_glass_v2.action_bao_theme_rh01_fixture"
+        sequence="530"
+        groups="base.group_system"
+    />
+</odoo>
