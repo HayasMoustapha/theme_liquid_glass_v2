@@ -24,6 +24,10 @@ class TestBaoThemeRh01Fixture(TransactionCase):
         self.assertEqual(action_result["target"], "current")
         self.assertIn("form", action_result["view_mode"])
         self.assertIn("list", action_result["view_mode"])
+        self.assertFalse(action_result["context"]["create"])
+        self.assertFalse(action_result["context"]["delete"])
+        self.assertFalse(action_result["context"]["duplicate"])
+        self.assertNotIn("edit", action_result["context"])
 
     def test_rh01_action_has_explicit_form_and_list_views(self):
         action = self.env.ref("theme_liquid_glass_v2.action_bao_theme_rh01_fixture")
@@ -56,6 +60,10 @@ class TestBaoThemeRh01Fixture(TransactionCase):
         arch = etree.fromstring(view.arch_db.encode())
 
         self.assertGreaterEqual(len(arch.xpath("//notebook/page")), 8)
+        self.assertEqual(arch.get("create"), "false")
+        self.assertEqual(arch.get("delete"), "false")
+        self.assertEqual(arch.get("duplicate"), "false")
+        self.assertIsNone(arch.get("edit"))
         self.assertGreaterEqual(
             len(arch.xpath("//button[contains(concat(' ', normalize-space(@class), ' '), ' oe_stat_button ')]")),
             6,
@@ -63,6 +71,18 @@ class TestBaoThemeRh01Fixture(TransactionCase):
         self.assertFalse(arch.xpath("//button[@type='object']"))
         self.assertTrue(arch.xpath("//field[@name='family_override_ids']"))
         self.assertTrue(arch.xpath("//field[@name='component_override_ids']"))
+        self.assertEqual(arch.xpath("string(//div[contains(@class, 'oe_title')]//field[@name='name']/@readonly)"), "1")
+        self.assertEqual(arch.xpath("string(//group/field[@name='name']/@readonly)"), "")
+        for field_name in ("color_primary", "bg_app", "text_primary"):
+            self.assertEqual(
+                arch.xpath("string(//field[@name=$field_name]/@readonly)", field_name=field_name),
+                "1",
+            )
+        for line_field_name in ("family_override_ids", "component_override_ids"):
+            line_list = arch.xpath("//field[@name=$field_name]/list", field_name=line_field_name)[0]
+            self.assertEqual(line_list.get("create"), "false")
+            self.assertEqual(line_list.get("edit"), "false")
+            self.assertEqual(line_list.get("delete"), "false")
 
     def test_rh01_list_has_required_dense_columns(self):
         view = self.env.ref("theme_liquid_glass_v2.bao_theme_rh01_fixture_view_list")

@@ -27,7 +27,7 @@
         <field name="name">bao.theme.rh01.fixture.form</field>
         <field name="model">bao.theme.config</field>
         <field name="arch" type="xml">
-            <form string="BAO RH01 Responsive Fixture" create="false" edit="false" delete="false" duplicate="false">
+            <form string="BAO RH01 Responsive Fixture" create="false" delete="false" duplicate="false">
                 <header>
                     <button name="%(theme_liquid_glass_v2.action_bao_theme_family_overrides)d" type="action" string="Open Family Overrides With A Very Long Header Label" class="btn-secondary"/>
                     <button name="%(theme_liquid_glass_v2.action_bao_theme_component_overrides)d" type="action" string="Open Component Overrides With Another Long Header Label" class="btn-secondary"/>
@@ -79,6 +79,7 @@
                         </h1>
                     </div>
                     <group>
+                        <field name="name" string="Editable Probe Name"/>
                         <field name="preset_id" readonly="1"/>
                         <field name="active" readonly="1"/>
                     </group>
@@ -142,7 +143,7 @@
                         </page>
                         <page string="Family Override Lines Stress Page">
                             <field name="family_override_ids" readonly="1">
-                                <list>
+                                <list create="false" edit="false" delete="false">
                                     <field name="family_key"/>
                                     <field name="color_primary"/>
                                     <field name="color_accent"/>
@@ -155,7 +156,7 @@
                         </page>
                         <page string="Component Override Lines Stress Page">
                             <field name="component_override_ids" readonly="1">
-                                <list>
+                                <list create="false" edit="false" delete="false">
                                     <field name="component_key"/>
                                     <field name="family_key"/>
                                     <field name="color_primary"/>
@@ -196,7 +197,7 @@ action = {
         (env.ref('theme_liquid_glass_v2.bao_theme_rh01_fixture_view_list').id, 'list'),
     ],
     'target': 'current',
-    'context': {'create': False, 'delete': False, 'edit': False, 'duplicate': False},
+    'context': {'create': False, 'delete': False, 'duplicate': False},
 }
         ]]></field>
     </record>
