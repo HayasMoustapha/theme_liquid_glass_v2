@@ -686,10 +686,8 @@ patch(NavBar.prototype, {
         }
         this.currentAppSectionsExtra = [];
         this.render();
-        refreshControlPanelsNow();
-        window.requestAnimationFrame(() => {
+        Promise.resolve().then(() => {
             this.adapt();
-            refreshControlPanelsNow();
         });
     },
 
