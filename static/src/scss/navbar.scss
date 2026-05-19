@@ -4818,4 +4818,44 @@
         height: max-content !important;
         overflow: visible !important;
     }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel
+        .o_control_panel_breadcrumbs_actions:has(> :is(.o-form-buttonbox, .o_form_button_box)) {
+        align-items: flex-start !important;
+        align-content: flex-start !important;
+        flex-wrap: wrap !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel
+        .o_control_panel_breadcrumbs_actions:has(> :is(.o-form-buttonbox, .o_form_button_box))
+        > .o_cp_action_menus {
+        position: relative !important;
+        inset: auto !important;
+        order: 0 !important;
+        flex: 0 0 40px !important;
+        align-self: flex-start !important;
+        width: 40px !important;
+        min-width: 40px !important;
+        max-width: 40px !important;
+        height: auto !important;
+        min-height: 44px !important;
+        max-height: none !important;
+        margin: 0 !important;
+        overflow: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel
+        .o_control_panel_breadcrumbs_actions:has(> :is(.o-form-buttonbox, .o_form_button_box))
+        > .o_cp_action_menus
+        :is(.btn, button) {
+        width: 40px !important;
+        min-width: 40px !important;
+        max-width: 40px !important;
+        min-height: 44px !important;
+        height: 44px !important;
+        max-height: none !important;
+    }
 }
