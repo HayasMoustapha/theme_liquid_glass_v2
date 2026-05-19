@@ -4785,3 +4785,37 @@
         word-break: break-word !important;
     }
 }
+
+/* RR10: mobile form control-panel rows must grow with long smartbuttons instead of centering overflow under the navbar. */
+@media (max-width: 767.98px) {
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel
+        .o_control_panel_main:has(.o_control_panel_breadcrumbs_actions > :is(.o-form-buttonbox, .o_form_button_box)) {
+        grid-template-rows: max-content auto !important;
+        align-items: flex-start !important;
+        align-content: flex-start !important;
+        min-height: max-content !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel:has(.o_control_panel_breadcrumbs_actions > :is(.o-form-buttonbox, .o_form_button_box)) {
+        min-height: max-content !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel
+        .o_control_panel_breadcrumbs:has(> .o_control_panel_breadcrumbs_actions > :is(.o-form-buttonbox, .o_form_button_box)) {
+        align-self: flex-start !important;
+        align-items: stretch !important;
+        align-content: flex-start !important;
+        justify-content: stretch !important;
+        grid-template-rows: auto auto !important;
+        min-height: max-content !important;
+        height: max-content !important;
+        overflow: visible !important;
+    }
+}
