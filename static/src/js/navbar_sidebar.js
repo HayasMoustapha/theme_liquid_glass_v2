@@ -5,7 +5,7 @@ import { ButtonBox } from "@web/views/form/button_box/button_box";
 import { StatusBarButtons } from "@web/views/form/status_bar_buttons/status_bar_buttons";
 import { patch } from "@web/core/utils/patch";
 import { useBus, useService } from "@web/core/utils/hooks";
-import { onMounted, onPatched, onWillRender, useExternalListener, useRef, useState } from "@odoo/owl";
+import { onMounted, onPatched, onWillRender, onWillUnmount, useExternalListener, useRef, useState } from "@odoo/owl";
 
 let refreshScheduled = false;
 let burstRefreshTimerIds = [];
@@ -151,7 +151,7 @@ function markControlPanelInteraction() {
 function hasOpenNativeOverlay() {
     return Boolean(
         document.querySelector(
-            ".dropdown-menu.show, .o-dropdown--menu, .o_popover, .modal.show, .o-autocomplete--dropdown-menu"
+            ".dropdown-menu.show, .o-dropdown--menu, .o_popover, .popover.show, .modal.show, .o_bottom_sheet, .ui-autocomplete, .o-autocomplete--dropdown-menu"
         )
     );
 }
@@ -264,15 +264,12 @@ function getButtonBoxAvailableWidth(root) {
         return 0;
     }
     const rootWidth = getPositiveWidth(root);
-    if (rootWidth) {
-        return rootWidth;
-    }
     const owner =
         root.closest(".o_control_panel_actions") ||
         root.closest(".o_form_sheet") ||
         root.closest(".o_form_view") ||
         root.parentElement;
-    return getPositiveWidth(owner);
+    return getPositiveWidth(owner) || rootWidth;
 }
 
 function getStatusButtonsAvailableWidth(root) {
@@ -336,7 +333,7 @@ function splitSlotsForOverflow(slotNames, capacity) {
 function getOverflowMetrics(kind) {
     return kind === "status"
         ? { gap: 6, estimatedItemWidth: 136, moreWidth: 48 }
-        : { gap: 8, estimatedItemWidth: 146, moreWidth: 56 };
+        : { gap: 0, estimatedItemWidth: 118, moreWidth: 76 };
 }
 
 function sumInlineWidths(widths, gap) {
@@ -377,11 +374,34 @@ function measuredCapacityFromWidths(width, widths, kind, total) {
         return Math.min(total, fallbackCapacityFromViewport(kind));
     }
     const { gap, estimatedItemWidth, moreWidth } = getOverflowMetrics(kind);
-    const allInlineWidth = sumInlineWidths(widths, gap);
+    const normalizedWidths = kind === "buttonbox" ? widths.map((itemWidth) => Math.max(itemWidth, estimatedItemWidth)) : widths;
+    const allInlineWidth = sumInlineWidths(normalizedWidths, gap);
     if (allInlineWidth <= width + 1) {
         return total;
     }
 
+    const availableForInline = Math.max(0, width - moreWidth - gap);
+    let used = 0;
+    let inlineCount = 0;
+    for (const itemWidth of normalizedWidths) {
+        const nextUsed = used + itemWidth + (inlineCount ? gap : 0);
+        if (nextUsed > availableForInline + 1) {
+            break;
+        }
+        used = nextUsed;
+        inlineCount += 1;
+    }
+    if (!inlineCount && availableForInline >= estimatedItemWidth * 0.55) {
+        inlineCount = 1;
+    }
+    return Math.max(1, Math.min(total, inlineCount + 1));
+}
+
+function dropdownCapacityFromInlineWidths(width, widths, kind, total) {
+    if (!total || !width) {
+        return Math.max(1, total ? Math.min(total, fallbackCapacityFromViewport(kind)) : 0);
+    }
+    const { gap, moreWidth } = getOverflowMetrics(kind);
     const availableForInline = Math.max(0, width - moreWidth - gap);
     let used = 0;
     let inlineCount = 0;
@@ -392,9 +412,6 @@ function measuredCapacityFromWidths(width, widths, kind, total) {
         }
         used = nextUsed;
         inlineCount += 1;
-    }
-    if (!inlineCount && availableForInline >= estimatedItemWidth * 0.55) {
-        inlineCount = 1;
     }
     return Math.max(1, Math.min(total, inlineCount + 1));
 }
@@ -414,13 +431,26 @@ function getOverflowLayoutState(root, kind, slotCount, previousWidths = []) {
           ? [...previousWidths]
           : [];
 
-    // First paint and unknown-width states stay native so the browser can prove
-    // whether the controls actually degrade before we introduce a More menu.
+    const earlyScrolls = Boolean(root && root.scrollWidth > root.clientWidth + 1);
+    // First paint and unknown-width states stay native unless the DOM already
+    // proves an overflow; a later resize/layout pass will refine the widths.
     if (slotWidths.length !== slotCount) {
+        if (kind === "buttonbox") {
+            return {
+                width: Math.round(width),
+                capacity: slotCount,
+                useDropdown: false,
+                wraps: false,
+                slotWidths,
+            };
+        }
+        const { estimatedItemWidth } = getOverflowMetrics(kind);
+        const estimatedWidths = Array(slotCount).fill(estimatedItemWidth);
+        const capacity = measuredCapacityFromWidths(width, estimatedWidths, kind, slotCount);
         return {
             width: Math.round(width),
-            capacity: slotCount,
-            useDropdown: false,
+            capacity,
+            useDropdown: slotCount > 1 && (earlyScrolls || slotCount > capacity),
             wraps: false,
             slotWidths,
         };
@@ -429,7 +459,15 @@ function getOverflowLayoutState(root, kind, slotCount, previousWidths = []) {
     const { gap } = getOverflowMetrics(kind);
     const wraps = canMeasureAllSlots ? getChildrenWrap(root, inlineChildren.slice(0, slotCount)) : false;
     const scrolls = Boolean(root && root.scrollWidth > root.clientWidth + 1);
-    const capacity = measuredCapacityFromWidths(width, slotWidths, kind, slotCount);
+    const hasOverflowDropdown = children.length !== inlineChildren.length;
+    let capacity = measuredCapacityFromWidths(width, slotWidths, kind, slotCount);
+    if (kind === "buttonbox" && scrolls && hasOverflowDropdown && inlineChildren.length > 1) {
+        const renderedWidths = inlineChildren.map((child) => child.getBoundingClientRect().width);
+        capacity = Math.min(capacity, dropdownCapacityFromInlineWidths(width, renderedWidths, kind, slotCount));
+    }
+    if ((wraps || scrolls) && capacity >= slotCount) {
+        capacity = Math.max(1, slotCount - 1);
+    }
     const allInlineFits = sumInlineWidths(slotWidths, gap) <= width + 1 && !wraps && !scrolls;
 
     return {
@@ -621,12 +659,22 @@ function normalizeBreadcrumbs(root) {
 
         breadcrumb.classList.add("o_bao_breadcrumb");
 
-        const header = ensureElement(
-            breadcrumb,
-            ":scope > .o_bao_breadcrumb_header",
+        const headerCluster = ensureElement(
+            breadcrumbs,
+            ":scope > .o_bao_form_header_cluster",
             "div",
-            "o_bao_breadcrumb_header d-flex align-items-center gap-2 min-w-0"
+            "o_bao_form_header_cluster d-inline-flex align-items-center min-w-0"
         );
+        let header =
+            headerCluster.querySelector(":scope > .o_bao_breadcrumb_header") ||
+            breadcrumb.querySelector(":scope > .o_bao_breadcrumb_header");
+        if (!header) {
+            header = document.createElement("div");
+        }
+        header.classList.add("o_bao_breadcrumb_header", "d-flex", "align-items-center", "gap-2", "min-w-0");
+        if (header.parentElement !== headerCluster) {
+            headerCluster.prepend(header);
+        }
         const headerTextNode = ensureElement(
             header,
             ":scope > .o_bao_breadcrumb_header_text",
@@ -650,18 +698,26 @@ function normalizeBreadcrumbs(root) {
             "div",
             "o_bao_header_menu_actions d-inline-flex align-items-center"
         );
-        const mainButtonsShell = ensureElement(
-            breadcrumbs,
-            ":scope > .o_bao_header_main_buttons",
-            "div",
-            "o_bao_header_main_buttons d-inline-flex align-items-center"
-        );
-        const statusShell = ensureElement(
-            breadcrumbs,
-            ":scope > .o_bao_header_status_actions",
-            "div",
-            "o_bao_header_status_actions d-inline-flex align-items-center"
-        );
+        let mainButtonsShell =
+            headerCluster.querySelector(":scope > .o_bao_header_main_buttons") ||
+            breadcrumbs.querySelector(":scope > .o_bao_header_main_buttons");
+        if (!mainButtonsShell) {
+            mainButtonsShell = document.createElement("div");
+            mainButtonsShell.className = "o_bao_header_main_buttons d-inline-flex align-items-center";
+        }
+        if (mainButtonsShell.parentElement !== headerCluster) {
+            headerCluster.append(mainButtonsShell);
+        }
+        let statusShell =
+            headerCluster.querySelector(":scope > .o_bao_header_status_actions") ||
+            breadcrumbs.querySelector(":scope > .o_bao_header_status_actions");
+        if (!statusShell) {
+            statusShell = document.createElement("div");
+            statusShell.className = "o_bao_header_status_actions d-inline-flex align-items-center";
+        }
+        if (statusShell.parentElement !== headerCluster) {
+            headerCluster.append(statusShell);
+        }
         if (mainButtons && mainButtons.parentElement !== mainButtonsShell) {
             mainButtonsShell.append(mainButtons);
         }
@@ -895,7 +951,8 @@ function initControlPanelBao() {
 
 patch(ButtonBox.prototype, {
     setup() {
-        super.setup(...arguments);
+        // The native viewport-based split is not enough once BAO moves the
+        // button box into a centered control-panel rail; use measured width.
         this.baoButtonBoxRef = useRef("baoButtonBox");
         this.baoButtonBoxState = useState({
             capacity: null,
@@ -903,30 +960,97 @@ patch(ButtonBox.prototype, {
             width: 0,
             slotCount: 0,
             slotWidths: [],
+            slotSignature: "",
         });
+        this.baoButtonBoxForcedOverflow = { width: 0, slotSignature: "", capacity: 0 };
+        let settledMeasureTimerId = null;
+        const scheduleSettledMeasure = () => {
+            window.requestAnimationFrame(measureCapacity);
+            window.clearTimeout(settledMeasureTimerId);
+            settledMeasureTimerId = window.setTimeout(measureCapacity, 80);
+        };
         const measureCapacity = () => {
-            const slotCount = getBaoSlotNames(this.props.slots).length;
+            const slotNames = getBaoSlotNames(this.props.slots);
+            const slotCount = slotNames.length;
+            const slotSignature = slotNames.join("|");
+            const previousWidths =
+                this.baoButtonBoxState.slotSignature === slotSignature ? this.baoButtonBoxState.slotWidths : [];
             const layout = getOverflowLayoutState(
                 this.baoButtonBoxRef.el,
                 "buttonbox",
                 slotCount,
-                this.baoButtonBoxState.slotWidths
+                previousWidths
             );
+            const root = this.baoButtonBoxRef.el;
+            const children = getMeasuredChildren(root);
+            const inlineChildren = children.filter((child) => !isOverflowDropdownChild(child));
+            const domOverflow = Boolean(root && root.scrollWidth > root.clientWidth + 1);
+            const rootWidth = layout.width || root?.clientWidth || 0;
+            let nextCapacity = layout.capacity;
+            let nextUseDropdown = layout.useDropdown;
+            if (domOverflow && slotCount > 1) {
+                const renderedWidths = inlineChildren.map((child) => child.getBoundingClientRect().width);
+                const overflowCapacity = dropdownCapacityFromInlineWidths(rootWidth, renderedWidths, "buttonbox", slotCount);
+                nextUseDropdown = true;
+                nextCapacity = Math.min(nextCapacity, overflowCapacity);
+                this.baoButtonBoxForcedOverflow = {
+                    width: rootWidth,
+                    slotSignature,
+                    capacity: nextCapacity,
+                };
+            } else if (
+                slotCount > 1 &&
+                this.baoButtonBoxForcedOverflow.slotSignature === slotSignature &&
+                rootWidth > 0 &&
+                rootWidth <= this.baoButtonBoxForcedOverflow.width + 4
+            ) {
+                nextUseDropdown = true;
+                nextCapacity = Math.min(nextCapacity, this.baoButtonBoxForcedOverflow.capacity);
+            } else if (
+                this.baoButtonBoxForcedOverflow.slotSignature === slotSignature &&
+                rootWidth > this.baoButtonBoxForcedOverflow.width + 4
+            ) {
+                this.baoButtonBoxForcedOverflow = { width: 0, slotSignature: "", capacity: 0 };
+            }
+            if (!domOverflow && nextUseDropdown && slotCount > 1 && inlineChildren.length < slotCount) {
+                const { gap, estimatedItemWidth, moreWidth } = getOverflowMetrics("buttonbox");
+                const renderedWidths = inlineChildren.map((child) => child.getBoundingClientRect().width);
+                const inlineWidth = sumInlineWidths(renderedWidths, gap);
+                const nextProjectedWidth = inlineWidth + (renderedWidths.length ? gap : 0) + estimatedItemWidth + gap + moreWidth;
+                if (nextProjectedWidth <= rootWidth + 1) {
+                    nextCapacity = Math.min(slotCount, Math.max(nextCapacity, inlineChildren.length + 2));
+                    nextUseDropdown = nextCapacity < slotCount;
+                    if (this.baoButtonBoxForcedOverflow.slotSignature === slotSignature) {
+                        this.baoButtonBoxForcedOverflow.capacity = nextCapacity;
+                    }
+                }
+            }
             if (
-                this.baoButtonBoxState.capacity !== layout.capacity ||
-                this.baoButtonBoxState.useDropdown !== layout.useDropdown ||
+                this.baoButtonBoxState.capacity !== nextCapacity ||
+                this.baoButtonBoxState.useDropdown !== nextUseDropdown ||
                 this.baoButtonBoxState.width !== layout.width ||
                 this.baoButtonBoxState.slotCount !== slotCount ||
+                this.baoButtonBoxState.slotSignature !== slotSignature ||
                 slotWidthsChanged(this.baoButtonBoxState.slotWidths, layout.slotWidths)
             ) {
-                this.baoButtonBoxState.capacity = layout.capacity;
-                this.baoButtonBoxState.useDropdown = layout.useDropdown;
+                this.baoButtonBoxState.capacity = nextCapacity;
+                this.baoButtonBoxState.useDropdown = nextUseDropdown;
                 this.baoButtonBoxState.width = layout.width;
                 this.baoButtonBoxState.slotCount = slotCount;
                 this.baoButtonBoxState.slotWidths = layout.slotWidths;
+                this.baoButtonBoxState.slotSignature = slotSignature;
+                this.render();
+                scheduleSettledMeasure();
             }
         };
-        onMounted(measureCapacity);
+        onMounted(() => {
+            measureCapacity();
+            window.requestAnimationFrame(measureCapacity);
+            window.setTimeout(measureCapacity, 80);
+        });
+        onWillUnmount(() => {
+            window.clearTimeout(settledMeasureTimerId);
+        });
         onPatched(measureCapacity);
         useExternalListener(window, "resize", measureCapacity);
         useExternalListener(window, "orientationchange", measureCapacity);
@@ -935,7 +1059,8 @@ patch(ButtonBox.prototype, {
         }
         onWillRender(() => {
             const allVisibleButtons = getBaoSlotNames(this.props.slots);
-            if (!this.baoButtonBoxState.useDropdown) {
+            const slotSignature = allVisibleButtons.join("|");
+            if (!this.baoButtonBoxState.useDropdown || this.baoButtonBoxState.slotSignature !== slotSignature) {
                 this.visibleButtons = allVisibleButtons;
                 this.additionalButtons = [];
                 this.isFull = false;
@@ -964,28 +1089,81 @@ patch(StatusBarButtons.prototype, {
             slotCount: 0,
             slotWidths: [],
         });
+        this.baoStatusButtonsForcedOverflow = { width: 0, slotCount: 0 };
+        let resizeObserver = null;
         const measureCapacity = () => {
             const root = this.baoStatusButtonsRef.el;
             const slotCount = this.visibleSlotNames.length;
             const layout = getOverflowLayoutState(root, "status", slotCount, this.baoStatusButtonsState.slotWidths);
+            const domOverflow = Boolean(root && root.scrollWidth > root.clientWidth + 1);
+            const rootWidth = root?.clientWidth || layout.width || 0;
+            if (domOverflow && slotCount > 1) {
+                this.baoStatusButtonsForcedOverflow = { width: rootWidth, slotCount };
+            }
+            const keepForcedDropdown =
+                slotCount > 1 &&
+                this.baoStatusButtonsForcedOverflow.slotCount === slotCount &&
+                rootWidth > 0 &&
+                rootWidth <= this.baoStatusButtonsForcedOverflow.width + 4;
+            const stableSlotWidths =
+                layout.slotWidths.length === slotCount || this.baoStatusButtonsState.slotWidths.length !== slotCount
+                    ? layout.slotWidths
+                    : this.baoStatusButtonsState.slotWidths;
+            const hasReliableWidths = stableSlotWidths.length === slotCount;
+            let nextCapacity = layout.capacity;
+            let nextUseDropdown = layout.useDropdown;
+            if (domOverflow && slotCount > 1) {
+                nextCapacity = Math.min(nextCapacity, Math.max(1, slotCount - 1));
+                nextUseDropdown = true;
+            } else if (keepForcedDropdown) {
+                nextCapacity = Math.min(nextCapacity, Math.max(1, slotCount - 1));
+                nextUseDropdown = true;
+            } else if (this.baoStatusButtonsState.useDropdown && !hasReliableWidths) {
+                nextCapacity = this.baoStatusButtonsState.capacity ?? Math.max(1, slotCount - 1);
+                nextUseDropdown = true;
+            }
+            if (!nextUseDropdown && rootWidth > this.baoStatusButtonsForcedOverflow.width + 4) {
+                this.baoStatusButtonsForcedOverflow = { width: 0, slotCount: 0 };
+            }
             if (
-                this.baoStatusButtonsState.capacity !== layout.capacity ||
-                this.baoStatusButtonsState.useDropdown !== layout.useDropdown ||
+                this.baoStatusButtonsState.capacity !== nextCapacity ||
+                this.baoStatusButtonsState.useDropdown !== nextUseDropdown ||
                 this.baoStatusButtonsState.wraps !== layout.wraps ||
                 this.baoStatusButtonsState.width !== layout.width ||
                 this.baoStatusButtonsState.slotCount !== slotCount ||
-                slotWidthsChanged(this.baoStatusButtonsState.slotWidths, layout.slotWidths)
+                slotWidthsChanged(this.baoStatusButtonsState.slotWidths, stableSlotWidths)
             ) {
-                this.baoStatusButtonsState.capacity = layout.capacity;
-                this.baoStatusButtonsState.useDropdown = layout.useDropdown;
+                this.baoStatusButtonsState.capacity = nextCapacity;
+                this.baoStatusButtonsState.useDropdown = nextUseDropdown;
                 this.baoStatusButtonsState.wraps = layout.wraps;
                 this.baoStatusButtonsState.width = layout.width;
                 this.baoStatusButtonsState.slotCount = slotCount;
-                this.baoStatusButtonsState.slotWidths = layout.slotWidths;
+                this.baoStatusButtonsState.slotWidths = stableSlotWidths;
+                this.render();
             }
         };
-        onMounted(measureCapacity);
-        onPatched(measureCapacity);
+        const scheduleMeasureCapacity = () => {
+            measureCapacity();
+            window.requestAnimationFrame(() => {
+                measureCapacity();
+                window.requestAnimationFrame(measureCapacity);
+            });
+        };
+        onMounted(() => {
+            scheduleMeasureCapacity();
+            window.setTimeout(measureCapacity, 120);
+            const root = this.baoStatusButtonsRef.el;
+            if (window.ResizeObserver && root) {
+                resizeObserver = new window.ResizeObserver(scheduleMeasureCapacity);
+                resizeObserver.observe(root);
+                const statusbar = root.closest(".o_form_statusbar");
+                if (statusbar) {
+                    resizeObserver.observe(statusbar);
+                }
+            }
+        });
+        onPatched(scheduleMeasureCapacity);
+        onWillUnmount(() => resizeObserver?.disconnect());
         useExternalListener(window, "resize", measureCapacity);
         useExternalListener(window, "orientationchange", measureCapacity);
         if (window.visualViewport) {
