@@ -795,6 +795,29 @@ function refreshControlPanels() {
     normalizeStatusbar(document);
 }
 
+function clearControlPanelTransitionResidue() {
+    if (deferredRefreshTimerId) {
+        window.clearTimeout(deferredRefreshTimerId);
+        deferredRefreshTimerId = null;
+    }
+    for (const timerId of burstRefreshTimerIds) {
+        window.clearTimeout(timerId);
+    }
+    burstRefreshTimerIds = [];
+    for (const timerId of pivotPrimeTimerIds) {
+        window.clearTimeout(timerId);
+    }
+    pivotPrimeTimerIds = [];
+    document.documentElement.classList.remove("o_bao_cp_switching_pivot");
+    document.body.classList.remove("o_bao_cp_switching_pivot");
+    for (const node of document.querySelectorAll(".o_bao_cp_switching_pivot")) {
+        node.classList.remove("o_bao_cp_switching_pivot");
+    }
+    for (const controlPanel of document.querySelectorAll(".o_bao_transition_control_panel, .o_bao_cp_pivot_pending")) {
+        controlPanel.classList.remove("o_bao_transition_control_panel", "o_bao_cp_pivot_pending");
+    }
+}
+
 function refreshControlPanelsNow() {
     if (deferredRefreshTimerId) {
         window.clearTimeout(deferredRefreshTimerId);
@@ -902,10 +925,13 @@ function initControlPanelBao() {
     }
     controlPanelBaoInitialized = true;
     instantResponsiveRefresh();
+    window.setTimeout(() => refreshControlPanels(), 700);
+    window.setTimeout(() => refreshControlPanels(), 1800);
     window.addEventListener("resize", instantResponsiveRefresh, { passive: true });
     window.addEventListener("orientationchange", instantResponsiveRefresh, { passive: true });
     window.visualViewport?.addEventListener("resize", instantResponsiveRefresh, { passive: true });
     window.addEventListener("scroll", scheduleRefresh, { passive: true });
+    window.addEventListener("pagehide", clearControlPanelTransitionResidue, { passive: true });
     const observer = new MutationObserver(() => scheduleRefresh());
     observer.observe(document.body, { childList: true, subtree: true });
     document.addEventListener(
@@ -1214,6 +1240,11 @@ patch(NavBar.prototype, {
                 this.closeEnterpriseLauncher();
             }
         });
+        useExternalListener(window, "resize", () => {
+            if (this.env.isSmall || this.isScopedApp) {
+                this.closeEnterpriseLauncher();
+            }
+        });
         initControlPanelBao();
     },
 
@@ -1232,6 +1263,10 @@ patch(NavBar.prototype, {
     },
 
     toggleEnterpriseLauncher() {
+        if (this.env.isSmall || this.isScopedApp) {
+            this.closeEnterpriseLauncher();
+            return;
+        }
         this.enterpriseLauncherState.isOpen = !this.enterpriseLauncherState.isOpen;
     },
 

@@ -16,11 +16,18 @@
 
 .o_main_navbar {
     border-bottom: none !important;
+    width: 100%;
+    max-width: 100%;
     min-height: 60px;
     min-width: 0;
-    width: 100%;
     gap: 10px;
     align-items: center;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+
+    .o_navbar_apps_menu {
+        flex: 0 0 auto;
+    }
 
     > * {
         min-width: 0;
@@ -43,7 +50,10 @@
         @include bao-display-text(600);
         display: flex;
         align-items: center;
+        flex: 0 1 fit-content;
         margin-right: 10px;
+        min-width: 0;
+        max-width: fit-content;
         padding-bottom: 1px;
         font-size: 1.2rem;
         line-height: 1;
@@ -56,12 +66,15 @@
 
     .o_menu_sections {
         display: flex;
+        flex: 1 1 auto;
         align-items: center;
         flex: 1 1 auto;
         min-width: 0;
         overflow: hidden;
         gap: 0;
         margin-left: 0;
+        min-width: 0;
+        max-width: 100%;
 
         .o-dropdown,
         .o_nav_entry,
@@ -81,8 +94,8 @@
             align-items: center;
             flex: 0 1 auto;
             gap: 7px;
-            max-width: clamp(8rem, 12vw, 14rem);
             min-width: 0;
+            max-width: clamp(72px, 12vw, 220px);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -121,6 +134,16 @@
             &.active {
                 background: rgba(255, 255, 255, 0.12) !important;
                 border-color: rgba(255, 255, 255, 0.14) !important;
+            }
+        }
+
+        .o_menu_sections_more {
+            flex: 0 0 auto;
+
+            .dropdown-toggle {
+                min-width: 44px;
+                max-width: none;
+                overflow: visible;
             }
         }
     }
@@ -294,12 +317,19 @@
         border: 1px solid rgba(17, 55, 99, 0.12) !important;
         backdrop-filter: none !important;
         font-family: $bao-font-body;
+        max-width: calc(100vw - 8px);
+        overflow-x: hidden;
 
         .dropdown-item,
+        .o-dropdown-item,
         a,
         button {
             color: #24405f !important;
             font-family: $bao-font-body;
+            max-width: 100%;
+            min-width: 0;
+            overflow-wrap: anywhere;
+            white-space: normal;
 
             &:hover,
             &:focus {
@@ -390,6 +420,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
+    min-width: 0;
     min-height: 112px;
     padding: 10px 8px !important;
     border: 1px solid transparent !important;
@@ -550,6 +581,55 @@
         gap: 24px 24px;
         max-width: 820px;
         padding-inline: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .o_main_navbar {
+        .o_menu_systray {
+            flex: 0 1 auto;
+            min-width: 0;
+            max-width: 520px;
+
+            > * {
+                flex: 0 1 auto;
+                min-width: 0;
+            }
+
+            .o_switch_company_menu {
+                .oe_topbar_name {
+                    max-width: clamp(80px, 11vw, 190px);
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .o_main_navbar {
+        .o_menu_brand {
+            flex-basis: clamp(120px, 18vw, 210px);
+            max-width: clamp(120px, 18vw, 210px);
+        }
+
+        .o_menu_sections {
+            .o-dropdown,
+            .o_nav_entry,
+            .dropdown-toggle {
+                max-width: 136px;
+            }
+        }
+
+        .o_menu_systray {
+            gap: 6px;
+            max-width: 380px;
+
+            .o_switch_company_menu {
+                .oe_topbar_name {
+                    max-width: 96px;
+                }
+            }
+        }
     }
 }
 

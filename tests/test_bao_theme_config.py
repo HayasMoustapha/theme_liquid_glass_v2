@@ -203,3 +203,4 @@ class TestBaoThemeConfig(TransactionCase):
             self.assertFalse(
                 self.env["ir.module.module"].search(domain + [("id", "=", hidden_theme.id)])
             )
+
