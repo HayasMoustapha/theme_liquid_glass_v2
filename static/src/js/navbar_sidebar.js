@@ -318,11 +318,11 @@ function capacityFromWidth(width, kind, total) {
     return Math.max(1, Math.min(total, Math.floor((width + gap) / (itemWidth + gap))));
 }
 
-function splitSlotsForOverflow(slotNames, capacity) {
+function splitSlotsForOverflow(slotNames, capacity, kind = "generic") {
     if (slotNames.length <= capacity) {
         return { visible: slotNames, additional: [], isFull: slotNames.length === capacity };
     }
-    const visibleCount = Math.max(capacity - 1, 1);
+    const visibleCount = kind === "buttonbox" ? Math.max(capacity - 1, 0) : Math.max(capacity - 1, 1);
     return {
         visible: slotNames.slice(0, visibleCount),
         additional: slotNames.slice(visibleCount),
@@ -1067,7 +1067,7 @@ patch(ButtonBox.prototype, {
                 return;
             }
             const capacity = this.baoButtonBoxState.capacity ?? allVisibleButtons.length;
-            const split = splitSlotsForOverflow(allVisibleButtons, capacity);
+            const split = splitSlotsForOverflow(allVisibleButtons, capacity, "buttonbox");
             this.visibleButtons = split.visible;
             this.additionalButtons = split.additional;
             this.isFull = split.isFull;
@@ -1180,7 +1180,7 @@ patch(StatusBarButtons.prototype, {
         if (!this.shouldUseBaoDropdown) {
             return slots;
         }
-        return splitSlotsForOverflow(slots, this.baoStatusButtonsState.capacity ?? slots.length).visible;
+        return splitSlotsForOverflow(slots, this.baoStatusButtonsState.capacity ?? slots.length, "status").visible;
     },
 
     get baoOverflowStatusSlotNames() {
@@ -1188,7 +1188,7 @@ patch(StatusBarButtons.prototype, {
         if (!this.shouldUseBaoDropdown) {
             return [];
         }
-        return splitSlotsForOverflow(slots, this.baoStatusButtonsState.capacity ?? slots.length).additional;
+        return splitSlotsForOverflow(slots, this.baoStatusButtonsState.capacity ?? slots.length, "status").additional;
     },
 });
 
