@@ -3682,6 +3682,7 @@
 
 .o_web_client .o-dropdown--menu.o-form-buttonbox.o_dropdown_more,
 .o_web_client .o-form-buttonbox.o_dropdown_more,
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu:has(.o-dropdown-item-unstyled-button),
 .o_web_client .o_form_statusbar .dropdown-menu.show,
 .o_web_client .o_form_statusbar .o-dropdown--menu.show,
 .o_web_client .o_control_panel.o_bao_form_control_panel .dropdown-menu.show,
@@ -3701,6 +3702,7 @@
 @media (min-width: 384px) {
     .o_web_client .o-dropdown--menu.o-form-buttonbox.o_dropdown_more,
     .o_web_client .o-form-buttonbox.o_dropdown_more,
+    .o_web_client .o_popover.o-dropdown--menu.dropdown-menu:has(.o-dropdown-item-unstyled-button),
     .o_web_client .o_form_statusbar .dropdown-menu.show,
     .o_web_client .o_form_statusbar .o-dropdown--menu.show,
     .o_web_client .o_control_panel.o_bao_form_control_panel .dropdown-menu.show,
@@ -3713,6 +3715,8 @@
 .o_web_client .o-dropdown--menu.o-form-buttonbox.o_dropdown_more .o-dropdown-item,
 .o_web_client .o-form-buttonbox.o_dropdown_more .dropdown-item,
 .o_web_client .o-form-buttonbox.o_dropdown_more .o-dropdown-item,
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu:has(.o-dropdown-item-unstyled-button) .dropdown-item,
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu:has(.o-dropdown-item-unstyled-button) .o-dropdown-item,
 .o_web_client .o_form_statusbar .dropdown-menu.show .dropdown-item,
 .o_web_client .o_form_statusbar .o-dropdown--menu.show .dropdown-item,
 .o_web_client .o_control_panel.o_bao_form_control_panel .dropdown-menu.show .dropdown-item,
@@ -3737,4 +3741,454 @@
     min-height: 48px !important;
     height: auto !important;
     overflow: visible !important;
+}
+
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu:has(.o-dropdown-item-unstyled-button) .o-dropdown-item-unstyled-button > .btn,
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu:has(.o-dropdown-item-unstyled-button) .o-dropdown-item-unstyled-button > button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 38px !important;
+    height: auto !important;
+    padding: 8px 12px !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 6px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #30343a !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 20px !important;
+    text-align: left !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+}
+
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu:has(.o-dropdown-item-unstyled-button) .o-dropdown-item-unstyled-button:hover > .btn,
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu:has(.o-dropdown-item-unstyled-button) .o-dropdown-item-unstyled-button:focus > .btn,
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu:has(.o-dropdown-item-unstyled-button) .o-dropdown-item-unstyled-button:hover > button,
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu:has(.o-dropdown-item-unstyled-button) .o-dropdown-item-unstyled-button:focus > button {
+    background: #f4f6f8 !important;
+    color: #202e3e !important;
+}
+
+/* BAO governed style-diff pass: chatter topbar follows atlas reference while keeping native mail DOM and controls. */
+@media (min-width: 1200px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_renderer:has(.o-mail-Chatter),
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_renderer:has(.o_FormRenderer_chatterContainer) {
+        --bao-chatter-width: 491px !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_renderer:has(.o-mail-Chatter) > .o-mail-Form-chatter,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_renderer:has(.o-mail-Chatter) > .o_FormRenderer_chatterContainer,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_renderer:has(.o-mail-Chatter) > .oe_chatter,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_renderer:has(.o-mail-Chatter) > .o-mail-Chatter {
+        flex: 0 0 var(--bao-chatter-width) !important;
+        width: var(--bao-chatter-width) !important;
+        max-width: var(--bao-chatter-width) !important;
+    }
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter {
+    --bao-chatter-topbar-surface: #f9f9f9;
+    --bao-chatter-topbar-primary: #fde900;
+    --bao-chatter-topbar-secondary: #c6c6c6;
+    --bao-chatter-topbar-text: #292c2f;
+    --bao-chatter-topbar-icon: #8f9498;
+    --bao-chatter-topbar-control-height: 44px;
+    --bao-chatter-topbar-radius: 7px;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-top,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-top {
+    min-height: 73px !important;
+    max-height: none !important;
+    height: auto !important;
+    margin: 0 0 8px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: var(--bao-chatter-topbar-surface) !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    align-content: center !important;
+    gap: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 73px !important;
+    max-height: none !important;
+    padding: 15px 17px 14px 21px !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    background: var(--bao-chatter-topbar-surface) !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    scrollbar-width: none;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar::-webkit-scrollbar,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar::-webkit-scrollbar {
+    display: none;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar > *,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar > * {
+    flex: 0 0 auto !important;
+    min-width: 0 !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar .o-mail-Chatter-topbarGrow,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .o-mail-Chatter-topbarGrow {
+    flex: 1 1 10px !important;
+    min-width: 10px !important;
+    height: 1px !important;
+    padding: 0 !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar .btn,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar button,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .btn,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: var(--bao-chatter-topbar-control-height) !important;
+    min-height: var(--bao-chatter-topbar-control-height) !important;
+    max-height: var(--bao-chatter-topbar-control-height) !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: var(--bao-chatter-topbar-radius) !important;
+    box-shadow: none !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 20px !important;
+    letter-spacing: 0 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar .o-mail-Chatter-sendMessage,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .o-mail-Chatter-sendMessage {
+    flex: 0 0 159px !important;
+    width: 159px !important;
+    min-width: 159px !important;
+    max-width: 159px !important;
+    margin-right: 16px !important;
+    padding: 0 12px !important;
+    background: var(--bao-chatter-topbar-primary) !important;
+    border-color: var(--bao-chatter-topbar-primary) !important;
+    color: var(--bao-chatter-topbar-text) !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar .o-mail-Chatter-logNote,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .o-mail-Chatter-logNote {
+    flex: 0 0 96px !important;
+    width: 96px !important;
+    min-width: 96px !important;
+    max-width: 96px !important;
+    padding: 0 10px !important;
+    background: var(--bao-chatter-topbar-secondary) !important;
+    border-color: var(--bao-chatter-topbar-secondary) !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    color: var(--bao-chatter-topbar-text) !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar .o-mail-Chatter-logNote:not(:has(+ .o-mail-Chatter-activity)),
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .o-mail-Chatter-logNote:not(:has(+ .o-mail-Chatter-activity)) {
+    margin-right: 16px !important;
+    border-top-right-radius: var(--bao-chatter-topbar-radius) !important;
+    border-bottom-right-radius: var(--bao-chatter-topbar-radius) !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar .o-mail-Chatter-activity,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .o-mail-Chatter-activity {
+    flex: 0 0 99px !important;
+    width: 99px !important;
+    min-width: 99px !important;
+    max-width: 99px !important;
+    padding: 0 10px !important;
+    background: var(--bao-chatter-topbar-secondary) !important;
+    border-color: var(--bao-chatter-topbar-secondary) !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    color: var(--bao-chatter-topbar-text) !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar .btn-link.text-action,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar button.btn-link.text-action,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar .o-mail-Followers-button,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .btn-link.text-action,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar button.btn-link.text-action,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .o-mail-Followers-button {
+    flex: 0 0 24px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border-color: transparent !important;
+    color: var(--bao-chatter-topbar-icon) !important;
+    font-size: 20px !important;
+    position: relative !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar .btn-link.text-action i,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar button.btn-link.text-action i,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar .o-mail-Followers-button i,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .btn-link.text-action i,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar button.btn-link.text-action i,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .o-mail-Followers-button i {
+    margin: 0 !important;
+    color: var(--bao-chatter-topbar-icon) !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Followers,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .o-mail-Followers {
+    flex: 0 0 24px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    margin: 0 !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Followers-counter,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .o-mail-Followers-counter {
+    position: absolute !important;
+    top: 6px !important;
+    right: 0 !important;
+    left: auto !important;
+    margin: 0 !important;
+    color: var(--bao-chatter-topbar-icon) !important;
+    font-size: 10px !important;
+    font-weight: 400 !important;
+    line-height: 1 !important;
+}
+
+@media (max-width: 575.98px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-top,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-top {
+        min-height: 0 !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar {
+        flex-wrap: wrap !important;
+        row-gap: 8px !important;
+        min-height: 0 !important;
+        padding: 10px 8px 12px !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar .o-mail-Chatter-sendMessage,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .o-mail-Chatter-sendMessage {
+        margin-right: 12px !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter .o-mail-Chatter-topbar .o-mail-Chatter-topbarGrow,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o-mail-Chatter-topbar .o-mail-Chatter-topbarGrow {
+        flex: 1 1 12px !important;
+        min-width: 12px !important;
+    }
+}
+
+/* BAO governed style-diff pass: only the sheet header zone that owns form actions and statusbar. */
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar {
+    --bao-sheet-header-action-height: 36px;
+    --bao-sheet-header-action-radius: 7px;
+    --bao-sheet-header-status-height: 34px;
+    --bao-sheet-header-primary: #e01017;
+    --bao-sheet-header-secondary: #d9dadd;
+    --bao-sheet-header-secondary-text: #666b72;
+    --bao-sheet-header-current-bg: #e4fff1;
+    --bao-sheet-header-current-border: #d5f2e2;
+    --bao-sheet-header-current-text: #009a49;
+    --bao-sheet-header-check: #00a957;
+    --bao-sheet-header-separator: #d6d7d9;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons {
+    display: flex !important;
+    align-items: center !important;
+    align-content: center !important;
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > .btn,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: var(--bao-sheet-header-action-height) !important;
+    min-height: var(--bao-sheet-header-action-height) !important;
+    max-height: var(--bao-sheet-header-action-height) !important;
+    margin: 0 !important;
+    padding: 0 12px !important;
+    border-radius: var(--bao-sheet-header-action-radius) !important;
+    box-shadow: none !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 20px !important;
+    letter-spacing: 0 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > .btn-primary,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > button.btn-primary {
+    background: var(--bao-sheet-header-primary) !important;
+    border-color: var(--bao-sheet-header-primary) !important;
+    color: #ffffff !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > .btn-secondary,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > button.btn-secondary {
+    background: var(--bao-sheet-header-secondary) !important;
+    border-color: var(--bao-sheet-header-secondary) !important;
+    color: var(--bao-sheet-header-secondary-text) !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > .dropdown,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > .o-dropdown {
+    flex: 0 0 44px !important;
+    width: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > .dropdown > .btn,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > .o-dropdown > .btn,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > .btn.dropdown-toggle {
+    width: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    padding: 0 !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_field_statusbar,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .o_arrow_button:not(.d-none),
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .dropdown-toggle.o_arrow_button:not(.d-none) {
+    min-height: 32px !important;
+    height: 32px !important;
+    max-height: 32px !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .o_arrow_button:not(.o_last):not(.d-none)::before,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status:has(> .dropdown-toggle.o_last.o-dropdown.dropdown:not(.o_arrow_button):not(.d-none)) > .o_arrow_button.d-none:not(.dropdown-toggle):not(.o_last)::before {
+    background: var(--bao-sheet-header-separator) !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .o_arrow_button_current:not(.d-none),
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > button.btn.o_arrow_button.o_arrow_button_current:disabled:not(.d-none),
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .dropdown-toggle.o_last.o-dropdown.dropdown:not(.o_arrow_button):not(.d-none) {
+    min-height: var(--bao-sheet-header-status-height) !important;
+    height: var(--bao-sheet-header-status-height) !important;
+    max-height: var(--bao-sheet-header-status-height) !important;
+    background: var(--bao-sheet-header-current-bg) !important;
+    border-color: var(--bao-sheet-header-current-border) !important;
+    color: var(--bao-sheet-header-current-text) !important;
+    border-radius: 8px !important;
+}
+
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .o_arrow_button_current::after,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > button.btn.o_arrow_button.o_arrow_button_current:disabled:not(.d-none)::after,
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .dropdown-toggle.o_last.o-dropdown.dropdown:not(.o_arrow_button):not(.d-none)::after {
+    background: var(--bao-sheet-header-check) !important;
+}
+
+@media (min-width: 1200px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar:has(.o_statusbar_status > .o_arrow_button) {
+        display: grid !important;
+        grid-template-columns: minmax(276px, 1fr) minmax(468px, 492px) !important;
+        column-gap: 18px !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar:has(.o_statusbar_status > .o_arrow_button) > .o_field_statusbar,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar:has(.o_statusbar_status > .o_arrow_button) .o_field_statusbar {
+        min-width: 468px !important;
+        max-width: 492px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar:has(.o_statusbar_status > .o_arrow_button) {
+        grid-template-columns: minmax(0, 1fr) minmax(430px, 480px) !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar:has(.o_statusbar_status > .o_arrow_button) > .o_field_statusbar,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar:has(.o_statusbar_status > .o_arrow_button) .o_field_statusbar {
+        min-width: 430px !important;
+        max-width: 480px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar {
+        align-items: stretch !important;
+        gap: 10px !important;
+        overflow: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons {
+        width: 100% !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > .btn:not(.dropdown-toggle),
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > button:not(.dropdown-toggle) {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        max-width: none !important;
+        height: var(--bao-sheet-header-action-height) !important;
+        min-height: var(--bao-sheet-header-action-height) !important;
+        padding: 0 12px !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        overflow-wrap: normal !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons:has(> .dropdown, > .o-dropdown) > .btn:not(.dropdown-toggle),
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons:has(> .dropdown, > .o-dropdown) > button:not(.dropdown-toggle) {
+        flex: 0 1 auto !important;
+        max-width: calc(100% - 52px) !important;
+        height: auto !important;
+        min-height: var(--bao-sheet-header-action-height) !important;
+        max-height: none !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+    }
 }
