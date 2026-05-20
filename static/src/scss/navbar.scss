@@ -6141,3 +6141,213 @@
     white-space: normal !important;
     overflow-wrap: anywhere !important;
 }
+
+/* RR19: premium hierarchy pass.
+   This layer keeps the RR18 functional contract intact and only improves visual grouping,
+   touch rhythm, focus affordances and dropdown polish. */
+.o_web_client {
+    --bao-rr19-topbar-hairline: rgba(255, 255, 255, 0.14);
+    --bao-rr19-topbar-control-bg: rgba(255, 255, 255, 0.08);
+    --bao-rr19-topbar-control-bg-hover: rgba(255, 255, 255, 0.16);
+    --bao-rr19-topbar-control-border: rgba(255, 255, 255, 0.14);
+    --bao-rr19-focus-ring: rgba(253, 233, 0, 0.62);
+    --bao-rr19-popover-shadow: 0 18px 44px rgba(13, 41, 76, 0.16), 0 5px 18px rgba(13, 41, 76, 0.08);
+}
+
+.o_web_client .o_main_navbar {
+    box-shadow: inset 0 -1px 0 rgba(7, 38, 78, 0.22), inset 0 1px 0 var(--bao-rr19-topbar-hairline) !important;
+}
+
+.o_web_client .o_main_navbar :is(button, a, .dropdown-toggle, .o-dropdown):focus-visible,
+.o_web_client .o_action_manager .o_control_panel :is(button, a, input, .dropdown-toggle, .o-dropdown):focus-visible {
+    outline: 2px solid var(--bao-rr19-focus-ring) !important;
+    outline-offset: 2px !important;
+}
+
+.o_web_client .o_main_navbar .o_menu_systray :is(.dropdown-toggle, .btn, .o-dropdown),
+.o_web_client .o_action_manager .o_control_panel :is(.btn, button, .dropdown-toggle, .o-dropdown) {
+    transition-property: background-color, border-color, box-shadow, color, opacity, transform !important;
+    transition-duration: 0.16s !important;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1) !important;
+}
+
+.o_web_client .o_main_navbar .o_menu_systray :is(.dropdown-toggle, .btn, .o-dropdown):active,
+.o_web_client .o_action_manager .o_control_panel :is(.btn, button, .dropdown-toggle, .o-dropdown):active {
+    transform: scale(0.96) !important;
+}
+
+.o_web_client .o_main_navbar .o_menu_sections .o_menu_sections_more :is(.dropdown-menu, .o-dropdown--menu),
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu.o-control-panel-adaptive-dropdown,
+.o_web_client:has(.o_control_panel .dropdown-toggle.show) .o_popover.o-dropdown--menu.dropdown-menu.mx-0.lh-base {
+    border-radius: 12px !important;
+    box-shadow: var(--bao-rr19-popover-shadow) !important;
+    scrollbar-width: thin;
+}
+
+.o_web_client .o_main_navbar .o_menu_sections .o_menu_sections_more :is(.dropdown-menu, .o-dropdown--menu) {
+    max-height: calc(100vh - 88px) !important;
+    padding: 8px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+.o_web_client .o_main_navbar .o_menu_sections .o_menu_sections_more :is(.dropdown-header, .o_more_dropdown_section) {
+    min-height: 24px !important;
+    padding: 6px 10px 4px !important;
+    color: #6f7a86 !important;
+    font-size: 0.76rem !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+}
+
+.o_web_client .o_main_navbar .o_menu_sections .o_menu_sections_more :is(.dropdown-item, .o-dropdown-item, a, button) {
+    min-height: 36px !important;
+    padding: 8px 10px !important;
+    border-radius: 8px !important;
+    line-height: 1.2 !important;
+}
+
+.o_web_client .o_main_navbar .o_menu_sections .o_menu_sections_more :is(.dropdown-item, .o-dropdown-item, a, button):hover,
+.o_web_client .o_main_navbar .o_menu_sections .o_menu_sections_more :is(.dropdown-item, .o-dropdown-item, a, button):focus {
+    background: #eef4fb !important;
+    color: #163f71 !important;
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .o_web_client .o_main_navbar {
+        gap: 8px !important;
+    }
+
+    .o_web_client .o_main_navbar .o_menu_brand {
+        flex-basis: 16vw !important;
+        min-width: 8rem !important;
+        max-width: 14rem !important;
+        font-size: 1.08rem !important;
+    }
+
+    .o_web_client .o_main_navbar .o_menu_systray {
+        gap: 6px !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel:not(.o_bao_form_control_panel) .o_cp_searchview,
+    .o_web_client .o_action_manager .o_control_panel:not(.o_bao_form_control_panel) .o_searchview {
+        box-shadow: 0 10px 24px rgba(13, 41, 76, 0.08) !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .o_web_client .o_main_navbar {
+        gap: 7px !important;
+        padding-inline: 10px !important;
+    }
+
+    .o_web_client .o_main_navbar .o_menu_brand {
+        flex: 1 1 46vw !important;
+        max-width: 12rem !important;
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        line-height: 1.05 !important;
+        letter-spacing: 0 !important;
+    }
+
+    .o_web_client .o_main_navbar .o_menu_systray {
+        flex: 0 0 auto !important;
+        gap: 4px !important;
+        margin-left: auto !important;
+    }
+
+    .o_web_client .o_main_navbar .o_menu_systray :is(.dropdown-toggle, .btn, .o-dropdown) {
+        min-width: 40px !important;
+        min-height: 40px !important;
+        height: 40px !important;
+        border-radius: 10px !important;
+        background: var(--bao-rr19-topbar-control-bg) !important;
+        border-color: var(--bao-rr19-topbar-control-border) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+    }
+
+    .o_web_client .o_main_navbar .o_menu_systray :is(.dropdown-toggle, .btn, .o-dropdown):hover,
+    .o_web_client .o_main_navbar .o_menu_systray :is(.dropdown-toggle, .btn, .o-dropdown):focus,
+    .o_web_client .o_main_navbar .o_menu_systray :is(.dropdown-toggle, .btn, .o-dropdown).show {
+        background: var(--bao-rr19-topbar-control-bg-hover) !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel {
+        border-bottom: 1px solid rgba(7, 38, 78, 0.16) !important;
+        box-shadow: 0 14px 30px rgba(13, 41, 76, 0.08) !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel:not(.o_bao_form_control_panel) {
+        padding: 8px 12px 10px !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel:not(.o_bao_form_control_panel) .o_control_panel_main {
+        row-gap: 8px !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel:not(.o_bao_form_control_panel) .o_searchview,
+    .o_web_client .o_action_manager .o_control_panel:not(.o_bao_form_control_panel) .o_cp_searchview {
+        border-radius: 10px !important;
+        box-shadow: 0 8px 20px rgba(13, 41, 76, 0.1) !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel:not(.o_bao_form_control_panel)
+        .o_control_panel_main_buttons :is(.btn, button):first-child:not(.o-control-panel-adaptive-dropdown) {
+        min-width: 88px !important;
+        font-weight: 700 !important;
+        box-shadow: 0 8px 16px rgba(13, 41, 76, 0.12) !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel {
+        padding: 7px 14px 10px !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_main,
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_main {
+        gap: 7px !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_main > .o_control_panel_navigation {
+        gap: 5px !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_main > .o_control_panel_navigation :is(.btn, button, .dropdown-toggle) {
+        border-radius: 10px !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_bao_breadcrumb_header_text {
+        font-size: 0.9rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0 !important;
+        text-wrap: balance;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        :is(.o_bao_header_main_buttons, .o_bao_header_menu_actions, .o_control_panel_breadcrumbs_actions, .o_control_panel_main_buttons, .o_cp_action_menus)
+        :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more) {
+        min-height: 38px !important;
+        padding: 7px 11px !important;
+        border-radius: 10px !important;
+        font-weight: 650 !important;
+    }
+
+    .o_web_client .o_popover.o-dropdown--menu.dropdown-menu.o-control-panel-adaptive-dropdown,
+    .o_web_client:has(.o_control_panel .dropdown-toggle.show) .o_popover.o-dropdown--menu.dropdown-menu.mx-0.lh-base {
+        max-height: calc(100vh - 96px) !important;
+        padding: 8px !important;
+    }
+}
