@@ -11,6 +11,7 @@ let refreshScheduled = false;
 let burstRefreshTimerIds = [];
 let pivotPrimeTimerIds = [];
 let deferredRefreshTimerId = null;
+let nativeNavbarAdaptTimerId = null;
 let controlPanelInteractionUntil = 0;
 let controlPanelBaoInitialized = false;
 
@@ -49,6 +50,73 @@ function syncUiSizeNow(ui) {
 
 function textOf(node) {
     return node ? node.textContent.trim() : "";
+}
+
+function readableTextOf(node) {
+    return textOf(node).replace(/\s+/g, " ");
+}
+
+function hasElementContent(node) {
+    return Boolean(
+        node &&
+            (readableTextOf(node) ||
+                node.querySelector("button, a, input, [role='button'], .o-dropdown, .dropdown-toggle, .o-form-buttonbox, .o_form_button_box"))
+    );
+}
+
+function syncTopbarReadableLabels(root = document) {
+    const selectors = [
+        ".o_main_navbar .o_menu_brand",
+        ".o_main_navbar .o_menu_sections a",
+        ".o_main_navbar .o_menu_sections button",
+        ".o_main_navbar .o_menu_systray .oe_topbar_name",
+        ".o_main_navbar .o_menu_systray mark",
+        ".o_control_panel .o_bao_breadcrumb_header_text",
+        ".o_control_panel .o_bao_breadcrumb_trail .breadcrumb-item",
+        ".o_control_panel .o_breadcrumb .breadcrumb-item",
+        ".o_control_panel .breadcrumb .breadcrumb-item",
+        ".o_control_panel .o_control_panel_main_buttons button",
+        ".o_control_panel .o_control_panel_main_buttons a",
+        ".o_control_panel .o_control_panel_breadcrumbs_actions button",
+        ".o_control_panel .o_control_panel_breadcrumbs_actions a",
+        ".o_control_panel .o_cp_action_menus button",
+        ".o_control_panel .o_cp_action_menus a",
+        ".o_control_panel .o_control_panel_navigation .o_pager_counter",
+        ".o_control_panel .o_searchview_facet .o_facet_value",
+        ".o_control_panel .oe_stat_button",
+        ".o_control_panel .oe_stat_button .o_stat_value",
+        ".o_control_panel .oe_stat_button .o_stat_text",
+        ".o_control_panel .oe_stat_button .o_button_label",
+    ];
+    for (const element of root.querySelectorAll(selectors.join(","))) {
+        const text = readableTextOf(element);
+        if (text.length < 8) {
+            continue;
+        }
+        element.setAttribute("title", text);
+        const carrier = element.matches("button, a, [role='button']")
+            ? element
+            : element.closest("button, a, [role='button']");
+        if (carrier && !carrier.querySelector("input, textarea")) {
+            carrier.setAttribute("aria-label", readableTextOf(carrier) || text);
+            carrier.setAttribute("title", readableTextOf(carrier) || text);
+        }
+    }
+}
+
+function nodeBelongsToMainNavbar(node) {
+    if (!node || node.nodeType !== Node.ELEMENT_NODE) {
+        return false;
+    }
+    return Boolean(node.closest?.(".o_main_navbar") || node.querySelector?.(".o_main_navbar"));
+}
+
+function scheduleNativeNavbarAdapt() {
+    window.clearTimeout(nativeNavbarAdaptTimerId);
+    nativeNavbarAdaptTimerId = window.setTimeout(() => {
+        window.__baoNativeNavbarAdapt?.();
+        syncTopbarReadableLabels(document);
+    }, 90);
 }
 
 function ensureElement(parent, selector, tagName, className) {
@@ -118,9 +186,18 @@ function isFormControlPanel(controlPanel) {
     if (controlPanel.closest(".o_base_settings_view") || document.querySelector(".o_base_settings_view")) {
         return false;
     }
+    const hasFormView = Boolean(document.querySelector(".o_form_view"));
+    const hasFormBreadcrumb = Boolean(controlPanel.querySelector(".o_control_panel_breadcrumbs .o_breadcrumb"));
+    const hasFormChrome = Boolean(
+        controlPanel.querySelector(
+            ".o_form_status_indicator, .o-form-buttonbox, .o_form_button_box, .o_bao_form_header_cluster, .o_control_panel_breadcrumbs_actions"
+        )
+    );
     return Boolean(
-        controlPanel.querySelector(".o_control_panel_breadcrumbs .o_breadcrumb") &&
-        (controlPanel.querySelector(".o_form_status_indicator") || document.querySelector(".o_form_view"))
+        hasFormView &&
+            (hasFormBreadcrumb ||
+                hasFormChrome ||
+                controlPanel.querySelector(".o_form_status_indicator"))
     );
 }
 
@@ -306,6 +383,10 @@ function fallbackCapacityFromViewport(kind) {
     return 9;
 }
 
+function getNativeButtonBoxMaxVisibleButtons() {
+    return [0, 0, 7, 4, 5, 8][getViewportSize()] ?? 8;
+}
+
 function capacityFromWidth(width, kind, total) {
     if (!total) {
         return 0;
@@ -486,6 +567,42 @@ function slotWidthsChanged(previousWidths = [], nextWidths = []) {
     );
 }
 
+function isElementTextClipped(element) {
+    if (!element) {
+        return false;
+    }
+    return element.scrollWidth > element.clientWidth + 1 || element.scrollHeight > element.clientHeight + 2;
+}
+
+function hasButtonBoxReadableOverflow(button) {
+    if (!button || isOverflowDropdownChild(button)) {
+        return false;
+    }
+    if (isElementTextClipped(button)) {
+        return true;
+    }
+    const readableNodes = button.querySelectorAll(
+        ".o_stat_value, .o_stat_text, .o_button_label, .o_field_statinfo, .o_stat_info, span"
+    );
+    return [...readableNodes].some((node) => node.textContent?.trim() && isElementTextClipped(node));
+}
+
+function getButtonBoxReadableWidth(button) {
+    if (!button) {
+        return 0;
+    }
+    const rectWidth = button.getBoundingClientRect().width;
+    const style = window.getComputedStyle(button);
+    const padding =
+        (Number.parseFloat(style.paddingLeft) || 0) + (Number.parseFloat(style.paddingRight) || 0);
+    const chromeWidth = padding + (button.querySelector(".o_button_icon, .fa, .oi") ? 48 : 0);
+    const readableNodes = [
+        ...button.querySelectorAll(".o_stat_value, .o_stat_text, .o_button_label, .o_field_statinfo, .o_stat_info, span"),
+    ].filter((node) => node.textContent?.trim());
+    const readableWidth = readableNodes.reduce((maxWidth, node) => Math.max(maxWidth, node.scrollWidth + chromeWidth), 0);
+    return Math.max(rectWidth, button.scrollWidth, Math.min(readableWidth, 280));
+}
+
 function normalizeSmartButtonRail(controlPanel) {
     const main = controlPanel.querySelector(".o_control_panel_main");
     const breadcrumbs = controlPanel.querySelector(".o_control_panel_breadcrumbs");
@@ -636,7 +753,14 @@ function normalizeBreadcrumbs(root) {
         const mainButtons = controlPanel.querySelector(".o_control_panel_main_buttons");
         const statusIndicator = controlPanel.querySelector(".o_form_status_indicator");
         const currentItem = sourceCluster?.querySelector(".o_last_breadcrumb_item span");
-        const actions = sourceCluster?.querySelector(".o_control_panel_breadcrumbs_actions");
+        const actionContainers = [
+            ...breadcrumb.querySelectorAll(".o_control_panel_breadcrumbs_actions"),
+            ...breadcrumbs.querySelectorAll(":scope > .o_control_panel_breadcrumbs_actions"),
+        ];
+        let actions =
+            actionContainers.find(hasElementContent) ||
+            sourceCluster?.querySelector(".o_control_panel_breadcrumbs_actions") ||
+            actionContainers[0];
         const isNewRecord = Boolean(statusIndicator?.classList.contains("o_form_status_indicator_new_record"));
         controlPanel.classList.toggle("o_bao_form_control_panel_new_record", isNewRecord);
 
@@ -724,6 +848,21 @@ function normalizeBreadcrumbs(root) {
         if (actions && actions.parentElement !== menuShell) {
             menuShell.append(actions);
         }
+        if (actions) {
+            for (const duplicateActions of actionContainers) {
+                if (duplicateActions === actions) {
+                    continue;
+                }
+                while (duplicateActions.firstChild) {
+                    actions.append(duplicateActions.firstChild);
+                }
+                duplicateActions.remove();
+            }
+            if (!hasElementContent(actions)) {
+                actions.remove();
+                actions = null;
+            }
+        }
         if (statusIndicator && statusIndicator.parentElement !== statusShell) {
             statusShell.append(statusIndicator);
         }
@@ -786,13 +925,65 @@ function normalizeBreadcrumbs(root) {
     }
 }
 
+function pruneFormActionContainers(root) {
+    const uniqueSelectors = [
+        ".o_cp_action_menus",
+        ".o-form-buttonbox",
+        ".o_form_button_box",
+        ".o_form_status_indicator",
+        ".o_control_panel_main_buttons",
+    ];
+
+    for (const controlPanel of root.querySelectorAll(".o_control_panel")) {
+        if (!isFormControlPanel(controlPanel)) {
+            continue;
+        }
+
+        const containers = [...controlPanel.querySelectorAll(".o_control_panel_breadcrumbs_actions")];
+        if (!containers.length) {
+            continue;
+        }
+
+        const canonical = containers.find(hasElementContent);
+        if (!canonical) {
+            for (const container of containers) {
+                container.remove();
+            }
+            continue;
+        }
+
+        for (const container of containers) {
+            if (container === canonical) {
+                continue;
+            }
+            while (container.firstChild) {
+                const child = container.firstChild;
+                const isDuplicate = uniqueSelectors.some(
+                    (selector) => child.matches?.(selector) && canonical.querySelector(selector)
+                );
+                if (isDuplicate) {
+                    child.remove();
+                    continue;
+                }
+                canonical.append(child);
+            }
+            container.remove();
+        }
+        if (!hasElementContent(canonical)) {
+            canonical.remove();
+        }
+    }
+}
+
 function refreshControlPanels() {
     normalizeSharedControlPanels(document);
     normalizePivotToolbar(document);
     normalizeDashboardToolbar(document);
     normalizeBreadcrumbs(document);
+    pruneFormActionContainers(document);
     normalizeSaveCancelIcons(document);
     normalizeStatusbar(document);
+    syncTopbarReadableLabels(document);
 }
 
 function clearControlPanelTransitionResidue() {
@@ -800,6 +991,8 @@ function clearControlPanelTransitionResidue() {
         window.clearTimeout(deferredRefreshTimerId);
         deferredRefreshTimerId = null;
     }
+    window.clearTimeout(nativeNavbarAdaptTimerId);
+    nativeNavbarAdaptTimerId = null;
     for (const timerId of burstRefreshTimerIds) {
         window.clearTimeout(timerId);
     }
@@ -932,7 +1125,18 @@ function initControlPanelBao() {
     window.visualViewport?.addEventListener("resize", instantResponsiveRefresh, { passive: true });
     window.addEventListener("scroll", scheduleRefresh, { passive: true });
     window.addEventListener("pagehide", clearControlPanelTransitionResidue, { passive: true });
-    const observer = new MutationObserver(() => scheduleRefresh());
+    const observer = new MutationObserver((mutations) => {
+        scheduleRefresh();
+        if (
+            mutations.some(
+                (mutation) =>
+                    nodeBelongsToMainNavbar(mutation.target) ||
+                    [...mutation.addedNodes, ...mutation.removedNodes].some(nodeBelongsToMainNavbar)
+            )
+        ) {
+            scheduleNativeNavbarAdapt();
+        }
+    });
     observer.observe(document.body, { childList: true, subtree: true });
     document.addEventListener(
         "pointerdown",
@@ -1011,11 +1215,12 @@ patch(ButtonBox.prototype, {
             const children = getMeasuredChildren(root);
             const inlineChildren = children.filter((child) => !isOverflowDropdownChild(child));
             const domOverflow = Boolean(root && root.scrollWidth > root.clientWidth + 1);
+            const readableOverflow = inlineChildren.some(hasButtonBoxReadableOverflow);
             const rootWidth = layout.width || root?.clientWidth || 0;
             let nextCapacity = layout.capacity;
             let nextUseDropdown = layout.useDropdown;
-            if (domOverflow && slotCount > 1) {
-                const renderedWidths = inlineChildren.map((child) => child.getBoundingClientRect().width);
+            if ((domOverflow || readableOverflow) && slotCount > 1) {
+                const renderedWidths = inlineChildren.map(getButtonBoxReadableWidth);
                 const overflowCapacity = dropdownCapacityFromInlineWidths(rootWidth, renderedWidths, "buttonbox", slotCount);
                 nextUseDropdown = true;
                 nextCapacity = Math.min(nextCapacity, overflowCapacity);
@@ -1037,19 +1242,6 @@ patch(ButtonBox.prototype, {
                 rootWidth > this.baoButtonBoxForcedOverflow.width + 4
             ) {
                 this.baoButtonBoxForcedOverflow = { width: 0, slotSignature: "", capacity: 0 };
-            }
-            if (!domOverflow && nextUseDropdown && slotCount > 1 && inlineChildren.length < slotCount) {
-                const { gap, estimatedItemWidth, moreWidth } = getOverflowMetrics("buttonbox");
-                const renderedWidths = inlineChildren.map((child) => child.getBoundingClientRect().width);
-                const inlineWidth = sumInlineWidths(renderedWidths, gap);
-                const nextProjectedWidth = inlineWidth + (renderedWidths.length ? gap : 0) + estimatedItemWidth + gap + moreWidth;
-                if (nextProjectedWidth <= rootWidth + 1) {
-                    nextCapacity = Math.min(slotCount, Math.max(nextCapacity, inlineChildren.length + 2));
-                    nextUseDropdown = nextCapacity < slotCount;
-                    if (this.baoButtonBoxForcedOverflow.slotSignature === slotSignature) {
-                        this.baoButtonBoxForcedOverflow.capacity = nextCapacity;
-                    }
-                }
             }
             if (
                 this.baoButtonBoxState.capacity !== nextCapacity ||
@@ -1086,13 +1278,26 @@ patch(ButtonBox.prototype, {
         onWillRender(() => {
             const allVisibleButtons = getBaoSlotNames(this.props.slots);
             const slotSignature = allVisibleButtons.join("|");
-            if (!this.baoButtonBoxState.useDropdown || this.baoButtonBoxState.slotSignature !== slotSignature) {
+            const nativeMaxVisibleButtons = getNativeButtonBoxMaxVisibleButtons();
+            if (this.env.isSmall || nativeMaxVisibleButtons <= 0) {
+                this.visibleButtons = [];
+                this.additionalButtons = allVisibleButtons;
+                this.isFull = Boolean(allVisibleButtons.length);
+                return;
+            }
+            const nativeRequiresDropdown = allVisibleButtons.length > nativeMaxVisibleButtons;
+            const measuredRequiresDropdown =
+                this.baoButtonBoxState.useDropdown && this.baoButtonBoxState.slotSignature === slotSignature;
+            if (!nativeRequiresDropdown && !measuredRequiresDropdown) {
                 this.visibleButtons = allVisibleButtons;
                 this.additionalButtons = [];
                 this.isFull = false;
                 return;
             }
-            const capacity = this.baoButtonBoxState.capacity ?? allVisibleButtons.length;
+            const measuredCapacity = measuredRequiresDropdown
+                ? (this.baoButtonBoxState.capacity ?? allVisibleButtons.length)
+                : allVisibleButtons.length;
+            const capacity = Math.min(nativeMaxVisibleButtons, measuredCapacity);
             const split = splitSlotsForOverflow(allVisibleButtons, capacity, "buttonbox");
             this.visibleButtons = split.visible;
             this.additionalButtons = split.additional;
@@ -1224,6 +1429,17 @@ patch(NavBar.prototype, {
         this.ui = useService("ui");
         this.baoRenderedViewportSize = getViewportSize();
         this.enterpriseLauncherState = useState({ isOpen: false });
+        window.__baoNativeNavbarAdapt = () => this.adapt?.();
+        onMounted(() => {
+            syncTopbarReadableLabels(document);
+            this.adapt?.();
+        });
+        onPatched(() => syncTopbarReadableLabels(document));
+        onWillUnmount(() => {
+            if (window.__baoNativeNavbarAdapt) {
+                delete window.__baoNativeNavbarAdapt;
+            }
+        });
         useExternalListener(window, "resize", () => this.syncBaoResponsiveNavbar());
         useExternalListener(window, "orientationchange", () => this.syncBaoResponsiveNavbar());
         useBus(this.ui.bus, "resize", () => this.syncBaoResponsiveNavbar());

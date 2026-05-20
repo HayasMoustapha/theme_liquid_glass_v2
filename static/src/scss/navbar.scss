@@ -344,6 +344,259 @@
     }
 }
 
+/* RR15: TopBar v2 preflight hardening.
+   Keep Odoo exposed controls native, but never leave long TopBar labels as destructive clipping. */
+@media (min-width: 768px) {
+    .o_main_navbar .o_menu_sections > :is(.o-dropdown, .o_nav_entry, .dropdown-toggle):not(.o_menu_sections_more),
+    .o_main_navbar .o_menu_sections > .o-dropdown > :is(button, .dropdown-toggle),
+    .o_main_navbar .o_menu_sections > .o_nav_entry {
+        flex: 0 0 auto !important;
+        width: max-content !important;
+        max-width: none !important;
+        min-width: 0 !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        white-space: nowrap !important;
+    }
+
+    .o_main_navbar .o_menu_sections :is(a, button, span):not(.o_menu_sections_more *) {
+        max-width: none !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+    }
+
+    .o_main_navbar .o_menu_sections .o_menu_sections_more,
+    .o_main_navbar .o_menu_sections .o_menu_sections_more :is(button, .dropdown-toggle) {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 44px !important;
+        max-width: none !important;
+        overflow: visible !important;
+    }
+}
+
+.o_web_client .o_action_manager .o_control_panel {
+    .o_control_panel_breadcrumbs > .o_control_panel_main_buttons,
+    .o_control_panel_main_buttons,
+    .o_bao_header_main_buttons,
+    .o_bao_header_main_buttons .o_control_panel_main_buttons,
+    .o_control_panel_breadcrumbs_actions {
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .o_control_panel_breadcrumbs > .o_control_panel_main_buttons,
+    .o_control_panel_main_buttons,
+    .o_bao_header_main_buttons .o_control_panel_main_buttons {
+        flex-wrap: wrap !important;
+        align-content: center !important;
+        row-gap: 6px !important;
+    }
+
+    .o_control_panel_main_buttons :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more),
+    .o_control_panel_breadcrumbs_actions :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more),
+    .o_cp_action_menus :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more) {
+        width: auto !important;
+        min-width: 36px !important;
+        max-width: 320px !important;
+        height: auto !important;
+        max-height: none !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        overflow-wrap: anywhere !important;
+        text-overflow: clip !important;
+        line-height: 1.15 !important;
+    }
+
+    .o_control_panel_navigation .o_pager_counter,
+    .o_control_panel_navigation .o_pager_counter span,
+    .o_searchview_facet .o_facet_value {
+        cursor: help;
+    }
+}
+
+/* RR15 navbar shell guard: preserve the native one-row flex behavior while BAO styles the surface. */
+.o_navbar,
+.o_main_navbar {
+    max-width: 100% !important;
+    overflow-x: clip !important;
+    overflow-y: visible !important;
+}
+
+.o_main_navbar {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 60px !important;
+    min-height: 60px !important;
+    max-height: 60px !important;
+}
+
+.o_main_navbar > * {
+    min-width: 0 !important;
+}
+
+.o_main_navbar .o_menu_brand,
+.o_main_navbar .o_menu_sections,
+.o_main_navbar .o_menu_systray {
+    min-width: 0 !important;
+    max-height: 60px !important;
+}
+
+.o_main_navbar .o_menu_sections {
+    display: flex !important;
+    align-items: center !important;
+    flex: 1 1 auto !important;
+    flex-wrap: nowrap !important;
+    overflow: hidden !important;
+}
+
+.o_main_navbar .o_menu_systray {
+    display: flex !important;
+    align-items: center !important;
+    flex: 0 1 auto !important;
+    flex-wrap: nowrap !important;
+    overflow: hidden !important;
+}
+
+.o_main_navbar .o_menu_sections_more,
+.o_main_navbar .o_menu_systray :is(.o-dropdown, .dropdown) {
+    overflow: visible !important;
+}
+
+@media (max-width: 575.98px) {
+    .o_main_navbar {
+        gap: 6px !important;
+        padding-inline: 8px !important;
+    }
+
+    .o_main_navbar .o_menu_systray {
+        margin-left: auto !important;
+    }
+}
+
+/* RR15 final containment: keep full labels accessible without allowing visual overlap. */
+@media (min-width: 768px) {
+    .o_main_navbar .o_menu_sections > :is(.o-dropdown, .o_nav_entry, .dropdown-toggle):not(.o_menu_sections_more),
+    .o_main_navbar .o_menu_sections > .o-dropdown > :is(button, .dropdown-toggle),
+    .o_main_navbar .o_menu_sections > .o_nav_entry {
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: clamp(72px, 12vw, 220px) !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+
+    .o_main_navbar .o_menu_sections :is(a, button, span):not(.o_menu_sections_more *) {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .o_main_navbar .o_menu_sections > :is(.o-dropdown, .o_nav_entry, .dropdown-toggle):not(.o_menu_sections_more),
+    .o_main_navbar .o_menu_sections > .o-dropdown > :is(button, .dropdown-toggle),
+    .o_main_navbar .o_menu_sections > .o_nav_entry {
+        max-width: clamp(7rem, 11vw, 10rem) !important;
+    }
+}
+
+.o_web_client .o_action_manager .o_control_panel {
+    .o_control_panel_breadcrumbs > .o_control_panel_main_buttons,
+    .o_control_panel_main_buttons,
+    .o_bao_header_main_buttons,
+    .o_bao_header_main_buttons .o_control_panel_main_buttons,
+    .o_control_panel_breadcrumbs_actions {
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+
+    .o_control_panel_main_buttons :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more),
+    .o_control_panel_breadcrumbs_actions :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more),
+    .o_cp_action_menus :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more) {
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: 36px !important;
+        max-width: 132px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        max-height: 36px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        overflow-wrap: normal !important;
+        text-overflow: ellipsis !important;
+        line-height: 1.1 !important;
+    }
+}
+
+/* RR15 containment rollback: full labels are exposed through native titles/ARIA;
+   visual tracks stay bounded to avoid collisions and root overflow. */
+@media (min-width: 768px) {
+    .o_main_navbar .o_menu_sections > :is(.o-dropdown, .o_nav_entry, .dropdown-toggle):not(.o_menu_sections_more),
+    .o_main_navbar .o_menu_sections > .o-dropdown > :is(button, .dropdown-toggle),
+    .o_main_navbar .o_menu_sections > .o_nav_entry {
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: clamp(72px, 12vw, 220px) !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+
+    .o_main_navbar .o_menu_sections :is(a, button, span):not(.o_menu_sections_more *) {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .o_main_navbar .o_menu_sections > :is(.o-dropdown, .o_nav_entry, .dropdown-toggle):not(.o_menu_sections_more),
+    .o_main_navbar .o_menu_sections > .o-dropdown > :is(button, .dropdown-toggle),
+    .o_main_navbar .o_menu_sections > .o_nav_entry {
+        max-width: clamp(7rem, 11vw, 10rem) !important;
+    }
+}
+
+.o_web_client .o_action_manager .o_control_panel {
+    .o_control_panel_breadcrumbs > .o_control_panel_main_buttons,
+    .o_control_panel_main_buttons,
+    .o_bao_header_main_buttons,
+    .o_bao_header_main_buttons .o_control_panel_main_buttons,
+    .o_control_panel_breadcrumbs_actions {
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+
+    .o_control_panel_main_buttons :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more),
+    .o_control_panel_breadcrumbs_actions :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more),
+    .o_cp_action_menus :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more) {
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: 36px !important;
+        max-width: 132px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        max-height: 36px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        overflow-wrap: normal !important;
+        text-overflow: ellipsis !important;
+        line-height: 1.1 !important;
+    }
+}
+
 .o_navbar_apps_menu {
     color: #ffffff !important;
     font-family: $bao-font-body;
@@ -5011,4 +5264,880 @@
         text-overflow: ellipsis !important;
         white-space: nowrap !important;
     }
+}
+
+/* RR13: native responsive behavior, BAO visual skin, no fabricated empty controls. */
+.o_web_client .o_action_manager:has(.o_form_view)
+    .o_control_panel
+    :is(.o_control_panel_actions, .o_control_panel_breadcrumbs_actions)
+    > :is(.o-form-buttonbox, .o_form_button_box):not(:has(.oe_stat_button)):not(:has(.o_button_more)):not(:has(button)) {
+    display: none !important;
+    flex: 0 0 0 !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    overflow: hidden !important;
+}
+
+@media (min-width: 768px) {
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button) {
+        --bao-stat-button-width: clamp(104px, 9.75vw, 132px);
+        --bao-smart-rail-max: 711px;
+        display: inline-flex !important;
+        align-items: stretch !important;
+        justify-content: center !important;
+        flex: 0 1 var(--bao-smart-rail-max) !important;
+        flex-wrap: nowrap !important;
+        gap: 0 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: var(--bao-smart-rail-max) !important;
+        height: 44px !important;
+        min-height: 44px !important;
+        max-height: 44px !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        color: #f1f1f1 !important;
+        background: #3d79b0 !important;
+        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        border-radius: 6px !important;
+        box-shadow: none !important;
+        overflow: hidden !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)
+        > .btn.oe_stat_button:not(:has(.o_button_more)),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)
+        > .btn.oe_stat_button:not(:has(.o_button_more)) {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 4px !important;
+        flex: 1 1 var(--bao-stat-button-width) !important;
+        width: auto !important;
+        min-width: 104px !important;
+        max-width: 300px !important;
+        height: 44px !important;
+        min-height: 44px !important;
+        max-height: 44px !important;
+        margin: 0 !important;
+        padding: 0 8px !important;
+        color: #f1f1f1 !important;
+        background: transparent !important;
+        border: 0 !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.16) !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+        overflow-wrap: normal !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)
+        > .btn.oe_stat_button:last-child,
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)
+        > .btn.oe_stat_button:last-child {
+        border-right: 0 !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)
+        > .btn.oe_stat_button:has(.o_button_more),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)
+        > .btn.oe_stat_button:has(.o_button_more) {
+        flex: 0 0 76px !important;
+        width: 76px !important;
+        min-width: 76px !important;
+        max-width: 76px !important;
+        justify-content: center !important;
+        padding: 0 !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions .btn.oe_stat_button :is(.o_field_statinfo, .o_stat_info),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions .btn.oe_stat_button :is(.o_field_statinfo, .o_stat_info),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions .btn.oe_stat_button > .d-flex.flex-column,
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions .btn.oe_stat_button > .d-flex.flex-column {
+        display: flex !important;
+        flex: 1 1 auto !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+        gap: 0 !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: 100% !important;
+        max-height: 44px !important;
+        overflow: hidden !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions .btn.oe_stat_button > .d-flex.flex-column > .o_field_widget.o_stat_info,
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions .btn.oe_stat_button > .d-flex.flex-column > .o_field_widget.o_stat_info {
+        display: inline-flex !important;
+        flex: 0 0 17px !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 4px !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: 17px !important;
+        min-height: 17px !important;
+        max-height: 17px !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions .btn.oe_stat_button :is(.o_stat_value, .o_stat_text, .o_button_label),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions .btn.oe_stat_button :is(.o_stat_value, .o_stat_text, .o_button_label) {
+        display: block !important;
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: 17px !important;
+        min-height: 17px !important;
+        max-height: 17px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        overflow-wrap: normal !important;
+        word-break: normal !important;
+        line-height: 15px !important;
+    }
+}
+
+@media (min-width: 1400px) {
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_main:has(.o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_main:has(.o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)) {
+        --bao-smart-rail-max: 940px;
+        grid-template-columns: minmax(0, 1fr) minmax(0, var(--bao-smart-rail-max)) minmax(0, 1fr) !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_main > .o_control_panel_actions:has(> :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_main > .o_control_panel_actions:has(> :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)) {
+        width: 100% !important;
+        max-width: var(--bao-smart-rail-max) !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button) {
+        --bao-stat-button-width: 104px;
+        --bao-smart-rail-max: 940px;
+        flex: 0 1 var(--bao-smart-rail-max) !important;
+        width: 100% !important;
+        max-width: var(--bao-smart-rail-max) !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.oe_stat_button),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.oe_stat_button) {
+        --bao-stat-button-width: 104px;
+        --bao-smart-rail-max: 940px;
+        flex: 0 1 var(--bao-smart-rail-max) !important;
+        width: 100% !important;
+        max-width: var(--bao-smart-rail-max) !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.oe_stat_button)
+        > .btn.oe_stat_button:not(:has(.o_button_more)),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.oe_stat_button)
+        > .btn.oe_stat_button:not(:has(.o_button_more)) {
+        flex: 1 1 104px !important;
+        width: auto !important;
+        min-width: 104px !important;
+        max-width: 300px !important;
+        height: 44px !important;
+        min-height: 44px !important;
+        max-height: 44px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        overflow-wrap: normal !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .o_web_client .o_action_manager .o_control_panel {
+        --bao-topbar-control-font-size: 0.84rem;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel :is(.btn, button, input, .o_searchview_input) {
+        font-size: var(--bao-topbar-control-font-size) !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel
+        .o_control_panel_breadcrumbs_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.o_button_more) {
+        position: relative !important;
+        display: inline-flex !important;
+        flex: 0 0 44px !important;
+        width: 44px !important;
+        min-width: 44px !important;
+        max-width: 44px !important;
+        height: 44px !important;
+        min-height: 44px !important;
+        max-height: 44px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        color: #f1f1f1 !important;
+        background: #3d79b0 !important;
+        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        border-radius: 6px !important;
+        box-shadow: none !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel
+        .o_control_panel_breadcrumbs_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.o_button_more)
+        > .oe_stat_button,
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel
+        .o_control_panel_breadcrumbs_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.o_button_more)
+        .o_button_more {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 0 0 44px !important;
+        width: 44px !important;
+        min-width: 44px !important;
+        max-width: 44px !important;
+        height: 44px !important;
+        min-height: 44px !important;
+        max-height: 44px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+        text-overflow: clip !important;
+        color: #f1f1f1 !important;
+        background: transparent !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .o_web_client .o_action_manager:not(:has(.o_form_view)):not(:has(.o_base_settings_view))
+        .o_control_panel .o_control_panel_main {
+        grid-template-columns: minmax(0, 1fr) max-content !important;
+        grid-template-areas:
+            "breadcrumbs navigation"
+            "actions actions" !important;
+        align-items: flex-start !important;
+        row-gap: 8px !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+
+    .o_web_client .o_action_manager:not(:has(.o_form_view)):not(:has(.o_base_settings_view))
+        .o_control_panel :is(.o_control_panel_breadcrumbs, .o_control_panel_actions, .o_control_panel_navigation),
+    .o_web_client .o_action_manager:not(:has(.o_form_view)):not(:has(.o_base_settings_view))
+        .o_control_panel :is(.o_searchview, .o_cp_searchview) {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+
+    .o_web_client .o_action_manager:not(:has(.o_form_view)):not(:has(.o_base_settings_view))
+        .o_control_panel .o_searchview :is(.o_searchview_facet, .o_facet_value, .o_searchview_input) {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons {
+        flex-wrap: wrap !important;
+        align-items: flex-start !important;
+        align-content: flex-start !important;
+        gap: 8px !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > :is(.btn, button):not(.dropdown-toggle) {
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: var(--bao-sheet-header-action-height) !important;
+        max-height: none !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+        text-overflow: clip !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg > .o_form_statusbar :is(.o_field_statusbar, .o_statusbar_status) {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .o_arrow_button:not(.d-none) {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+}
+
+/* RR14: keep non-form BAO control-panel actions in the native left cluster.
+   The RR12/RR13 guards protected overflow, but allowed short actions to stack at normal widths. */
+@media (min-width: 768px) {
+    .o_web_client .o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_breadcrumbs {
+        display: inline-flex !important;
+        align-items: center !important;
+        align-content: center !important;
+        justify-content: flex-start !important;
+        justify-self: start !important;
+        gap: 8px !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        min-height: 40px !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+
+    .o_web_client .o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_breadcrumbs > :is(.o_breadcrumb, .breadcrumb) {
+        display: inline-flex !important;
+        order: 0 !important;
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: clamp(88px, 18vw, 240px) !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        position: relative !important;
+        z-index: 0 !important;
+    }
+
+    .o_web_client .o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_breadcrumbs > :is(.o_control_panel_main_buttons, .o_control_panel_breadcrumbs_actions),
+    .o_web_client .o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_breadcrumbs :is(.o_control_panel_main_buttons, .o_control_panel_breadcrumbs_actions),
+    .o_web_client .o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_main_buttons {
+        display: inline-flex !important;
+        order: 1 !important;
+        align-items: center !important;
+        align-content: center !important;
+        justify-content: flex-start !important;
+        flex: 0 0 auto !important;
+        flex-wrap: nowrap !important;
+        gap: 8px !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 300px !important;
+        height: auto !important;
+        min-height: 36px !important;
+        max-height: 40px !important;
+        margin: 0 !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    .o_web_client .o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_main_buttons :is(.btn, button),
+    .o_web_client .o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_breadcrumbs_actions :is(.btn, button),
+    .o_web_client .o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(:has(.o_base_settings_view))
+        .o_cp_action_menus :is(.btn, button) {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 36px !important;
+        max-width: 132px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        max-height: 36px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .o_web_client .o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_main_buttons :is(.btn, button):first-child {
+        flex: 0 0 auto !important;
+        min-width: 36px !important;
+    }
+}
+
+/* RR15 final containment: keep full labels accessible without allowing visual overlap. */
+@media (min-width: 768px) {
+    .o_main_navbar .o_menu_sections > :is(.o-dropdown, .o_nav_entry, .dropdown-toggle):not(.o_menu_sections_more),
+    .o_main_navbar .o_menu_sections > .o-dropdown > :is(button, .dropdown-toggle),
+    .o_main_navbar .o_menu_sections > .o_nav_entry {
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: clamp(72px, 12vw, 220px) !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+
+    .o_main_navbar .o_menu_sections :is(a, button, span):not(.o_menu_sections_more *) {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .o_main_navbar .o_menu_sections > :is(.o-dropdown, .o_nav_entry, .dropdown-toggle):not(.o_menu_sections_more),
+    .o_main_navbar .o_menu_sections > .o-dropdown > :is(button, .dropdown-toggle),
+    .o_main_navbar .o_menu_sections > .o_nav_entry {
+        max-width: clamp(7rem, 11vw, 10rem) !important;
+    }
+}
+
+.o_web_client .o_action_manager .o_control_panel {
+    .o_control_panel_breadcrumbs > .o_control_panel_main_buttons,
+    .o_control_panel_main_buttons,
+    .o_bao_header_main_buttons,
+    .o_bao_header_main_buttons .o_control_panel_main_buttons,
+    .o_control_panel_breadcrumbs_actions {
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+
+    .o_control_panel_main_buttons :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more),
+    .o_control_panel_breadcrumbs_actions :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more),
+    .o_cp_action_menus :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more) {
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: 36px !important;
+        max-width: 132px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        max-height: 36px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        overflow-wrap: normal !important;
+        text-overflow: ellipsis !important;
+        line-height: 1.1 !important;
+    }
+
+    .o_control_panel_navigation .o_pager_counter,
+    .o_control_panel_navigation .o_pager_counter span,
+    .o_searchview_facet .o_facet_value {
+        cursor: help;
+    }
+}
+
+/* RR16: navbar sections must use natural readable widths so native Odoo NavBar.adapt()
+   can move surplus sections into More instead of BAO clipping visible labels. */
+@media (min-width: 576px) {
+    .o_main_navbar .o_menu_sections {
+        align-items: center !important;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+    }
+
+    .o_main_navbar .o_menu_sections > :not(.o_menu_sections_more) {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: max-content !important;
+        max-width: none !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        white-space: nowrap !important;
+    }
+
+    .o_main_navbar .o_menu_sections > :not(.o_menu_sections_more) :is(a, button, span),
+    .o_main_navbar .o_menu_sections > :is(a, button, .o_nav_entry, .dropdown-toggle):not(.o_menu_sections_more) {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: max-content !important;
+        max-width: none !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        white-space: nowrap !important;
+    }
+
+    .o_main_navbar .o_menu_sections .o_menu_sections_more {
+        display: inline-flex !important;
+        flex: 0 0 auto !important;
+        min-width: 44px !important;
+        max-width: none !important;
+        overflow: visible !important;
+    }
+
+    .o_main_navbar .o_menu_sections .o_menu_sections_more :is(button, .dropdown-toggle) {
+        min-width: 44px !important;
+        max-width: none !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+    }
+
+    .o_main_navbar .o_menu_sections .o_menu_sections_more :is(.dropdown-menu, .o-dropdown--menu, .dropdown-item, .o_more_dropdown_section, .dropdown-header) {
+        max-width: 92vw !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+        text-overflow: clip !important;
+    }
+}
+
+/* RR17: mobile form TopBar readability.
+   Keep native stacking behavior, but stop long breadcrumbs/actions from being squeezed
+   into a narrow column during abrupt mobile transitions. */
+@media (max-width: 767.98px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel {
+        padding: 8px 14px 12px !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_main,
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_main {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-template-areas:
+            "navigation"
+            "breadcrumbs"
+            "actions" !important;
+        align-items: start !important;
+        justify-content: stretch !important;
+        gap: 8px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_main > .o_control_panel_navigation {
+        grid-area: navigation !important;
+        justify-self: start !important;
+        align-self: start !important;
+        display: inline-flex !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        overflow: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_main > .o_control_panel_breadcrumbs {
+        grid-area: breadcrumbs !important;
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 7px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_main > .o_control_panel_breadcrumbs > .o_breadcrumb.o_bao_breadcrumb {
+        display: contents !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_bao_form_header_cluster {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 7px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_bao_form_header_cluster > .o_bao_breadcrumb_header {
+        display: flex !important;
+        flex: 1 1 100% !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        margin: 0 !important;
+        overflow: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_bao_breadcrumb_header_text {
+        display: block !important;
+        flex: 1 1 auto !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+        word-break: normal !important;
+        line-height: 1.14 !important;
+        font-size: 0.92rem !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        :is(.o_bao_breadcrumb_interactive, .o_bao_header_menu_actions, .o_bao_header_main_buttons, .o_bao_header_status_actions),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        :is(.o_bao_header_menu_actions, .o_bao_header_main_buttons)
+        :is(.o_control_panel_breadcrumbs_actions, .o_cp_action_menus, .o_control_panel_main_buttons) {
+        display: inline-flex !important;
+        flex: 0 1 auto !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 6px !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        min-height: 36px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        :is(.o_bao_header_main_buttons, .o_bao_header_menu_actions, .o_control_panel_breadcrumbs_actions, .o_control_panel_main_buttons, .o_cp_action_menus)
+        :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more) {
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: 36px !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 36px !important;
+        max-height: none !important;
+        padding: 8px 12px !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        overflow-wrap: anywhere !important;
+        text-overflow: clip !important;
+        line-height: 1.12 !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_bao_breadcrumb_trail {
+        display: block !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        white-space: normal !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_bao_breadcrumb_trail .breadcrumb {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        gap: 3px 6px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        overflow: visible !important;
+        white-space: normal !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_bao_breadcrumb_trail :is(.breadcrumb-item, .breadcrumb-item a, .breadcrumb-item span, .o_last_breadcrumb_item, .o_last_breadcrumb_item span) {
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+        line-height: 1.16 !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_main > .o_control_panel_actions {
+        grid-area: actions !important;
+        justify-self: stretch !important;
+        align-self: start !important;
+        display: flex !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+}
+
+/* RR18: control-panel dropdown popovers must keep a usable touch target on mobile/tablet. */
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu.o-control-panel-adaptive-dropdown,
+.o_web_client:has(.o_control_panel .dropdown-toggle.show) .o_popover.o-dropdown--menu.dropdown-menu.mx-0.lh-base {
+    width: max-content !important;
+    min-width: 188px !important;
+    max-width: calc(100vw - 24px) !important;
+    min-height: 40px !important;
+    padding: 6px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    border: 1px solid rgba(32, 46, 62, 0.14) !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.14), 0 4px 14px rgba(15, 23, 42, 0.08) !important;
+}
+
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu.o-control-panel-adaptive-dropdown :is(.dropdown-item, .o-dropdown-item, .o-dropdown-item-unstyled-button),
+.o_web_client:has(.o_control_panel .dropdown-toggle.show) .o_popover.o-dropdown--menu.dropdown-menu.mx-0.lh-base :is(.dropdown-item, .o-dropdown-item, .o-dropdown-item-unstyled-button) {
+    display: flex !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 38px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 6px !important;
+    white-space: normal !important;
+}
+
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu.o-control-panel-adaptive-dropdown :is(.dropdown-item, .o-dropdown-item, .o-dropdown-item-unstyled-button) > :is(.btn, button, a),
+.o_web_client .o_popover.o-dropdown--menu.dropdown-menu.o-control-panel-adaptive-dropdown > :is(.btn, button, a, .dropdown-item, .o-dropdown-item),
+.o_web_client:has(.o_control_panel .dropdown-toggle.show) .o_popover.o-dropdown--menu.dropdown-menu.mx-0.lh-base :is(.dropdown-item, .o-dropdown-item, .o-dropdown-item-unstyled-button) > :is(.btn, button, a),
+.o_web_client:has(.o_control_panel .dropdown-toggle.show) .o_popover.o-dropdown--menu.dropdown-menu.mx-0.lh-base > :is(.btn, button, a, .dropdown-item, .o-dropdown-item) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 38px !important;
+    height: auto !important;
+    padding: 8px 12px !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 6px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #30343a !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 20px !important;
+    text-align: left !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
 }
