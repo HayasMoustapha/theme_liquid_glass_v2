@@ -2091,6 +2091,10 @@
 
 .o_web_client .o_action_manager:has(.o_base_settings_view) .o_content {
     margin: 26px !important;
+    min-height: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
 }
 
 .o_web_client .o_base_settings_view .o_setting_container {
@@ -2098,9 +2102,14 @@
     grid-template-columns: minmax(200px, 220px) minmax(0, 1fr) !important;
     align-items: start !important;
     gap: 0 !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
     max-width: 1180px !important;
     margin: 0 auto !important;
-    overflow: hidden !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
     border: 1px solid $bao-border-200 !important;
     border-radius: 8px !important;
     background: $bao-surface-0 !important;
@@ -2119,12 +2128,15 @@
     min-width: 0 !important;
     max-width: 100% !important;
     border-radius: 0 !important;
-    overflow: auto !important;
+    overflow: visible !important;
 }
 
 @media (max-width: 767.98px) {
     .o_web_client .o_base_settings_view .o_setting_container {
         display: block !important;
+        height: 100% !important;
+        min-height: 0 !important;
+        max-height: 100% !important;
         max-width: 100% !important;
     }
 
@@ -4700,6 +4712,275 @@
         max-height: none !important;
         white-space: normal !important;
         overflow-wrap: anywhere !important;
+    }
+}
+
+/* RR33 global scroll contract: long action bodies own vertical scroll, never the page root. */
+.o_web_client .o_action_manager,
+.o_web_client .o_action_manager > :is(.o_action, .o_view_controller),
+.o_web_client .o_action_manager :is(.o_content, .o_renderer) {
+    min-width: 0 !important;
+    min-height: 0 !important;
+}
+
+.o_web_client .o_action_manager:has(.o_base_settings_view),
+.o_web_client .o_action_manager:has(.o_kanban_view.o_stock_dashboard_kanban_view) {
+    overflow: hidden !important;
+}
+
+.o_web_client .o_action_manager:has(.o_base_settings_view) .o_content,
+.o_web_client .o_action_manager:has(.o_kanban_view.o_stock_dashboard_kanban_view) .o_content {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+.o_web_client .o_base_settings_view {
+    min-height: 0 !important;
+    overflow: hidden !important;
+}
+
+.o_web_client .o_base_settings_view .o_setting_container {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+}
+
+.o_web_client .o_base_settings_view .settings {
+    overflow: visible !important;
+}
+
+.o_web_client .o_base_settings_view .settings_tab {
+    min-height: 0 !important;
+}
+
+.o_web_client .o_action_manager > .o_kanban_view.o_stock_dashboard_kanban_view.o_action.o_view_controller {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: calc(100dvh - 60px) !important;
+    max-height: calc(100dvh - 60px) !important;
+    overflow: hidden !important;
+}
+
+.o_web_client .o_action_manager > .o_kanban_view.o_stock_dashboard_kanban_view.o_action.o_view_controller > .o_content {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+.o_web_client
+    .o_action_manager
+    > .o_kanban_view.o_stock_dashboard_kanban_view.o_action.o_view_controller
+    > .o_content
+    > .o_kanban_renderer {
+    flex: 0 0 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel .o_control_panel_main {
+    display: grid !important;
+    grid-template-columns: minmax(260px, 1fr) minmax(320px, 468px) minmax(0, 1fr) !important;
+    grid-template-areas: "breadcrumbs actions navigation" !important;
+    align-items: center !important;
+    column-gap: clamp(14px, 2vw, 24px) !important;
+    row-gap: 8px !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_control_panel_breadcrumbs {
+    grid-area: breadcrumbs !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 42px !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_settings_header_cluster {
+    display: inline-flex !important;
+    align-items: center !important;
+    align-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 8px 10px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_breadcrumb_header {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    color: #ffe017 !important;
+    font-family: $bao-font-body !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+    letter-spacing: 0 !important;
+}
+
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_breadcrumb_header_text {
+    color: inherit !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_header_main_buttons,
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_header_main_buttons .o_control_panel_main_buttons {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    overflow: visible !important;
+}
+
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_header_main_buttons .btn,
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_header_main_buttons button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 176px !important;
+    min-height: 36px !important;
+    height: 36px !important;
+    padding: 7px 14px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_control_panel_actions {
+    grid-area: actions !important;
+    justify-self: center !important;
+    width: 100% !important;
+    min-width: 320px !important;
+    max-width: 468px !important;
+    margin: 0 !important;
+}
+
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_control_panel_navigation {
+    grid-area: navigation !important;
+    justify-self: end !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_settings_breadcrumb {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_settings_breadcrumb:not(:has(.o_bao_breadcrumb_trail)),
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_settings_empty_breadcrumb,
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_settings_breadcrumb > :not(.o_bao_breadcrumb_trail) {
+    display: none !important;
+}
+
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_breadcrumb_trail {
+    display: inline-flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scrollbar-width: none;
+}
+
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_breadcrumb_trail::-webkit-scrollbar {
+    display: none;
+}
+
+@media (max-width: 1199.98px) {
+    .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel .o_control_panel_main {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 42vw) minmax(0, auto) !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_control_panel_actions {
+        min-width: 280px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel .o_control_panel_main {
+        grid-template-columns: minmax(0, 1fr) auto !important;
+        grid-template-areas:
+            "breadcrumbs navigation"
+            "actions actions" !important;
+        align-items: start !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_control_panel_breadcrumbs {
+        min-height: 40px !important;
+        overflow: visible !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_settings_header_cluster {
+        flex-wrap: nowrap !important;
+        gap: 8px !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_breadcrumb_header {
+        flex: 1 1 auto !important;
+        max-width: 42vw !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_header_main_buttons {
+        flex: 0 1 auto !important;
+        max-width: calc(100% - 84px) !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_header_main_buttons .o_control_panel_main_buttons {
+        gap: 6px !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_header_main_buttons .btn,
+    .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_header_main_buttons button {
+        flex: 0 1 auto !important;
+        max-width: 98px !important;
+        min-height: 38px !important;
+        height: 38px !important;
+        padding-inline: 10px !important;
+    }
+
+    .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_control_panel_actions {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
     }
 }
 
@@ -7546,4 +7827,32 @@
         overflow: hidden !important;
         white-space: nowrap !important;
     }
+}
+
+/* RR33 final authority: Settings has no duplicated native breadcrumb when the
+   only trail item is the current Settings header. */
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_settings_empty_breadcrumb {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+}
+
+.o_web_client
+    .o_action_manager
+    .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel)
+    .o_control_panel_breadcrumbs
+    > .o_breadcrumb.o_bao_settings_breadcrumb.o_bao_settings_empty_breadcrumb {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
 }

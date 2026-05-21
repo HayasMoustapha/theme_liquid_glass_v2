@@ -994,6 +994,97 @@ function normalizeBreadcrumbs(root) {
     }
 }
 
+function getSettingsControlPanelLabel(controlPanel) {
+    const existingBreadcrumb = readableTextOf(
+        controlPanel.querySelector(".o_control_panel_breadcrumbs .o_breadcrumb, .o_control_panel_breadcrumbs .breadcrumb")
+    );
+    const navbarBrand = readableTextOf(document.querySelector(".o_main_navbar .o_menu_brand"));
+    const pageTitle = document.title.split(" - ")[0]?.trim();
+    return existingBreadcrumb || navbarBrand || (pageTitle && pageTitle !== "Odoo" ? pageTitle : "Settings");
+}
+
+function normalizeSettingsControlPanel(root) {
+    for (const controlPanel of root.querySelectorAll(".o_control_panel")) {
+        if (!isSettingsControlPanel(controlPanel)) {
+            controlPanel.classList.remove("o_bao_settings_control_panel");
+            continue;
+        }
+        const breadcrumbs = controlPanel.querySelector(".o_control_panel_breadcrumbs");
+        if (!breadcrumbs) {
+            continue;
+        }
+        controlPanel.classList.add("o_bao_settings_control_panel");
+
+        let breadcrumb = breadcrumbs.querySelector(":scope > .o_breadcrumb");
+        if (!breadcrumb) {
+            breadcrumb = document.createElement("div");
+            breadcrumb.className = "o_breadcrumb o_bao_breadcrumb o_bao_settings_breadcrumb d-flex gap-1 text-truncate";
+            breadcrumbs.append(breadcrumb);
+        }
+        breadcrumb.classList.add("o_bao_breadcrumb", "o_bao_settings_breadcrumb");
+
+        const headerCluster = ensureElement(
+            breadcrumbs,
+            ":scope > .o_bao_settings_header_cluster",
+            "div",
+            "o_bao_settings_header_cluster d-inline-flex align-items-center min-w-0"
+        );
+        if (headerCluster.parentElement !== breadcrumbs || breadcrumbs.firstElementChild !== headerCluster) {
+            breadcrumbs.prepend(headerCluster);
+        }
+        const header = ensureElement(
+            headerCluster,
+            ":scope > .o_bao_breadcrumb_header",
+            "div",
+            "o_bao_breadcrumb_header d-flex align-items-center gap-2 min-w-0"
+        );
+        const headerText = ensureElement(
+            header,
+            ":scope > .o_bao_breadcrumb_header_text",
+            "span",
+            "o_bao_breadcrumb_header_text min-w-0 text-truncate"
+        );
+        headerText.textContent = getSettingsControlPanelLabel(controlPanel);
+
+        const mainButtons = controlPanel.querySelector(".o_control_panel_main_buttons");
+        if (mainButtons) {
+            const mainButtonsShell = ensureElement(
+                headerCluster,
+                ":scope > .o_bao_header_main_buttons",
+                "div",
+                "o_bao_header_main_buttons d-inline-flex align-items-center"
+            );
+            if (mainButtons.parentElement !== mainButtonsShell) {
+                mainButtonsShell.append(mainButtons);
+            }
+        }
+
+        const trailList = breadcrumb.querySelector(":scope > .breadcrumb");
+        const trailTexts = [...(trailList?.querySelectorAll(".breadcrumb-item") || [])]
+            .map((item) => textOf(item.querySelector("a, span, button")) || textOf(item))
+            .filter(Boolean);
+        const hasMeaningfulTrail =
+            trailTexts.length > 1 || (trailTexts.length === 1 && trailTexts[0] !== headerText.textContent);
+        breadcrumb.classList.toggle("o_bao_settings_empty_breadcrumb", !hasMeaningfulTrail);
+        if (trailList && hasMeaningfulTrail) {
+            const trailRow = ensureElement(
+                breadcrumb,
+                ":scope > .o_bao_breadcrumb_trail",
+                "div",
+                "o_bao_breadcrumb_trail d-flex align-items-center min-w-0"
+            );
+            if (trailList.parentElement !== trailRow) {
+                trailRow.prepend(trailList);
+            }
+            trailList.classList.add("o_bao_live_trail", "flex-nowrap", "text-nowrap", "lh-sm");
+        } else {
+            for (const trailRow of breadcrumb.querySelectorAll(":scope > .o_bao_breadcrumb_trail")) {
+                trailRow.remove();
+            }
+        }
+    }
+}
+
 function normalizeRouteBreadcrumbs(root) {
     for (const controlPanel of root.querySelectorAll(".o_control_panel")) {
         const clearRouteState = () => {
@@ -1122,6 +1213,7 @@ function refreshControlPanels() {
     normalizeDashboardToolbar(document);
     normalizeProductKanban(document);
     normalizeBreadcrumbs(document);
+    normalizeSettingsControlPanel(document);
     normalizeRouteBreadcrumbs(document);
     normalizeNavbarBreadcrumbs(document);
     pruneFormActionContainers(document);
