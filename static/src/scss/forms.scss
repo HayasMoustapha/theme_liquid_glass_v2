@@ -4526,6 +4526,120 @@
     }
 }
 
+// Tags/autocomplete fields: keep Odoo's native many2many flow, but remove the
+// double input shell that makes BAO tags look encapsulated inside another field.
+.o_form_view .o_form_sheet,
+.o_form_view .o_notebook .tab-content,
+.o_form_view .o_notebook .o_notebook_content,
+.o_form_view .o_notebook .tab-pane {
+    .o_cell_custom.null > .o_row:has(> .o_field_many2many_tags),
+    .o_wrap_input > .o_row:has(> .o_field_many2many_tags) {
+        flex-wrap: wrap !important;
+        align-items: flex-start !important;
+        gap: 4px 8px !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .o_field_widget.o_field_many2many_tags,
+    .o_field_widget.o_field_many2many_tags.oe_inline,
+    .o_field_widget.o_field_many2many_tags_avatar {
+        display: flex !important;
+        flex-flow: row wrap !important;
+        align-items: center !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+        --Tag-max-width: 100%;
+    }
+
+    .o_field_widget.o_field_many2many_tags > .o_field_tags.o_tags_input.o_input,
+    .o_field_widget.o_field_many2many_tags_avatar > .o_field_tags.o_tags_input.o_input {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        gap: 6px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+    }
+
+    .o_field_widget.o_field_many2many_tags .o_field_many2many_selection,
+    .o_field_widget.o_field_many2many_tags_avatar .o_field_many2many_selection {
+        flex: 1 1 8rem !important;
+        width: auto !important;
+        min-width: 7rem !important;
+        max-width: 100% !important;
+    }
+
+    .o_field_widget.o_field_many2many_tags .o_field_tags:has(.o_tag) .o_field_many2many_selection .o-autocomplete--input,
+    .o_field_widget.o_field_many2many_tags_avatar .o_field_tags:has(.o_tag) .o_field_many2many_selection .o-autocomplete--input {
+        min-height: 28px !important;
+        padding: 2px 34px 2px 6px !important;
+        background: transparent !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .o_field_widget.o_field_many2many_tags .o_field_tags:has(.o_tag):focus-within .o_field_many2many_selection .o-autocomplete--input,
+    .o_field_widget.o_field_many2many_tags_avatar .o_field_tags:has(.o_tag):focus-within .o_field_many2many_selection .o-autocomplete--input {
+        min-height: 36px !important;
+        padding: 6px 42px 6px 12px !important;
+        background: #ffffff !important;
+        border-color: rgba(17, 74, 126, 0.14) !important;
+    }
+
+    .o_field_widget.o_field_many2many_tags .o_tag,
+    .o_field_widget.o_field_many2many_tags .badge,
+    .o_field_widget.o_field_many2many_tags_avatar .o_tag,
+    .o_field_widget.o_field_many2many_tags_avatar .badge,
+    .o_field_widget.o_field_badge,
+    .o_field_widget.o_field_badge .badge,
+    .o_tag_badge {
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        flex: 0 1 auto !important;
+        overflow: hidden !important;
+    }
+
+    .o_field_widget.o_field_many2many_tags .o_badge_text,
+    .o_field_widget.o_field_many2many_tags .o_tag_badge_text,
+    .o_field_widget.o_field_many2many_tags_avatar .o_badge_text,
+    .o_field_widget.o_field_many2many_tags_avatar .o_tag_badge_text,
+    .o_field_widget.o_field_badge .badge,
+    .o_tag_badge .o_badge_text,
+    .o_tag_badge .o_tag_badge_text {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+}
+
+.o-autocomplete--dropdown-menu,
+.ui-autocomplete {
+    max-width: calc(100vw - 24px) !important;
+    overflow-wrap: anywhere;
+}
+
+.o-autocomplete--dropdown-item,
+.ui-autocomplete .dropdown-item,
+.ui-autocomplete a,
+.ui-autocomplete button {
+    min-width: 0 !important;
+    white-space: normal !important;
+}
+
 // RR8 final form overflow contract. Dropdowns are overflow recovery only:
 // desktop/tablet/laptop show the normal inline controls while they fit.
 @media (min-width: 768px) {
