@@ -1086,9 +1086,9 @@ table {
     min-height: 30px;
     padding: 2px 8px;
     border-radius: 999px !important;
-    border: 1px solid $bao-border-selected !important;
-    background: $bao-surface-200 !important;
-    color: #ffffff !important;
+    border: 1px solid $bao-border-200 !important;
+    background: $bao-surface-100 !important;
+    color: $bao-text-700 !important;
     font-size: 12px !important;
     font-weight: 700;
     line-height: 1.15 !important;
@@ -1170,8 +1170,8 @@ table {
 .o_field_badge.o_tag_color_5 .badge,
 .o_field_many2many_tags .o_tag.o_tag_color_5,
 .o_field_many2many_selection .o_tag.o_tag_color_5 {
-    background: #03a750 !important;
-    border-color: #03a750 !important;
+    background: $bao-success-700 !important;
+    border-color: $bao-success-700 !important;
     color: #ffffff !important;
 }
 
@@ -1287,9 +1287,9 @@ table {
 .o_field_contact_statistics .badge.bg-secondary.o_tag_color_5,
 .o_field_contact_statistics .o_tag.o_tag_color_5,
 .o_field_contact_statistics .o_tag_color_5 {
-    background: #03a750 !important;
+    background: $bao-success-700 !important;
     color: #ffffff !important;
-    border-color: #03a750 !important;
+    border-color: $bao-success-700 !important;
 }
 
 .o_field_contact_statistics .badge.bg-secondary.o_tag_color_2,
@@ -3131,13 +3131,13 @@ select {
 .o-tooltip,
 .tooltip,
 [role="tooltip"]:not(.o-dropdown--menu):not(.dropdown-menu) {
-    --tooltip-bg: #102033 !important;
+    --tooltip-bg: #{$bao-brand-700} !important;
     --tooltip-color: #f8fafc !important;
-    --bs-tooltip-bg: #102033 !important;
+    --bs-tooltip-bg: #{$bao-brand-700} !important;
     --bs-tooltip-color: #f8fafc !important;
-    --bs-popover-bg: #102033 !important;
+    --bs-popover-bg: #{$bao-brand-700} !important;
     --bs-popover-border-color: rgba(255, 255, 255, 0.16) !important;
-    background: #102033 !important;
+    background: $bao-brand-700 !important;
     border: 1px solid rgba(255, 255, 255, 0.16) !important;
     border-radius: 10px !important;
     box-shadow: 0 14px 34px rgba(13, 41, 76, 0.22) !important;
@@ -3161,7 +3161,7 @@ select {
 .tooltip .tooltip-inner {
     max-width: #{'min(360px, calc(100vw - 24px))'} !important;
     padding: 8px 10px !important;
-    background: #102033 !important;
+    background: $bao-brand-700 !important;
     border-radius: 10px !important;
     font-weight: 600 !important;
     line-height: 1.32 !important;

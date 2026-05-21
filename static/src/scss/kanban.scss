@@ -210,6 +210,160 @@
     max-width: max-content;
 }
 
+// RR37: purchase RFQ kanban keeps native grouped behavior but matches BAO card density.
+.o_kanban_view.o_kanban_small_column .o_kanban_renderer.o_kanban_grouped {
+    gap: 16px !important;
+    padding: 16px !important;
+    background: $bao-surface-0 !important;
+    border: 1px solid $bao-border-200 !important;
+    border-radius: 16px !important;
+    box-shadow: 1px 2px 4px rgba(13, 79, 148, 0.08) !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+}
+
+.o_kanban_view.o_kanban_small_column .o_kanban_group {
+    flex: 1 0 clamp(272px, 30vw, 392px) !important;
+    min-width: clamp(272px, 30vw, 392px) !important;
+    max-width: 392px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.o_kanban_view.o_kanban_small_column .o_kanban_group .o_kanban_header {
+    min-height: 42px !important;
+    padding: 0 0 10px !important;
+    background: transparent !important;
+    border: 0 !important;
+    color: $bao-text-800 !important;
+}
+
+.o_kanban_view.o_kanban_small_column .o_kanban_group .o_kanban_header .o_column_title,
+.o_kanban_view.o_kanban_small_column .o_kanban_group .o_kanban_header .o_kanban_header_title {
+    color: $bao-text-800 !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+}
+
+.o_kanban_view.o_kanban_small_column
+    .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new) {
+    min-height: 76px !important;
+    padding: 8px !important;
+    border: 1px solid $bao-border-200 !important;
+    border-radius: 6px !important;
+    background: $bao-surface-0 !important;
+    box-shadow: 1px 2px 4px rgba(13, 79, 148, 0.08) !important;
+    color: $bao-text-800 !important;
+}
+
+.o_kanban_view.o_kanban_small_column
+    .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new):hover {
+    border-color: $bao-border-selected !important;
+    box-shadow: 0 0 0 1px rgba(19, 87, 160, 0.12), 1px 2px 4px rgba(13, 79, 148, 0.08) !important;
+    transform: none !important;
+}
+
+.o_kanban_view.o_kanban_small_column .o_kanban_record .oe_kanban_card {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) max-content !important;
+    grid-template-areas:
+        "header header"
+        "partner amount"
+        "date date" !important;
+    align-items: center !important;
+    column-gap: 10px !important;
+    row-gap: 3px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+.o_kanban_view.o_kanban_small_column .o_kanban_record .oe_kanban_card > .row {
+    grid-area: header !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    min-height: 22px !important;
+    margin: 0 !important;
+}
+
+.o_kanban_view.o_kanban_small_column .o_kanban_record .oe_kanban_card > .row > [class*="col-"] {
+    min-width: 0 !important;
+    padding: 0 !important;
+}
+
+.o_kanban_view.o_kanban_small_column .o_kanban_record .oe_kanban_card > .row > [class*="col-"]:first-child {
+    flex: 1 1 auto !important;
+}
+
+.o_kanban_view.o_kanban_small_column .o_kanban_record .oe_kanban_card > .row > .text-end {
+    flex: 0 0 auto !important;
+    margin-left: 8px !important;
+}
+
+.o_kanban_view.o_kanban_small_column .o_kanban_record .oe_kanban_card > div:nth-of-type(2) {
+    grid-area: partner !important;
+    min-width: 0 !important;
+    color: $bao-text-800 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.o_kanban_view.o_kanban_small_column .o_kanban_record .oe_kanban_card > .text-muted {
+    grid-area: date !important;
+    min-width: 0 !important;
+    color: $bao-text-600 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.o_kanban_view.o_kanban_small_column .o_kanban_record .oe_kanban_card > div:last-child {
+    grid-area: amount !important;
+    justify-self: end !important;
+    max-width: 9.5rem !important;
+    color: $bao-text-800 !important;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.o_kanban_view.o_kanban_small_column .o_kanban_record .badge,
+.o_kanban_view.o_kanban_small_column .o_kanban_record .o_tag,
+.o_kanban_view.o_kanban_small_column .o_kanban_record .o_label_selection {
+    min-height: 20px !important;
+    height: 20px !important;
+    max-width: 10rem !important;
+    padding: 0 8px !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: $bao-brand-600 !important;
+    color: #ffffff !important;
+    font-size: 0.68rem !important;
+    font-weight: 600 !important;
+    line-height: 20px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+@media (max-width: 767.98px) {
+    .o_kanban_view.o_kanban_small_column .o_kanban_renderer.o_kanban_grouped {
+        scroll-snap-type: x mandatory;
+    }
+
+    .o_kanban_view.o_kanban_small_column .o_kanban_group {
+        flex-basis: calc(100vw - 52px) !important;
+        min-width: calc(100vw - 52px) !important;
+        max-width: calc(100vw - 52px) !important;
+        scroll-snap-align: start;
+    }
+}
+
 // BAO atlas v3 card_kanban: compact ungrouped purchase-style cards, native data/actions.
 .o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
     --bao-kanban-columns: 5;
@@ -222,7 +376,7 @@
     flex-wrap: wrap !important;
     gap: 8px !important;
     width: 100% !important;
-    margin: none !important;
+    margin: 0 !important;
     padding: 16px !important;
     background: #ffffff !important;
     border: 1px solid #e1e1e1 !important;
@@ -250,7 +404,7 @@
         font-weight: 400 !important;
         line-height: 20px !important;
         overflow: hidden !important;
-        transform:  !important;
+        transform: none !important;
         -webkit-transform: none !important;
         -moz-transform: none !important;
         -ms-transform: none !important;
@@ -346,8 +500,8 @@
         border: 0 !important;
         border-radius: 999px !important;
         box-shadow: none !important;
-        font-size: 10px !important;
-        font-weight: 400 !important;
+        font-size: 10.5px !important;
+        font-weight: 600 !important;
         line-height: 18px !important;
         white-space: nowrap !important;
     }
@@ -375,7 +529,7 @@
     .o_kanban_record .bg-200,
     .o_kanban_record .o_status.o_status_grey {
         background: #dedede !important;
-        color: #8a8a8a !important;
+        color: #45515f !important;
     }
 
     .o_kanban_record .badge[raw-value="purchase"],
@@ -393,7 +547,7 @@
 
     .o_kanban_record .badge[raw-value="draft"] {
         background: #dedede !important;
-        color: #8a8a8a !important;
+        color: #45515f !important;
     }
 
     .o_kanban_record .badge[raw-value="cancel"] {
