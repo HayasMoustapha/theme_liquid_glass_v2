@@ -3687,6 +3687,61 @@
     }
 }
 
+// RR38: readonly fields need a clearer label/value hierarchy in sheets and notebooks.
+// Use native Odoo readonly classes only; edit-mode inputs and complex widgets stay native.
+.o_action_manager:has(.o_form_view) .o_form_view {
+    .o_form_sheet,
+    .o_notebook .tab-content,
+    .o_notebook .o_notebook_content,
+    .o_notebook .tab-pane {
+        .o_form_label.o_form_label_readonly,
+        .o_td_label .col-form-label.o_form_label_readonly,
+        .o_wrap_label .col-form-label.o_form_label_readonly,
+        .o_wrap_label .o_form_label.o_form_label_readonly {
+            color: #6f6f6f !important;
+            font-size: 0.86rem !important;
+            font-weight: 600 !important;
+            line-height: 1.28 !important;
+            letter-spacing: 0 !important;
+            opacity: 1 !important;
+        }
+
+        .o_wrap_label:has(.o_form_label_readonly),
+        .o_td_label:has(.o_form_label_readonly) {
+            margin-bottom: 4px !important;
+        }
+
+        .o_wrap_input:has(
+                > .o_field_widget.o_readonly_modifier:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html):not(.o_field_statusbar):not(.o_field_many2many_tags):not(.o_field_many2many_tags_avatar)
+            ),
+        .o_cell_custom.null:has(
+                > .o_field_widget.o_readonly_modifier:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html):not(.o_field_statusbar):not(.o_field_many2many_tags):not(.o_field_many2many_tags_avatar)
+            ) {
+            color: $bao-text-800 !important;
+        }
+
+        .o_field_widget.o_readonly_modifier:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html):not(.o_field_statusbar):not(.o_field_many2many_tags):not(.o_field_many2many_tags_avatar) {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            color: $bao-text-800 !important;
+            font-weight: 600 !important;
+            line-height: 1.35 !important;
+            opacity: 1 !important;
+            overflow-wrap: anywhere !important;
+        }
+
+        .o_field_widget.o_readonly_modifier:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html):not(.o_field_statusbar):not(.o_field_many2many_tags):not(.o_field_many2many_tags_avatar)
+            > :is(span, a, div):not(.badge):not(.o_badge):not(.o_tag):not(.o_tag_badge) {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            color: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+            overflow-wrap: inherit !important;
+        }
+    }
+}
+
 // Notebook field inheritance: notebook autocomplete/many2one controls must reuse the
 // exact same Liquid+BAO shell contract as the main form sheet, without introducing a
 // notebook-only field skin.
