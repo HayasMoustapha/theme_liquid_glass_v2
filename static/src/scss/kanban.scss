@@ -726,14 +726,15 @@
     gap: 24px !important;
     width: 100% !important;
     min-height: calc(100vh - 156px) !important;
-    height: calc(100vh - 156px) !important;
+    height: auto !important;
     margin: -26px -28px 0 !important;
     padding: 11px !important;
     background: transparent !important;
     border: none !important;
     border-radius: none !important;
     box-shadow: none !important;
-    overflow: hidden !important;
+    align-content: flex-start !important;
+    overflow: visible !important;
     font-family: "Open Sans", sans-serif !important;
     .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),    .o_kanban_quick_create{
         flex: 0 0 var(--bao-kanban-card-basis) !important;
@@ -835,6 +836,19 @@
         color: #ffffff !important;
         box-shadow: none !important;
     }
+}
+
+.o_action_manager .o_content:has(.o_kanban_view.o_stock_dashboard_kanban_view) {
+    min-height: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+.o_kanban_view.o_stock_dashboard_kanban_view:not(.o_modules_kanban) {
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
 }
 
 
