@@ -6070,6 +6070,166 @@
     }
 }
 
+// RR39: financial fields need label/value proximity without replacing Odoo's
+// native monetary widget internals. Only groups that contain real monetary,
+// amount or price widgets switch to a two-column label/value rhythm.
+@media (min-width: 768px) {
+    .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet {
+        .o_inner_group.grid:not(.oe_subtotal_footer):has(
+                > .o_cell_custom.null .o_field_widget.o_field_monetary:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_cell_custom.null .o_field_widget[name*="amount"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_cell_custom.null .o_field_widget[name*="price"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_cell_custom.null .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many)
+            ) {
+            grid-template-columns: minmax(8.75rem, 42%) minmax(0, 1fr) !important;
+            column-gap: 14px !important;
+            row-gap: 2px !important;
+            align-items: center !important;
+        }
+
+        .o_inner_group.grid:not(.oe_subtotal_footer):has(
+                > .o_cell_custom.null .o_field_widget.o_field_monetary:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_cell_custom.null .o_field_widget[name*="amount"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_cell_custom.null .o_field_widget[name*="price"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_cell_custom.null .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many)
+            )
+            > .o_cell_custom {
+            grid-column: 1 / -1 !important;
+        }
+
+        .o_inner_group.grid:not(.oe_subtotal_footer):has(
+                > .o_cell_custom.null .o_field_widget.o_field_monetary:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_cell_custom.null .o_field_widget[name*="amount"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_cell_custom.null .o_field_widget[name*="price"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_cell_custom.null .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many)
+            )
+            > .o_cell_custom.o_wrap_label:not(:empty):has(
+                + .o_cell_custom.null .o_field_widget.o_field_monetary:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                + .o_cell_custom.null .o_field_widget[name*="amount"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                + .o_cell_custom.null .o_field_widget[name*="price"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                + .o_cell_custom.null .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many)
+            ) {
+            grid-column: 1 !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            margin-bottom: 8px !important;
+            align-self: start !important;
+        }
+
+        .o_inner_group.grid:not(.oe_subtotal_footer):has(
+                > .o_cell_custom.null .o_field_widget.o_field_monetary:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_cell_custom.null .o_field_widget[name*="amount"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_cell_custom.null .o_field_widget[name*="price"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_cell_custom.null .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many)
+            )
+            > .o_cell_custom.o_wrap_label:not(:empty):has(
+                + .o_cell_custom.null .o_field_widget.o_field_monetary:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                + .o_cell_custom.null .o_field_widget[name*="amount"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                + .o_cell_custom.null .o_field_widget[name*="price"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                + .o_cell_custom.null .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many)
+            )
+            + .o_cell_custom.null {
+            grid-column: 2 !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            margin-bottom: 8px !important;
+            align-self: start !important;
+        }
+
+        .o_inner_group.grid:not(.oe_subtotal_footer)
+            > .o_cell_custom.null:has(
+                .o_field_widget.o_field_monetary:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                .o_field_widget[name*="amount"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                .o_field_widget[name*="price"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many)
+            ) {
+            text-align: right !important;
+        }
+
+        .o_inner_group.grid:not(.oe_subtotal_footer)
+            > .o_cell_custom.null:has(
+                .o_field_widget.o_field_monetary:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                .o_field_widget[name*="amount"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                .o_field_widget[name*="price"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many)
+            )
+            > :not(.o_field_x2many) {
+            max-width: 100% !important;
+            min-width: 0 !important;
+            text-align: inherit !important;
+        }
+
+        .o_inner_group.grid:not(.oe_subtotal_footer)
+            > .o_cell_custom.null
+            :is(.o_row, .d-flex):has(
+                > .o_field_widget.o_field_monetary:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_field_widget[name*="amount"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_field_widget[name*="price"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+                > .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many)
+            ) {
+            justify-content: flex-end !important;
+            margin-inline: 0 !important;
+            width: 100% !important;
+        }
+    }
+}
+
+.o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet {
+    .o_field_widget.o_field_monetary:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+    .o_field_widget[name*="amount"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+    .o_field_widget[name*="price"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
+    .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many) {
+        max-width: 100% !important;
+        white-space: nowrap !important;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .o_field_widget.o_readonly_modifier.o_field_monetary,
+    .o_field_widget.o_readonly_modifier[name*="amount"],
+    .o_field_widget.o_readonly_modifier[name*="price"],
+    .o_field_widget.o_readonly_modifier[name*="margin"] {
+        width: auto !important;
+        justify-content: flex-end !important;
+        text-align: right !important;
+    }
+
+    .o_field_widget.o_field_monetary:not(.o_readonly_modifier) {
+        width: 14rem !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .o_field_widget.o_field_monetary > .text-nowrap,
+    .o_field_widget.o_field_monetary > .d-inline-flex {
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .oe_subtotal_footer {
+        .o_field_monetary,
+        .o_field_account-tax-totals-field,
+        .o_list_monetary,
+        .oe_currency_value,
+        .oe_subtotal_footer_separator {
+            white-space: nowrap !important;
+            font-variant-numeric: tabular-nums;
+            text-align: right !important;
+        }
+
+        .o_field_account-tax-totals-field table {
+            width: 100% !important;
+            table-layout: auto !important;
+        }
+
+        .o_field_account-tax-totals-field .o_td_label {
+            max-width: 70% !important;
+            padding-right: 14px !important;
+            text-align: left !important;
+            white-space: normal !important;
+        }
+    }
+}
+
 // Inline numeric controls need enough room for BAO input padding. Odoo's
 // native 7ch cap is correct for unskinned percentage widgets, but it clips
 // decimal values once the BAO form-control padding is applied.
