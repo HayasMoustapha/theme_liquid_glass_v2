@@ -3124,3 +3124,45 @@ select {
         }
     }
 }
+
+// RR32 tooltip readability: tooltips are informational overlays, not menus.
+// Keep them visually separate from light dropdown/autocomplete surfaces.
+.o_popover:has(.o-tooltip),
+.o-tooltip,
+.tooltip,
+[role="tooltip"]:not(.o-dropdown--menu):not(.dropdown-menu) {
+    --tooltip-bg: #102033 !important;
+    --tooltip-color: #f8fafc !important;
+    --bs-tooltip-bg: #102033 !important;
+    --bs-tooltip-color: #f8fafc !important;
+    --bs-popover-bg: #102033 !important;
+    --bs-popover-border-color: rgba(255, 255, 255, 0.16) !important;
+    background: #102033 !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 14px 34px rgba(13, 41, 76, 0.22) !important;
+    color: #f8fafc !important;
+}
+
+.o_popover:has(.o-tooltip) *,
+.o-tooltip,
+.o-tooltip *,
+.tooltip .tooltip-inner,
+[role="tooltip"]:not(.o-dropdown--menu):not(.dropdown-menu) * {
+    color: #f8fafc !important;
+}
+
+.o-tooltip .o-tooltip--technical,
+.o-tooltip .o-tooltip--technical *,
+.o-tooltip .o-tooltip--help {
+    color: #dbeafe !important;
+}
+
+.tooltip .tooltip-inner {
+    max-width: #{'min(360px, calc(100vw - 24px))'} !important;
+    padding: 8px 10px !important;
+    background: #102033 !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    line-height: 1.32 !important;
+}
