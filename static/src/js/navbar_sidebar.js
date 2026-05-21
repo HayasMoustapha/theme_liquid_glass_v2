@@ -1306,7 +1306,6 @@ patch(ButtonBox.prototype, {
             slotSignature: "",
         });
         this.baoButtonBoxForcedOverflow = { width: 0, slotSignature: "", capacity: 0 };
-        this.baoButtonBoxReadableLimit = { viewportWidth: 0, availableWidth: 0, slotSignature: "", capacity: 0 };
         let settledMeasureTimerId = null;
         const scheduleSettledMeasure = () => {
             window.requestAnimationFrame(measureCapacity);
@@ -1329,20 +1328,11 @@ patch(ButtonBox.prototype, {
             const children = getMeasuredChildren(root);
             const inlineChildren = children.filter((child) => !isOverflowDropdownChild(child));
             const domOverflow = Boolean(root && root.scrollWidth > root.clientWidth + 1);
-            const isCompactSmartRail = isBaoCompactSmartButtonRail(root);
-            const readableOverflow = inlineChildren.some(hasButtonBoxReadableOverflow);
+            const readableOverflow =
+                !isBaoCompactSmartButtonRail(root) && inlineChildren.some(hasButtonBoxReadableOverflow);
             const rootWidth = layout.width || root?.clientWidth || 0;
-            const availableWidth = getButtonBoxAvailableWidth(root);
             let nextCapacity = layout.capacity;
             let nextUseDropdown = layout.useDropdown;
-            if (
-                !isCompactSmartRail ||
-                this.baoButtonBoxReadableLimit.slotSignature !== slotSignature ||
-                Math.abs(window.innerWidth - this.baoButtonBoxReadableLimit.viewportWidth) > 4 ||
-                availableWidth > this.baoButtonBoxReadableLimit.availableWidth + 16
-            ) {
-                this.baoButtonBoxReadableLimit = { viewportWidth: 0, availableWidth: 0, slotSignature: "", capacity: 0 };
-            }
             if ((domOverflow || readableOverflow) && slotCount > 1) {
                 const renderedWidths = inlineChildren.map(getButtonBoxReadableWidth);
                 const overflowCapacity = dropdownCapacityFromInlineWidths(rootWidth, renderedWidths, "buttonbox", slotCount);
@@ -1353,22 +1343,6 @@ patch(ButtonBox.prototype, {
                     slotSignature,
                     capacity: nextCapacity,
                 };
-                if (isCompactSmartRail) {
-                    const visibleCount = Math.max(nextCapacity - 1, 0);
-                    const firstClippedVisibleIndex = inlineChildren.findIndex(
-                        (child, index) => index < visibleCount && hasButtonBoxReadableOverflow(child)
-                    );
-                    if (firstClippedVisibleIndex >= 0) {
-                        nextCapacity = Math.min(nextCapacity, firstClippedVisibleIndex + 1);
-                        this.baoButtonBoxForcedOverflow.capacity = nextCapacity;
-                        this.baoButtonBoxReadableLimit = {
-                            viewportWidth: window.innerWidth,
-                            availableWidth,
-                            slotSignature,
-                            capacity: nextCapacity,
-                        };
-                    }
-                }
             } else if (
                 slotCount > 1 &&
                 this.baoButtonBoxForcedOverflow.slotSignature === slotSignature &&
@@ -1382,15 +1356,6 @@ patch(ButtonBox.prototype, {
                 rootWidth > this.baoButtonBoxForcedOverflow.width + 4
             ) {
                 this.baoButtonBoxForcedOverflow = { width: 0, slotSignature: "", capacity: 0 };
-            }
-            if (
-                isCompactSmartRail &&
-                this.baoButtonBoxReadableLimit.slotSignature === slotSignature &&
-                Math.abs(window.innerWidth - this.baoButtonBoxReadableLimit.viewportWidth) <= 4 &&
-                availableWidth <= this.baoButtonBoxReadableLimit.availableWidth + 16
-            ) {
-                nextUseDropdown = true;
-                nextCapacity = Math.min(nextCapacity, this.baoButtonBoxReadableLimit.capacity);
             }
             if (
                 this.baoButtonBoxState.capacity !== nextCapacity ||
