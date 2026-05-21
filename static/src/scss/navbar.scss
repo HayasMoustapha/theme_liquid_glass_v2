@@ -7049,6 +7049,75 @@
     color: inherit !important;
 }
 
+/* RR24: keep smartbutton More dropdown text readable on the light menu surface. */
+.o_web_client
+    :is(
+        .o-dropdown--menu.o-form-buttonbox.o_dropdown_more,
+        .dropdown-menu.o-form-buttonbox.o_dropdown_more,
+        .o-dropdown--menu.o-form-buttonbox.o-form-buttonbox-small,
+        .o-form-buttonbox.o-form-buttonbox-small
+    )
+    :is(.dropdown-item, .o-dropdown-item)
+    .oe_stat_button {
+    background: transparent !important;
+    border-color: transparent !important;
+    color: $bao-text-800 !important;
+}
+
+.o_web_client
+    :is(
+        .o-dropdown--menu.o-form-buttonbox.o_dropdown_more,
+        .dropdown-menu.o-form-buttonbox.o_dropdown_more,
+        .o-dropdown--menu.o-form-buttonbox.o-form-buttonbox-small,
+        .o-form-buttonbox.o-form-buttonbox-small
+    )
+    :is(.dropdown-item, .o-dropdown-item)
+    .oe_stat_button:is(:hover, :focus, :focus-visible) {
+    background: $bao-surface-100 !important;
+    border-color: rgba(32, 46, 62, 0.08) !important;
+    color: $bao-text-900 !important;
+}
+
+.o_web_client
+    :is(
+        .o-dropdown--menu.o-form-buttonbox.o_dropdown_more,
+        .dropdown-menu.o-form-buttonbox.o_dropdown_more,
+        .o-dropdown--menu.o-form-buttonbox.o-form-buttonbox-small,
+        .o-form-buttonbox.o-form-buttonbox-small
+    )
+    :is(.dropdown-item, .o-dropdown-item)
+    .oe_stat_button
+    :is(
+        .o_field_statinfo,
+        .o_stat_info,
+        .o_stat_value,
+        .o_stat_text,
+        .o_button_label,
+        span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon)
+    ) {
+    color: $bao-text-800 !important;
+}
+
+.o_web_client
+    :is(
+        .o-dropdown--menu.o-form-buttonbox.o_dropdown_more,
+        .dropdown-menu.o-form-buttonbox.o_dropdown_more,
+        .o-dropdown--menu.o-form-buttonbox.o-form-buttonbox-small,
+        .o-form-buttonbox.o-form-buttonbox-small
+    )
+    :is(.dropdown-item, .o-dropdown-item)
+    .oe_stat_button:is(:hover, :focus, :focus-visible)
+    :is(
+        .o_field_statinfo,
+        .o_stat_info,
+        .o_stat_value,
+        .o_stat_text,
+        .o_button_label,
+        span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon)
+    ) {
+    color: $bao-text-900 !important;
+}
+
 @media (max-width: 575.98px) {
     .o_web_client .o-dropdown--menu.o-form-buttonbox.o_dropdown_more,
     .o_web_client .dropdown-menu.o-form-buttonbox.o_dropdown_more {
