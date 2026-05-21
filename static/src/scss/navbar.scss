@@ -4703,6 +4703,14 @@
     }
 }
 
+/* RR31: keep sheet status steps visually anchored to the right edge of their
+   statusbar area on desktop/tablet. The DOM order remains native Odoo. */
+@media (min-width: 768px) {
+    .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status {
+        justify-content: end !important;
+    }
+}
+
 /* Governor doctrine hardening: keep Odoo's exposed smartbuttons native, but never shrink them into unreadable 44px controls. */
 @media (max-width: 767.98px) {
     .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel
