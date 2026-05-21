@@ -5901,6 +5901,49 @@
     }
 }
 
+// Inline numeric controls need enough room for BAO input padding. Odoo's
+// native 7ch cap is correct for unskinned percentage widgets, but it clips
+// decimal values once the BAO form-control padding is applied.
+.o_form_view .o_form_sheet {
+    .o_field_widget.o_field_percentage.oe_inline,
+    .o_field_widget.o_field_float_percentage.oe_inline,
+    .o_field_widget.o_field_float_time.oe_inline {
+        display: inline-flex !important;
+        align-items: center !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .o_field_widget.o_field_percentage.oe_inline > .d-flex,
+    .o_field_widget.o_field_float_percentage.oe_inline > .d-flex,
+    .o_field_widget.o_field_float_time.oe_inline > .d-flex {
+        display: inline-flex !important;
+        align-items: center !important;
+        width: auto !important;
+        min-width: 8.75rem !important;
+        max-width: 100% !important;
+        gap: 6px !important;
+    }
+
+    .o_field_widget.o_field_percentage.oe_inline input.o_input,
+    .o_field_widget.o_field_float_percentage.oe_inline input.o_input,
+    .o_field_widget.o_field_float_time.oe_inline input.o_input {
+        width: 7.75rem !important;
+        min-width: 7.75rem !important;
+        max-width: 100% !important;
+        text-align: right !important;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .o_field_widget.o_field_percentage.oe_inline > .d-flex > span,
+    .o_field_widget.o_field_float_percentage.oe_inline > .d-flex > span,
+    .o_field_widget.o_field_float_time.oe_inline > .d-flex > span {
+        flex: 0 0 auto;
+        color: $text-strong;
+    }
+}
+
 @media (max-width: 1199.98px) {
     .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel {
         .o_control_panel_main {
