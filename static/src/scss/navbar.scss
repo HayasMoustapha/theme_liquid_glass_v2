@@ -52,8 +52,8 @@
         align-items: center;
         flex: 0 1 fit-content;
         margin-right: 10px;
-        min-width: 0;
-        max-width: fit-content;
+        min-width: 0 !important;
+        max-width: fit-content !important;
         padding-bottom: 1px;
         font-size: 1.2rem;
         line-height: 1;
@@ -796,7 +796,7 @@
         gap: 6px;
 
         .o_menu_brand {
-            max-width: clamp(8rem, 16vw, 12rem);
+            max-width: fit-content !important;
         }
 
         .o_menu_sections {
@@ -862,7 +862,7 @@
     .o_main_navbar {
         .o_menu_brand {
             flex-basis: clamp(120px, 18vw, 210px);
-            max-width: clamp(120px, 18vw, 210px);
+            max-width: fit-content !important;
         }
 
         .o_menu_sections {
@@ -6154,9 +6154,9 @@
     --bao-rr19-popover-shadow: 0 18px 44px rgba(13, 41, 76, 0.16), 0 5px 18px rgba(13, 41, 76, 0.08);
 }
 
-.o_web_client .o_main_navbar {
-    box-shadow: inset 0 -1px 0 rgba(7, 38, 78, 0.22), inset 0 1px 0 var(--bao-rr19-topbar-hairline) !important;
-}
+// .o_web_client .o_main_navbar {
+//     box-shadow: inset 0 -1px 0 rgba(7, 38, 78, 0.22), inset 0 1px 0 var(--bao-rr19-topbar-hairline) !important;
+// }
 
 .o_web_client .o_main_navbar :is(button, a, .dropdown-toggle, .o-dropdown):focus-visible,
 .o_web_client .o_action_manager .o_control_panel :is(button, a, input, .dropdown-toggle, .o-dropdown):focus-visible {
@@ -6222,8 +6222,8 @@
 
     .o_web_client .o_main_navbar .o_menu_brand {
         flex-basis: 16vw !important;
-        min-width: 8rem !important;
-        max-width: 14rem !important;
+        min-width: 0 !important;
+        max-width: fit-content !important;
         font-size: 1.08rem !important;
     }
 
@@ -6245,7 +6245,7 @@
 
     .o_web_client .o_main_navbar .o_menu_brand {
         flex: 1 1 46vw !important;
-        max-width: 12rem !important;
+        max-width: fit-content !important;
         font-size: 1rem !important;
         font-weight: 700 !important;
         line-height: 1.05 !important;
