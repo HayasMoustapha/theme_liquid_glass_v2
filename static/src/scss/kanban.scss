@@ -872,3 +872,148 @@
         padding: 11px !important;
     }
 }
+
+/* RR34: generic kanban long-content guard. Cards stay scannable and never let
+   badges, bootstrap rows, or unbroken labels widen the board. */
+.o_web_client .o_action_manager .o_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost),
+.o_web_client .o_action_manager .o_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost) * {
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.o_web_client .o_action_manager .o_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost) {
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    :is(main, section, article, .o_kanban_details, .oe_kanban_details, .o_kanban_content, .o_kanban_record_body, .d-flex, .row) {
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost) .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow: hidden !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    [class*="col"] {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    :is(.o_kanban_record_title, .o_kanban_record_subtitle, .o_text_overflow, .fw-bold, .fw-bolder, strong, a) {
+    display: block !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    span:not(.badge):not(.o_badge):not(.o_tag):not(.o_status):not(.fa):not(.oi):not([class*="fa-"]):not([class*="oi-"]) {
+    display: inline-block;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    vertical-align: bottom;
+    white-space: nowrap !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    :is(.text-muted, small, p, .o_kanban_record_body, .o_kanban_record_subtitle) {
+    display: -webkit-box !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    :is(.badge, .o_badge, .o_tag, .o_label_selection, .o_status, .rounded-pill) {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view.o_stock_dashboard_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    :is(.fw-bold, .fw-bolder, .fs-4, .d-block, .stock-overview-links, .stock-overview-links a, .stock-overview-links .row) {
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view.o_stock_dashboard_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    .stock-overview-links {
+    max-height: 112px !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view.o_stock_dashboard_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped
+    .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new) {
+    height: auto !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view.o_stock_dashboard_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    :is(.oe_kanban_action, .stock-overview-links a) {
+    display: block !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view.o_stock_dashboard_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    .btn.btn-primary.oe_kanban_action {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: 180px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view.o_stock_dashboard_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    .btn.btn-primary.oe_kanban_action > span {
+    display: block !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    .text-truncate {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    .text-truncate :is(.fa, .oi, [class*="fa-"], [class*="oi-"]) {
+    flex: 0 0 auto !important;
+}
+
+.o_web_client .o_action_manager .o_kanban_view:not(.o_modules_kanban) .o_kanban_record:not(.o_kanban_ghost)
+    .text-truncate span:not(.badge):not(.o_badge):not(.o_tag):not(.o_status):not(.fa):not(.oi):not([class*="fa-"]):not([class*="oi-"]) {
+    display: block !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
