@@ -1207,11 +1207,130 @@ function normalizeProductKanban(root) {
     }
 }
 
+const PRODUCT_TAXONOMY_FIELD_NAMES = [
+    "gt_department_id",
+    "gt_rayon_id",
+    "gt_famille_id",
+    "gt_sous_famille_id",
+    "x_department_id",
+    "x_rayon_id",
+    "x_famille_id",
+    "x_sous_famille_id",
+];
+
+function normalizeProductNameTitle(sheet) {
+    const title = sheet.querySelector(":scope > .oe_title");
+    const nameField = title?.querySelector("[name='name'].o_field_text");
+    if (!title || !nameField) {
+        return;
+    }
+    sheet.classList.add("o_bao_product_sheet");
+    title.classList.add("o_bao_product_title");
+    nameField.classList.add("o_bao_product_name_field");
+
+    const nameInner = nameField.firstElementChild;
+    const textarea = nameField.querySelector("textarea.o_input");
+    nameInner?.classList.add("o_bao_product_name_inner");
+    if (!textarea) {
+        return;
+    }
+
+    const maxHeight = 112;
+    const minHeight = window.innerWidth < 576 ? 40 : 44;
+    const nextHeight = Math.max(minHeight, Math.min(textarea.scrollHeight || minHeight, maxHeight));
+    textarea.style.setProperty("height", `${nextHeight}px`, "important");
+    textarea.style.setProperty("max-height", `${maxHeight}px`, "important");
+    textarea.style.setProperty("overflow-y", textarea.scrollHeight > maxHeight ? "auto" : "hidden", "important");
+    nameInner?.style.setProperty("height", `${nextHeight}px`, "important");
+    nameInner?.style.setProperty("max-height", `${maxHeight}px`, "important");
+}
+
+function findDirectProductTaxonomyPair(sheet, panel, fieldName) {
+    const field =
+        sheet.querySelector(`:scope > [name='${fieldName}']`) ||
+        panel?.querySelector(`[name='${fieldName}']`);
+    if (!field) {
+        return null;
+    }
+    let label =
+        sheet.querySelector(`:scope > label[for='${fieldName}']`) ||
+        panel?.querySelector(`label[for='${fieldName}']`);
+    if (!label && field.previousElementSibling?.matches("label.o_form_label")) {
+        label = field.previousElementSibling;
+    }
+    return { field, label };
+}
+
+function normalizeProductTaxonomyPanel(sheet) {
+    const title = sheet.querySelector(":scope > .oe_title");
+    if (!title) {
+        return;
+    }
+    let panel = sheet.querySelector(":scope > .o_bao_product_taxonomy_panel");
+    const pairs = PRODUCT_TAXONOMY_FIELD_NAMES
+        .map((fieldName) => [fieldName, findDirectProductTaxonomyPair(sheet, panel, fieldName)])
+        .filter(([_, pair]) => pair?.field);
+    if (!pairs.length) {
+        panel?.remove();
+        return;
+    }
+
+    sheet.classList.add("o_bao_product_sheet");
+    if (!panel) {
+        panel = document.createElement("div");
+        panel.className = "o_bao_product_taxonomy_panel";
+    }
+    if (panel.parentElement !== sheet || panel.previousElementSibling !== title) {
+        title.after(panel);
+    }
+
+    let heading = panel.querySelector(":scope > .o_bao_product_taxonomy_title");
+    if (!heading) {
+        heading = document.createElement("div");
+        heading.className = "o_bao_product_taxonomy_title";
+        heading.textContent = "Classification produit";
+        panel.prepend(heading);
+    }
+
+    for (const [fieldName, pair] of pairs) {
+        let item = panel.querySelector(`:scope > .o_bao_product_taxonomy_item[data-bao-field='${fieldName}']`);
+        if (!item) {
+            item = document.createElement("div");
+            item.className = "o_bao_product_taxonomy_item";
+            item.dataset.baoField = fieldName;
+            panel.append(item);
+        }
+        if (pair.label && pair.label.parentElement !== item) {
+            item.append(pair.label);
+        }
+        if (pair.field.parentElement !== item) {
+            item.append(pair.field);
+        }
+    }
+}
+
+function normalizeProductFormSheet(root) {
+    for (const sheet of root.querySelectorAll(".o_form_sheet")) {
+        const hasProductTitle = Boolean(sheet.querySelector(":scope > .oe_title [name='name'].o_field_text"));
+        const hasTaxonomyFields = PRODUCT_TAXONOMY_FIELD_NAMES.some((fieldName) =>
+            Boolean(sheet.querySelector(`:scope > [name='${fieldName}'], :scope > .o_bao_product_taxonomy_panel [name='${fieldName}']`))
+        );
+        const isProductRoute = window.location.pathname.includes("/inventory/products");
+        if (!hasProductTitle || (!hasTaxonomyFields && !isProductRoute)) {
+            sheet.classList.remove("o_bao_product_sheet");
+            continue;
+        }
+        normalizeProductNameTitle(sheet);
+        normalizeProductTaxonomyPanel(sheet);
+    }
+}
+
 function refreshControlPanels() {
     normalizeSharedControlPanels(document);
     normalizePivotToolbar(document);
     normalizeDashboardToolbar(document);
     normalizeProductKanban(document);
+    normalizeProductFormSheet(document);
     normalizeBreadcrumbs(document);
     normalizeSettingsControlPanel(document);
     normalizeRouteBreadcrumbs(document);
