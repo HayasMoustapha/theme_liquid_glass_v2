@@ -414,7 +414,11 @@ function splitSlotsForOverflow(slotNames, capacity, kind = "generic") {
 function getOverflowMetrics(kind) {
     return kind === "status"
         ? { gap: 6, estimatedItemWidth: 136, moreWidth: 48 }
-        : { gap: 0, estimatedItemWidth: 118, moreWidth: 76 };
+        : { gap: 0, estimatedItemWidth: 118, moreWidth: 62 };
+}
+
+function getOverflowSpacingGuard(kind) {
+    return kind === "buttonbox" ? 12 : 0;
 }
 
 function sumInlineWidths(widths, gap) {
@@ -455,13 +459,14 @@ function measuredCapacityFromWidths(width, widths, kind, total) {
         return Math.min(total, fallbackCapacityFromViewport(kind));
     }
     const { gap, estimatedItemWidth, moreWidth } = getOverflowMetrics(kind);
+    const widthBudget = Math.max(0, width - getOverflowSpacingGuard(kind));
     const normalizedWidths = kind === "buttonbox" ? widths.map((itemWidth) => Math.max(itemWidth, estimatedItemWidth)) : widths;
     const allInlineWidth = sumInlineWidths(normalizedWidths, gap);
-    if (allInlineWidth <= width + 1) {
+    if (allInlineWidth <= widthBudget + 1) {
         return total;
     }
 
-    const availableForInline = Math.max(0, width - moreWidth - gap);
+    const availableForInline = Math.max(0, widthBudget - moreWidth - gap);
     let used = 0;
     let inlineCount = 0;
     for (const itemWidth of normalizedWidths) {
@@ -483,7 +488,8 @@ function dropdownCapacityFromInlineWidths(width, widths, kind, total) {
         return Math.max(1, total ? Math.min(total, fallbackCapacityFromViewport(kind)) : 0);
     }
     const { gap, moreWidth } = getOverflowMetrics(kind);
-    const availableForInline = Math.max(0, width - moreWidth - gap);
+    const widthBudget = Math.max(0, width - getOverflowSpacingGuard(kind));
+    const availableForInline = Math.max(0, widthBudget - moreWidth - gap);
     let used = 0;
     let inlineCount = 0;
     for (const itemWidth of widths) {
@@ -549,7 +555,10 @@ function getOverflowLayoutState(root, kind, slotCount, previousWidths = []) {
     if ((wraps || scrolls) && capacity >= slotCount) {
         capacity = Math.max(1, slotCount - 1);
     }
-    const allInlineFits = sumInlineWidths(slotWidths, gap) <= width + 1 && !wraps && !scrolls;
+    const allInlineFits =
+        sumInlineWidths(slotWidths, gap) <= Math.max(0, width - getOverflowSpacingGuard(kind)) + 1 &&
+        !wraps &&
+        !scrolls;
 
     return {
         width: Math.round(width),
@@ -660,7 +669,7 @@ function getButtonBoxReadableWidth(button) {
         ...button.querySelectorAll(".o_stat_value, .o_stat_text, .o_button_label, .o_field_statinfo, .o_stat_info, span"),
     ].filter((node) => node.textContent?.trim());
     const readableWidth = readableNodes.reduce((maxWidth, node) => Math.max(maxWidth, node.scrollWidth + chromeWidth), 0);
-    return Math.max(rectWidth, button.scrollWidth, Math.min(readableWidth, 280));
+    return Math.max(rectWidth, button.scrollWidth, Math.min(readableWidth, 360));
 }
 
 function normalizeSmartButtonRail(controlPanel) {
@@ -1306,13 +1315,32 @@ patch(ButtonBox.prototype, {
             slotSignature: "",
         });
         this.baoButtonBoxForcedOverflow = { width: 0, slotSignature: "", capacity: 0 };
+        let resizeObserver = null;
+        let observedButtonBoxRoot = null;
         let settledMeasureTimerId = null;
         const scheduleSettledMeasure = () => {
             window.requestAnimationFrame(measureCapacity);
             window.clearTimeout(settledMeasureTimerId);
             settledMeasureTimerId = window.setTimeout(measureCapacity, 80);
         };
+        const observeButtonBoxLayout = () => {
+            const root = this.baoButtonBoxRef.el;
+            if (!root || !window.ResizeObserver || observedButtonBoxRoot === root) {
+                return;
+            }
+            resizeObserver?.disconnect();
+            resizeObserver = new ResizeObserver(scheduleSettledMeasure);
+            observedButtonBoxRoot = root;
+            [
+                root,
+                root.closest(".o_control_panel_actions"),
+                root.closest(".o_control_panel_main"),
+            ]
+                .filter(Boolean)
+                .forEach((target) => resizeObserver.observe(target));
+        };
         const measureCapacity = () => {
+            observeButtonBoxLayout();
             const slotNames = getBaoSlotNames(this.props.slots);
             const slotCount = slotNames.length;
             const slotSignature = slotNames.join("|");
@@ -1328,8 +1356,7 @@ patch(ButtonBox.prototype, {
             const children = getMeasuredChildren(root);
             const inlineChildren = children.filter((child) => !isOverflowDropdownChild(child));
             const domOverflow = Boolean(root && root.scrollWidth > root.clientWidth + 1);
-            const readableOverflow =
-                !isBaoCompactSmartButtonRail(root) && inlineChildren.some(hasButtonBoxReadableOverflow);
+            const readableOverflow = inlineChildren.some(hasButtonBoxReadableOverflow);
             const rootWidth = layout.width || root?.clientWidth || 0;
             let nextCapacity = layout.capacity;
             let nextUseDropdown = layout.useDropdown;
@@ -1382,8 +1409,12 @@ patch(ButtonBox.prototype, {
         });
         onWillUnmount(() => {
             window.clearTimeout(settledMeasureTimerId);
+            resizeObserver?.disconnect();
         });
-        onPatched(measureCapacity);
+        onPatched(() => {
+            observeButtonBoxLayout();
+            measureCapacity();
+        });
         useExternalListener(window, "resize", measureCapacity);
         useExternalListener(window, "orientationchange", measureCapacity);
         if (window.visualViewport) {
@@ -1392,26 +1423,21 @@ patch(ButtonBox.prototype, {
         onWillRender(() => {
             const allVisibleButtons = getBaoSlotNames(this.props.slots);
             const slotSignature = allVisibleButtons.join("|");
-            const nativeMaxVisibleButtons = getNativeButtonBoxMaxVisibleButtons();
-            if (this.env.isSmall || nativeMaxVisibleButtons <= 0) {
+            if (this.env.isSmall) {
                 this.visibleButtons = [];
                 this.additionalButtons = allVisibleButtons;
                 this.isFull = Boolean(allVisibleButtons.length);
                 return;
             }
-            const nativeRequiresDropdown = allVisibleButtons.length > nativeMaxVisibleButtons;
             const measuredRequiresDropdown =
                 this.baoButtonBoxState.useDropdown && this.baoButtonBoxState.slotSignature === slotSignature;
-            if (!nativeRequiresDropdown && !measuredRequiresDropdown) {
+            if (!measuredRequiresDropdown) {
                 this.visibleButtons = allVisibleButtons;
                 this.additionalButtons = [];
                 this.isFull = false;
                 return;
             }
-            const measuredCapacity = measuredRequiresDropdown
-                ? (this.baoButtonBoxState.capacity ?? allVisibleButtons.length)
-                : allVisibleButtons.length;
-            const capacity = Math.min(nativeMaxVisibleButtons, measuredCapacity);
+            const capacity = this.baoButtonBoxState.capacity ?? allVisibleButtons.length;
             const split = splitSlotsForOverflow(allVisibleButtons, capacity, "buttonbox");
             this.visibleButtons = split.visible;
             this.additionalButtons = split.additional;

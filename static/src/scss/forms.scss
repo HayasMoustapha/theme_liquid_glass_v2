@@ -4413,9 +4413,9 @@
         gap: 8px !important;
         min-width: 0 !important;
         max-width: 100% !important;
-        overflow-x: auto !important;
+        overflow-x: visible !important;
         overflow-y: hidden !important;
-        scrollbar-width: thin;
+        scrollbar-width: none;
     }
 
     .o_control_panel_actions .oe_stat_button {

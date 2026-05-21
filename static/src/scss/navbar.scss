@@ -7353,3 +7353,189 @@
         max-width: 620px !important;
     }
 }
+/* RR26 gate: legacy density rules may style the rail, but must not impose child-count widths. */
+@media (min-width: 768px) {
+    .o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_main.o_control_panel_main:has(.o_control_panel_actions > .o-form-buttonbox .oe_stat_button),
+    .o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_main.o_control_panel_main:has(.o_control_panel_actions > .o_form_button_box .oe_stat_button) {
+        --bao-smart-rail-max: #{'min(65vw, calc(100vw - 48px))'} !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, var(--bao-smart-rail-max)) minmax(0, 1fr) !important;
+    }
+
+    .o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_main.o_control_panel_main > .o_control_panel_actions.o_control_panel_actions:has(> .o-form-buttonbox .oe_stat_button),
+    .o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_main.o_control_panel_main > .o_control_panel_actions.o_control_panel_actions:has(> .o_form_button_box .oe_stat_button) {
+        justify-self: center !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: visible !important;
+        overflow-y: hidden !important;
+    }
+
+    .o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions.o_control_panel_actions:has(> .o-form-buttonbox .oe_stat_button),
+    .o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions.o_control_panel_actions:has(> .o_form_button_box .oe_stat_button) {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: visible !important;
+        overflow-y: hidden !important;
+    }
+
+    .o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions.o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box, .o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.oe_stat_button):has(.oe_stat_button) {
+        display: inline-flex !important;
+        flex: 0 1 auto !important;
+        flex-basis: auto !important;
+        flex-wrap: nowrap !important;
+        align-items: stretch !important;
+        justify-content: center !important;
+        gap: 0 !important;
+        width: fit-content !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: 46px !important;
+        min-height: 46px !important;
+        max-height: 46px !important;
+        padding-inline: 0 !important;
+        overflow: visible !important;
+        scrollbar-width: none !important;
+    }
+
+    .o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions.o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box, .o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.oe_stat_button):has(.oe_stat_button)
+        > .btn.oe_stat_button.oe_stat_button:not(:has(.o_button_more)) {
+        flex: 0 0 auto !important;
+        flex-basis: auto !important;
+        width: max-content !important;
+        min-width: 56px !important;
+        max-width: #{'min(360px, calc(100vw - 124px))'} !important;
+        padding-inline: 10px !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+    }
+
+    .o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions.o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box, .o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.oe_stat_button):has(.oe_stat_button)
+        > :is(.btn.oe_stat_button.oe_stat_button:has(.o_button_more), .oe_stat_button.dropdown, .o_button_more) {
+        position: relative !important;
+        inset: auto !important;
+        flex: 0 0 auto !important;
+        flex-basis: auto !important;
+        width: auto !important;
+        min-width: 46px !important;
+        max-width: 104px !important;
+        margin-inline-start: 0 !important;
+        transform: none !important;
+    }
+
+    .o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions.o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)
+        > .btn.oe_stat_button.oe_stat_button:not(:has(.o_button_more))
+        :is(.o_field_statinfo, .o_stat_info, .o_stat_value, .o_stat_text, .o_button_label, span:not(.fa):not([class*="fa-"]):not(.oi):not(.o_button_icon)) {
+        max-width: 100% !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        white-space: nowrap !important;
+    }
+}
+
+/* RR26: smartbutton capacity is measured in JS; CSS must not cap rails by child count. */
+@media (min-width: 768px) {
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.oe_stat_button),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.oe_stat_button) {
+        display: inline-flex !important;
+        flex: 0 1 auto !important;
+        flex-basis: auto !important;
+        flex-wrap: nowrap !important;
+        align-items: stretch !important;
+        justify-content: center !important;
+        width: fit-content !important;
+        min-width: 0 !important;
+        max-width: #{'min(100%, calc(100vw - 48px))'} !important;
+        height: 46px !important;
+        min-height: 46px !important;
+        max-height: 46px !important;
+        padding-inline: 0 !important;
+        overflow: visible !important;
+        scrollbar-width: none !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)::-webkit-scrollbar,
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)
+        > :is(.oe_stat_button.dropdown, .oe_stat_button:has(> .o_button_more), .o_button_more),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)
+        > :is(.oe_stat_button.dropdown, .oe_stat_button:has(> .o_button_more), .o_button_more) {
+        position: relative !important;
+        inset: auto !important;
+        right: auto !important;
+        left: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        flex: 0 0 auto !important;
+        flex-basis: auto !important;
+        width: auto !important;
+        min-width: 46px !important;
+        max-width: 104px !important;
+        margin-inline-start: 0 !important;
+        transform: none !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)
+        > .oe_stat_button:not(:has(.o_button_more)),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions > :is(.o-form-buttonbox, .o_form_button_box):has(.oe_stat_button)
+        > .oe_stat_button:not(:has(.o_button_more)) {
+        flex: 0 0 auto !important;
+        flex-basis: auto !important;
+        width: max-content !important;
+        min-width: 118px !important;
+        max-width: #{'min(280px, calc(100vw - 124px))'} !important;
+        padding-inline: 10px !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+    }
+}
