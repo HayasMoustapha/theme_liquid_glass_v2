@@ -1095,10 +1095,32 @@ function pruneFormActionContainers(root) {
     }
 }
 
+function normalizeProductKanban(root) {
+    for (const renderer of root.querySelectorAll(".o_kanban_renderer.o_kanban_ungrouped")) {
+        const view = renderer.closest(".o_kanban_view");
+        const isProductKanban = Boolean(
+            renderer.querySelector(".o_kanban_record [name='list_price'].o_field_monetary") &&
+                renderer.querySelector(".o_kanban_record [name='product_properties']")
+        );
+        renderer.classList.toggle("o_bao_product_kanban_renderer", isProductKanban);
+        view?.classList.toggle("o_bao_product_kanban_view", isProductKanban);
+        if (!isProductKanban) {
+            continue;
+        }
+        for (const title of renderer.querySelectorAll(".o_kanban_record > main > .mb-1 > .d-flex.h5 > span")) {
+            const text = textOf(title);
+            if (text) {
+                title.setAttribute("title", text);
+            }
+        }
+    }
+}
+
 function refreshControlPanels() {
     normalizeSharedControlPanels(document);
     normalizePivotToolbar(document);
     normalizeDashboardToolbar(document);
+    normalizeProductKanban(document);
     normalizeBreadcrumbs(document);
     normalizeRouteBreadcrumbs(document);
     normalizeNavbarBreadcrumbs(document);
