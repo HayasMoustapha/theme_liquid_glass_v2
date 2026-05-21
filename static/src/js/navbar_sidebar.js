@@ -567,11 +567,63 @@ function slotWidthsChanged(previousWidths = [], nextWidths = []) {
     );
 }
 
+let baoTextMeasureCanvas;
+
+function getTextMeasureContext() {
+    baoTextMeasureCanvas ||= document.createElement("canvas");
+    return baoTextMeasureCanvas.getContext("2d");
+}
+
+function getIntrinsicTextWidth(element, style) {
+    const text = element.textContent?.replace(/\s+/g, " ").trim();
+    if (!text) {
+        return 0;
+    }
+    const context = getTextMeasureContext();
+    if (!context) {
+        return 0;
+    }
+    context.font =
+        style.font ||
+        `${style.fontStyle} ${style.fontVariant} ${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+    return context.measureText(text).width;
+}
+
 function isElementTextClipped(element) {
     if (!element) {
         return false;
     }
-    return element.scrollWidth > element.clientWidth + 1 || element.scrollHeight > element.clientHeight + 2;
+    if (element.scrollWidth > element.clientWidth + 1 || element.scrollHeight > element.clientHeight + 2) {
+        return true;
+    }
+    const text = element.textContent?.trim();
+    if (!text || !element.getClientRects().length) {
+        return false;
+    }
+    const style = window.getComputedStyle(element);
+    const mayHideInlineText =
+        style.textOverflow === "ellipsis" ||
+        style.overflowX !== "visible" ||
+        style.whiteSpace === "nowrap" ||
+        style.whiteSpace === "pre";
+    if (!mayHideInlineText) {
+        return false;
+    }
+    const rect = element.getBoundingClientRect();
+    if (rect.width <= 0) {
+        return false;
+    }
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    const textRect = range.getBoundingClientRect();
+    range.detach();
+    if (textRect.width > rect.width + 0.1) {
+        return true;
+    }
+    if ([...element.children].some((child) => child.textContent?.trim())) {
+        return false;
+    }
+    return getIntrinsicTextWidth(element, style) > rect.width + 0.1;
 }
 
 function hasButtonBoxReadableOverflow(button) {
@@ -591,7 +643,6 @@ function isBaoCompactSmartButtonRail(root) {
     return Boolean(
         root?.closest?.(".o_control_panel.o_bao_form_control_panel") &&
             root.closest(".o_control_panel_actions") &&
-            root.querySelector(".o_button_more") &&
             window.innerWidth >= 768
     );
 }
@@ -934,6 +985,57 @@ function normalizeBreadcrumbs(root) {
     }
 }
 
+function normalizeRouteBreadcrumbs(root) {
+    for (const controlPanel of root.querySelectorAll(".o_control_panel")) {
+        const clearRouteState = () => {
+            controlPanel.classList.remove("o_bao_route_control_panel");
+            for (const routeBreadcrumb of controlPanel.querySelectorAll(".o_bao_route_breadcrumb")) {
+                routeBreadcrumb.classList.remove("o_bao_route_breadcrumb");
+            }
+        };
+        if (isFormControlPanel(controlPanel) || isSettingsControlPanel(controlPanel)) {
+            clearRouteState();
+            continue;
+        }
+        const breadcrumbs = controlPanel.querySelector(".o_control_panel_breadcrumbs");
+        const breadcrumb = breadcrumbs?.querySelector(":scope > .o_breadcrumb");
+        const trailList = breadcrumb?.querySelector(":scope > .breadcrumb");
+        const headerCluster = breadcrumb?.querySelector(":scope > .d-flex.gap-1.text-truncate");
+        if (!breadcrumbs || !breadcrumb || !trailList || !headerCluster) {
+            clearRouteState();
+            continue;
+        }
+
+        controlPanel.classList.add("o_bao_route_control_panel");
+        breadcrumb.classList.add("o_bao_breadcrumb", "o_bao_route_breadcrumb");
+        headerCluster.classList.add("o_bao_breadcrumb_header", "d-flex", "align-items-center", "gap-2", "min-w-0");
+        trailList.classList.add("o_bao_breadcrumb_trail", "flex-nowrap", "text-nowrap", "lh-sm");
+
+        const headerText = headerCluster.querySelector(".o_last_breadcrumb_item span");
+        headerText?.classList.add("o_bao_breadcrumb_header_text", "min-w-0", "text-truncate");
+
+        const actions = headerCluster.querySelector(".o_control_panel_breadcrumbs_actions");
+        actions?.classList.add("o_bao_header_menu_actions");
+    }
+}
+
+function normalizeNavbarBreadcrumbs(root) {
+    for (const breadcrumb of root.querySelectorAll(".o_main_navbar .o_navbar_breadcrumbs > .o_breadcrumb")) {
+        const headerCluster = breadcrumb.querySelector(":scope > .d-flex.gap-1.text-truncate");
+        if (!headerCluster) {
+            continue;
+        }
+        breadcrumb.classList.add("o_bao_breadcrumb", "o_bao_navbar_breadcrumb");
+        headerCluster.classList.add("o_bao_breadcrumb_header", "d-flex", "align-items-center", "gap-2", "min-w-0");
+
+        const headerText = headerCluster.querySelector(".o_last_breadcrumb_item span");
+        headerText?.classList.add("o_bao_breadcrumb_header_text", "min-w-0", "text-truncate");
+
+        const actions = headerCluster.querySelector(".o_control_panel_breadcrumbs_actions");
+        actions?.classList.add("o_bao_header_menu_actions");
+    }
+}
+
 function pruneFormActionContainers(root) {
     const uniqueSelectors = [
         ".o_cp_action_menus",
@@ -989,6 +1091,8 @@ function refreshControlPanels() {
     normalizePivotToolbar(document);
     normalizeDashboardToolbar(document);
     normalizeBreadcrumbs(document);
+    normalizeRouteBreadcrumbs(document);
+    normalizeNavbarBreadcrumbs(document);
     pruneFormActionContainers(document);
     normalizeSaveCancelIcons(document);
     normalizeStatusbar(document);
@@ -1202,6 +1306,7 @@ patch(ButtonBox.prototype, {
             slotSignature: "",
         });
         this.baoButtonBoxForcedOverflow = { width: 0, slotSignature: "", capacity: 0 };
+        this.baoButtonBoxReadableLimit = { viewportWidth: 0, availableWidth: 0, slotSignature: "", capacity: 0 };
         let settledMeasureTimerId = null;
         const scheduleSettledMeasure = () => {
             window.requestAnimationFrame(measureCapacity);
@@ -1224,11 +1329,20 @@ patch(ButtonBox.prototype, {
             const children = getMeasuredChildren(root);
             const inlineChildren = children.filter((child) => !isOverflowDropdownChild(child));
             const domOverflow = Boolean(root && root.scrollWidth > root.clientWidth + 1);
-            const readableOverflow =
-                !isBaoCompactSmartButtonRail(root) && inlineChildren.some(hasButtonBoxReadableOverflow);
+            const isCompactSmartRail = isBaoCompactSmartButtonRail(root);
+            const readableOverflow = inlineChildren.some(hasButtonBoxReadableOverflow);
             const rootWidth = layout.width || root?.clientWidth || 0;
+            const availableWidth = getButtonBoxAvailableWidth(root);
             let nextCapacity = layout.capacity;
             let nextUseDropdown = layout.useDropdown;
+            if (
+                !isCompactSmartRail ||
+                this.baoButtonBoxReadableLimit.slotSignature !== slotSignature ||
+                Math.abs(window.innerWidth - this.baoButtonBoxReadableLimit.viewportWidth) > 4 ||
+                availableWidth > this.baoButtonBoxReadableLimit.availableWidth + 16
+            ) {
+                this.baoButtonBoxReadableLimit = { viewportWidth: 0, availableWidth: 0, slotSignature: "", capacity: 0 };
+            }
             if ((domOverflow || readableOverflow) && slotCount > 1) {
                 const renderedWidths = inlineChildren.map(getButtonBoxReadableWidth);
                 const overflowCapacity = dropdownCapacityFromInlineWidths(rootWidth, renderedWidths, "buttonbox", slotCount);
@@ -1239,6 +1353,22 @@ patch(ButtonBox.prototype, {
                     slotSignature,
                     capacity: nextCapacity,
                 };
+                if (isCompactSmartRail) {
+                    const visibleCount = Math.max(nextCapacity - 1, 0);
+                    const firstClippedVisibleIndex = inlineChildren.findIndex(
+                        (child, index) => index < visibleCount && hasButtonBoxReadableOverflow(child)
+                    );
+                    if (firstClippedVisibleIndex >= 0) {
+                        nextCapacity = Math.min(nextCapacity, firstClippedVisibleIndex + 1);
+                        this.baoButtonBoxForcedOverflow.capacity = nextCapacity;
+                        this.baoButtonBoxReadableLimit = {
+                            viewportWidth: window.innerWidth,
+                            availableWidth,
+                            slotSignature,
+                            capacity: nextCapacity,
+                        };
+                    }
+                }
             } else if (
                 slotCount > 1 &&
                 this.baoButtonBoxForcedOverflow.slotSignature === slotSignature &&
@@ -1252,6 +1382,15 @@ patch(ButtonBox.prototype, {
                 rootWidth > this.baoButtonBoxForcedOverflow.width + 4
             ) {
                 this.baoButtonBoxForcedOverflow = { width: 0, slotSignature: "", capacity: 0 };
+            }
+            if (
+                isCompactSmartRail &&
+                this.baoButtonBoxReadableLimit.slotSignature === slotSignature &&
+                Math.abs(window.innerWidth - this.baoButtonBoxReadableLimit.viewportWidth) <= 4 &&
+                availableWidth <= this.baoButtonBoxReadableLimit.availableWidth + 16
+            ) {
+                nextUseDropdown = true;
+                nextCapacity = Math.min(nextCapacity, this.baoButtonBoxReadableLimit.capacity);
             }
             if (
                 this.baoButtonBoxState.capacity !== nextCapacity ||
