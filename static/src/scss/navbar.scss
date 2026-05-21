@@ -6698,3 +6698,125 @@
     height: auto !important;
     overflow: visible !important;
 }
+
+/* RR21: prevent multi-smartbutton rails with More from wrapping into a second row. */
+@media (min-width: 768px) {
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.o_button_more),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.o_button_more),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.o_button_more),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.o_button_more) {
+        flex-wrap: nowrap !important;
+        height: 46px !important;
+        min-height: 46px !important;
+        max-height: 46px !important;
+        overflow: visible !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.o_button_more),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.o_button_more),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.o_button_more),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.o_button_more) {
+        --bao-smart-visible-rail: 292px;
+        flex-basis: 292px !important;
+        width: 292px !important;
+        min-width: 292px !important;
+        max-width: 292px !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.o_button_more):has(> :nth-child(4)),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.o_button_more):has(> :nth-child(4)),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.o_button_more):has(> :nth-child(4)),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.o_button_more):has(> :nth-child(4)) {
+        --bao-smart-visible-rail: 396px;
+        flex-basis: 396px !important;
+        width: 396px !important;
+        min-width: 396px !important;
+        max-width: 396px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.o_button_more),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.o_button_more),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.o_button_more),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.o_button_more) {
+        --bao-smart-visible-rail: 300px;
+        flex-basis: 300px !important;
+        width: 300px !important;
+        min-width: 300px !important;
+        max-width: 300px !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.o_button_more):has(> :nth-child(4)),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox, .o_form_button_box):has(.o_button_more):has(> :nth-child(4)),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.o_button_more):has(> :nth-child(4)),
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
+        .o_control_panel_actions
+        > :is(.o-form-buttonbox.o_full, .o-form-buttonbox.o_not_full, .o_form_button_box.o_full, .o_form_button_box.o_not_full):has(.o_button_more):has(> :nth-child(4)) {
+        --bao-smart-visible-rail: 532px;
+        flex-basis: 532px !important;
+        width: 532px !important;
+        min-width: 532px !important;
+        max-width: 532px !important;
+    }
+}

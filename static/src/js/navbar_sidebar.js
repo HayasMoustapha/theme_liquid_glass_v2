@@ -587,6 +587,15 @@ function hasButtonBoxReadableOverflow(button) {
     return [...readableNodes].some((node) => node.textContent?.trim() && isElementTextClipped(node));
 }
 
+function isBaoCompactSmartButtonRail(root) {
+    return Boolean(
+        root?.closest?.(".o_control_panel.o_bao_form_control_panel") &&
+            root.closest(".o_control_panel_actions") &&
+            root.querySelector(".o_button_more") &&
+            window.innerWidth >= 768
+    );
+}
+
 function getButtonBoxReadableWidth(button) {
     if (!button) {
         return 0;
@@ -1215,7 +1224,8 @@ patch(ButtonBox.prototype, {
             const children = getMeasuredChildren(root);
             const inlineChildren = children.filter((child) => !isOverflowDropdownChild(child));
             const domOverflow = Boolean(root && root.scrollWidth > root.clientWidth + 1);
-            const readableOverflow = inlineChildren.some(hasButtonBoxReadableOverflow);
+            const readableOverflow =
+                !isBaoCompactSmartButtonRail(root) && inlineChildren.some(hasButtonBoxReadableOverflow);
             const rootWidth = layout.width || root?.clientWidth || 0;
             let nextCapacity = layout.capacity;
             let nextUseDropdown = layout.useDropdown;
