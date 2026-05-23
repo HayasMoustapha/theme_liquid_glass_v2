@@ -9,7 +9,6 @@ class ResConfigSettings(models.TransientModel):
     bao_theme_config_id = fields.Many2one(
         "bao.theme.config",
         string="BAO Theme Configuration",
-        default=lambda self: self.env["bao.theme.config"]._get_active_config(),
         groups="base.group_system",
     )
     bao_color_primary = fields.Char(
@@ -120,6 +119,12 @@ class ResConfigSettings(models.TransientModel):
             )
             warnings = config.get_contrast_warnings()
             settings.bao_contrast_warnings = "\n".join(warnings) if warnings else "No contrast warning."
+
+    @api.model
+    def get_values(self):
+        values = super().get_values()
+        values["bao_theme_config_id"] = self.env["bao.theme.config"]._get_active_config().id
+        return values
 
     def action_open_bao_family_overrides(self):
         config = self.bao_theme_config_id or self.env["bao.theme.config"]._get_active_config()

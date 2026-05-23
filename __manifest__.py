@@ -21,7 +21,7 @@
 #############################################################################
 {
     'name': 'BAO Backend Theme',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.0.1',
     'category': 'Theme/Backend',
     'summary': 'Configurable BAO backend theme for Odoo',
     'description': """

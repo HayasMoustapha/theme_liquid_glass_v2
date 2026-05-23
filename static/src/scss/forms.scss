@@ -4683,7 +4683,7 @@
 
 .o-autocomplete--dropdown-menu,
 .ui-autocomplete {
-    max-width: calc(100vw - 24px) !important;
+    max-width: 100vw !important;
     overflow-wrap: anywhere;
 }
 
@@ -5030,7 +5030,7 @@
 .o_web_client .o-dropdown--menu.o-form-buttonbox.o_dropdown_more {
     width: 312px !important;
     min-width: 0 !important;
-    max-width: calc(100vw - 24px) !important;
+    max-width: 100vw !important;
     max-height: 440px !important;
     padding: 6px !important;
     overflow-x: hidden !important;
@@ -5893,7 +5893,7 @@
 @media (max-width: 575.98px) {
     .o_web_client .o-dropdown--menu .o-dropdown-item-unstyled-button > button,
     .o_web_client .dropdown-menu .o-dropdown-item-unstyled-button > button {
-        max-width: calc(100vw - 24px) !important;
+        max-width: 100vw !important;
     }
 }
 
@@ -5901,7 +5901,7 @@
 .o_web_client .o_form_button_box.o_dropdown_more {
     width: 280px !important;
     min-width: 0 !important;
-    max-width: calc(100vw - 24px) !important;
+    max-width: 100vw !important;
     max-height: 420px !important;
     overflow-x: hidden !important;
     overflow-y: auto !important;
@@ -6270,6 +6270,52 @@
     .o_field_widget.o_field_float_time.oe_inline > .d-flex > span {
         flex: 0 0 auto;
         color: $text-strong;
+    }
+}
+
+// RR53: inline financial rows must not become a second field surface. BAO keeps
+// the real input skin, while the Odoo row shell remains a transparent alignment
+// owner for target margin, amount, price and percentage controls.
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet {
+    .o_cell_custom.null > .o_row:has(
+            > .o_field_widget.oe_inline:is(
+                .o_field_monetary,
+                .o_field_float,
+                .o_field_percentage,
+                .o_field_float_percentage,
+                [name*="amount"],
+                [name*="margin"],
+                [name*="price"]
+            )
+        ),
+    .o_wrap_input > .o_row:has(
+            > .o_field_widget.oe_inline:is(
+                .o_field_monetary,
+                .o_field_float,
+                .o_field_percentage,
+                .o_field_float_percentage,
+                [name*="amount"],
+                [name*="margin"],
+                [name*="price"]
+            )
+        ) {
+        background: transparent !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+
+    .o_inner_group.grid.oe_subtotal_footer {
+        > :is(.o_cell, .o_cell_custom),
+        :is(.o_row, .d-flex):has(> .o_field_widget),
+        .o_field_widget,
+        .o_field_widget > :not(.o_field_x2many):not(.o_field_html) {
+            background: transparent !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
     }
 }
 
@@ -7405,5 +7451,74 @@
             padding: 12px !important;
             border-radius: 10px !important;
         }
+    }
+}
+
+// RR41: sheet financial footers keep a single summary rhythm. BAO sheet
+// groups are one-column by default, but the purchase margin footer is a
+// label/value subtotal group that must stay aligned with the native tax total.
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet {
+    .o_inner_group.grid.oe_subtotal_footer {
+        width: 100% !important;
+        max-width: 20rem !important;
+        margin-left: auto !important;
+        padding-top: 10px !important;
+        border-top: 1px solid rgba(146, 158, 171, 0.34) !important;
+        justify-self: end;
+    }
+
+    .o_inner_group.grid.oe_subtotal_footer:has(.o_field_widget[name="x_total_margin"]) {
+        grid-template-columns: minmax(0, 1fr) auto !important;
+        align-items: baseline !important;
+        gap: 4px 14px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .o_inner_group.grid.oe_subtotal_footer:has(.o_field_widget[name="x_total_margin"])
+        > :is(.o_cell, .o_cell_custom).o_wrap_label {
+        grid-column: 1 !important;
+        width: auto !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        align-self: baseline !important;
+        text-align: left !important;
+    }
+
+    .o_inner_group.grid.oe_subtotal_footer:has(.o_field_widget[name="x_total_margin"])
+        > :is(.o_cell, .o_cell_custom):not(.o_wrap_label) {
+        grid-column: 2 !important;
+        width: auto !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        justify-self: end !important;
+        align-self: baseline !important;
+        text-align: right !important;
+    }
+
+    .o_inner_group.grid.oe_subtotal_footer:has(.o_field_widget[name="x_total_margin"]) {
+        .o_form_label,
+        .col-form-label {
+            color: $bao-text-600 !important;
+            font-size: 0.89rem !important;
+            font-weight: 500 !important;
+            line-height: 1.3 !important;
+            white-space: normal !important;
+        }
+
+        .o_field_widget:is(.o_field_monetary, .o_field_float),
+        .oe_currency_value {
+            color: $bao-text-800 !important;
+            font-variant-numeric: tabular-nums;
+            font-weight: 600 !important;
+            text-align: right !important;
+            white-space: nowrap !important;
+        }
+    }
+
+    .o_inner_group.grid.oe_subtotal_footer:has(.o_field_widget[name="x_total_margin"])
+        + .o_inner_group.grid.oe_subtotal_footer {
+        margin-top: 0 !important;
+        padding-top: 4px !important;
+        border-top: none !important;
     }
 }

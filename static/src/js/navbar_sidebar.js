@@ -817,7 +817,9 @@ function normalizeBreadcrumbs(root) {
         }
 
         const breadcrumbs = controlPanel.querySelector(".o_control_panel_breadcrumbs");
-        const trailList = breadcrumb.querySelector(":scope > .breadcrumb");
+        const trailList = breadcrumb.querySelector(
+            ":scope > .breadcrumb, :scope > .o_bao_breadcrumb_trail > .breadcrumb"
+        );
         const sourceCluster = breadcrumb.querySelector(":scope > .d-flex.gap-1.text-truncate");
         const mainButtons = controlPanel.querySelector(".o_control_panel_main_buttons");
         const statusIndicator = controlPanel.querySelector(".o_form_status_indicator");
@@ -843,10 +845,9 @@ function normalizeBreadcrumbs(root) {
         const currentBreadcrumbText = textOf(currentItem);
         const currentLabel = isNewRecord
             ? currentBreadcrumbText || recordTitleText || "New"
-            : (!looksLikeDocumentCode(recordTitleText) && recordTitleText !== "New" && recordTitleText) ||
-              (!looksLikeDocumentCode(currentBreadcrumbText) && currentBreadcrumbText !== "New" && currentBreadcrumbText) ||
+            : (currentBreadcrumbText !== "New" && currentBreadcrumbText) ||
+              (!looksLikeDocumentCode(recordTitleText) && recordTitleText !== "New" && recordTitleText) ||
               titleFamilyText ||
-              currentBreadcrumbText ||
               trailTexts[trailTexts.length - 1] ||
               headerLabel;
 
@@ -964,7 +965,7 @@ function normalizeBreadcrumbs(root) {
         }
         trailList.classList.add("o_bao_live_trail", "o_bao_generated_trail", "flex-nowrap", "text-nowrap", "lh-sm");
 
-        for (const orphan of trailRow.querySelectorAll(":scope > .o_bao_current_trail_item_shell")) {
+        for (const orphan of trailRow.querySelectorAll(".o_bao_current_trail_item_shell")) {
             orphan.remove();
         }
 
@@ -1522,6 +1523,9 @@ function initControlPanelBao() {
     document.addEventListener(
         "click",
         (event) => {
+            if (event.target.closest(".o_control_panel .o_pager button, .o_control_panel .o_cp_pager button")) {
+                queueBurstRefresh();
+            }
             const target = event.target.closest(
                 ".o_switch_view, .o_app, a[href*='/odoo/dashboards'], [data-menu-xmlid='spreadsheet_dashboard.spreadsheet_dashboard_menu_root']"
             );
@@ -1701,7 +1705,11 @@ patch(StatusBarButtons.prototype, {
             const layout = getOverflowLayoutState(root, "status", slotCount, this.baoStatusButtonsState.slotWidths);
             const domOverflow = Boolean(root && root.scrollWidth > root.clientWidth + 1);
             const rootWidth = root?.clientWidth || layout.width || 0;
-            if (domOverflow && slotCount > 1) {
+            const layoutRequiresDropdown = Boolean(domOverflow || layout.wraps || layout.useDropdown);
+            // Keep BAO overflow splits stable after rendering More. Wider form
+            // headers may report a first-paint wrap before their grid settles.
+            const shouldLockBaoDropdown = Boolean(domOverflow || (this.env.isSmall && layoutRequiresDropdown));
+            if (shouldLockBaoDropdown && slotCount > 1) {
                 this.baoStatusButtonsForcedOverflow = { width: rootWidth, slotCount };
             }
             const keepForcedDropdown =
@@ -1716,7 +1724,7 @@ patch(StatusBarButtons.prototype, {
             const hasReliableWidths = stableSlotWidths.length === slotCount;
             let nextCapacity = layout.capacity;
             let nextUseDropdown = layout.useDropdown;
-            if (domOverflow && slotCount > 1) {
+            if (layoutRequiresDropdown && slotCount > 1) {
                 nextCapacity = Math.min(nextCapacity, Math.max(1, slotCount - 1));
                 nextUseDropdown = true;
             } else if (keepForcedDropdown) {

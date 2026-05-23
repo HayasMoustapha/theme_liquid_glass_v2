@@ -1798,10 +1798,33 @@ a.o_todo_done_button,
     background-color: $hover-bg !important;
 }
 
-.bg-light, .o-we-toolbar {
+.bg-light {
     background-color: $glass-bg-light !important;
     backdrop-filter: blur($blur-light) saturate(180%) !important;
     border-radius: $radius-xl !important;
+}
+
+.o-we-toolbar[data-namespace] {
+    height: 40px !important;
+    padding: 0 2px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid rgba(146, 158, 171, 0.32) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    color: $text-strong !important;
+}
+
+.o-we-toolbar[data-namespace] .btn-group {
+    border-radius: 0 !important;
+}
+
+.o-we-toolbar[data-namespace] .btn {
+    min-width: 28px !important;
+    height: 33px !important;
+    white-space: nowrap !important;
 }
 
 select {
@@ -2841,7 +2864,7 @@ select {
     .o-dropdown--menu:has(.o_group_by_menu),
     .dropdown-menu:has(.o_filter_menu),
     .dropdown-menu:has(.o_group_by_menu) {
-        width: calc(100vw - 24px) !important;
+        width: 100vw !important;
         max-width: 600px !important;
         overflow-x: visible !important;
         z-index: 1085 !important;
@@ -2878,7 +2901,7 @@ select {
         bottom: auto !important;
         transform: none !important;
         width: calc(100vw - 24px) !important;
-        max-width: calc(100vw - 24px) !important;
+    max-width: 100vw !important;
         max-height: calc(100dvh - 124px) !important;
         overflow: auto !important;
     }
@@ -2928,7 +2951,7 @@ select {
         }
 
         .o_cp_searchview {
-            max-width: calc(100vw - 24px) !important;
+        max-width: 100vw !important;
         }
     }
 }

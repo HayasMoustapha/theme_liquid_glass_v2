@@ -4019,11 +4019,18 @@
 .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_statusbar .o_field_statusbar,
 .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_statusbar .o_statusbar_status {
     min-height: 32px !important;
-    height: 32px !important;
-    max-height: 32px !important;
-    overflow-x: hidden !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow-x: visible !important;
     overflow-y: visible !important;
     scrollbar-width: none;
+}
+
+/* RR42: StatusBarField measures wrap height before Odoo folds status steps. */
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_statusbar .o_statusbar_status {
+    align-items: stretch !important;
+    align-content: space-around !important;
+    flex-flow: row-reverse wrap-reverse !important;
 }
 
 .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_statusbar .o_statusbar_status > .dropdown-toggle.o_arrow_button.o-dropdown.dropdown:not(.d-none) {
@@ -4210,7 +4217,7 @@
 .o_web_client .o_control_panel.o_bao_form_control_panel .o-dropdown--menu.show {
     width: max-content !important;
     min-width: 188px !important;
-    max-width: calc(100vw - 24px) !important;
+    max-width: 100vw !important;
     padding: 6px !important;
     overflow-x: hidden !important;
     overflow-y: auto !important;
@@ -4620,9 +4627,9 @@
 
 .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .o_arrow_button:not(.d-none),
 .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .dropdown-toggle.o_arrow_button:not(.d-none) {
-    min-height: 32px !important;
-    height: 32px !important;
-    max-height: 32px !important;
+    min-height: var(--bao-sheet-header-status-height) !important;
+    height: var(--bao-sheet-header-status-height) !important;
+    max-height: var(--bao-sheet-header-status-height) !important;
     white-space: nowrap !important;
     overflow: visible !important;
     text-overflow: clip !important;
@@ -6378,7 +6385,7 @@
 .o_web_client:has(.o_control_panel .dropdown-toggle.show) .o_popover.o-dropdown--menu.dropdown-menu.mx-0.lh-base {
     width: max-content !important;
     min-width: 188px !important;
-    max-width: calc(100vw - 24px) !important;
+    max-width: 100vw !important;
     min-height: 40px !important;
     padding: 6px !important;
     overflow-x: hidden !important;
@@ -6940,22 +6947,23 @@
 .o_web_client .o-form-buttonbox.o-form-buttonbox-small {
     display: block !important;
     width: max-content !important;
-    min-width: 188px !important;
-    max-width: calc(100vw - 24px) !important;
+    min-width: 100% !important;
+    max-width: 100vw !important;
     right: auto !important;
-    padding: 6px !important;
+    padding: 8px !important;
     overflow-x: hidden !important;
     overflow-y: auto !important;
     gap: 0 !important;
     border: 1px solid rgba(32, 46, 62, 0.14) !important;
-    border-radius: 8px !important;
+    border-radius: 12px !important;
     background: #ffffff !important;
-    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.14), 0 4px 14px rgba(15, 23, 42, 0.08) !important;
+    box-shadow: var(--bao-rr19-popover-shadow) !important;
 }
 
 @media (min-width: 384px) {
     .o_web_client .o-dropdown--menu.o-form-buttonbox.o-form-buttonbox-small,
     .o_web_client .o-form-buttonbox.o-form-buttonbox-small {
+        width: 100vw !important;
         max-width: 360px !important;
     }
 }
@@ -6979,12 +6987,35 @@
 
 .o_web_client .o-dropdown--menu.o-form-buttonbox.o-form-buttonbox-small .oe_stat_button,
 .o_web_client .o-form-buttonbox.o-form-buttonbox-small .oe_stat_button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    min-height: 48px !important;
+    min-height: 38px !important;
     height: auto !important;
+    padding: 8px 12px !important;
     overflow: visible !important;
+    border: 0 !important;
+    border-radius: 6px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #30343a !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 20px !important;
+    text-align: left !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+}
+
+.o_web_client .o-dropdown--menu.o-form-buttonbox.o-form-buttonbox-small .oe_stat_button:hover,
+.o_web_client .o-dropdown--menu.o-form-buttonbox.o-form-buttonbox-small .oe_stat_button:focus,
+.o_web_client .o-form-buttonbox.o-form-buttonbox-small .oe_stat_button:hover,
+.o_web_client .o-form-buttonbox.o-form-buttonbox-small .oe_stat_button:focus {
+    background: #eef4fb !important;
+    color: #163f71 !important;
 }
 
 /* RR21: prevent multi-smartbutton rails with More from wrapping into a second row. */
@@ -7409,9 +7440,9 @@
 @media (max-width: 575.98px) {
     .o_web_client .o-dropdown--menu.o-form-buttonbox.o_dropdown_more,
     .o_web_client .dropdown-menu.o-form-buttonbox.o_dropdown_more {
-        width: calc(100vw - 24px) !important;
-        min-width: calc(100vw - 24px) !important;
-        max-width: calc(100vw - 24px) !important;
+        width: 100vw !important;
+        min-width: 100vw !important;
+        max-width: 100vw !important;
     }
 }
 
@@ -7857,8 +7888,8 @@
 }
 
 /* RR36: native-like mobile topbar organization.
-   Below tablet, form navigation, primary actions and More share one compact row;
-   dropdown surfaces keep the same desktop/mobile token contract. */
+   Below tablet, keep the form control row on the BAO shell background from its
+   pre-normalized first paint: primary actions first, pager at the row end. */
 @media (max-width: 767.98px) {
     .o_web_client .o_main_navbar {
         height: 52px !important;
@@ -7902,8 +7933,109 @@
         min-height: 0 !important;
         padding: 6px 14px 8px !important;
         gap: 0 !important;
+        border-bottom: 0 !important;
+        background: $bao-shell-blue !important;
+        box-shadow: none !important;
         overflow-x: hidden !important;
         overflow-y: visible !important;
+    }
+
+    // The BAO form marker lands after Odoo's first control-panel paint.
+    // Keep that brief pre-normalized frame on the final mobile geometry.
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel:not(.o_bao_form_control_panel) {
+        min-height: 0 !important;
+        padding: 6px 14px 8px !important;
+        gap: 0 !important;
+        border-bottom: 0 !important;
+        background: $bao-shell-blue !important;
+        box-shadow: none !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel:not(.o_bao_form_control_panel)
+        .o_control_panel_main {
+        grid-template-columns: minmax(0, 1fr) auto !important;
+        grid-template-areas: "breadcrumbs navigation" !important;
+        column-gap: 8px !important;
+        row-gap: 0 !important;
+        min-height: 40px !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel:not(.o_bao_form_control_panel)
+        .o_control_panel_main > .o_control_panel_actions:empty {
+        display: none !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel:not(.o_bao_form_control_panel)
+        .o_control_panel_main > .o_control_panel_breadcrumbs {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        flex-wrap: nowrap !important;
+        gap: 8px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: 40px !important;
+        min-height: 40px !important;
+        max-height: 40px !important;
+        overflow: hidden !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel:not(.o_bao_form_control_panel)
+        .o_control_panel_breadcrumbs > :is(.o_breadcrumb, .breadcrumb) {
+        display: none !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel:not(.o_bao_form_control_panel)
+        .o_control_panel_breadcrumbs:has(> .o_control_panel_breadcrumbs_actions)
+        .o_control_panel_main_buttons {
+        margin-inline-start: 0 !important;
+        max-width: 142px !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel:not(.o_bao_form_control_panel)
+        .o_control_panel_breadcrumbs > .o_control_panel_breadcrumbs_actions,
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel:not(.o_bao_form_control_panel)
+        .o_control_panel_breadcrumbs > .o_control_panel_breadcrumbs_actions.d-contents {
+        position: static !important;
+        inset: auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        flex: 1 1 auto !important;
+        gap: 6px !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: 40px !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view)
+        .o_control_panel:not(.o_bao_form_control_panel)
+        .o_control_panel_breadcrumbs_actions > :is(.o_cp_action_menus, .o-form-buttonbox, .o_form_button_box) {
+        position: static !important;
+        inset: auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        flex: 0 0 auto !important;
+        gap: 6px !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 92px !important;
+        height: 38px !important;
+        margin: 0 !important;
+        overflow: visible !important;
     }
 
     .o_web_client .o_action_manager:has(.o_form_view)
@@ -7913,8 +8045,8 @@
         .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel_smart_rail
         .o_control_panel_main {
         display: grid !important;
-        grid-template-columns: auto minmax(0, 1fr) !important;
-        grid-template-areas: "navigation breadcrumbs" !important;
+        grid-template-columns: minmax(0, 1fr) auto !important;
+        grid-template-areas: "breadcrumbs navigation" !important;
         align-items: center !important;
         justify-content: stretch !important;
         column-gap: 8px !important;
@@ -7933,7 +8065,8 @@
         grid-area: navigation !important;
         display: inline-flex !important;
         align-items: center !important;
-        justify-content: flex-start !important;
+        justify-content: flex-end !important;
+        justify-self: end !important;
         flex-wrap: nowrap !important;
         gap: 4px !important;
         width: auto !important;
@@ -7983,12 +8116,69 @@
         display: none !important;
     }
 
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_breadcrumbs.o_control_panel_breadcrumbs > .o_bao_form_header_cluster {
+        display: contents !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_bao_form_header_cluster > .o_bao_breadcrumb_header {
+        display: inline-flex !important;
+        flex: 0 0 auto !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 40px !important;
+        height: 38px !important;
+        min-height: 38px !important;
+        max-height: 38px !important;
+        overflow: hidden !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_bao_form_header_cluster .o_bao_breadcrumb_header_text {
+        display: none !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_bao_form_header_cluster > .o_bao_header_main_buttons {
+        display: inline-flex !important;
+        flex: 0 0 auto !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 142px !important;
+        height: 38px !important;
+        min-height: 38px !important;
+        max-height: 38px !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_bao_form_header_cluster > .o_bao_header_status_actions:empty {
+        display: none !important;
+    }
+
     .o_web_client .o_action_manager:has(.o_form_view)
         .o_control_panel.o_bao_form_control_panel
         .o_control_panel_main_buttons {
         display: inline-flex !important;
         align-items: center !important;
         flex: 0 0 auto !important;
+        flex-wrap: nowrap !important;
         gap: 6px !important;
         width: auto !important;
         min-width: 0 !important;
@@ -8109,6 +8299,7 @@
         order: 0 !important;
         display: inline-flex !important;
         flex: 0 0 auto !important;
+        flex-wrap: nowrap !important;
         grid-area: auto !important;
         align-items: center !important;
         gap: 6px !important;
@@ -8120,6 +8311,35 @@
         max-width: 142px !important;
         margin: 0 !important;
         overflow: hidden !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_breadcrumbs.o_control_panel_breadcrumbs
+        > .o_control_panel_main_buttons.o_control_panel_main_buttons
+        :is(.btn, button, a):not(.dropdown-toggle):not(.o_button_more) {
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_bao_header_main_buttons .o_control_panel_main_buttons.o_control_panel_main_buttons
+        .o_form_button_create {
+        flex: 0 1 88px !important;
+        width: auto !important;
+        min-width: 84px !important;
+        max-width: 92px !important;
+        height: 38px !important;
+        min-height: 38px !important;
+        max-height: 38px !important;
+        padding: 0 12px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
     }
 
     body.o_web_client.o_web_client
@@ -8176,5 +8396,291 @@
         max-height: 38px !important;
         padding: 0 !important;
         border-radius: 9px !important;
+    }
+}
+
+/* RR44: below desktop, keep form control rows close to native Odoo:
+   actions stay in the command row and the breadcrumb trail stays below. */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_main.o_control_panel_main {
+        grid-template-columns: minmax(0, 1fr) auto !important;
+        grid-template-areas:
+            "baoFormHeadGroup baoFormPager"
+            "baoFormSmart baoFormSmart"
+            "baoFormTrail baoFormTrail" !important;
+        column-gap: 10px !important;
+        row-gap: 4px !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_bao_form_header_cluster {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_bao_form_header_cluster > .o_bao_breadcrumb_header {
+        display: contents !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_bao_form_header_cluster .o_bao_breadcrumb_header_text {
+        display: none !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        :is(.o_bao_breadcrumb_interactive, .o_bao_header_menu_actions, .o_bao_header_main_buttons, .o_bao_header_main_buttons .o_control_panel_main_buttons) {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_bao_header_main_buttons .o_control_panel_main_buttons.o_control_panel_main_buttons
+        .o_form_button_create {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: max-content !important;
+        max-width: none !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
+        .o_control_panel_main > .o_control_panel_actions {
+        justify-self: stretch !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+}
+
+/* RR45: SearchBar facets follow native Odoo:
+   the facet container and facet values wrap; the field grows with content and
+   does not become an internal scroll pane. BAO only keeps the surface skin. */
+.o_web_client .o_action_manager
+    .o_control_panel:not(.o_bao_form_control_panel)
+    .o_cp_searchview {
+    min-height: 38px !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.o_web_client .o_action_manager
+    .o_control_panel:not(.o_bao_form_control_panel)
+    .o_searchview {
+    min-height: 38px !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.o_web_client .o_action_manager
+    .o_control_panel:not(.o_bao_form_control_panel)
+    .o_searchview .o_searchview_input_container {
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    min-width: 0 !important;
+    min-height: 28px !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.o_web_client .o_action_manager
+    .o_control_panel:not(.o_bao_form_control_panel)
+    .o_searchview .o_facet_values {
+    flex-wrap: wrap !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: hidden !important;
+}
+
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager:not(:has(.o_form_view)):not(:has(.o_base_settings_view))
+    .o_control_panel:not(.o_bao_form_control_panel)
+    :is(.o_cp_searchview, .o_searchview) {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager:not(:has(.o_form_view)):not(:has(.o_base_settings_view))
+    .o_control_panel:not(.o_bao_form_control_panel)
+    .o_searchview
+    :is(.o_searchview_input_container, .o_searchview_facet, .o_searchview_input) {
+    white-space: normal !important;
+}
+
+/* RR47: native headers can expose more than one StatusBarField.
+   Keep each field measurable so Odoo can fold its own steps instead of stacking
+   every BAO statusbar field in the same two-column grid cell. */
+@media (min-width: 768px) {
+    body.o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_statusbar:has(> .o_field_statusbar + .o_field_statusbar) {
+        display: flex !important;
+        grid-template-columns: none !important;
+        grid-template-rows: none !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 10px !important;
+    }
+
+    body.o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_statusbar:has(> .o_field_statusbar + .o_field_statusbar)
+        > .o_statusbar_buttons {
+        flex: 1 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    body.o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_statusbar:has(> .o_field_statusbar + .o_field_statusbar)
+        > .o_field_statusbar {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_statusbar:has(> .o_field_statusbar + .o_field_statusbar)
+        > .o_field_statusbar
+        > .o_statusbar_status {
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+}
+
+/* RR48/RR49: below tablet, control-panel dropdowns are touch surfaces.
+   Keep the native dropdown content, but remove the narrow desktop popover width
+   and do not leave an Actions tooltip layered above the open menu. */
+@media (max-width: 767.98px) {
+    body.o_web_client.o_web_client
+        .o_popover.o-dropdown--menu.dropdown-menu.o-control-panel-adaptive-dropdown,
+    body.o_web_client.o_web_client:has(.o_control_panel .dropdown-toggle.show)
+        .o_popover.o-dropdown--menu.dropdown-menu.mx-0.lh-base {
+        box-sizing: border-box !important;
+        width: calc(100vw - 24px) !important;
+        min-width: 0 !important;
+        max-width: calc(100vw - 24px) !important;
+    }
+
+    body.o_web_client.o_web_client:has(.o_control_panel .dropdown-toggle.show)
+        .o_popover.popover:not(.o-dropdown--menu):has(.o-tooltip) {
+        display: none !important;
+    }
+}
+
+/* RR51: Odoo measures and folds status steps from the real inline room.
+   Tablet statusbars must not reserve a fixed status column that starves long
+   Purchase actions before the native status field can react. */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg
+        > .o_form_statusbar:has(.o_statusbar_status) {
+        display: flex !important;
+        grid-template-columns: none !important;
+        grid-template-rows: none !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+        column-gap: 14px !important;
+        row-gap: 8px !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg
+        > .o_form_statusbar:has(.o_statusbar_status)
+        > .o_statusbar_buttons {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        flex: 1 1 320px !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg
+        > .o_form_statusbar:has(.o_statusbar_status)
+        > .o_field_statusbar {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        justify-self: auto !important;
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg
+        > .o_form_statusbar:has(.o_statusbar_status)
+        > .o_field_statusbar
+        > .o_statusbar_status {
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+}
+
+/* RR52: under wide desktop, BAO statusbars can become two or three visual rows.
+   Keep the actions/status readable, but do not pin that taller block above the
+   form fields while the user scrolls through the sheet. */
+@media (min-width: 768px) and (max-width: 1439.98px) {
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg
+        > .o_form_statusbar {
+        position: relative !important;
+        top: auto !important;
+        z-index: 0 !important;
     }
 }

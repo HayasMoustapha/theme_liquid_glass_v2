@@ -79,6 +79,10 @@ class TestBaoThemeConfig(TransactionCase):
             "#445566",
         )
 
+    def test_settings_defaults_active_theme_config(self):
+        values = self.env["res.config.settings"].default_get(["bao_theme_config_id"])
+        self.assertEqual(values["bao_theme_config_id"], self.config.id)
+
     def test_family_runtime_css_uses_family_selector(self):
         self.env["bao.theme.family.override"].create({
             "config_id": self.config.id,
