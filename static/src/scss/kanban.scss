@@ -564,13 +564,25 @@
         }
     }
 
-    &:has(.o_kanban_record .o_kanban_image, .o_kanban_record .o_kanban_image_fill, .o_kanban_record img) {
+    &:has(.o_kanban_record .o_kanban_image, .o_kanban_record .o_kanban_image_fill, .o_kanban_record .o_field_background_image, .o_kanban_record img) {
         --bao-kanban-card-min-height: 100px;
 
         .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new) {
-            height: 100% !important;
+            height: auto !important;
             min-height: 100px !important;
         }
+    }
+
+    .o_kanban_record > aside :is(.o_field_background_image, .o_kanban_image, .o_kanban_image_fill) {
+        overflow: hidden !important;
+    }
+
+    .o_kanban_record > aside :is(.o_field_background_image, .o_kanban_image, .o_kanban_image_fill) > img,
+    .o_kanban_record > aside > img {
+        color: transparent !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+        object-fit: cover !important;
     }
 }
 
