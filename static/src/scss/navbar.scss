@@ -8684,3 +8684,116 @@ body.o_web_client.o_web_client
         z-index: 0 !important;
     }
 }
+
+/* RR55: list/Kanban multi-selection must keep Odoo's native controls measurable.
+   BAO's centered control-panel grid was compressing the selection toolbar between
+   breadcrumbs and pager; from tablet upward it gets its own responsive row. */
+@media (min-width: 768px) {
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel:not(.o_bao_form_control_panel):has(.o_selection_container)
+        .o_control_panel_main.o_control_panel_main {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) auto !important;
+        grid-template-rows: auto auto !important;
+        grid-template-areas: none !important;
+        align-items: center !important;
+        justify-content: stretch !important;
+        column-gap: 12px !important;
+        row-gap: 8px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel:not(.o_bao_form_control_panel):has(.o_selection_container)
+        .o_control_panel_main.o_control_panel_main
+        > .o_control_panel_breadcrumbs {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        justify-self: stretch !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel:not(.o_bao_form_control_panel):has(.o_selection_container)
+        .o_control_panel_main.o_control_panel_main
+        > .o_control_panel_navigation {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        justify-self: end !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel:not(.o_bao_form_control_panel):has(.o_selection_container)
+        .o_control_panel_main.o_control_panel_main
+        > .o_control_panel_actions:has(.o_selection_container) {
+        grid-column: 1 / -1 !important;
+        grid-row: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        justify-self: stretch !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 40px !important;
+        max-height: none !important;
+        margin: 0 !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel:not(.o_bao_form_control_panel)
+        .o_selection_container {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 40px !important;
+        max-height: none !important;
+        margin: 0 !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel:not(.o_bao_form_control_panel)
+        .o_selection_container
+        .o_selection_box {
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 38px !important;
+        overflow: hidden !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel:not(.o_bao_form_control_panel)
+        .o_selection_container
+        :is(.btn, button, .dropdown-toggle, .list-group-item) {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        white-space: nowrap !important;
+    }
+}

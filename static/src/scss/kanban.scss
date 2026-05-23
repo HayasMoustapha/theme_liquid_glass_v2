@@ -729,6 +729,156 @@
     }
 }
 
+// RR55: Lunch order cards keep Odoo's native clickable card and favorite action,
+// but the BAO two-column Kanban density is too narrow beside the order panel.
+@media (min-width: 576px) and (max-width: 899.98px) {
+    .o_lunch_content .o_kanban_renderer.o_kanban_ungrouped,
+    .o_content.o_component_with_search_panel
+        .o_kanban_renderer.o_kanban_ungrouped:has(.o_kanban_record > aside.o_kanban_aside_full),
+    .o_lunch_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
+        --bao-kanban-columns: 1;
+        --bao-kanban-total-gap: 0px;
+        --bao-kanban-card-basis: 100%;
+
+        .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new) {
+            flex-basis: 100% !important;
+            max-width: 100% !important;
+            min-height: 112px !important;
+        }
+    }
+}
+
+.o_lunch_content .o_kanban_renderer.o_kanban_ungrouped,
+.o_content.o_component_with_search_panel
+    .o_kanban_renderer.o_kanban_ungrouped:has(.o_kanban_record > aside.o_kanban_aside_full),
+.o_lunch_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
+    .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new) > main {
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .o_kanban_record > main > .d-flex:first-child {
+        align-items: flex-start !important;
+        gap: 6px !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .o_kanban_record > main > .d-flex:first-child > .d-flex {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .o_kanban_record > main > .d-flex:first-child .text-primary {
+        flex: 0 1 auto !important;
+        max-width: 45% !important;
+        min-width: max-content !important;
+        margin-left: auto !important;
+        text-align: right !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .o_kanban_record > main > .d-flex:first-child :is(.fw-bolder, .fs-5),
+    .o_kanban_record > main > .d-flex:first-child .o_field_widget[name="name"] {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+
+    .o_kanban_record footer {
+        height: auto !important;
+        min-height: 24px !important;
+        max-height: none !important;
+        overflow: hidden !important;
+    }
+}
+
+// RR55: Survey Kanban exposes several primary actions in one native row.
+// BAO must let that row wrap instead of forcing clipped tablet buttons.
+@media (min-width: 576px) and (max-width: 1199.98px) {
+    .o_survey_view_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
+        .o_survey_kanban_card_certification {
+            background-image: none !important;
+        }
+
+        .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new) {
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            overflow: visible !important;
+        }
+
+        .o_survey_kanban_card,
+        .o_survey_kanban_card > .row {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            overflow: visible !important;
+        }
+
+        .o_survey_kanban_card > .row {
+            margin-left: 10px !important;
+            margin-right: 10px !important;
+            padding-bottom: 8px !important;
+        }
+
+        .o_survey_kanban_card [class*="col-"] {
+            min-width: 0 !important;
+            max-width: 100% !important;
+        }
+
+        .o_survey_kanban_card > .row > .col-lg-3.col-sm-12.d-sm-flex {
+            justify-content: flex-start !important;
+            flex-wrap: wrap !important;
+            gap: 6px !important;
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            overflow: visible !important;
+            padding-bottom: 4px !important;
+        }
+
+        .o_survey_kanban_card > .row > .col-lg-3.col-sm-12.d-sm-flex > .btn {
+            flex: 1 1 calc(50% - 6px) !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            min-height: 34px !important;
+            height: auto !important;
+            padding: 6px 10px !important;
+            line-height: 1.15 !important;
+            white-space: normal !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .o_survey_kanban_card_bottom {
+            position: static !important;
+            display: flex !important;
+            justify-content: flex-end !important;
+            width: auto !important;
+            margin: 0 12px 8px auto !important;
+        }
+    }
+}
+
+@media (min-width: 576px) and (max-width: 699.98px) {
+    .o_survey_view_kanban_view:not(.o_modules_kanban)
+        .o_kanban_renderer.o_kanban_ungrouped
+        .o_survey_kanban_card
+        > .row
+        > .col-lg-3.col-sm-12.d-sm-flex
+        > .btn {
+        flex-basis: 100% !important;
+    }
+}
+
 // Partner notebook contact cards stay separate from full-screen kanban boards.
 // This block intentionally repeats the critical geometry after the generic kanban rules
 // because kanban.scss is loaded after forms.scss in the backend asset bundle.
