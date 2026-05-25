@@ -8607,6 +8607,35 @@ body.o_web_client.o_web_client
     }
 }
 
+/* RR60: form mobile dropdowns must use the same usable viewport contract as
+   the control-panel More menu. Keep Odoo's native menu content; only prevent
+   narrow statusbar action menus and smartbutton popovers from escaping. */
+@media (max-width: 767.98px) {
+    body.o_web_client.o_web_client
+        .o_popover.o-dropdown--menu.dropdown-menu.o-form-buttonbox.o-form-buttonbox-small,
+    body.o_web_client.o_web_client
+        .o_popover.o-dropdown--menu.dropdown-menu.o-form-buttonbox.o_dropdown_more,
+    body.o_web_client.o_web_client
+        .dropdown-menu.o-form-buttonbox.o-form-buttonbox-small,
+    body.o_web_client.o_web_client
+        .dropdown-menu.o-form-buttonbox.o_dropdown_more,
+    body.o_web_client.o_web_client:has(.o_form_statusbar .o_statusbar_buttons .dropdown-toggle.show)
+        .o_popover.o-dropdown--menu.dropdown-menu.mx-0,
+    body.o_web_client.o_web_client:has(.o_form_statusbar .o_statusbar_buttons .o-dropdown.show)
+        .o_popover.o-dropdown--menu.dropdown-menu.mx-0,
+    body.o_web_client.o_web_client:has(.o_form_statusbar .o_statusbar_buttons .o-dropdown .btn.show)
+        .o_popover.o-dropdown--menu.dropdown-menu.mx-0 {
+        box-sizing: border-box !important;
+        inset-inline: 12px !important;
+        width: calc(100vw - 24px) !important;
+        min-width: 0 !important;
+        max-width: calc(100vw - 24px) !important;
+        transform: none !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+}
+
 /* RR51: Odoo measures and folds status steps from the real inline room.
    Tablet statusbars must not reserve a fixed status column that starves long
    Purchase actions before the native status field can react. */
