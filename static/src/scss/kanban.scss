@@ -814,6 +814,194 @@
     }
 }
 
+// RR66: Survey kanban is a native rich list-card, not a compact atlas card.
+// Keep BAO skinning, but preserve full labels, metrics and action buttons.
+.o_survey_view_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
+    --bao-kanban-columns: 1;
+    --bao-kanban-total-gap: 0px;
+    --bao-kanban-card-basis: 100%;
+    --bao-kanban-card-min-height: 0px;
+    display: block !important;
+    width: 100% !important;
+    padding: 16px !important;
+    background: #ffffff !important;
+    overflow: auto !important;
+
+    .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),
+    .o_kanban_quick_create {
+        display: block !important;
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        margin: 0 0 8px !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    .o_survey_kanban_card {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+        border-top: 0 !important;
+    }
+
+    .o_survey_kanban_card > .row {
+        align-items: center !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        min-height: 76px !important;
+        height: auto !important;
+        max-height: none !important;
+        margin-left: 16px !important;
+        margin-right: 16px !important;
+        padding: 12px 0 !important;
+        row-gap: 8px !important;
+        overflow: visible !important;
+    }
+
+    .o_survey_kanban_card [class*="col-"] {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .o_survey_kanban_card :is(.fw-bold, .fw-bolder, strong, .o_kanban_record_title, .o_text_overflow),
+    .o_survey_kanban_card :is(.fw-bold, .fw-bolder, strong, .o_kanban_record_title, .o_text_overflow) span {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        overflow-wrap: anywhere !important;
+        line-height: 1.2 !important;
+    }
+
+    .o_survey_kanban_card .text-muted {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        line-height: 1.2 !important;
+    }
+
+    .o_survey_kanban_card .col-lg-2 span.d-flex.align-items-center {
+        flex-wrap: wrap !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        gap: 2px !important;
+    }
+
+    .o_survey_kanban_card [name="o_survey_kanban_card_section_success"] > a {
+        display: inline-flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 3px !important;
+        min-width: 92px !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+        overflow: visible !important;
+    }
+
+    .o_survey_kanban_card .o_field_progressbar,
+    .o_survey_kanban_card .o_progressbar {
+        width: 100% !important;
+        min-width: 92px !important;
+        max-width: 128px !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .o_survey_kanban_card .o_progressbar {
+        gap: 4px !important;
+    }
+
+    .o_survey_kanban_card .o_progress {
+        flex: 1 1 58px !important;
+        min-width: 52px !important;
+        max-width: 80px !important;
+    }
+
+    .o_survey_kanban_card .o_progressbar_value,
+    .o_survey_kanban_card .o_progressbar_value span {
+        flex: 0 0 auto !important;
+        min-width: max-content !important;
+        width: auto !important;
+        max-width: none !important;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+    }
+
+    .o_survey_kanban_card > .row > .col-lg-3.col-sm-12.d-sm-flex {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        flex-wrap: wrap !important;
+        align-content: center !important;
+        gap: 6px !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        padding-bottom: 0 !important;
+        overflow: visible !important;
+    }
+
+    .o_survey_kanban_card > .row > .col-lg-3.col-sm-12.d-sm-flex > .btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: max-content !important;
+        max-width: 100% !important;
+        min-height: 34px !important;
+        height: auto !important;
+        padding: 6px 12px !important;
+        line-height: 1.15 !important;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+    }
+
+    .o_survey_kanban_card_bottom {
+        position: static !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        width: auto !important;
+        margin: 0 14px 8px auto !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .o_survey_view_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
+        padding: 12px !important;
+
+        .o_survey_kanban_card > .row {
+            margin-left: 10px !important;
+            margin-right: 10px !important;
+            row-gap: 6px !important;
+        }
+
+        .o_survey_kanban_card [name="o_survey_kanban_card_section_success"] > a {
+            min-width: 108px !important;
+        }
+    }
+}
+
 // Partner notebook contact cards stay separate from full-screen kanban boards.
 // This block intentionally repeats the critical geometry after the generic kanban rules
 // because kanban.scss is loaded after forms.scss in the backend asset bundle.
@@ -1267,4 +1455,129 @@
     flex: 1 1 auto !important;
     min-width: 0 !important;
     max-width: 100% !important;
+}
+
+/* RR66 final survey authority: this must stay after the generic kanban
+   truncation guards above. Survey cards carry readable titles, metrics and
+   command buttons, so they need wrapping instead of atlas-card ellipsis. */
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager
+    .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+    .o_kanban_renderer.o_kanban_ungrouped
+    .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new) {
+    overflow: visible !important;
+}
+
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager
+    .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+    .o_kanban_renderer.o_kanban_ungrouped
+    .o_survey_kanban_card_certification {
+    background-image: none !important;
+}
+
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager
+    .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+    .o_kanban_renderer.o_kanban_ungrouped
+    .o_survey_kanban_card
+    :is(.row, [class*="col-"], [class*="col_"]) {
+    overflow: visible !important;
+}
+
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager
+    .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+    .o_kanban_renderer.o_kanban_ungrouped
+    .o_survey_kanban_card
+    :is(.o_kanban_record_title, .o_kanban_record_subtitle, .o_text_overflow, .fw-bold, .fw-bolder, strong, a:not(.btn)) {
+    display: inline-block !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+}
+
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager
+    .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+    .o_kanban_renderer.o_kanban_ungrouped
+    .o_survey_kanban_card
+    span:not(.badge):not(.o_badge):not(.o_tag):not(.o_status):not(.fa):not(.oi):not([class*="fa-"]):not([class*="oi-"]) {
+    display: inline !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+    vertical-align: baseline !important;
+}
+
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager
+    .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+    .o_kanban_renderer.o_kanban_ungrouped
+    .o_survey_kanban_card
+    .o_progressbar_value,
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager
+    .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+    .o_kanban_renderer.o_kanban_ungrouped
+    .o_survey_kanban_card
+    .o_progressbar_value span {
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    min-width: max-content !important;
+    width: auto !important;
+    max-width: none !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: nowrap !important;
+}
+
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager
+    .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+    .o_kanban_renderer.o_kanban_ungrouped
+    .o_survey_kanban_card
+    > .row
+    > .col-lg-3.col-sm-12.d-sm-flex
+    > .btn {
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: nowrap !important;
+}
+
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager
+    .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+    .o_kanban_renderer.o_kanban_ungrouped
+    .o_survey_kanban_card
+    [name="o_survey_kanban_card_section_success"]
+    > a.oe_kanban_action {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: max-content !important;
+    min-width: max-content !important;
+    max-width: none !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+}
+
+@media (min-width: 992px) {
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+        .o_kanban_renderer.o_kanban_ungrouped
+        .o_survey_kanban_card
+        [name="o_survey_kanban_card_section_success"] {
+        flex: 0 0 144px !important;
+        width: 144px !important;
+        min-width: 144px !important;
+        max-width: 144px !important;
+        overflow: visible !important;
+    }
 }

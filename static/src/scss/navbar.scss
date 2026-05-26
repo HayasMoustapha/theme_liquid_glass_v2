@@ -4950,37 +4950,47 @@
 
     .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_control_panel_breadcrumbs {
         min-height: 40px !important;
+        height: auto !important;
+        max-height: none !important;
         overflow: visible !important;
     }
 
     .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_settings_header_cluster {
-        flex-wrap: nowrap !important;
+        flex-wrap: wrap !important;
         gap: 8px !important;
     }
 
     .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_breadcrumb_header {
-        flex: 1 1 auto !important;
-        max-width: 42vw !important;
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
     .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_header_main_buttons {
-        flex: 0 1 auto !important;
-        max-width: calc(100% - 84px) !important;
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
     .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_header_main_buttons .o_control_panel_main_buttons {
         gap: 6px !important;
+        flex-wrap: wrap !important;
         max-width: 100% !important;
-        overflow: hidden !important;
+        overflow: visible !important;
     }
 
     .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_header_main_buttons .btn,
     .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_bao_header_main_buttons button {
-        flex: 0 1 auto !important;
-        max-width: 98px !important;
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 88px !important;
+        max-width: 132px !important;
         min-height: 38px !important;
         height: 38px !important;
-        padding-inline: 10px !important;
+        padding-inline: 12px !important;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
     }
 
     .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_control_panel_actions {
@@ -8397,6 +8407,137 @@
         padding: 0 !important;
         border-radius: 9px !important;
     }
+
+    /* RR66: Settings is implemented as an Odoo form view, but its control panel
+       owns a search row. Keep the generic mobile form header from collapsing the
+       Settings buttons into the search hit area. */
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_base_settings_view)
+        .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel {
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_base_settings_view)
+        .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel
+        .o_control_panel_main.o_control_panel_main {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-template-areas:
+            "breadcrumbs"
+            "actions"
+            "navigation" !important;
+        align-items: stretch !important;
+        justify-content: stretch !important;
+        row-gap: 10px !important;
+        min-height: 0 !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_base_settings_view)
+        .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel
+        .o_control_panel_main.o_control_panel_main > .o_control_panel_breadcrumbs.o_control_panel_breadcrumbs {
+        grid-area: breadcrumbs !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_base_settings_view)
+        .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel
+        .o_bao_settings_header_cluster {
+        display: flex !important;
+        align-items: flex-start !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_base_settings_view)
+        .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel
+        .o_bao_settings_header_cluster > .o_bao_breadcrumb_header,
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_base_settings_view)
+        .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel
+        .o_bao_settings_header_cluster > .o_bao_header_main_buttons {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_base_settings_view)
+        .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel
+        .o_bao_header_main_buttons .o_control_panel_main_buttons.o_control_panel_main_buttons {
+        display: flex !important;
+        flex: 1 1 auto !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        gap: 6px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_base_settings_view)
+        .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel
+        .o_bao_header_main_buttons .o_control_panel_main_buttons.o_control_panel_main_buttons :is(.btn, button, a) {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: 38px !important;
+        min-height: 38px !important;
+        max-height: 38px !important;
+        padding-inline: 12px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_base_settings_view)
+        .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel
+        .o_control_panel_main.o_control_panel_main > .o_control_panel_actions.o_control_panel_actions {
+        grid-area: actions !important;
+        display: flex !important;
+        justify-self: stretch !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_base_settings_view)
+        .o_control_panel.o_bao_settings_control_panel.o_bao_center_search_panel
+        :is(.o_cp_searchview, .o_searchview) {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
 }
 
 /* RR44: below desktop, keep form control rows close to native Odoo:
@@ -8711,6 +8852,61 @@ body.o_web_client.o_web_client
         position: relative !important;
         top: auto !important;
         z-index: 0 !important;
+    }
+}
+
+/* RR66: compact desktop sheets with the chatter column can leave less inline
+   room than the old fixed desktop statusbar minimum. Let the native Odoo
+   status field measure the available sheet width instead of forcing overflow. */
+@media (min-width: 1200px) and (max-width: 1439.98px) {
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg
+        > .o_form_statusbar:has(.o_statusbar_status) {
+        grid-template-columns: minmax(276px, 276px) minmax(0, 1fr) !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg
+        > .o_form_statusbar:has(.o_statusbar_status)
+        > .o_statusbar_buttons {
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 276px !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg
+        > .o_form_statusbar:has(.o_statusbar_status)
+        > .o_field_statusbar,
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg
+        > .o_form_statusbar:has(.o_statusbar_status)
+        .o_field_statusbar {
+        min-width: 0 !important;
+        width: auto !important;
+        max-width: 100% !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg
+        > .o_form_statusbar:has(.o_statusbar_status)
+        .o_statusbar_status {
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 }
 
