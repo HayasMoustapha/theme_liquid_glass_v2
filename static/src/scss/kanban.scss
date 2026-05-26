@@ -317,7 +317,7 @@
     border: 1px solid #e1e1e1 !important;
     border-radius: 16px !important;
     box-shadow: 1px 2px 4px rgba(13, 79, 148, 0.08) !important;
-    overflow: hidden !important;
+    overflow: auto !important;
 
     .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),
     .o_kanban_quick_create {
