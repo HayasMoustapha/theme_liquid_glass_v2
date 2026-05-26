@@ -8676,6 +8676,188 @@ body.o_web_client.o_web_client
     white-space: normal !important;
 }
 
+/* RR66: non-form tablet control panels must keep native first-row ownership.
+   Breadcrumb/actions stay on the left, pager and view switcher start on that
+   same row, while the search bar remains the second-row resilient surface. */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(.o_bao_settings_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_main.o_control_panel_main {
+        --bao-cp-search-width: clamp(260px, 30vw, 420px);
+        display: grid !important;
+        grid-template-columns: minmax(136px, 1fr) minmax(260px, var(--bao-cp-search-width)) minmax(220px, clamp(240px, 34vw, 380px)) !important;
+        grid-template-rows: auto auto !important;
+        grid-template-areas:
+            "breadcrumbs . navigation"
+            ". actions ." !important;
+        align-items: start !important;
+        column-gap: 12px !important;
+        row-gap: 8px !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(.o_bao_settings_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_main.o_control_panel_main
+        > .o_control_panel_breadcrumbs {
+        grid-area: breadcrumbs !important;
+        align-self: start !important;
+        justify-self: stretch !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(.o_bao_settings_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_main.o_control_panel_main
+        > .o_control_panel_actions {
+        grid-area: actions !important;
+        align-self: center !important;
+        justify-self: center !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: var(--bao-cp-search-width) !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(.o_bao_settings_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_main.o_control_panel_main
+        > .o_control_panel_navigation {
+        grid-area: navigation !important;
+        align-self: start !important;
+        justify-self: end !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        scrollbar-width: none;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(.o_bao_settings_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_main.o_control_panel_main
+        > .o_control_panel_navigation::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* RR66: opened mobile search is one native input group. Keep facet wrapping
+   inside the field, but never let the filter toggler fall to a second row. */
+@media (max-width: 767.98px) {
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:not(:has(.o_form_view)):not(:has(.o_base_settings_view))
+        .o_control_panel:not(.o_bao_form_control_panel):not(.o_bao_settings_control_panel)
+        .o_cp_searchview.input-group {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: stretch !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 40px !important;
+        overflow: visible !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:not(:has(.o_form_view)):not(:has(.o_base_settings_view))
+        .o_control_panel:not(.o_bao_form_control_panel):not(.o_bao_settings_control_panel)
+        .o_cp_searchview.input-group
+        > .o_searchview {
+        flex: 1 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: calc(100% - 42px) !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:not(:has(.o_form_view)):not(:has(.o_base_settings_view))
+        .o_control_panel:not(.o_bao_form_control_panel):not(.o_bao_settings_control_panel)
+        .o_cp_searchview.input-group
+        > .o_searchview_dropdown_toggler {
+        flex: 0 0 42px !important;
+        align-self: stretch !important;
+        width: 42px !important;
+        min-width: 42px !important;
+        max-width: 42px !important;
+        margin: 0 !important;
+    }
+}
+
+/* RR66: tablet search menus can open below a multi-facet search row.
+   Keep Odoo's native menu width, but bound the floating surface to the
+   available viewport height so it scrolls internally instead of escaping. */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    body.o_web_client.o_web_client
+        .o_popover.o-dropdown--menu.o_search_bar_menu,
+    body.o_web_client.o_web_client
+        .o-dropdown--menu.o_search_bar_menu {
+        max-height: #{'min(536px, calc(100dvh - 272px))'} !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel:not(.o_bao_form_control_panel):not(.o_bao_settings_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_main.o_control_panel_main
+        > .o_control_panel_navigation {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 8px !important;
+        min-height: 40px !important;
+        max-height: 42px !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        scrollbar-width: none;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel:not(.o_bao_form_control_panel):not(.o_bao_settings_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_main.o_control_panel_main
+        > .o_control_panel_navigation::-webkit-scrollbar {
+        display: none;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel:not(.o_bao_form_control_panel):not(.o_bao_settings_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_navigation
+        > :is(.o_pager, .o_cp_switch_buttons, .btn-group),
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel:not(.o_bao_form_control_panel):not(.o_bao_settings_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_navigation
+        .o_cp_switch_buttons
+        > :is(.btn, button) {
+        flex: 0 0 auto !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_control_panel:not(.o_bao_form_control_panel):not(.o_bao_settings_control_panel):not(:has(.o_base_settings_view))
+        .o_control_panel_navigation
+        .o_cp_switch_buttons {
+        display: inline-flex !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+    }
+}
+
 /* RR47: native headers can expose more than one StatusBarField.
    Keep each field measurable so Odoo can fold its own steps instead of stacking
    every BAO statusbar field in the same two-column grid cell. */

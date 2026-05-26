@@ -1581,3 +1581,85 @@ body.o_web_client.o_web_client
         overflow: visible !important;
     }
 }
+
+/* RR66: Survey list-cards keep the native information order, but BAO should
+   remove excessive Bootstrap vertical rhythm so the hierarchy reads as a dense
+   business list instead of separated marketing blocks. */
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager
+    .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+    .o_kanban_renderer.o_kanban_ungrouped
+    .o_survey_kanban_card
+    > .row {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    row-gap: 4px !important;
+}
+
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager
+    .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+    .o_kanban_renderer.o_kanban_ungrouped
+    .o_survey_kanban_card
+    > .row
+    > [class*="col-"] {
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+}
+
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager
+    .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+    .o_kanban_renderer.o_kanban_ungrouped
+    .o_survey_kanban_card_bottom {
+    margin-top: 2px !important;
+    margin-bottom: 6px !important;
+}
+
+@media (max-width: 575.98px) {
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+        .o_kanban_renderer.o_kanban_ungrouped
+        .o_survey_kanban_card
+        > .row {
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+        row-gap: 4px !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+        .o_kanban_renderer.o_kanban_ungrouped
+        .o_survey_kanban_card
+        > .row
+        > [class*="col-"] {
+        margin-top: 4px !important;
+        margin-bottom: 4px !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+        .o_kanban_renderer.o_kanban_ungrouped
+        .o_survey_kanban_card
+        > .row
+        > .col-lg-3.col-sm-12.d-sm-flex {
+        justify-content: center !important;
+        align-content: center !important;
+        gap: 6px !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager
+        .o_survey_view_kanban_view.o_survey_view_kanban_view:not(.o_modules_kanban)
+        .o_kanban_renderer.o_kanban_ungrouped
+        .o_survey_kanban_card
+        > .row
+        > .col-lg-3.col-sm-12.d-sm-flex
+        > .btn {
+        min-height: 32px !important;
+        padding: 5px 10px !important;
+    }
+}
