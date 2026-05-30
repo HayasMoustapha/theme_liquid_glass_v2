@@ -1136,16 +1136,23 @@
     row-gap: 14px;
 }
 
-// RR67-FORMS: 2-column grid — label and field on same line, each taking
-// only the space it needs. No excessive gap between label and value.
+// RR67-FORMS: 2-column grid — label and field on same line.
+// Both columns auto-size. justify-content: start keeps them tight.
+// In edit mode, field inputs stretch via width:100% on the field widget.
 .o_form_sheet .o_inner_group {
     display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: 6px 10px;
+    align-content: start;
+    justify-items: start;
+    --o-grid-column-span: 1 !important;
+}
+
+// In readonly, fields should only take the space their content needs
+.o_form_view:not(.o_form_editable) .o_form_sheet .o_inner_group {
     grid-template-columns: auto auto;
     justify-content: start;
-    align-items: baseline;
-    gap: 6px 12px;
-    align-content: start;
-    --o-grid-column-span: 1 !important;
 }
 
 .o_form_sheet .o_cell,
@@ -6112,16 +6119,18 @@
 // amount or price widgets switch to a two-column label/value rhythm.
 @media (min-width: 768px) {
     .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet {
+        // RR67: Monetary groups use same tight grid as all other groups
         .o_inner_group.grid:not(.oe_subtotal_footer):has(
                 > .o_cell_custom.null .o_field_widget.o_field_monetary:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
                 > .o_cell_custom.null .o_field_widget[name*="amount"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
                 > .o_cell_custom.null .o_field_widget[name*="price"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
                 > .o_cell_custom.null .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many)
             ) {
-            grid-template-columns: minmax(8.75rem, 42%) minmax(0, 1fr) !important;
-            column-gap: 14px !important;
-            row-gap: 2px !important;
-            align-items: center !important;
+            grid-template-columns: auto auto !important;
+            justify-content: start !important;
+            column-gap: 10px !important;
+            row-gap: 6px !important;
+            align-items: baseline !important;
         }
 
         // RR67-FORMS: Removed grid-column: 1/-1 on all cells in monetary groups.
