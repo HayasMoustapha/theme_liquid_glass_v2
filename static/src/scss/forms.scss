@@ -1171,10 +1171,11 @@
     min-width: 0;
 }
 
+// RR67: Label aligns to center of its companion field row
 .o_form_sheet .o_wrap_label {
     margin-bottom: 0;
     display: flex;
-    align-items: first baseline;
+    align-items: center;
     min-height: 40px;
 }
 
@@ -1182,6 +1183,20 @@
 .o_form_sheet .o_cell_custom:not(.o_wrap_label),
 .o_form_sheet .o_inner_group > .null {
     margin-bottom: 0 !important;
+}
+
+// RR67: Alert label/value pairs on same line via grid.
+// Targets alert cols that contain a label (small/text-muted) + value (field/strong).
+.o_form_view .alert .row > .col,
+.o_form_view .alert .row > [class*="col-"] {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: 4px 8px;
+
+    > .d-block {
+        display: inline !important;
+    }
 }
 
 .o_form_sheet .o_wrap_input,
