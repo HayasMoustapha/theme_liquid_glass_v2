@@ -1136,11 +1136,16 @@
     row-gap: 14px;
 }
 
+// RR67-FORMS: Native Odoo 2-column grid — label and field on the same line.
+// Label column auto-sizes to content (max 30%), field takes the rest.
+// Gap between label and field is tight for good UX proximity.
+// Override --o-grid-column-span to prevent native Odoo from spanning cells.
 .o_form_sheet .o_inner_group {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
+    grid-template-columns: minmax(auto, 30%) minmax(0, 1fr);
+    gap: 6px 12px;
     align-content: start;
+    --o-grid-column-span: 1 !important;
 }
 
 .o_form_sheet .o_cell,
@@ -1153,21 +1158,30 @@
     padding: 0 !important;
 }
 
-.o_form_sheet .o_inner_group > .o_cell,
-.o_form_sheet .o_inner_group > .o_cell_custom {
-    grid-column: 1;
+// RR67-FORMS: Force ALL cells into the 2-column grid flow — no span 2.
+// High specificity to override native Odoo form_controller span 2 rule.
+.o_form_view .o_form_sheet .o_inner_group > .o_cell,
+.o_form_view .o_form_sheet .o_inner_group > .o_cell_custom,
+.o_form_view .o_form_sheet .o_inner_group > .o_cell.o_cell_custom,
+.o_form_view .o_form_sheet .o_inner_group > .o_cell.o_wrap_label,
+.o_form_view .o_form_sheet .o_inner_group > .o_cell_custom.o_wrap_label,
+.o_form_view .o_form_sheet .o_inner_group > .o_cell_custom.null {
+    grid-column: auto !important;
     width: 100%;
     min-width: 0;
 }
 
 .o_form_sheet .o_wrap_label {
-    margin-bottom: 6px;
+    margin-bottom: 0;
+    display: flex;
+    align-items: first baseline;
+    min-height: 40px;
 }
 
 .o_form_sheet .o_wrap_input,
 .o_form_sheet .o_cell_custom:not(.o_wrap_label),
 .o_form_sheet .o_inner_group > .null {
-    margin-bottom: 14px !important;
+    margin-bottom: 0 !important;
 }
 
 .o_form_sheet .o_wrap_input,
@@ -1211,7 +1225,7 @@
     display: inline-flex;
     align-items: center;
     min-height: auto;
-    padding: 0 0 6px !important;
+    padding: 0 !important;
     background: transparent !important;
     border: none !important;
     border-radius: 0 !important;
@@ -6094,15 +6108,8 @@
             align-items: center !important;
         }
 
-        .o_inner_group.grid:not(.oe_subtotal_footer):has(
-                > .o_cell_custom.null .o_field_widget.o_field_monetary:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
-                > .o_cell_custom.null .o_field_widget[name*="amount"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
-                > .o_cell_custom.null .o_field_widget[name*="price"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
-                > .o_cell_custom.null .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many)
-            )
-            > .o_cell_custom {
-            grid-column: 1 / -1 !important;
-        }
+        // RR67-FORMS: Removed grid-column: 1/-1 on all cells in monetary groups.
+        // Cells now follow the natural 2-column grid flow (label | value same line).
 
         .o_inner_group.grid:not(.oe_subtotal_footer):has(
                 > .o_cell_custom.null .o_field_widget.o_field_monetary:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many),
