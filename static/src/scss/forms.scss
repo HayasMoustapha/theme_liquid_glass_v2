@@ -4966,43 +4966,50 @@
 
 @media (min-width: 768px) and (max-width: 1199.98px) {
     .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel {
-        --bao-form-breadcrumb-max: 100%;
-        --bao-form-smart-rail: 100%;
-
+        // RR67-CP: Keep breadcrumb + smartbuttons + pager on ONE row at tablet.
+        // Smartbuttons stay in their grid cell; overflow triggers native "More".
         .o_control_panel_main {
-            grid-template-columns: minmax(0, 1fr) minmax(0, auto) !important;
-            grid-template-rows: auto auto !important;
+            grid-template-columns: auto minmax(0, 1fr) auto !important;
+            grid-template-rows: auto !important;
         }
 
         .o_control_panel_breadcrumbs {
             grid-column: 1 !important;
             grid-row: 1 !important;
-        }
-
-        .o_control_panel_navigation {
-            grid-column: 2 !important;
-            grid-row: 1 !important;
+            min-width: 0 !important;
+            overflow: hidden !important;
         }
 
         .o_control_panel_actions {
-            grid-column: 1 / -1 !important;
-            grid-row: 2 !important;
-            justify-self: stretch !important;
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+            justify-self: center !important;
+            min-width: 0 !important;
             max-width: 100% !important;
+            overflow: hidden !important;
         }
 
-        .o_control_panel_breadcrumbs > .o_bao_header_main_buttons,
-        .o_control_panel_breadcrumbs > .o_bao_header_status_actions {
-            max-width: 220px !important;
+        .o_control_panel_navigation {
+            grid-column: 3 !important;
+            grid-row: 1 !important;
+            min-width: 0 !important;
+        }
+
+        .o_control_panel_actions > .o-form-buttonbox,
+        .o_control_panel_actions > .o_form_button_box {
+            flex-wrap: nowrap !important;
+            overflow: hidden !important;
+            max-width: 100% !important;
         }
 
         .o_control_panel_actions > .o-form-buttonbox > .oe_stat_button,
         .o_control_panel_actions > .o_form_button_box > .oe_stat_button,
         .o_form_view .o_form_button_box > .oe_stat_button,
         .o_form_view .o-form-buttonbox > .oe_stat_button {
-            flex-basis: 132px !important;
-            width: 132px !important;
-            max-width: 132px !important;
+            flex: 0 1 auto !important;
+            min-width: 0 !important;
+            width: auto !important;
+            max-width: 100% !important;
         }
     }
 }

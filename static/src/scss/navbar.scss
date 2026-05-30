@@ -1997,7 +1997,7 @@
 .o_web_client .o_list_renderer .o_list_table {
     table-layout: auto !important;
     width: max-content !important;
-    min-width: 1120px !important;
+    min-width: 100% !important;
     max-width: none !important;
 }
 
@@ -8543,15 +8543,16 @@
 /* RR44: below desktop, keep form control rows close to native Odoo:
    actions stay in the command row and the breadcrumb trail stays below. */
 @media (min-width: 768px) and (max-width: 1199.98px) {
+    // RR67-CP: Keep header + smartbuttons + pager on ONE row at tablet.
+    // Smartbuttons stay in their cell; overflow triggers native "More".
     body.o_web_client.o_web_client
         .o_action_manager.o_action_manager:has(.o_form_view)
         .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
         .o_control_panel_main.o_control_panel_main {
-        grid-template-columns: minmax(0, 1fr) auto !important;
+        grid-template-columns: auto minmax(0, 1fr) auto !important;
         grid-template-areas:
-            "baoFormHeadGroup baoFormPager"
-            "baoFormSmart baoFormSmart"
-            "baoFormTrail baoFormTrail" !important;
+            "baoFormHeadGroup baoFormSmart baoFormPager"
+            "baoFormTrail baoFormTrail baoFormTrail" !important;
         column-gap: 10px !important;
         row-gap: 4px !important;
     }
@@ -8608,10 +8609,11 @@
         .o_action_manager.o_action_manager:has(.o_form_view)
         .o_control_panel.o_bao_form_control_panel.o_bao_form_control_panel
         .o_control_panel_main > .o_control_panel_actions {
-        justify-self: stretch !important;
-        width: 100% !important;
+        justify-self: center !important;
+        width: auto !important;
         min-width: 0 !important;
         max-width: 100% !important;
+        overflow: hidden !important;
     }
 }
 
