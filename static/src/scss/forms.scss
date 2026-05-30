@@ -1136,13 +1136,12 @@
     row-gap: 14px;
 }
 
-// RR67-FORMS: Native Odoo 2-column grid — label and field on the same line.
-// Label column auto-sizes to content (max 30%), field takes the rest.
-// Gap between label and field is tight for good UX proximity.
-// Override --o-grid-column-span to prevent native Odoo from spanning cells.
+// RR67-FORMS: 2-column grid — label and field on same line, each taking
+// only the space it needs. No excessive gap between label and value.
 .o_form_sheet .o_inner_group {
     display: grid !important;
-    grid-template-columns: minmax(auto, 30%) minmax(0, 1fr);
+    grid-template-columns: auto auto;
+    justify-content: start;
     gap: 6px 12px;
     align-content: start;
     --o-grid-column-span: 1 !important;
