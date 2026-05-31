@@ -4640,10 +4640,11 @@
     background: var(--bao-sheet-header-separator) !important;
 }
 
+// RR67: Active status green badge — covers ALL visible status buttons
+// Targets arrow_button_current, dropdown-toggle (approval workflows), and last dropdown
 .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .o_arrow_button_current:not(.d-none),
 .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > button.btn.o_arrow_button.o_arrow_button_current:disabled:not(.d-none),
-.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .dropdown-toggle.o_last.o-dropdown.dropdown:not(.o_arrow_button):not(.d-none) {
-    // RR67: Active status green badge — full coverage with generous padding
+.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .dropdown-toggle.o-dropdown.dropdown:not(.o_arrow_button):not(.d-none) {
     min-height: var(--bao-sheet-header-status-height) !important;
     height: auto !important;
     max-height: none !important;
