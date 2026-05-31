@@ -4643,13 +4643,15 @@
 .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .o_arrow_button_current:not(.d-none),
 .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > button.btn.o_arrow_button.o_arrow_button_current:disabled:not(.d-none),
 .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .dropdown-toggle.o_last.o-dropdown.dropdown:not(.o_arrow_button):not(.d-none) {
+    // RR67: Active status green badge — full coverage with generous padding
     min-height: var(--bao-sheet-header-status-height) !important;
-    height: var(--bao-sheet-header-status-height) !important;
-    max-height: var(--bao-sheet-header-status-height) !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: 6px 14px !important;
     background: var(--bao-sheet-header-current-bg) !important;
-    border-color: var(--bao-sheet-header-current-border) !important;
+    border: 1px solid var(--bao-sheet-header-current-border) !important;
     color: var(--bao-sheet-header-current-text) !important;
-    border-radius: 8px !important;
+    border-radius: 12px !important;
 }
 
 .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_status > .o_arrow_button_current::after,

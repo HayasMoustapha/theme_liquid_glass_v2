@@ -876,7 +876,9 @@
         background: #cfd5dc;
     }
 
-    .o_bao_statusbar_current_visible {
+    // RR67: Active status — green badge covers the entire button text
+    .o_bao_statusbar_current_visible,
+    .o_arrow_button.o_arrow_button_current {
         padding: 8px 16px !important;
         background: #e7fbef !important;
         border: 1px solid #b6e8c8 !important;
@@ -886,6 +888,7 @@
         display: inline-flex !important;
         align-items: center;
         gap: 9px;
+        clip-path: none !important;
     }
 
     .o_arrow_button.o_arrow_button_current::before,
@@ -1968,10 +1971,12 @@
     }
 }
 
+// RR67: Active status green badge — target both BAO and native Odoo classes
 .o_form_statusbar .o_statusbar_status .o_bao_statusbar_current_visible,
 .o_form_statusbar .o_statusbar_status > .btn.o_bao_statusbar_current_visible,
 .o_form_statusbar .o_statusbar_status > button.o_bao_statusbar_current_visible,
-.o_form_statusbar .o_statusbar_status > .dropdown-toggle.o_bao_statusbar_current_visible {
+.o_form_statusbar .o_statusbar_status > .dropdown-toggle.o_bao_statusbar_current_visible,
+.o_form_statusbar .o_statusbar_status > .o_arrow_button.o_arrow_button_current {
     padding: 8px 16px !important;
     background: #e7fbef !important;
     border: 1px solid #b6e8c8 !important;
@@ -1983,6 +1988,8 @@
     align-items: center !important;
     box-shadow: none !important;
     white-space: nowrap;
+    clip-path: none !important;
+    overflow: hidden !important;
 }
 
 .o_form_statusbar .o_statusbar_status > .o_bao_statusbar_current_visible::before,
