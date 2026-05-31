@@ -83,10 +83,39 @@
         margin: 14px;
     }
 
-    // RR67-P3: Main buttons (Nouveau) before action menus (gear) in all control panels
-    .o_control_panel_main_buttons,
+    // RR67-P3: Order: BreadcrumbText → Nouveau → ⚙ gear
+    // The gear is inside breadcrumb_header, so we use grid + display:contents
+    // to pull it out visually to the 3rd position
+    .o_bao_form_header_cluster {
+        display: grid !important;
+        grid-template-columns: auto auto auto !important;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+
+    .o_bao_breadcrumb_header {
+        display: contents !important;
+    }
+
+    .o_bao_breadcrumb_header_text {
+        grid-column: 1 !important;
+        order: 0 !important;
+    }
+
     .o_bao_header_main_buttons {
-        order: -1 !important;
+        grid-column: 2 !important;
+        order: 0 !important;
+    }
+
+    .o_bao_breadcrumb_interactive {
+        grid-column: 3 !important;
+        order: 0 !important;
+    }
+
+    .o_bao_header_menu_actions,
+    .o_bao_header_status_actions {
+        grid-column: 3 !important;
+        order: 0 !important;
     }
 
     .o_control_panel {

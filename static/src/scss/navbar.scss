@@ -3026,13 +3026,15 @@
         overflow: visible !important;
     }
 
+    // RR67-P3: Cluster uses grid so breadcrumb_header children can be reordered
+    // Order: BreadcrumbText(1) → Nouveau(2) → ⚙ gear(3)
     .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_form_header_cluster {
         grid-area: baoFormHeadGroup !important;
         justify-self: start !important;
         align-self: center !important;
-        display: inline-flex !important;
+        display: inline-grid !important;
+        grid-auto-flow: column !important;
         align-items: center !important;
-        justify-content: flex-start !important;
         gap: 6px !important;
         width: auto !important;
         min-width: 0 !important;
@@ -3052,8 +3054,9 @@
         overflow: hidden !important;
     }
 
+    // RR67-P3: display:contents so children participate in parent grid
     .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_form_header_cluster > .o_bao_breadcrumb_header {
-        display: inline-flex !important;
+        display: contents !important;
         flex: 0 1 auto !important;
         align-items: center !important;
         justify-content: flex-start !important;
@@ -3066,7 +3069,9 @@
         overflow: visible !important;
     }
 
+    // RR67-P3: BreadcrumbText first, then mainButtons, then gear
     .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_breadcrumb_header_text {
+        order: 0 !important;
         flex: 0 1 auto !important;
         width: auto !important;
         min-width: 0 !important;
@@ -3074,6 +3079,19 @@
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         white-space: nowrap !important;
+    }
+
+    // RR67-P3: mainButtons order:1 (after breadcrumb text), gear order:2 (last)
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_header_main_buttons,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_header_main_buttons .o_control_panel_main_buttons {
+        order: 1 !important;
+    }
+
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_breadcrumb_interactive,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_header_menu_actions,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_header_menu_actions .o_control_panel_breadcrumbs_actions,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_header_menu_actions .o_cp_action_menus {
+        order: 2 !important;
     }
 
     .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_breadcrumb_interactive,
