@@ -2070,12 +2070,11 @@ select {
 }
 
 // RR67-P2: KPI cards — BAO reference: label on top, stat big below
+// CSS Grid with 2 rows: row 1 = label (text node flows here), row 2 = .fs-2
 .o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    justify-content: space-between !important;
-    justify-content: space-between !important;
+    display: grid !important;
+    grid-template-rows: auto 1fr !important;
+    align-items: start !important;
     min-width: 0 !important;
     width: auto !important;
     height: auto !important;
@@ -2121,8 +2120,8 @@ select {
     flex-wrap: wrap !important;
     gap: 0 !important;
     width: 100% !important;
-    // RR67-P2: BAO ref — stat pushed below label via order:1
-    order: 1 !important;
+    // RR67-P2: BAO ref — stat placed in row 2 (below label text in row 1)
+    grid-row: 2 !important;
     margin: 0 !important;
     padding: 0 !important;
     color: #33363c !important;
