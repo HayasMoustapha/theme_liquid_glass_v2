@@ -4922,7 +4922,7 @@
 
         .o_control_panel_main {
             display: grid !important;
-            grid-template-columns: minmax(0, 1fr) minmax(320px, var(--bao-form-smart-rail)) minmax(0, auto) !important;
+            grid-template-columns: auto minmax(0, 1fr) auto !important;
             grid-template-rows: auto !important;
             align-items: center !important;
             column-gap: clamp(12px, 2vw, 24px) !important;
@@ -4938,7 +4938,7 @@
             grid-column: 1 !important;
             grid-row: 1 !important;
             display: grid !important;
-            grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, auto) !important;
+            grid-template-columns: auto auto auto !important;
             align-items: center !important;
             justify-content: start !important;
             column-gap: 10px !important;
@@ -5780,7 +5780,7 @@
 
         .o_control_panel_main {
             display: grid !important;
-            grid-template-columns: minmax(0, 1fr) minmax(320px, var(--bao-form-smart-rail)) minmax(0, auto) !important;
+            grid-template-columns: auto minmax(0, 1fr) auto !important;
             grid-template-rows: auto !important;
             align-items: center !important;
             column-gap: clamp(12px, 2vw, 24px) !important;
@@ -7034,7 +7034,7 @@
 
         .o_control_panel_main {
             display: grid !important;
-            grid-template-columns: minmax(0, 1fr) minmax(320px, var(--bao-form-smart-rail)) minmax(0, auto) !important;
+            grid-template-columns: auto minmax(0, 1fr) auto !important;
             grid-template-rows: auto !important;
             align-items: center !important;
             column-gap: clamp(12px, 2vw, 24px) !important;
@@ -7050,7 +7050,7 @@
             grid-column: 1 !important;
             grid-row: 1 !important;
             display: grid !important;
-            grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, auto) !important;
+            grid-template-columns: auto auto auto !important;
             align-items: center !important;
             justify-content: start !important;
             column-gap: 10px !important;
