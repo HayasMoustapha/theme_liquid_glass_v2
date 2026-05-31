@@ -2099,17 +2099,21 @@ select {
     overflow: hidden !important;
 }
 
-.o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(1) > .purchase-dashboard-card.o_purchase_dashboard_card_top {
+// RR67: KPI card colors — target both _top and _sole variants
+.o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(1) > .purchase-dashboard-card.o_purchase_dashboard_card_top,
+.o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(1) > .purchase-dashboard-card.o_purchase_dashboard_card_sole {
     background: #c3fad8 !important;
     border-color: #35e979 !important;
 }
 
-.o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(3) > .purchase-dashboard-card.o_purchase_dashboard_card_top {
+.o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(3) > .purchase-dashboard-card.o_purchase_dashboard_card_top,
+.o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(3) > .purchase-dashboard-card.o_purchase_dashboard_card_sole {
     background: #fff8c9 !important;
     border-color: #ffe34d !important;
 }
 
-.o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(6) > .purchase-dashboard-card.o_purchase_dashboard_card_top {
+.o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(6) > .purchase-dashboard-card.o_purchase_dashboard_card_top,
+.o_purchase_dashboard.container-fluid .grid[style*="--columns"] > .g-col-12.p-0:nth-child(6) > .purchase-dashboard-card.o_purchase_dashboard_card_sole {
     background: #f8d6d6 !important;
     border-color: #ff8787 !important;
     color: #e00000 !important;
