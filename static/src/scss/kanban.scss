@@ -301,8 +301,11 @@
 
 // RR67: Kanban ungrouped — CSS Grid auto-fill replaces flexbox.
 // Cards reflow dynamically at every viewport width — no fixed column counts.
+// Override native --KanbanRecord-width so cards fill grid cells instead of
+// using a fixed px width that conflicts with auto-fill columns.
 .o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
-    --bao-kanban-card-min: 260px;
+    --bao-kanban-card-min: 460px;
+    --KanbanRecord-width: 100% !important;
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(var(--bao-kanban-card-min), 1fr)) !important;
     align-content: start !important;
@@ -1159,7 +1162,7 @@
     font-family: "Open Sans", sans-serif !important;
     .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),    .o_kanban_quick_create{
         flex: 0 0 var(--bao-kanban-card-basis) !important;
-        max-width: var(--bao-kanban-card-basis) !important;
+        max-width: 100% !important;
         height: 312px !important;
         min-height: 312px !important;
         padding: 8px !important;
