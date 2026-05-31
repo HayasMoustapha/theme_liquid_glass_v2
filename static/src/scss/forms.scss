@@ -800,13 +800,14 @@
         display: flex !important;
         align-items: center;
         justify-content: flex-end;
+        // RR67: statusbar must shrink with available space, not overflow
         min-width: 0;
+        max-width: 100%;
         margin-left: auto;
-    }
-
-    .o_statusbar_status {
         gap: 11px !important;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        min-width: 0;
     }
 
     .o_arrow_button:not(.d-none),
@@ -814,8 +815,13 @@
     .o_statusbar_status button:not(.d-none) {
         display: inline-flex !important;
         align-items: center;
+        // RR67: Status buttons shrink with container, text truncates
         white-space: nowrap;
-        overflow: visible !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: 100% !important;
+        flex-shrink: 1 !important;
+        min-width: 0 !important;
         position: relative;
         min-height: auto !important;
         padding: 0 !important;
@@ -2157,13 +2163,15 @@
     min-height: 84px;
 }
 
+// RR67: Statusbar stays on one line, long text truncates with ellipsis
 .o_form_statusbar .o_statusbar_status {
     display: flex !important;
     align-items: center !important;
     justify-content: flex-end !important;
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
     gap: 14px !important;
     width: auto !important;
+    overflow: hidden !important;
 }
 
 .o_form_statusbar > .o_field_widget {
