@@ -810,6 +810,13 @@
         flex: 1 1 auto !important;
     }
 
+    // RR67-P1: In XXL mode (chatter side), statusbar buttons shrink first
+    // so status arrows keep enough room for long text
+    .o_statusbar_buttons {
+        flex-shrink: 2 !important;
+        min-width: 0 !important;
+    }
+
     .o_arrow_button:not(.d-none),
     .o_statusbar_status .btn:not(.d-none),
     .o_statusbar_status button:not(.d-none) {
@@ -1263,6 +1270,13 @@
 
 // RR67: Alert label/value pairs — each col is its own sub-grid.
 // Label and value sit tight, no wasted space.
+// RR67-P7: Alert row container converted to grid for responsive label/value
+.o_form_view .alert .row {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+    gap: 8px !important;
+}
+
 .o_form_view .alert .row > .col,
 .o_form_view .alert .row > [class*="col-"] {
     display: grid !important;
@@ -1270,6 +1284,8 @@
     justify-content: start;
     align-items: baseline;
     gap: 4px 8px;
+    width: 100% !important;
+    max-width: 100% !important;
 
     > .d-block {
         display: inline !important;
@@ -1705,18 +1721,34 @@
     color: $text-strong !important;
 }
 
-// RR67: Footer subtotal grid — tight label/value, no overlap
-.o_form_sheet .oe_subtotal_footer.o_inner_group {
+// RR67-P5: Footer subtotal grid — labels never truncate, no overlap
+.o_form_sheet .oe_subtotal_footer.o_inner_group,
+.o_form_sheet .o_inner_group:last-child {
     grid-template-columns: auto auto !important;
     justify-content: end !important;
     gap: 4px 10px !important;
     overflow: visible !important;
 }
 
-.o_form_sheet .oe_subtotal_footer .o_wrap_label {
+.o_form_sheet .oe_subtotal_footer .o_wrap_label,
+.o_form_sheet .o_inner_group:last-child .o_wrap_label {
     white-space: nowrap !important;
     overflow: visible !important;
     text-overflow: clip !important;
+    max-width: none !important;
+    width: auto !important;
+}
+
+.o_form_sheet .oe_subtotal_footer > .o_cell_custom:not(.o_wrap_label),
+.o_form_sheet .o_inner_group:last-child > .o_cell_custom:not(.o_wrap_label) {
+    width: auto !important;
+    justify-self: end !important;
+}
+
+// RR67-P6: Hide invisible currency placeholders that cause visual duplication
+.o_field_monetary span.opacity-0,
+.o_field_float span.opacity-0 {
+    display: none !important;
 }
 
 // RR67: All monetary/float/numeric readonly fields — fit-content width
@@ -2155,6 +2187,21 @@
     .oe_title .o_form_label {
         font-size: 0.97rem !important;
         margin-bottom: 3px !important;
+    }
+}
+
+// RR67-P1: XXL form view — statusbar gets more space by shrinking action buttons
+.o_form_view.o_xxl_form_view .o_form_statusbar {
+    .o_field_statusbar,
+    .o_statusbar_status {
+        flex: 1 1 auto !important;
+        min-width: 250px !important;
+    }
+
+    .o_statusbar_buttons {
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
     }
 }
 

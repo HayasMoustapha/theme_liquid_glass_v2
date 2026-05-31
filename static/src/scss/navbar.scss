@@ -9081,6 +9081,28 @@ body.o_web_client.o_web_client
     }
 }
 
+// RR67-P1: Desktop/XXL — statusbar gets flex-grow so long text has room
+@media (min-width: 1200px) {
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg
+        > .o_form_statusbar:has(.o_statusbar_status)
+        > .o_field_statusbar {
+        flex: 1 1 auto !important;
+        min-width: 300px !important;
+    }
+
+    body.o_web_client.o_web_client
+        .o_action_manager.o_action_manager:has(.o_form_view)
+        .o_form_view
+        .o_form_sheet_bg
+        > .o_form_statusbar:has(.o_statusbar_status)
+        > .o_statusbar_buttons {
+        flex-shrink: 2 !important;
+    }
+}
+
 /* RR52: under wide desktop, BAO statusbars can become two or three visual rows.
    Keep the actions/status readable, but do not pin that taller block above the
    form fields while the user scrolls through the sheet. */
