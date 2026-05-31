@@ -1193,6 +1193,34 @@
     margin-bottom: 0 !important;
 }
 
+// RR67: o_row in readonly — children auto-size, wrap naturally.
+// Fixes: badges stretch, delay inputs too wide, checkbox misaligned.
+.o_form_view:not(.o_form_editable) .o_form_sheet .o_row {
+    flex-wrap: wrap !important;
+    gap: 4px 8px !important;
+
+    > .o_field_widget,
+    > div,
+    > label {
+        flex: 0 0 auto !important;
+        width: auto !important;
+    }
+}
+
+// RR67: Checkbox o_row — always nowrap so checkbox + label stay on same line
+.o_form_view .o_form_sheet .o_row:has(> .o_field_boolean) {
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+// RR67: Date fields in readonly — readable height
+.o_form_view:not(.o_form_editable) .o_form_sheet .o_field_widget.o_field_datetime {
+    min-height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
 // RR67: Alert label/value pairs on same line via grid.
 // Targets alert cols that contain a label (small/text-muted) + value (field/strong).
 .o_form_view .alert .row > .col,
