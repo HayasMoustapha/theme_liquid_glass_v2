@@ -299,16 +299,13 @@
     }
 }
 
-// BAO atlas v3 card_kanban: compact ungrouped purchase-style cards, native data/actions.
+// RR67: Kanban ungrouped — CSS Grid auto-fill replaces flexbox.
+// Cards reflow dynamically at every viewport width — no fixed column counts.
 .o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
-    --bao-kanban-columns: 5;
-    --bao-kanban-total-gap: 32px;
-    --bao-kanban-card-basis: calc((100% - var(--bao-kanban-total-gap)) / var(--bao-kanban-columns));
-    --bao-kanban-card-min-height: 72px;
-    display: flex !important;
-    align-content: flex-start !important;
-    align-items: flex-start !important;
-    flex-wrap: wrap !important;
+    --bao-kanban-card-min: 260px;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(var(--bao-kanban-card-min), 1fr)) !important;
+    align-content: start !important;
     gap: 8px !important;
     width: 100% !important;
     margin: 0 !important;
@@ -321,12 +318,10 @@
 
     .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),
     .o_kanban_quick_create {
-        flex: 0 1 var(--bao-kanban-card-basis) !important;
-        max-width: var(--bao-kanban-card-basis) !important;
         min-width: 0 !important;
         width: auto !important;
         height: auto !important;
-        min-height: var(--bao-kanban-card-min-height) !important;
+        min-height: 72px !important;
         margin: 0 !important;
         padding: 8px !important;
         background: #ffffff !important;
@@ -521,27 +516,11 @@
     }
 }
 
-@media (max-width: 1599.98px) {
-    .o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
-        --bao-kanban-columns: 3;
-        --bao-kanban-total-gap: 16px;
-        --bao-kanban-card-basis: 365px;
-    }
-}
-
-@media (max-width: 1099.98px) {
-    .o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
-        --bao-kanban-columns: 2;
-        --bao-kanban-total-gap: 8px;
-        --bao-kanban-card-basis: min(365px, calc((100% - var(--bao-kanban-total-gap)) / var(--bao-kanban-columns)));
-    }
-}
-
+// RR67: auto-fill grid handles column count automatically.
+// Only override for mobile to force single column.
 @media (max-width: 575.98px) {
     .o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
-        --bao-kanban-columns: 1;
-        --bao-kanban-total-gap: 0px;
-        --bao-kanban-card-basis: 100%;
+        --bao-kanban-card-min: 100%;
         width: 100% !important;
         margin: 0 !important;
         padding: 12px !important;

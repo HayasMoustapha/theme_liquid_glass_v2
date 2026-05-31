@@ -1261,12 +1261,13 @@
     width: fit-content !important;
 }
 
-// RR67: Alert label/value pairs on same line via grid.
-// Targets alert cols that contain a label (small/text-muted) + value (field/strong).
+// RR67: Alert label/value pairs — each col is its own sub-grid.
+// Label and value sit tight, no wasted space.
 .o_form_view .alert .row > .col,
 .o_form_view .alert .row > [class*="col-"] {
     display: grid !important;
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: auto auto;
+    justify-content: start;
     align-items: baseline;
     gap: 4px 8px;
 
