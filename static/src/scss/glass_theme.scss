@@ -1998,13 +1998,21 @@ select {
     color: $bao-danger-text !important;
 }
 
+// RR67-P2: Label text small — but NOT spans inside .fs-2 (those are stats)
 .purchase-dashboard-card .purchase-dashboard-card__title,
 .purchase-dashboard-card .o_stat_text,
 .purchase-dashboard-card small,
-.purchase-dashboard-card span:not(.fs-2):not(.o_stat_value) {
+.purchase-dashboard-card span:not(.fs-2):not(.o_stat_value):not(.fs-2 > span) {
     font-size: 13px !important;
     font-weight: 500 !important;
     line-height: 1.2 !important;
+}
+
+// Force stat spans inside .fs-2 to inherit the big size
+.purchase-dashboard-card .fs-2 > span {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
 }
 
 // RR67-P2: BAO reference — stat values big and bold
