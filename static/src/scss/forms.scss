@@ -1721,17 +1721,16 @@
     color: $text-strong !important;
 }
 
-// RR67-P5: Footer subtotal grid — labels never truncate, no overlap
-.o_form_sheet .oe_subtotal_footer.o_inner_group,
-.o_form_sheet .o_inner_group:last-child {
+// RR67-P5: Footer subtotal grid ONLY — labels never truncate, no overlap
+// IMPORTANT: Only target oe_subtotal_footer, NOT :last-child (that leaked to form fields)
+.o_form_sheet .oe_subtotal_footer.o_inner_group {
     grid-template-columns: auto auto !important;
     justify-content: end !important;
     gap: 4px 10px !important;
     overflow: visible !important;
 }
 
-.o_form_sheet .oe_subtotal_footer .o_wrap_label,
-.o_form_sheet .o_inner_group:last-child .o_wrap_label {
+.o_form_sheet .oe_subtotal_footer .o_wrap_label {
     white-space: nowrap !important;
     overflow: visible !important;
     text-overflow: clip !important;
@@ -1739,8 +1738,7 @@
     width: auto !important;
 }
 
-.o_form_sheet .oe_subtotal_footer > .o_cell_custom:not(.o_wrap_label),
-.o_form_sheet .o_inner_group:last-child > .o_cell_custom:not(.o_wrap_label) {
+.o_form_sheet .oe_subtotal_footer > .o_cell_custom:not(.o_wrap_label) {
     width: auto !important;
     justify-self: end !important;
 }
