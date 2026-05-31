@@ -800,14 +800,14 @@
         display: flex !important;
         align-items: center;
         justify-content: flex-end;
-        // RR67: statusbar must shrink with available space, not overflow
-        min-width: 0;
+        // RR67: Give statusbar enough space for long status text
+        min-width: 200px;
         max-width: 100%;
         margin-left: auto;
         gap: 11px !important;
         flex-wrap: nowrap;
         overflow: hidden;
-        min-width: 0;
+        flex: 1 1 auto !important;
     }
 
     .o_arrow_button:not(.d-none),
@@ -1407,7 +1407,6 @@
 .o_form_sheet .o_field_widget .o_input_dropdown .o_input,
 .o_form_sheet .o_field_widget .o_input_dropdown .o-autocomplete--input {
     width: 100% !important;
-    padding-right: 42px !important;
 }
 
 .o_form_sheet .o_field_widget .o_input_dropdown .o_dropdown_button {
@@ -1703,6 +1702,27 @@
 .o_form_sheet .oe_subtotal_footer .oe_currency_value,
 .o_form_sheet .oe_subtotal_footer .oe_subtotal_footer_separator {
     color: $text-strong !important;
+}
+
+// RR67: Footer subtotal grid — tight label/value, no overlap
+.o_form_sheet .oe_subtotal_footer.o_inner_group {
+    grid-template-columns: auto auto !important;
+    justify-content: end !important;
+    gap: 4px 10px !important;
+    overflow: visible !important;
+}
+
+.o_form_sheet .oe_subtotal_footer .o_wrap_label {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+// RR67: All monetary/float/numeric readonly fields — fit-content width
+.o_form_view:not(.o_form_editable) .o_form_sheet .o_field_monetary,
+.o_form_view:not(.o_form_editable) .o_form_sheet .o_field_float,
+.o_form_view:not(.o_form_editable) .o_form_sheet .o_field_integer {
+    width: fit-content !important;
 }
 
 .o_form_sheet .oe_chatter,
@@ -3629,7 +3649,6 @@
     .o_field_widget .o_input_dropdown .o_input,
     .o_field_widget .o_input_dropdown .o-autocomplete--input {
         width: 100% !important;
-        padding-right: 42px !important;
     }
 
     .o_field_widget .o_input_dropdown .o_dropdown_button {
@@ -3912,7 +3931,6 @@
         .o_field_widget .o_input_dropdown .o_input,
         .o_field_widget .o_input_dropdown .o-autocomplete--input {
             width: 100% !important;
-            padding-right: 42px !important;
         }
 
         .o_field_widget .o_input_dropdown .o_dropdown_button {
