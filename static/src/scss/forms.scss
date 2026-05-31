@@ -1220,13 +1220,18 @@
     gap: 6px !important;
 }
 
-// RR67: Date fields — calendar icon stays next to value, not far right
-.o_form_view .o_form_sheet .o_field_widget.o_field_datetime,
-.o_form_view .o_form_sheet .o_field_widget.o_field_date {
+// RR67: Date fields in readonly — hide calendar icon, clean display
+.o_form_view:not(.o_form_editable) .o_form_sheet .o_field_widget.o_field_datetime,
+.o_form_view:not(.o_form_editable) .o_form_sheet .o_field_widget.o_field_date {
     min-height: 32px !important;
     display: flex !important;
     align-items: center !important;
     width: fit-content !important;
+
+    // Hide calendar icon in readonly — just show the date text
+    button {
+        display: none !important;
+    }
 
     .d-flex {
         width: fit-content !important;
