@@ -2036,10 +2036,11 @@ select {
     color: $primary-color !important;
 }
 
+// RR67-P2: KPI dashboard — auto-fit, compact cards matching BAO reference
 .o_purchase_dashboard.container-fluid {
     display: grid !important;
-    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
-    column-gap: 16px !important;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+    column-gap: 10px !important;
     row-gap: 0 !important;
     width: auto !important;
     max-width: 100% !important;
@@ -2067,6 +2068,7 @@ select {
     display: none !important;
 }
 
+// RR67-P2: KPI cards — BAO reference: number big on top, label small below
 .o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top {
     display: flex !important;
     flex-direction: column-reverse !important;
