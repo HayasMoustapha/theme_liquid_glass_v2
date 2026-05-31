@@ -1142,9 +1142,9 @@
     row-gap: 14px;
 }
 
-// RR67-FORMS: 2-column grid — label and field on same line.
-// Both columns auto-size. justify-content: start keeps them tight.
-// In edit mode, field inputs stretch via width:100% on the field widget.
+// RR67-FORMS: When field pairs are wrapped by JS, inner group becomes
+// a single-column stack. Each .o_bao_field_pair is its own sub-grid.
+// Fallback: without JS, the 2-column grid still works.
 .o_form_sheet .o_inner_group {
     display: grid !important;
     grid-template-columns: auto minmax(0, 1fr);
@@ -1155,8 +1155,29 @@
     --o-grid-column-span: 1 !important;
 }
 
-// In readonly, fields should only take the space their content needs
-.o_form_view:not(.o_form_editable) .o_form_sheet .o_inner_group {
+// When JS wraps pairs, switch parent to 1-column stack
+.o_form_sheet .o_inner_group:has(.o_bao_field_pair) {
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+}
+
+// Each field pair: its own 2-column grid [label | value]
+.o_bao_field_pair {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0 10px;
+    width: 100%;
+}
+
+// Readonly: pair columns auto-size, value tight to label
+.o_form_view:not(.o_form_editable) .o_bao_field_pair {
+    grid-template-columns: auto auto !important;
+    justify-content: start !important;
+}
+
+// Fallback for non-paired inner groups (no JS)
+.o_form_view:not(.o_form_editable) .o_form_sheet .o_inner_group:not(:has(.o_bao_field_pair)) {
     grid-template-columns: auto auto;
     justify-content: start;
 }

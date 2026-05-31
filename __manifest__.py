@@ -54,6 +54,7 @@
             'theme_liquid_glass_v2/static/src/scss/navbar.scss',
             'theme_liquid_glass_v2/static/src/scss/icons.scss',
             'theme_liquid_glass_v2/static/src/js/navbar_sidebar.js',
+            'theme_liquid_glass_v2/static/src/js/form_field_pairs.js',
             'theme_liquid_glass_v2/static/src/xml/apps_sidebar.xml',
         ],
         'web.assets_backend_lazy': [
