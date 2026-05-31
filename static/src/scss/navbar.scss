@@ -3032,8 +3032,8 @@
         grid-area: baoFormHeadGroup !important;
         justify-self: start !important;
         align-self: center !important;
-        display: inline-grid !important;
-        grid-auto-flow: column !important;
+        display: inline-flex !important;
+        flex-wrap: nowrap !important;
         align-items: center !important;
         gap: 6px !important;
         width: auto !important;
@@ -3092,6 +3092,12 @@
     .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_header_menu_actions .o_control_panel_breadcrumbs_actions,
     .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_header_menu_actions .o_cp_action_menus {
         order: 2 !important;
+    }
+
+    // RR67-P3: Save/Cancel buttons come AFTER gear icon
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_form_status_indicator,
+    .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_header_status_actions {
+        order: 3 !important;
     }
 
     .o_web_client .o_action_manager:has(.o_form_view) .o_control_panel.o_bao_form_control_panel .o_bao_breadcrumb_interactive,
