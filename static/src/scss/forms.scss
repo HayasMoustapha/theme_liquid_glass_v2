@@ -1220,11 +1220,40 @@
     gap: 6px !important;
 }
 
-// RR67: Date fields in readonly — readable height
-.o_form_view:not(.o_form_editable) .o_form_sheet .o_field_widget.o_field_datetime {
+// RR67: Date fields — calendar icon stays next to value, not far right
+.o_form_view .o_form_sheet .o_field_widget.o_field_datetime,
+.o_form_view .o_form_sheet .o_field_widget.o_field_date {
     min-height: 32px !important;
     display: flex !important;
     align-items: center !important;
+    width: fit-content !important;
+
+    .d-flex {
+        width: fit-content !important;
+        gap: 4px !important;
+    }
+
+    button {
+        flex-shrink: 0 !important;
+    }
+}
+
+// RR67: Delay sub-row inputs stay side by side (nowrap)
+.o_form_view .o_form_sheet .o_row .o_row {
+    flex-wrap: nowrap !important;
+    gap: 4px !important;
+
+    > .o_field_widget {
+        flex: 0 1 auto !important;
+        min-width: 60px !important;
+        max-width: 120px !important;
+    }
+}
+
+// RR67: Monetary field values in readonly must not have excessive gap
+.o_form_view:not(.o_form_editable) .o_form_sheet .o_field_monetary,
+.o_form_view:not(.o_form_editable) .o_form_sheet .o_field_float {
+    width: fit-content !important;
 }
 
 // RR67: Alert label/value pairs on same line via grid.
