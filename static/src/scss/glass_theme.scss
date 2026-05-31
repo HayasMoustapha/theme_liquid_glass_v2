@@ -2069,11 +2069,10 @@ select {
     display: none !important;
 }
 
-// RR67-P2: KPI cards — BAO reference pixel-perfect
-// Native column-reverse: stat on top (big), label below (small)
+// RR67-P2: KPI cards — BAO reference: label on top, stat big below
 .o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top {
     display: flex !important;
-    flex-direction: column-reverse !important;
+    flex-direction: column !important;
     align-items: flex-start !important;
     justify-content: space-between !important;
     justify-content: space-between !important;
@@ -2122,10 +2121,11 @@ select {
     flex-wrap: wrap !important;
     gap: 0 !important;
     width: 100% !important;
-    margin: 0 0 auto !important;
+    // RR67-P2: BAO ref — stat pushed below label via order:1
+    order: 1 !important;
+    margin: 0 !important;
     padding: 0 !important;
     color: #33363c !important;
-    // RR67-P2: BAO reference has stat number ~40-48px bold
     font-size: 2.4rem !important;
     font-weight: 800 !important;
     line-height: 1.1 !important;
