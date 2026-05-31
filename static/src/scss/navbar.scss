@@ -4355,7 +4355,7 @@
     min-width: 0 !important;
     min-height: 73px !important;
     max-height: none !important;
-    padding: 15px 17px 14px 21px !important;
+    padding: 0px !important;
     overflow-x: hidden !important;
     overflow-y: visible !important;
     background: var(--bao-chatter-topbar-surface) !important;
@@ -9050,6 +9050,7 @@ body.o_web_client.o_web_client
         max-width: 100% !important;
     }
 
+    // RR67: Give statusbar enough space for long status text like "Bon de commande fournisseur"
     body.o_web_client.o_web_client
         .o_action_manager.o_action_manager:has(.o_form_view)
         .o_form_view
@@ -9059,9 +9060,9 @@ body.o_web_client.o_web_client
         grid-column: auto !important;
         grid-row: auto !important;
         justify-self: auto !important;
-        flex: 0 1 auto !important;
+        flex: 1 1 auto !important;
         width: auto !important;
-        min-width: 0 !important;
+        min-width: 300px !important;
         max-width: 100% !important;
         margin-left: auto !important;
         overflow: visible !important;

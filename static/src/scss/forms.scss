@@ -6238,7 +6238,7 @@
                 + .o_cell_custom.null .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many)
             ) {
             grid-column: 1 !important;
-            width: 100% !important;
+            width: auto !important;
             min-width: 0 !important;
             margin-bottom: 8px !important;
             align-self: start !important;
@@ -6257,8 +6257,9 @@
                 + .o_cell_custom.null .o_field_widget[name*="margin"]:not(.o_field_x2many):not(.o_field_one2many):not(.o_field_many2many)
             )
             + .o_cell_custom.null {
+            // RR67: monetary value cells use auto width, not 100%
             grid-column: 2 !important;
-            width: 100% !important;
+            width: auto !important;
             min-width: 0 !important;
             margin-bottom: 8px !important;
             align-self: start !important;
