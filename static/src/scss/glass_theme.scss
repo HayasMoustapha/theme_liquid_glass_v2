@@ -2007,11 +2007,12 @@ select {
     line-height: 1.2 !important;
 }
 
+// RR67-P2: BAO reference — stat values big and bold
 .purchase-dashboard-card .purchase-dashboard-card__value,
 .purchase-dashboard-card .o_stat_value,
 .purchase-dashboard-card .fs-2 {
-    font-size: 24px !important;
-    font-weight: 700 !important;
+    font-size: 2.4rem !important;
+    font-weight: 800 !important;
     line-height: 1.1 !important;
 }
 
@@ -2068,12 +2069,13 @@ select {
     display: none !important;
 }
 
-// RR67-P2: KPI cards — BAO reference: label small on top, stat big bold below
+// RR67-P2: KPI cards — BAO reference pixel-perfect
+// Native column-reverse: stat on top (big), label below (small)
 .o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: column-reverse !important;
     align-items: flex-start !important;
-    justify-content: flex-start !important;
+    justify-content: space-between !important;
     justify-content: space-between !important;
     min-width: 0 !important;
     width: auto !important;
@@ -2120,14 +2122,15 @@ select {
     flex-wrap: wrap !important;
     gap: 0 !important;
     width: 100% !important;
-    margin: 4px 0 0 !important;
+    margin: 0 0 auto !important;
     padding: 0 !important;
     color: #33363c !important;
-    font-size: clamp(22px, 2vw, 30px) !important;
-    font-weight: 700 !important;
-    line-height: 1 !important;
-    letter-spacing: 0 !important;
-    min-height: 30px !important;
+    // RR67-P2: BAO reference has stat number ~40-48px bold
+    font-size: 2.4rem !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
+    min-height: 40px !important;
     max-width: 100% !important;
     overflow: hidden !important;
     overflow-wrap: anywhere !important;
