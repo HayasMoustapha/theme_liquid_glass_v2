@@ -2070,8 +2070,10 @@ select {
 }
 
 // RR67-P2: KPI cards — BAO reference: label on top, stat big below
-// CSS Grid with 2 rows: row 1 = label (text node flows here), row 2 = .fs-2
-.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top {
+// CSS Grid with 2 rows: row 1 = label (text node), row 2 = .fs-2 (stat)
+// Target both _top (multiuser) and _sole (single user) variants
+.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top,
+.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_sole {
     display: grid !important;
     grid-template-rows: auto 1fr !important;
     align-items: start !important;
@@ -2113,7 +2115,8 @@ select {
     color: #e00000 !important;
 }
 
-.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top > .fs-2 {
+.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_top > .fs-2,
+.o_purchase_dashboard.container-fluid .purchase-dashboard-card.o_purchase_dashboard_card_sole > .fs-2 {
     display: flex !important;
     align-items: baseline !important;
     justify-content: flex-start !important;
