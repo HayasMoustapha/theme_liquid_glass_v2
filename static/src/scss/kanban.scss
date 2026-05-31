@@ -519,15 +519,6 @@
     }
 }
 
-// RR67: Override Bootstrap col/flex-basis that prevents cards from filling grid cells
-.o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped .o_kanban_record,
-.o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped .o_kanban_record[class*="col-"],
-.o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped .o_kanban_record[class*="flex-"] {
-    width: 100% !important;
-    max-width: 100% !important;
-    flex: none !important;
-}
-
 // RR67: auto-fill grid handles column count automatically.
 // Only override for mobile to force single column.
 @media (max-width: 575.98px) {
