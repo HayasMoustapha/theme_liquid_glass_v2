@@ -318,8 +318,11 @@
 
     .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),
     .o_kanban_quick_create {
+        // RR67: Cards must fill their grid cell — override native max-width %
         min-width: 0 !important;
-        width: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        --Kanban-record-width: 100% !important;
         height: auto !important;
         min-height: 72px !important;
         margin: 0 !important;
@@ -514,6 +517,15 @@
         line-height: 0 !important;
         object-fit: cover !important;
     }
+}
+
+// RR67: Override Bootstrap col/flex-basis that prevents cards from filling grid cells
+.o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped .o_kanban_record,
+.o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped .o_kanban_record[class*="col-"],
+.o_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped .o_kanban_record[class*="flex-"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
 }
 
 // RR67: auto-fill grid handles column count automatically.

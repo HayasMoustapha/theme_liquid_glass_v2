@@ -1406,7 +1406,7 @@
 .o_form_sheet .o_field_widget.o_field_datetime button.o_input,
 .o_form_sheet .o_field_widget .o_input_dropdown .o_input,
 .o_form_sheet .o_field_widget .o_input_dropdown .o-autocomplete--input {
-    width: 100% !important;
+    width: 204px !important;
 }
 
 .o_form_sheet .o_field_widget .o_input_dropdown .o_dropdown_button {
@@ -1432,6 +1432,7 @@
 
 .o_form_sheet .o_field_widget.o_readonly_modifier.o_field_datetime > .d-flex > span {
     display: inline !important;
+    width: 205px !important;
     min-height: auto !important;
     padding: 0 !important;
     background: transparent !important;
