@@ -1720,6 +1720,23 @@
     color: $text-strong !important;
 }
 
+// RR67: Footer keeps native 2-column grid, labels never truncate
+.o_form_sheet .oe_subtotal_footer.o_inner_group {
+    grid-template-columns: auto auto !important;
+    justify-content: end !important;
+    gap: 4px 10px !important;
+}
+
+.o_form_sheet .oe_subtotal_footer .o_wrap_label {
+    white-space: nowrap !important;
+    overflow: visible !important;
+}
+
+.o_form_sheet .oe_subtotal_footer > .o_cell_custom:not(.o_wrap_label) {
+    text-align: right !important;
+    white-space: nowrap !important;
+}
+
 .o_form_sheet .oe_chatter,
 .o_form_sheet_bg .oe_chatter,
 .o-mail-Chatter,

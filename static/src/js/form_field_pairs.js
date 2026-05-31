@@ -17,7 +17,7 @@ patch(FormRenderer.prototype, {
         const wrapPairs = () => {
             const root = rootRef.el;
             if (!root) return;
-            const groups = root.querySelectorAll('.o_inner_group');
+            const groups = root.querySelectorAll('.o_inner_group:not(.oe_subtotal_footer)');
             for (const group of groups) {
                 if (group.dataset.baoPaired) continue;
                 group.dataset.baoPaired = '1';
