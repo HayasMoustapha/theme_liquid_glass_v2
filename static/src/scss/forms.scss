@@ -792,12 +792,12 @@
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    gap: 18px 26px;
+    gap: 0 8px !important;
     background: transparent !important;
     border: none !important;
     border-radius: 0 !important;
     margin: 0px !important;
-    padding: 0 0 18px !important;
+    padding: 0 0 8px !important;
     box-shadow: none !important;
 
     .o_statusbar_buttons {
@@ -839,7 +839,7 @@
         min-width: 200px;
         max-width: 100%;
         margin-left: auto;
-        gap: 11px !important;
+        gap: 0 !important;
         flex-wrap: nowrap;
         overflow: hidden;
         flex: 1 1 auto !important;
@@ -1242,6 +1242,11 @@
 .o_form_sheet .o_cell_custom:not(.o_wrap_label),
 .o_form_sheet .o_inner_group > .null {
     margin-bottom: 0 !important;
+
+    .o_field_widget {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
 }
 
 // RR67: o_row in readonly — children auto-size, wrap naturally.
@@ -1641,6 +1646,12 @@
     .o_field_x2many_list_row_add {
         padding-top: 8px;
     }
+}
+
+// RR69: Notebook "Add a line" buttons aligned left like native Odoo
+.o_form_view .o_field_x2many .o_list_renderer tfoot td.o_field_x2many_list_row_add,
+.o_form_view .o_field_x2many tfoot .o_field_x2many_list_row_add {
+    text-align: left !important;
 }
 
 .o_form_view .o_field_x2many .o_list_renderer,
@@ -3688,8 +3699,8 @@
     textarea,
     input:not([type="checkbox"]):not([type="radio"]),
     [contenteditable="true"] {
-        background: #f1f1f17d !important;
-        border: 1px solid rgba(214, 219, 227, 0.95) !important;
+        background: #ffffff !important;
+        border: 1px solid #ced4da !important;
         border-radius: 8px !important;
         box-shadow: none !important;
         color: #3a4047 !important;

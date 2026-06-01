@@ -548,6 +548,10 @@
 .o_kanban_view.o_stock_kanban:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped,
 .o_kanban_view.o_stock_dashboard_kanban_view:not(.o_modules_kanban) .o_kanban_renderer.o_kanban_ungrouped {
     --bao-kanban-card-min: 460px !important;
+
+    .o_content {
+        margin: 26px !important;
+    }
 }
 
 // RR67: auto-fill grid handles column count automatically.
