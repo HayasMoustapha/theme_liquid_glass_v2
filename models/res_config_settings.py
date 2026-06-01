@@ -155,6 +155,18 @@ class ResConfigSettings(models.TransientModel):
             "target": "current",
         }
 
+    def action_open_bao_module_overrides(self):
+        config = self.bao_theme_config_id or self.env["bao.theme.config"]._get_active_config()
+        return {
+            "type": "ir.actions.act_window",
+            "name": "BAO Module Overrides",
+            "res_model": "bao.theme.module.override",
+            "view_mode": "list,form",
+            "domain": [("config_id", "=", config.id)],
+            "context": {"default_config_id": config.id},
+            "target": "current",
+        }
+
     def action_reset_bao_theme_global(self):
         config = self.bao_theme_config_id or self.env["bao.theme.config"]._get_active_config()
         config.action_reset_global()

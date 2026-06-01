@@ -18,7 +18,7 @@
                            t-att-title="app.name"
                            role="menuitem"
                            t-att-class="{ 'o_app': true, 'o_enterprise_app_launcher_item': true, focus: menuService.getCurrentApp() === app }"
-                           t-on-click.prevent="() => { this.onNavBarDropdownItemSelection(app); this.closeEnterpriseLauncher(); }">
+                           t-on-click.prevent="() => { this.onNavBarDropdownItemSelection(app); setTimeout(() => this.closeEnterpriseLauncher(), 300); }">
                             <span class="o_enterprise_app_launcher_icon">
                                 <t t-if="app.webIconData">
                                     <img t-attf-src="{{app.webIconData}}"

@@ -694,36 +694,49 @@
     }
 }
 
-// RR70: App launcher fullscreen — covers entire viewport including navbar
+// RR71: App launcher fullscreen — Enterprise-style pastel background
 .o_enterprise_app_launcher {
     position: fixed;
     inset: 0 !important;
     z-index: 10000 !important;
     overflow: auto;
-    background: rgba(10, 25, 50, 0.95) !important;
-    backdrop-filter: blur(16px) !important;
-    color: #f0f4f8 !important;
+    background-color: #eaeaea !important;
+    background-image: linear-gradient(135deg, #f1f1f1, #e5e5e5, #f1f1f1) !important;
+    color: #303030 !important;
     font-family: $bao-font-body;
-    padding: 60px 40px 40px !important;
+    padding: 40px !important;
 }
 
 // Hide navbar when launcher is open
 body:has(#o_enterprise_app_launcher) .o_main_navbar {
     opacity: 0 !important;
     pointer-events: none !important;
+    transition: opacity 0.15s ease !important;
 }
 
 .o_enterprise_app_launcher_grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(96px, 112px));
-    justify-content: center;
+    display: grid !important;
+    grid-template-columns: 120px 120px 120px 120px 120px 120px !important;
+    justify-content: center !important;
+    justify-items: center;
     align-content: start;
-    gap: 30px 34px;
+    gap: 24px 16px;
     box-sizing: border-box;
     width: 100%;
-    max-width: 920px;
+    max-width: 860px;
     margin: 0 auto;
-    padding: 74px 24px 48px;
+    padding: 60px 24px 48px;
+}
+
+@media (max-width: 767.98px) {
+    .o_enterprise_app_launcher_grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .o_enterprise_app_launcher_grid {
+        grid-template-columns: repeat(5, 1fr) !important;
+    }
 }
 
 .o_enterprise_app_launcher_item {
@@ -731,29 +744,36 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 8px;
     min-width: 0;
-    min-height: 112px;
-    padding: 10px 8px !important;
-    border: 1px solid transparent !important;
-    border-radius: 8px !important;
+    width: 100%;
+    max-width: 120px;
+    padding: 12px 8px !important;
+    border: none !important;
+    border-radius: 12px !important;
     background: transparent !important;
-    color: #f0f4f8 !important;
+    color: $bao-text-800 !important;
     font-family: $bao-font-body;
+    font-size: 0.78rem;
+    font-weight: 500;
     text-align: center;
     text-decoration: none !important;
     box-shadow: none !important;
-    transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+    cursor: pointer;
+    transition: background-color 0.16s ease, transform 0.12s ease;
 
     &:hover,
-    &:focus,
+    &:focus {
+        background: $bao-surface-0 !important;
+        transform: scale(1.03);
+        outline: none;
+    }
+
     &.focus,
     &.active,
     &.o_app_active {
-        background: rgba(19, 87, 160, 0.08) !important;
-        border-color: rgba(19, 87, 160, 0.14) !important;
-        color: $bao-brand-700 !important;
-        outline: none;
+        background: $bao-surface-0 !important;
+        box-shadow: 0 0 0 2px $bao-border-selected !important;
     }
 }
 
@@ -761,20 +781,20 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 68px;
-    height: 68px;
-    border: 1px solid rgba(48, 48, 48, 0.08);
-    border-radius: 8px;
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: $radius-lg;
     background: $bao-surface-0 !important;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.10);
+    box-shadow: $shadow-soft;
 
     .o_app_icon,
     img {
         display: block;
-        width: 52px;
-        height: 52px;
+        width: 64px;
+        height: 64px;
         object-fit: contain;
-        border-radius: 7px;
+        border-radius: 14px;
         box-shadow: none !important;
     }
 }
@@ -783,11 +803,11 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    width: 52px !important;
-    height: 52px !important;
-    border-radius: 7px !important;
+    width: 64px !important;
+    height: 64px !important;
+    border-radius: 14px !important;
     color: #ffffff !important;
-    font-size: 1.8rem;
+    font-size: 2rem;
 }
 
 .o_enterprise_app_launcher_label {

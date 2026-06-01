@@ -1852,10 +1852,20 @@ td.o_field_x2many_list_row_add a {
 // RR67-P5: Footer subtotal grid ONLY — labels never truncate, no overlap
 // IMPORTANT: Only target oe_subtotal_footer, NOT :last-child (that leaked to form fields)
 .o_form_sheet .oe_subtotal_footer.o_inner_group {
-    grid-template-columns: auto 1fr !important;
+    grid-template-columns: auto auto !important;
     justify-content: end !important;
-    gap: 4px 10px !important;
+    gap: 8px 16px !important;
     overflow: visible !important;
+    width: auto !important;
+    max-width: 100% !important;
+
+    .o_cell:not(.o_wrap_label) {
+        min-width: 120px !important;
+    }
+
+    .o_wrap_label {
+        white-space: nowrap !important;
+    }
 }
 
 .o_form_sheet .oe_subtotal_footer .o_wrap_label {
