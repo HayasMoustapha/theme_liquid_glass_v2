@@ -786,7 +786,7 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
     border: none;
     border-radius: $radius-lg;
     background: $bao-surface-0 !important;
-    box-shadow: $shadow-soft;
+    box-shadow: $shadow-medium;
 
     .o_app_icon,
     img {
