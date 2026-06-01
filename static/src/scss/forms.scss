@@ -1184,7 +1184,7 @@
 }
 
 .o_form_sheet .o_group {
-    row-gap: 14px;
+    row-gap: 8px;
 }
 
 // RR67-FORMS: 2-column grid — label and field on same line.
@@ -2304,6 +2304,7 @@
 
 .o_form_view .o_field_widget textarea {
     min-height: 84px;
+    resize: vertical;
 }
 
 // RR67: Statusbar stays on one line, long text truncates with ellipsis
@@ -2312,7 +2313,7 @@
     align-items: center !important;
     justify-content: flex-end !important;
     flex-wrap: nowrap !important;
-    gap: 14px !important;
+    gap: 0 !important;
     width: auto !important;
     overflow: hidden !important;
 }
@@ -7560,9 +7561,8 @@
 
     > .oe_title.o_bao_product_title .o_bao_product_name_field textarea.o_input {
         min-height: 44px !important;
-        max-height: 112px !important;
         overflow-x: hidden !important;
-        resize: none !important;
+        resize: vertical !important;
     }
 
     > .o_bao_product_taxonomy_panel {

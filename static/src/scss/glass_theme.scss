@@ -89,7 +89,7 @@ table {
     padding-inline: 12px;
     background: $bao-surface-0 !important;
     border: 1px solid $bao-border-200 !important;
-    border-radius: 11px !important;
+    border-radius: var(--bs-border-radius, 4px) !important;
     box-shadow: none !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
@@ -147,12 +147,14 @@ table {
         .o_searchview {
             min-height: 38px;
             height: 38px;
-            padding-inline: 14px 12px;
-            border-radius: 11px 0 0 11px !important;
+            padding-inline: 14px 0;
+            border-right: none !important;
+            border-radius: var(--bs-border-radius, 4px) 0 0 var(--bs-border-radius, 4px) !important;
         }
 
         > .o_searchview:last-child {
-            border-radius: 11px !important;
+            border-right: 1px solid $bao-border-200 !important;
+            border-radius: var(--bs-border-radius, 4px) !important;
         }
 
         .o_searchview_input_container {
@@ -171,8 +173,13 @@ table {
             background: $bao-surface-0 !important;
             border: 1px solid $bao-border-200 !important;
             border-left: none !important;
-            border-radius: 0 11px 11px 0 !important;
+            border-radius: 0 var(--bs-border-radius, 4px) var(--bs-border-radius, 4px) 0 !important;
             color: $bao-text-600 !important;
+
+            &:hover, &:focus, &.show {
+                background: $bao-surface-0 !important;
+                color: $bao-text-600 !important;
+            }
 
             &::after {
                 margin-inline-start: 0;
@@ -1543,11 +1550,15 @@ select > option {
 }
 
 a.text-primary:hover,
-.o_loading_indicator,
 .bg-primary,
 .o-we-table-menu {
     background: $primary-gradient !important;
     @include text-white-color;
+}
+
+.o_loading_indicator {
+    background: $primary-gradient !important;
+    color: #ffffff !important;
 }
 
 .border-primary,
@@ -1843,10 +1854,7 @@ select {
     color: black !important;
 }
 
-.popover {
-    --popover-bg: transparent !important;
-    --popover-border-color: transparent !important;
-}
+// RR68: Popover — keep native Odoo defaults
 
 [data-embedded="tableOfContent"],
 [data-embedded="tableOfContent"] .o_embedded_toc_content,
@@ -2442,7 +2450,7 @@ select {
 .o_bao_shared_cp_surface > .o_content,
 .o_action.o_bao_shared_cp_surface > .o_content,
 .o_view_controller.o_bao_shared_cp_surface > .o_content {
-    padding: 18px !important;
+    padding: 12px !important;
 }
 
 .o_action.o_spreadsheet_dashboard_action.o_bao_shared_cp_surface > .o_content > .o_renderer {
@@ -3208,45 +3216,4 @@ select {
     }
 }
 
-// RR32 tooltip readability: tooltips are informational overlays, not menus.
-// Keep them visually separate from light dropdown/autocomplete surfaces.
-.o_popover:has(.o-tooltip),
-.o-tooltip,
-.tooltip,
-[role="tooltip"]:not(.o-dropdown--menu):not(.dropdown-menu) {
-    --tooltip-bg: #{$bao-brand-700} !important;
-    --tooltip-color: #f8fafc !important;
-    --bs-tooltip-bg: #{$bao-brand-700} !important;
-    --bs-tooltip-color: #f8fafc !important;
-    --bs-popover-bg: #{$bao-brand-700} !important;
-    --bs-popover-border-color: rgba(255, 255, 255, 0.16) !important;
-    background: $bao-brand-700 !important;
-    border: 1px solid rgba(255, 255, 255, 0.16) !important;
-    border-radius: 10px !important;
-    box-shadow: 0 14px 34px rgba(13, 41, 76, 0.22) !important;
-    color: #f8fafc !important;
-    pointer-events: none !important;
-}
-
-.o_popover:has(.o-tooltip) *,
-.o-tooltip,
-.o-tooltip *,
-.tooltip .tooltip-inner,
-[role="tooltip"]:not(.o-dropdown--menu):not(.dropdown-menu) * {
-    color: #f8fafc !important;
-}
-
-.o-tooltip .o-tooltip--technical,
-.o-tooltip .o-tooltip--technical *,
-.o-tooltip .o-tooltip--help {
-    color: #dbeafe !important;
-}
-
-.tooltip .tooltip-inner {
-    max-width: #{'min(360px, calc(100vw - 24px))'} !important;
-    padding: 8px 10px !important;
-    background: $bao-brand-700 !important;
-    border-radius: 10px !important;
-    font-weight: 600 !important;
-    line-height: 1.32 !important;
-}
+// RR68: Tooltips — keep native Odoo behavior, no custom overrides

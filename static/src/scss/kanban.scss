@@ -42,7 +42,7 @@
     }
 
     .o_kanban_ungrouped {
-        .o_kanban_record {
+        .o_kanban_record:not(.o_kanban_ghost) {
             background: #ffffff !important;
             border: 1px solid rgba(17, 74, 126, 0.11) !important;
             border-radius: $radius-md !important;
@@ -52,6 +52,15 @@
             &:hover {
                 background: #f7fbff !important;
             }
+        }
+
+        .o_kanban_ghost {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            min-height: 0 !important;
+            height: 0 !important;
         }
     }
 }
@@ -64,10 +73,10 @@
     color: $text-strong !important;
 }
 
-.o_kanban_dashboard .o_kanban_record,
-.o_kanban_renderer .o_kanban_record.oe_kanban_global_click {
+.o_kanban_dashboard .o_kanban_record:not(.o_kanban_ghost),
+.o_kanban_renderer .o_kanban_record.oe_kanban_global_click:not(.o_kanban_ghost) {
     min-height: auto !important;
-    padding: 18px !important;
+    padding: 12px !important;
 }
 
 .o_kanban_dashboard .o_kanban_record .btn,
@@ -87,6 +96,17 @@
 .o_kanban_renderer {
     background: $bao-surface-0 !important;
     border-radius: 16px !important;
+}
+
+// RR68: Hide empty kanban renderer (only ghosts, no real records)
+.o_kanban_renderer.o_kanban_ungrouped:not(:has(.o_kanban_record:not(.o_kanban_ghost))):not(:has(.o-kanban-button-new)) {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
 }
 
 .o_kanban_renderer .o_kanban_group {

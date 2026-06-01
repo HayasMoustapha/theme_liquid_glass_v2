@@ -525,7 +525,7 @@
         flex: 0 1 auto !important;
         width: auto !important;
         min-width: 36px !important;
-        max-width: 132px !important;
+        max-width: none !important;
         height: 36px !important;
         min-height: 36px !important;
         max-height: 36px !important;
@@ -585,7 +585,7 @@
         flex: 0 1 auto !important;
         width: auto !important;
         min-width: 36px !important;
-        max-width: 132px !important;
+        max-width: none !important;
         height: 36px !important;
         min-height: 36px !important;
         max-height: 36px !important;
@@ -1689,7 +1689,7 @@
             flex: 0 1 132px !important;
             width: 132px !important;
             min-width: 104px !important;
-            max-width: 132px !important;
+            max-width: none !important;
             min-height: 46px !important;
             height: 46px !important;
             max-height: 50px !important;
@@ -4918,6 +4918,14 @@
     margin: 0 !important;
 }
 
+.o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_searchview.o_searchview {
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    padding-block: 0 !important;
+    font-size: 14px !important;
+}
+
 .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_control_panel_navigation {
     grid-area: navigation !important;
     justify-self: end !important;
@@ -5010,7 +5018,7 @@
         flex: 0 0 auto !important;
         width: auto !important;
         min-width: 88px !important;
-        max-width: 132px !important;
+        max-width: none !important;
         min-height: 38px !important;
         height: 38px !important;
         padding-inline: 12px !important;
@@ -6064,7 +6072,7 @@
         flex: 0 0 auto !important;
         width: auto !important;
         min-width: 36px !important;
-        max-width: 132px !important;
+        max-width: none !important;
         height: 36px !important;
         min-height: 36px !important;
         max-height: 36px !important;
@@ -6128,7 +6136,7 @@
         flex: 0 1 auto !important;
         width: auto !important;
         min-width: 36px !important;
-        max-width: 132px !important;
+        max-width: none !important;
         height: 36px !important;
         min-height: 36px !important;
         max-height: 36px !important;
@@ -6564,7 +6572,7 @@
 
     .o_web_client .o_action_manager .o_control_panel:not(.o_bao_form_control_panel) .o_cp_searchview,
     .o_web_client .o_action_manager .o_control_panel:not(.o_bao_form_control_panel) .o_searchview {
-        box-shadow: 0 10px 24px rgba(13, 41, 76, 0.08) !important;
+        box-shadow: none !important;
     }
 }
 
@@ -9008,10 +9016,7 @@ body.o_web_client.o_web_client
         max-width: calc(100vw - 24px) !important;
     }
 
-    body.o_web_client.o_web_client:has(.o_control_panel .dropdown-toggle.show)
-        .o_popover.popover:not(.o-dropdown--menu):has(.o-tooltip) {
-        display: none !important;
-    }
+    // RR68: removed tooltip hide rule — keep native behavior
 }
 
 /* RR60: form mobile dropdowns must use the same usable viewport contract as

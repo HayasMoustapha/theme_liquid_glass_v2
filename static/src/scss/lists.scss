@@ -80,7 +80,7 @@
             font-size: 13px;
             font-weight: 400;
             line-height: 1.35;
-            padding: 14px 16px !important;
+            padding: 8px 10px !important;
             vertical-align: middle;
             background: transparent !important;
         }
@@ -94,19 +94,19 @@
         th {
             color: $text-strong !important;
             font-weight: 700;
-            padding: 14px 16px !important;
+            padding: 8px 10px !important;
         }
     }
 }
 
 .o_list_renderer thead th:first-child,
 .o_list_renderer tbody td:first-child {
-    padding-left: 14px !important;
+    padding-left: 10px !important;
 }
 
 .o_list_renderer thead th:last-child,
 .o_list_renderer tbody td:last-child {
-    padding-right: 18px !important;
+    padding-right: 10px !important;
 }
 
 .o_list_renderer .o_data_row.o_selected_row > .o_data_cell,
