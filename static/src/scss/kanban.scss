@@ -149,11 +149,15 @@
     color: $bao-text-800 !important;
 }
 
-// RR70: Kanban product titles in Open Sans for readability
+// RR70: Kanban product titles — Open Sans, bold for readability
 .o_kanban_renderer .o_kanban_record_title,
 .o_kanban_renderer .o_kanban_record strong,
-.o_kanban_renderer .o_kanban_record .fw-bold {
-    font-family: "Open Sans", $bao-font-body, sans-serif !important;
+.o_kanban_renderer .o_kanban_record .fw-bold,
+.o_kanban_renderer .o_kanban_record > div:first-child,
+.o_kanban_renderer .o_kanban_record .oe_kanban_details > div:first-child,
+.o_kanban_renderer .o_kanban_record .mb-1:first-child {
+    font-family: "Open Sans", sans-serif !important;
+    font-weight: 600 !important;
 }
 
 .o_kanban_renderer .o_kanban_record .text-muted,

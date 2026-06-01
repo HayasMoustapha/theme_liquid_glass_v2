@@ -785,10 +785,15 @@
     min-width: 0;
 }
 
-// RR70: Prevent flash on statusbar load
+// RR70: Prevent flash on statusbar/CP load
 @keyframes baoFadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(-2px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+// Apply to CP form as well
+.o_bao_form_control_panel .o_control_panel_main {
+    animation: baoFadeIn 0.2s ease forwards;
 }
 
 .o_form_statusbar {
@@ -1191,23 +1196,21 @@
     row-gap: 8px;
 }
 
-// RR67-FORMS: 2-column grid — label and field on same line.
-// Both columns auto-size. justify-content: start keeps them tight.
-// In edit mode, field inputs stretch via width:100% on the field widget.
+// RR70: 2-column grid — label auto, field 1fr (takes all remaining space)
 .o_form_sheet .o_inner_group {
     display: grid !important;
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: auto minmax(0, 1fr) !important;
     align-items: baseline;
     gap: 6px 10px;
     align-content: start;
-    justify-items: start;
+    justify-items: stretch !important;
     --o-grid-column-span: 1 !important;
 }
 
-// In readonly, fields should only take the space their content needs
+// In readonly, same layout
 .o_form_view:not(.o_form_editable) .o_form_sheet .o_inner_group {
-    grid-template-columns: auto auto;
-    justify-content: start;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    justify-items: stretch !important;
 }
 
 .o_form_sheet .o_cell,
@@ -1248,41 +1251,66 @@
     margin-bottom: 0 !important;
 }
 
-// RR70: All field widgets and inputs take 100% of their grid cell
+// RR70: ALL field cells take 100% width — no exception
+.o_form_sheet .o_inner_group > .o_cell:not(.o_wrap_label),
+.o_form_sheet .o_inner_group > .o_cell_custom:not(.o_wrap_label),
+.o_form_sheet .o_inner_group > .null {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
 .o_form_sheet .o_inner_group > .o_cell:not(.o_wrap_label) > *,
 .o_form_sheet .o_inner_group > .o_cell_custom:not(.o_wrap_label) > *,
 .o_form_sheet .o_inner_group > .null > * {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
 }
 
-// RR70: Composite cells (Prix de vente, etc.) — flex column layout
-.o_form_sheet .o_cell:not(.o_wrap_label),
-.o_form_sheet .o_cell_custom:not(.o_wrap_label) {
-    &[style*="display: block"],
-    &:has(> .o_field_monetary),
-    &:has(> .o_field_float) {
-        display: flex !important;
-        flex-flow: column wrap !important;
-        width: 100% !important;
-    }
+// RR70: Inputs/selects inside field widgets fill container
+.o_form_sheet .o_inner_group .o_field_widget input:not([type="checkbox"]):not([type="radio"]),
+.o_form_sheet .o_inner_group .o_field_widget select,
+.o_form_sheet .o_inner_group .o_field_widget .o_input,
+.o_form_sheet .o_inner_group .o_field_widget .o_input_dropdown,
+.o_form_sheet .o_inner_group .o_field_widget .o-autocomplete {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 auto !important;
+}
+
+// RR70: Composite cells (Prix de vente, monetary, float)
+.o_form_sheet .o_cell:not(.o_wrap_label) > .o_field_monetary,
+.o_form_sheet .o_cell:not(.o_wrap_label) > .o_field_float,
+.o_form_sheet .o_cell_custom:not(.o_wrap_label) > .o_field_monetary,
+.o_form_sheet .o_cell_custom:not(.o_wrap_label) > .o_field_float {
+    display: flex !important;
+    flex-flow: row wrap !important;
+    align-items: center !important;
+    width: 100% !important;
 }
 
 // RR70: Note/HTML editors — visible, wide, flexible
 .o_form_view .o_field_html,
 .o_form_view .o_field_text {
     width: 100% !important;
+    min-height: 100px !important;
+}
+
+.o_form_view .o_notebook_content .o_field_html,
+.o_form_view .o_notebook_content .o_field_text {
+    grid-column: 1 / -1 !important;
     min-width: 0 !important;
-    min-height: 80px !important;
+    width: 100% !important;
+    min-height: 100px !important;
 }
 
 .o_form_view .note-editable,
 .o_form_view .odoo-editor-editable {
     width: 100% !important;
-    min-width: 200px !important;
-    min-height: 60px !important;
-    padding: 8px 12px !important;
+    min-height: 100px !important;
+    padding: 10px 14px !important;
     background: #ffffff !important;
     border: 1px solid #ced4da !important;
     border-radius: 6px !important;
@@ -1369,7 +1397,7 @@
 .o_form_view .alert .row > .col,
 .o_form_view .alert .row > [class*="col-"] {
     display: grid !important;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto 1fr;
     justify-content: start;
     align-items: baseline;
     gap: 4px 8px;
@@ -1697,12 +1725,18 @@
 // RR70: Notebook "Add a line" buttons aligned left like native Odoo
 .o_form_view .o_field_x2many .o_list_renderer tfoot td,
 .o_form_view .o_field_x2many .o_list_renderer tfoot td.o_field_x2many_list_row_add,
-.o_form_view .o_field_x2many tfoot .o_field_x2many_list_row_add {
+.o_form_view .o_field_x2many tfoot .o_field_x2many_list_row_add,
+.o_list_renderer tfoot td,
+.o_field_x2many_list_row_add {
     text-align: left !important;
+    justify-content: flex-start !important;
 }
 
-.o_form_view .o_field_x2many .o_list_renderer tfoot td a {
+.o_form_view .o_field_x2many .o_list_renderer tfoot td a,
+.o_field_x2many_list_row_add a,
+.o_field_x2many_list_row_add .btn-link {
     justify-content: flex-start !important;
+    text-align: left !important;
 }
 
 .o_form_view .o_field_x2many .o_list_renderer,
@@ -1824,7 +1858,7 @@
 // RR67-P5: Footer subtotal grid ONLY — labels never truncate, no overlap
 // IMPORTANT: Only target oe_subtotal_footer, NOT :last-child (that leaked to form fields)
 .o_form_sheet .oe_subtotal_footer.o_inner_group {
-    grid-template-columns: auto auto !important;
+    grid-template-columns: auto 1fr !important;
     justify-content: end !important;
     gap: 4px 10px !important;
     overflow: visible !important;
@@ -2366,7 +2400,7 @@
 
 .o_form_view .o_field_widget textarea {
     min-height: 84px;
-    resize: vertical;
+    resize: both;
 }
 
 // RR67: Statusbar stays on one line, long text truncates with ellipsis

@@ -9409,17 +9409,17 @@ body.o_web_client.o_web_client
     min-height: 42px !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
-    overflow: hidden !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
 }
 
 body.o_web_client.o_web_client
     .o_action_manager.o_action_manager
     .o_searchview .o_searchview_input_container {
     flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    max-height: 34px !important;
-    scrollbar-width: none !important;
+    overflow: visible !important;
+    max-height: 38px !important;
+    scrollbar-width: thin !important;
 }
 
 body.o_web_client.o_web_client

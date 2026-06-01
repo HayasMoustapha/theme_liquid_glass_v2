@@ -97,8 +97,18 @@ table {
     border: 1px solid $bao-border-200 !important;
     border-radius: var(--bs-border-radius, 4px) !important;
     box-shadow: none !important;
-    overflow: hidden !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
     align-items: center !important;
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+        height: 3px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 2px;
+    }
 
     .o_searchview_input_container {
         gap: 4px;
@@ -107,9 +117,7 @@ table {
         box-shadow: none !important;
         flex-wrap: nowrap !important;
         align-items: center !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        scrollbar-width: thin;
+        overflow: visible !important;
         max-height: 38px !important;
 
         &::-webkit-scrollbar {
