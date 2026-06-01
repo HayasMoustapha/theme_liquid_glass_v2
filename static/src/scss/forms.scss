@@ -1199,9 +1199,9 @@
 // RR70: 2-column grid — label auto, field 1fr (takes all remaining space)
 .o_form_sheet .o_inner_group {
     display: grid !important;
-    grid-template-columns: auto minmax(0, 1fr) !important;
+    grid-template-columns: auto 1fr !important;
     align-items: baseline;
-    gap: 6px 10px;
+    gap: 8px;
     align-content: start;
     justify-items: stretch !important;
     --o-grid-column-span: 1 !important;
@@ -1209,7 +1209,7 @@
 
 // In readonly, same layout
 .o_form_view:not(.o_form_editable) .o_form_sheet .o_inner_group {
-    grid-template-columns: auto minmax(0, 1fr) !important;
+    grid-template-columns: auto 1fr !important;
     justify-items: stretch !important;
 }
 
@@ -1723,20 +1723,13 @@
 }
 
 // RR70: Notebook "Add a line" buttons aligned left like native Odoo
-.o_form_view .o_field_x2many .o_list_renderer tfoot td,
-.o_form_view .o_field_x2many .o_list_renderer tfoot td.o_field_x2many_list_row_add,
-.o_form_view .o_field_x2many tfoot .o_field_x2many_list_row_add,
-.o_list_renderer tfoot td,
-.o_field_x2many_list_row_add {
+td.o_field_x2many_list_row_add {
     text-align: left !important;
-    justify-content: flex-start !important;
 }
 
-.o_form_view .o_field_x2many .o_list_renderer tfoot td a,
-.o_field_x2many_list_row_add a,
-.o_field_x2many_list_row_add .btn-link {
-    justify-content: flex-start !important;
+td.o_field_x2many_list_row_add a {
     text-align: left !important;
+    display: inline !important;
 }
 
 .o_form_view .o_field_x2many .o_list_renderer,

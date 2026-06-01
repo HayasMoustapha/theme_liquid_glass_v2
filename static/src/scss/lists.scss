@@ -42,7 +42,11 @@
     border-spacing: 0;
     min-width: 100%;
 
+    // RR70-T2.2: Sticky header
     thead {
+        position: sticky;
+        top: 0;
+        z-index: 1;
         background: $bao-surface-0 !important;
         border-bottom: 1px solid $bao-border-200 !important;
 
@@ -107,6 +111,11 @@
 .o_list_renderer thead th:last-child,
 .o_list_renderer tbody td:last-child {
     padding-right: 10px !important;
+}
+
+// RR70-T2.1: First data column bold for visual hierarchy
+.o_list_renderer tbody td:nth-child(2) {
+    font-weight: 600 !important;
 }
 
 .o_list_renderer .o_data_row.o_selected_row > .o_data_cell,
