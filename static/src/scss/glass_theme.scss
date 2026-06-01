@@ -61,6 +61,10 @@ a {
     }
 }
 
+.o_stock_dashboard_kanban_view  .o_content {
+        margin: 26px !important;
+}
+
 table {
     @include transparent-bg;
 
@@ -83,39 +87,71 @@ table {
     z-index: 8000 !important;
 }
 
-// RR69: Searchbar native height — never grows with facets
+// RR70: Searchbar — 42px height, facets flexible + scroll horizontal
 .o_searchview.o_searchview {
-    min-height: 38px !important;
-    height: 38px !important;
-    max-height: 38px !important;
-    padding-inline: 12px;
+    min-height: 42px !important;
+    height: 42px !important;
+    max-height: 42px !important;
+    padding: 0 8px !important;
     background: $bao-surface-0 !important;
     border: 1px solid $bao-border-200 !important;
     border-radius: var(--bs-border-radius, 4px) !important;
     box-shadow: none !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
     overflow: hidden !important;
+    align-items: center !important;
 
     .o_searchview_input_container {
-        gap: 6px;
+        gap: 4px;
         background: transparent !important;
         border: none !important;
         box-shadow: none !important;
         flex-wrap: nowrap !important;
+        align-items: center !important;
         overflow-x: auto !important;
         overflow-y: hidden !important;
-        scrollbar-width: none;
+        scrollbar-width: thin;
+        max-height: 38px !important;
+
+        &::-webkit-scrollbar {
+            height: 3px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 2px;
+        }
 
         .o_searchview_facet {
-            min-height: 28px;
-            padding: 4px 8px;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+            flex: 0 0 auto !important;
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: 30px !important;
+            padding: 2px 8px !important;
             background: $bao-surface-100 !important;
             border: 1px solid $bao-border-200 !important;
-            border-radius: 9px;
+            border-radius: 6px !important;
             color: $bao-brand-600 !important;
-            font-size: 0.78rem;
-            font-weight: 600;
+            font-size: 0.8rem !important;
+            font-weight: 500 !important;
+            white-space: nowrap !important;
+
+            .o_searchview_facet_label {
+                font-size: 0.75rem !important;
+                padding: 0 2px !important;
+            }
+
+            .fa, .oi {
+                font-size: 0.7rem !important;
+                line-height: 1 !important;
+            }
+
+            .o_facet_remove {
+                font-size: 0.65rem !important;
+                padding: 0 !important;
+                margin-left: 2px !important;
+            }
 
             &:hover {
                 background: $bao-surface-200 !important;
@@ -127,11 +163,13 @@ table {
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
-            font-size: 0.95rem !important;
+            font-size: 0.92rem !important;
             font-weight: 400 !important;
+            min-width: 80px !important;
 
             &::placeholder {
                 color: $text-muted !important;
+                font-style: italic !important;
             }
         }
     }
@@ -150,9 +188,9 @@ table {
         align-items: center;
 
         .o_searchview {
-            min-height: 38px;
-            height: 38px;
-            padding-inline: 14px 0;
+            min-height: 42px;
+            height: 42px;
+            padding-inline: 10px 0;
             border-right: none !important;
             border-radius: var(--bs-border-radius, 4px) 0 0 var(--bs-border-radius, 4px) !important;
         }
@@ -172,8 +210,8 @@ table {
         }
 
         .o_searchview_dropdown_toggler {
-            min-width: 38px;
-            min-height: 38px;
+            min-width: 42px;
+            min-height: 42px;
             padding: 0 10px !important;
             background: $bao-surface-0 !important;
             border: 1px solid $bao-border-200 !important;
@@ -602,9 +640,9 @@ table {
     .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel) {
         .o_control_panel_main {
             display: grid !important;
-            grid-template-columns: auto minmax(0, 1fr) auto;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
             align-items: center !important;
-            column-gap: 12px;
+            column-gap: 8px;
         }
 
         .o_control_panel_breadcrumbs {
@@ -1039,7 +1077,10 @@ table {
     box-shadow: $shadow-medium !important;
     color: $text-strong !important;
     padding: 12px 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
 
+    
     .o_dropdown_container {
         padding-inline: 10px !important;
     }

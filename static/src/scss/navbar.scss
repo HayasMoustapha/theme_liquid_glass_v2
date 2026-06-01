@@ -2203,7 +2203,7 @@
     .o_web_client .o_action_manager .o_control_panel.o_bao_center_search_panel:not(.o_bao_form_control_panel):not(:has(.o_base_settings_view)) .o_control_panel_main {
         --bao-cp-search-width: clamp(300px, 30vw, 420px);
         display: grid !important;
-        grid-template-columns: auto minmax(0, 1fr) auto !important;
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
         align-items: center !important;
         column-gap: 8px !important;
         min-width: 0 !important;
@@ -4969,9 +4969,9 @@
 }
 
 .o_web_client .o_action_manager .o_control_panel.o_bao_settings_control_panel .o_searchview.o_searchview {
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    max-height: 42px !important;
     padding-block: 0 !important;
     font-size: 14px !important;
 }
@@ -8772,7 +8772,7 @@ body.o_web_client.o_web_client
         .o_control_panel_main.o_control_panel_main {
         --bao-cp-search-width: clamp(312px, 44vw, 460px);
         display: grid !important;
-        grid-template-columns: minmax(0, 1fr) minmax(312px, clamp(312px, 42vw, 500px)) !important;
+        grid-template-columns: auto 1fr !important;
         grid-template-rows: auto auto !important;
         grid-template-areas:
             "breadcrumbs navigation"
@@ -9404,9 +9404,9 @@ body.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_statu
 body.o_web_client.o_web_client
     .o_action_manager.o_action_manager:not(:has(.o_form_view)):not(:has(.o_base_settings_view))
     .o_searchview {
-    height: 38px !important;
-    max-height: 38px !important;
-    min-height: 38px !important;
+    height: 42px !important;
+    max-height: 42px !important;
+    min-height: 42px !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     overflow: hidden !important;
