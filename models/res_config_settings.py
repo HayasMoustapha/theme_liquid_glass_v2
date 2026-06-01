@@ -81,6 +81,11 @@ class ResConfigSettings(models.TransientModel):
         readonly=False,
         groups="base.group_system",
     )
+    bao_module_override_ids = fields.One2many(
+        related="bao_theme_config_id.module_override_ids",
+        readonly=False,
+        groups="base.group_system",
+    )
     bao_preview_css = fields.Text(
         string="Computed Token Preview",
         compute="_compute_bao_preview",

@@ -274,6 +274,7 @@ class BaoThemeConfig(models.Model):
     preset_id = fields.Many2one("bao.theme.preset", required=True, ondelete="restrict")
     family_override_ids = fields.One2many("bao.theme.family.override", "config_id")
     component_override_ids = fields.One2many("bao.theme.component.override", "config_id")
+    module_override_ids = fields.One2many("bao.theme.module.override", "config_id")
 
     @api.model
     def _get_active_config(self):

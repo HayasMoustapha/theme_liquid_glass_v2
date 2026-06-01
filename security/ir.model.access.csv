@@ -7,3 +7,5 @@ access_bao_theme_family_override_user,bao.theme.family.override.user,model_bao_t
 access_bao_theme_family_override_system,bao.theme.family.override.system,model_bao_theme_family_override,base.group_system,1,1,1,1
 access_bao_theme_component_override_user,bao.theme.component.override.user,model_bao_theme_component_override,base.group_user,1,0,0,0
 access_bao_theme_component_override_system,bao.theme.component.override.system,model_bao_theme_component_override,base.group_system,1,1,1,1
+access_bao_theme_module_override_user,bao.theme.module.override.user,model_bao_theme_module_override,base.group_user,1,0,0,0
+access_bao_theme_module_override_system,bao.theme.module.override.system,model_bao_theme_module_override,base.group_system,1,1,1,1

@@ -1309,6 +1309,7 @@
 .o_form_view .note-editable,
 .o_form_view .odoo-editor-editable {
     width: 100% !important;
+    min-width: 460px !important;
     min-height: 100px !important;
     padding: 10px 14px !important;
     background: #ffffff !important;

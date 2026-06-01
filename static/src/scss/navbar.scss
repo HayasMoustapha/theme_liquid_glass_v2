@@ -694,14 +694,23 @@
     }
 }
 
+// RR70: App launcher fullscreen — covers entire viewport including navbar
 .o_enterprise_app_launcher {
     position: fixed;
-    inset: 60px 0 0 0;
-    z-index: 7020 !important;
+    inset: 0 !important;
+    z-index: 10000 !important;
     overflow: auto;
-    background: $bao-bg-app !important;
-    color: $bao-text-800 !important;
+    background: rgba(10, 25, 50, 0.95) !important;
+    backdrop-filter: blur(16px) !important;
+    color: #f0f4f8 !important;
     font-family: $bao-font-body;
+    padding: 60px 40px 40px !important;
+}
+
+// Hide navbar when launcher is open
+body:has(#o_enterprise_app_launcher) .o_main_navbar {
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 .o_enterprise_app_launcher_grid {
@@ -729,7 +738,7 @@
     border: 1px solid transparent !important;
     border-radius: 8px !important;
     background: transparent !important;
-    color: $bao-text-800 !important;
+    color: #f0f4f8 !important;
     font-family: $bao-font-body;
     text-align: center;
     text-decoration: none !important;
