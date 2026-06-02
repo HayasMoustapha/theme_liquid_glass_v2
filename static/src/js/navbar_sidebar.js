@@ -1860,7 +1860,7 @@ patch(NavBar.prototype, {
     },
 
     toggleEnterpriseLauncher() {
-        if (this.env.isSmall || this.isScopedApp) {
+        if (this.isScopedApp) {
             this.closeEnterpriseLauncher();
             return;
         }

@@ -8,12 +8,12 @@
                 <field name="sequence" widget="handle"/>
                 <field name="module_id"/>
                 <field name="module_name" optional="hide"/>
-                <field name="color_primary" placeholder="Inherit"/>
-                <field name="color_primary_dark" placeholder="Inherit"/>
-                <field name="color_accent" placeholder="Inherit"/>
-                <field name="bg_app" placeholder="Inherit"/>
-                <field name="surface_base" placeholder="Inherit"/>
-                <field name="text_primary" placeholder="Inherit"/>
+                <field name="color_primary" widget="color" placeholder="Inherit"/>
+                <field name="color_primary_dark" widget="color" placeholder="Inherit"/>
+                <field name="color_accent" widget="color" placeholder="Inherit"/>
+                <field name="bg_app" widget="color" placeholder="Inherit"/>
+                <field name="surface_base" widget="color" placeholder="Inherit"/>
+                <field name="text_primary" widget="color" placeholder="Inherit"/>
                 <field name="active" widget="boolean_toggle"/>
             </list>
         </field>
@@ -31,18 +31,18 @@
                             <field name="active" widget="boolean_toggle"/>
                         </group>
                         <group string="Colors">
-                            <field name="color_primary" placeholder="Inherit global"/>
-                            <field name="color_primary_dark" placeholder="Inherit global"/>
-                            <field name="color_accent" placeholder="Inherit global"/>
+                            <field name="color_primary" widget="color" placeholder="Inherit global"/>
+                            <field name="color_primary_dark" widget="color" placeholder="Inherit global"/>
+                            <field name="color_accent" widget="color" placeholder="Inherit global"/>
                         </group>
                     </group>
                     <group>
                         <group string="Surfaces">
-                            <field name="bg_app" placeholder="Inherit global"/>
-                            <field name="surface_base" placeholder="Inherit global"/>
+                            <field name="bg_app" widget="color" placeholder="Inherit global"/>
+                            <field name="surface_base" widget="color" placeholder="Inherit global"/>
                         </group>
                         <group string="Text">
-                            <field name="text_primary" placeholder="Inherit global"/>
+                            <field name="text_primary" widget="color" placeholder="Inherit global"/>
                         </group>
                     </group>
                 </sheet>

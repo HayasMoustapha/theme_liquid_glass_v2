@@ -28,21 +28,26 @@ whenReady(() => {
             ig.dataset.baoMobile = String(isMobile);
         }
 
-        // ALL o_cell children must be 100% width
-        for (const cell of document.querySelectorAll(".o_form_sheet .o_cell:not(.o_wrap_label), .o_form_sheet .o_cell_custom:not(.o_wrap_label)")) {
-            if (cell.dataset.baoCellDone) continue;
-            cell.style.setProperty("display", "flex", "important");
-            cell.style.setProperty("flex-flow", "column wrap", "important");
-            for (const ch of cell.children) {
-                ch.style.setProperty("width", "100%", "important");
-                ch.style.setProperty("max-width", "100%", "important");
-            }
-            // Also inputs and buttons inside
-            for (const inp of cell.querySelectorAll("input, button, select, .o-autocomplete, .o-autocomplete--input, .o_input, .o_field_widget, .o_field_float")) {
+        // Targeted field widgets: 100% width (exclude checkboxes, radios, booleans)
+        const SKIP = ".o_field_boolean, .o-checkbox, [type=checkbox], [type=radio], .o_field_selection_badge";
+        for (const fw of document.querySelectorAll(".o_form_sheet .o_cell:not(.o_wrap_label) > .o_field_widget:not(" + SKIP + ")")) {
+            if (fw.dataset.baoFw) continue;
+            fw.style.setProperty("width", "100%", "important");
+            fw.style.setProperty("max-width", "100%", "important");
+            // Inputs inside the widget
+            for (const inp of fw.querySelectorAll("input:not([type=checkbox]):not([type=radio]), select, .o-autocomplete, .o-autocomplete--input, .o_input")) {
                 inp.style.setProperty("width", "100%", "important");
-                inp.style.setProperty("max-width", "100%", "important");
             }
-            cell.dataset.baoCellDone = "1";
+            fw.dataset.baoFw = "1";
+        }
+        // Specific: monetary, float, date fields
+        for (const f of document.querySelectorAll(".o_form_sheet .o_field_monetary, .o_form_sheet .o_field_float, .o_form_sheet .o_field_datetime, .o_form_sheet .o_field_date")) {
+            if (f.dataset.baoFw) continue;
+            f.style.setProperty("width", "100%", "important");
+            for (const inp of f.querySelectorAll("input")) {
+                inp.style.setProperty("width", "100%", "important");
+            }
+            f.dataset.baoFw = "1";
         }
 
         // x2many list tables: full width
@@ -141,6 +146,23 @@ whenReady(() => {
 
     observer.observe(document.body, { childList: true, subtree: true });
 
+    // Force-close launcher on navigation
+    let _lastUrl = window.location.href;
+    setInterval(() => {
+        if (window.location.href !== _lastUrl) {
+            _lastUrl = window.location.href;
+            const launcher = document.querySelector(".o_enterprise_app_launcher");
+            if (launcher) {
+                launcher.remove();
+                const navbar = document.querySelector(".o_main_navbar");
+                if (navbar) {
+                    navbar.style.removeProperty("opacity");
+                    navbar.style.removeProperty("pointer-events");
+                }
+            }
+        }
+    }, 200);
+
     // Module-specific theme overrides — apply CSS vars based on current URL
     let _moduleOverrides = null;
     let _lastAppliedModule = null;
@@ -183,17 +205,17 @@ whenReady(() => {
         const mod = detectCurrentModule();
         if (mod === _lastAppliedModule) return;
         _lastAppliedModule = mod;
-        const root = document.documentElement;
+        const target = document.body;
         // Reset all module vars
         for (const vars of Object.values(_moduleOverrides)) {
             for (const cssVar of Object.keys(vars)) {
-                root.style.removeProperty(cssVar);
+                target.style.removeProperty(cssVar);
             }
         }
-        // Apply current module vars
+        // Apply current module vars with !important via body
         if (mod && _moduleOverrides[mod]) {
             for (const [cssVar, val] of Object.entries(_moduleOverrides[mod])) {
-                root.style.setProperty(cssVar, val);
+                target.style.setProperty(cssVar, val, "important");
             }
         }
     }

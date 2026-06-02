@@ -30,11 +30,11 @@ class BaoThemeModuleOverride(models.Model):
 
     def _to_css_vars(self):
         mapping = {
-            "color_primary": "--bao-brand-600",
-            "color_primary_dark": "--bao-brand-700",
-            "color_accent": "--bao-accent-500",
+            "color_primary": "--bao-color-primary",
+            "color_primary_dark": "--bao-color-primary-dark",
+            "color_accent": "--bao-color-accent",
             "bg_app": "--bao-bg-app",
-            "surface_base": "--bao-surface-0",
+            "surface_base": "--bao-surface-base",
             "text_primary": "--bao-text-primary",
         }
         lines = []
@@ -63,11 +63,11 @@ class BaoThemeModuleOverride(models.Model):
         for ov in overrides:
             mapping = {}
             for field_name, css_var in {
-                "color_primary": "--bao-brand-600",
-                "color_primary_dark": "--bao-brand-700",
-                "color_accent": "--bao-accent-500",
+                "color_primary": "--bao-color-primary",
+                "color_primary_dark": "--bao-color-primary-dark",
+                "color_accent": "--bao-color-accent",
                 "bg_app": "--bao-bg-app",
-                "surface_base": "--bao-surface-0",
+                "surface_base": "--bao-surface-base",
                 "text_primary": "--bao-text-primary",
             }.items():
                 val = getattr(ov, field_name)

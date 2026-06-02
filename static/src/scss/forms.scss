@@ -4068,6 +4068,10 @@ td.o_field_x2many_list_row_add a {
     }
 }
 
+.o_field_boolean_favorite  {
+    width: fit-content !important;
+}
+
 // Notebook field inheritance: notebook autocomplete/many2one controls must reuse the
 // exact same Liquid+BAO shell contract as the main form sheet, without introducing a
 // notebook-only field skin.
@@ -7064,7 +7068,7 @@ td.o_field_x2many_list_row_add a {
         .oe_title h1,
         .oe_title h2 {
             display: block !important;
-            width: 100% !important;
+            // width: 100% !important;
             max-width: 100% !important;
             min-width: 0 !important;
             margin: 0 !important;

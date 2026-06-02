@@ -2194,8 +2194,8 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
 }
 
 .o_web_client .o_base_settings_view .settings_tab {
-    width: 220px !important;
-    max-width: 220px !important;
+    width: 100% !important;
+    max-width: 100% !important;
     border-radius: 0 !important;
     background: #e7eff9 !important;
     overflow-x: hidden !important;
