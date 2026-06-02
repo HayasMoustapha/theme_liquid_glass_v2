@@ -8,7 +8,7 @@
         gap: 0 !important;
 
         .o_kanban_record {
-            background: #ffffff !important;
+            background: $bao-surface-0 !important;
             border: 1px solid rgba(17, 74, 126, 0.11) !important;
             border-radius: $radius-md !important;
             box-shadow: $shadow-medium !important;
@@ -27,14 +27,14 @@
         @include transparent-bg;
 
         .o_kanban_record {
-            background: #ffffff !important;
+            background: $bao-surface-0 !important;
             border: 1px solid rgba(17, 74, 126, 0.11) !important;
             border-radius: $radius-md !important;
             box-shadow: $shadow-medium !important;
             margin-bottom: 5px !important;
 
             &:hover {
-                background: #f7fbff !important;
+                background: $bao-surface-50 !important;
                 box-shadow: $shadow-medium !important;
                 transform: none !important;
             }
@@ -43,14 +43,14 @@
 
     .o_kanban_ungrouped {
         .o_kanban_record:not(.o_kanban_ghost) {
-            background: #ffffff !important;
+            background: $bao-surface-0 !important;
             border: 1px solid rgba(17, 74, 126, 0.11) !important;
             border-radius: $radius-md !important;
             box-shadow: $shadow-medium !important;
             margin-top: 5px !important;
 
             &:hover {
-                background: #f7fbff !important;
+                background: $bao-surface-50 !important;
             }
         }
 
@@ -81,7 +81,7 @@
 
 .o_kanban_dashboard .o_kanban_record .btn,
 .o_kanban_dashboard .o_kanban_record button {
-    background: #ffffff !important;
+    background: $bao-surface-0 !important;
     border: 1px solid rgba(17, 74, 126, 0.14) !important;
     border-radius: 14px !important;
     box-shadow: none !important;
@@ -156,7 +156,7 @@
 .o_kanban_renderer .o_kanban_record > div:first-child,
 .o_kanban_renderer .o_kanban_record .oe_kanban_details > div:first-child,
 .o_kanban_renderer .o_kanban_record .mb-1:first-child {
-    font-family: "Open Sans", sans-serif !important;
+    font-family: $bao-font-body, sans-serif !important;
     font-weight: 600 !important;
 }
 
@@ -387,7 +387,7 @@
     width: 100% !important;
     margin: 0 !important;
     padding: 16px !important;
-    background: #ffffff !important;
+    background: $bao-surface-0 !important;
     border: 1px solid #e1e1e1 !important;
     border-radius: 16px !important;
     box-shadow: 1px 2px 4px rgba(13, 79, 148, 0.08) !important;
@@ -404,7 +404,7 @@
         min-height: 72px !important;
         margin: 0 !important;
         padding: 8px !important;
-        background: #ffffff !important;
+        background: $bao-surface-0 !important;
         border: 1px solid #e1e1e1 !important;
         border-radius: 6px !important;
         box-shadow: 1px 2px 4px rgba(13, 79, 148, 0.08) !important;
@@ -422,7 +422,7 @@
 }
 
     .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new):hover {
-        background: #ffffff !important;
+        background: $bao-surface-0 !important;
         border-color: #d4d4d4 !important;
         box-shadow: none !important;
         transform: none !important;
@@ -894,7 +894,7 @@
     display: block !important;
     width: 100% !important;
     padding: 16px !important;
-    background: #ffffff !important;
+    background: $bao-surface-0 !important;
     overflow: auto !important;
 
     .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),
@@ -1105,7 +1105,7 @@
         min-height: 120px !important;
         margin: 0 !important;
         padding: 8px !important;
-        background: #ffffff !important;
+        background: $bao-surface-0 !important;
         border: 1px solid #d9dde2 !important;
         border-radius: 6px !important;
         box-shadow: none !important;
@@ -1244,23 +1244,23 @@
     box-shadow: none !important;
     align-content: flex-start !important;
     overflow: visible !important;
-    font-family: "Open Sans", sans-serif !important;
+    font-family: $bao-font-body, sans-serif !important;
     .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new),    .o_kanban_quick_create{
         flex: 0 0 var(--bao-kanban-card-basis) !important;
         max-width: 100% !important;
         height: 312px !important;
         min-height: 312px !important;
         padding: 8px !important;
-        background: #ffffff !important;
+        background: $bao-surface-0 !important;
         border: 1px solid #dbdbdb !important;
         border-radius: 14px !important;
         box-shadow: none !important;
         overflow: hidden !important;
-        font-family: "Open Sans", sans-serif !important;
+        font-family: $bao-font-body, sans-serif !important;
     }
 
     .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new):hover {
-        background: #ffffff !important;
+        background: $bao-surface-0 !important;
         border-color: #d4d4d4 !important;
         box-shadow: none !important;
         transform: none !important;
@@ -1312,7 +1312,7 @@
         font-size: 16px !important;
         font-weight: 400 !important;
         line-height: 22px !important;
-        font-family: "Open Sans", sans-serif !important;
+        font-family: $bao-font-body, sans-serif !important;
     }
 
     .o_kanban_record .btn.btn-primary.oe_kanban_action span {

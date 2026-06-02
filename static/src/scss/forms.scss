@@ -1478,7 +1478,7 @@
     border: 1px solid rgba(214, 219, 227, 0.95) !important;
     border-radius: 8px !important;
     box-shadow: none !important;
-    color: #3a4047 !important;
+    color: $bao-text-800 !important;
     min-height: 40px;
     padding: 8px 14px !important;
     font-size: 0.96rem;
@@ -1583,7 +1583,7 @@
     border: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
-    color: #3a4047 !important;
+    color: $bao-text-800 !important;
 }
 
 .o_form_sheet .o_field_widget.o_field_datetime > .d-flex > button:not(.o_input),
@@ -1608,7 +1608,7 @@
 
 .o_form_sheet .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html),
 .o_form_sheet .o_field_widget.o_field_readonly {
-    color: #3a4047 !important;
+    color: $bao-text-800 !important;
 }
 
 .o_form_sheet .o_field_widget:not(.o_field_x2many):not(.o_field_boolean):not(.o_field_image):not(.o_field_html) > span,
@@ -1617,7 +1617,7 @@
 .o_form_sheet .o_field_widget .o_field_many2one_selection,
 .o_form_sheet .o_field_widget .o_field_many2many_selection,
 .o_form_sheet .o_field_widget .o_tag_badge {
-    color: #3a4047 !important;
+    color: $bao-text-800 !important;
 }
 
 .o_form_sheet .o_field_many2many_tags .badge:not([class*="o_tag_color_"]),
@@ -1660,7 +1660,7 @@
         }
 
         .nav-link {
-            background: #edf5fd !important;
+            background: $bao-surface-50 !important;
             border: 1px solid rgba(17, 74, 126, 0.1) !important;
             border-radius: 14px !important;
             box-shadow: none !important;
@@ -1746,7 +1746,7 @@ td.o_field_x2many_list_row_add a {
 .o_form_view .o_field_x2many .o_list_renderer,
 .o_form_view .o_field_x2many .o_kanban_renderer {
     @include bao-panel-shell;
-    background: rgba(255, 255, 255, 0.92) !important;
+    background: $bao-surface-0 !important;
     border-radius: 18px !important;
     margin-top: 8px;
     overflow: hidden;
@@ -2013,7 +2013,7 @@ td.o_field_x2many_list_row_add a {
 
 .o-mail-Message,
 .o-mail-Composer {
-    background: rgba(255, 255, 255, 0.92) !important;
+    background: $bao-surface-0 !important;
     border: 1px solid rgba(17, 74, 126, 0.09) !important;
     border-radius: 18px !important;
     box-shadow: none !important;
@@ -3252,7 +3252,7 @@ td.o_field_x2many_list_row_add a {
         }
 
         .nav-link {
-            background: #edf5fd !important;
+            background: $bao-surface-50 !important;
             border: 1px solid rgba(17, 74, 126, 0.12) !important;
             border-radius: $radius-sm !important;
             box-shadow: none !important;
@@ -3342,7 +3342,7 @@ td.o_field_x2many_list_row_add a {
     margin-bottom: 0 !important;
 
     thead th {
-        background: #edf5fd !important;
+        background: $bao-surface-50 !important;
         border-bottom: 1px solid rgba(17, 74, 126, 0.1) !important;
         color: $primary-color !important;
         font-size: 0.84rem !important;
@@ -3379,7 +3379,7 @@ td.o_field_x2many_list_row_add a {
 .o_form_view .o_field_x2many .o_handle_cell,
 .o_form_view .o_field_x2many .o_list_controller,
 .o_form_view .o_field_x2many .o_list_controller .dropdown-toggle {
-    background: #edf5fd !important;
+    background: $bao-surface-50 !important;
 }
 
 .o_form_view .o_field_x2many .o_field_many2one .o-autocomplete--input,
@@ -3818,11 +3818,11 @@ td.o_field_x2many_list_row_add a {
     textarea,
     input:not([type="checkbox"]):not([type="radio"]),
     [contenteditable="true"] {
-        background: #ffffff !important;
-        border: 1px solid #ced4da !important;
+        background: $bao-surface-0 !important;
+        border: 1px solid $bao-border-300 !important;
         border-radius: 8px !important;
         box-shadow: none !important;
-        color: #3a4047 !important;
+        color: $bao-text-800 !important;
         font-size: 0.96rem !important;
         font-weight: 400 !important;
         line-height: 1.3 !important;
@@ -3923,7 +3923,7 @@ td.o_field_x2many_list_row_add a {
 
 // Final BAO palette authority for form surfaces, without changing native widgets.
 .o_action_manager:has(.o_form_view) .o_form_view {
-    color: #303030 !important;
+    color: $bao-text-800 !important;
 
     .o_form_renderer {
         background: transparent !important;
@@ -3937,7 +3937,7 @@ td.o_field_x2many_list_row_add a {
     .o_form_sheet_bg .o_form_sheet {
         background: #ffffff !important;
         border-color: #e1e1e1 !important;
-        color: #303030 !important;
+        color: $bao-text-800 !important;
     }
 
     .o_form_label,
@@ -3955,7 +3955,7 @@ td.o_field_x2many_list_row_add a {
     .o_field_many2one input {
         background: #fafafa !important;
         border-color: #dedede !important;
-        color: #3a4047 !important;
+        color: $bao-text-800 !important;
     }
 
     .form-control::placeholder,
@@ -3990,7 +3990,7 @@ td.o_field_x2many_list_row_add a {
         .nav-tabs .nav-link.active {
             background: #f1f1f1 !important;
             border-color: #dedede !important;
-            color: #303030 !important;
+            color: $bao-text-800 !important;
         }
     }
 
@@ -4023,7 +4023,7 @@ td.o_field_x2many_list_row_add a {
         }
 
         tbody td {
-            color: #303030 !important;
+            color: $bao-text-800 !important;
         }
 
         tfoot,
@@ -4184,7 +4184,7 @@ td.o_field_x2many_list_row_add a {
         .o_field_widget .o_field_many2one_selection,
         .o_field_widget .o_field_many2many_selection,
         .o_field_widget .o_tag_badge {
-            color: #3a4047 !important;
+            color: $bao-text-800 !important;
         }
 
         .o_external_button,
