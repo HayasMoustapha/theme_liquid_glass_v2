@@ -598,13 +598,13 @@
 }
 
 .o_navbar_apps_menu {
-    color: #ffffff !important;
+    color: var(--bao-shell-text, #ffffff) !important;
     font-family: $bao-font-body;
 
     a,
     button,
     .dropdown-toggle {
-        color: #ffffff !important;
+        color: var(--bao-shell-text, #ffffff) !important;
         font-family: $bao-font-body;
     }
 
@@ -612,7 +612,7 @@
     .dropdown-toggle:focus,
     .dropdown-toggle.show {
         background-color: rgba(255, 255, 255, 0.12) !important;
-        color: #ffffff !important;
+        color: var(--bao-shell-text, #ffffff) !important;
     }
 
     // RR69: App launcher fullscreen overlay like Odoo Enterprise
@@ -646,7 +646,7 @@
             align-items: center !important;
             gap: 8px !important;
             padding: 16px 8px !important;
-            color: #ffffff !important;
+            color: var(--bao-shell-text, #ffffff) !important;
             text-align: center !important;
             border-radius: 12px !important;
             width: 100px !important;
@@ -677,7 +677,7 @@
     border: 1px solid transparent !important;
     border-radius: 8px !important;
     background: transparent !important;
-    color: #ffffff !important;
+    color: var(--bao-shell-text, #ffffff) !important;
     box-shadow: none !important;
     font-family: $bao-font-body;
     font-size: 1.35rem;
@@ -689,7 +689,7 @@
     &.show {
         background: rgba(255, 255, 255, 0.12) !important;
         border-color: rgba(255, 255, 255, 0.14) !important;
-        color: #ffffff !important;
+        color: var(--bao-shell-text, #ffffff) !important;
         outline: none;
     }
 }
@@ -806,7 +806,7 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
     width: 64px !important;
     height: 64px !important;
     border-radius: 14px !important;
-    color: #ffffff !important;
+    color: var(--bao-shell-text, #ffffff) !important;
     font-size: 2rem;
 }
 
@@ -859,13 +859,13 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
 
 .o_sidebar_topbar {
     background: $bao-brand-600 !important;
-    color: #ffffff !important;
+    color: var(--bao-shell-text, #ffffff) !important;
     font-family: $bao-font-body;
 
     a,
     button,
     .dropdown-toggle {
-        color: #ffffff !important;
+        color: var(--bao-shell-text, #ffffff) !important;
         font-family: $bao-font-body;
     }
 }
@@ -3510,7 +3510,7 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
     min-width: 20px !important;
     border-radius: 999px !important;
     background: #00a957 !important;
-    color: #ffffff !important;
+    color: var(--bao-shell-text, #ffffff) !important;
     font-size: 12px !important;
     font-weight: 700 !important;
     line-height: 1 !important;
@@ -3755,7 +3755,7 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
         min-width: 20px !important;
         border-radius: 999px !important;
         background: #00a957 !important;
-        color: #ffffff !important;
+        color: var(--bao-shell-text, #ffffff) !important;
         font-size: 12px !important;
         font-weight: 700 !important;
         line-height: 1 !important;
@@ -3846,7 +3846,7 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
         min-width: 20px !important;
         border-radius: 999px !important;
         background: #00a957 !important;
-        color: #ffffff !important;
+        color: var(--bao-shell-text, #ffffff) !important;
         font-size: 12px !important;
         font-weight: 700 !important;
         line-height: 1 !important;
@@ -4171,7 +4171,7 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
     border: 0 !important;
     border-radius: 999px !important;
     background: #00a957 !important;
-    color: #ffffff !important;
+    color: var(--bao-shell-text, #ffffff) !important;
     font-size: 12px !important;
     font-weight: 700 !important;
     line-height: 1 !important;
@@ -4291,7 +4291,7 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
         border: 0 !important;
         border-radius: 999px !important;
         background: #00a957 !important;
-        color: #ffffff !important;
+        color: var(--bao-shell-text, #ffffff) !important;
         font-size: 12px !important;
         font-weight: 700 !important;
         line-height: 1 !important;
@@ -4693,7 +4693,7 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
 .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > button.btn-primary {
     background: var(--bao-sheet-header-primary) !important;
     border-color: var(--bao-sheet-header-primary) !important;
-    color: #ffffff !important;
+    color: var(--bao-shell-text, #ffffff) !important;
 }
 
 .o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet_bg > .o_form_statusbar .o_statusbar_buttons > .btn-secondary,
@@ -9460,7 +9460,7 @@ body.o_web_client.o_web_client
 // P5: Input fields — white bg with solid border for readability
 body.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet
     :is(.o_input, .form-control, input:not([type="checkbox"]):not([type="radio"]), textarea, select) {
-    background-color: #ffffff !important;
+    background-color: var(--bao-shell-text, #ffffff) !important;
     border-color: #ced4da !important;
 }
 

@@ -99,8 +99,12 @@ whenReady(() => {
             launcher.style.setProperty("inset", "0", "important");
             launcher.style.setProperty("z-index", "10000", "important");
             launcher.style.setProperty("overflow", "auto", "important");
-            launcher.style.setProperty("background", "linear-gradient(135deg, #f1f1f1, #e5e5e5, #f1f1f1)", "important");
-            launcher.style.setProperty("color", "#303030", "important");
+            const cs = getComputedStyle(document.documentElement);
+            const surface100 = cs.getPropertyValue("--bao-surface-subtle").trim() || "#f1f1f1";
+            const surface200 = cs.getPropertyValue("--bao-surface-raised").trim() || "#e5e5e5";
+            const textColor = cs.getPropertyValue("--bao-text-primary").trim() || "#303030";
+            launcher.style.setProperty("background", "linear-gradient(135deg, " + surface100 + ", " + surface200 + ", " + surface100 + ")", "important");
+            launcher.style.setProperty("color", textColor, "important");
             launcher.style.setProperty("padding", "40px", "important");
 
             const navbar = document.querySelector(".o_main_navbar");
@@ -125,7 +129,7 @@ whenReady(() => {
                 closeBtn.style.setProperty("border-radius", "10px", "important");
                 closeBtn.style.setProperty("cursor", "pointer", "important");
                 closeBtn.style.setProperty("font-size", "1.2rem", "important");
-                closeBtn.style.setProperty("color", "#303030", "important");
+                closeBtn.style.setProperty("color", textColor, "important");
             }
 
             // Grid
@@ -143,7 +147,7 @@ whenReady(() => {
 
             // Items
             for (const item of launcher.querySelectorAll(".o_enterprise_app_launcher_item")) {
-                item.style.setProperty("color", "#303030", "important");
+                item.style.setProperty("color", textColor, "important");
                 item.style.setProperty("font-size", "0.78rem", "important");
                 item.style.setProperty("text-align", "center", "important");
             }
@@ -156,7 +160,8 @@ whenReady(() => {
                 icon.style.setProperty("width", "80px", "important");
                 icon.style.setProperty("height", "80px", "important");
                 icon.style.setProperty("border-radius", "16px", "important");
-                icon.style.setProperty("background", "#ffffff", "important");
+                const surfaceBase = cs.getPropertyValue("--bao-surface-base").trim() || "#ffffff";
+                icon.style.setProperty("background", surfaceBase, "important");
                 icon.style.setProperty("box-shadow", "0 2px 12px rgba(15,23,42,0.08)", "important");
             }
 
