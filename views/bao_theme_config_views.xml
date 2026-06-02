@@ -64,13 +64,21 @@
         <field name="name">bao.theme.component.override.list</field>
         <field name="model">bao.theme.component.override</field>
         <field name="arch" type="xml">
-            <list string="BAO Component Overrides">
+            <list string="BAO Component Overrides" editable="bottom">
                 <field name="component_key"/>
                 <field name="family_key"/>
-                <field name="color_primary"/>
-                <field name="color_accent"/>
-                <field name="surface_base"/>
-                <field name="text_primary"/>
+                <field name="color_primary" widget="color"/>
+                <field name="color_primary_dark" widget="color" optional="hide"/>
+                <field name="color_accent" widget="color"/>
+                <field name="color_accent_hover" widget="color" optional="hide"/>
+                <field name="surface_base" widget="color"/>
+                <field name="surface_muted" widget="color" optional="hide"/>
+                <field name="surface_subtle" widget="color" optional="hide"/>
+                <field name="surface_raised" widget="color" optional="hide"/>
+                <field name="border_default" widget="color" optional="hide"/>
+                <field name="text_primary" widget="color"/>
+                <field name="text_secondary" widget="color" optional="hide"/>
+                <field name="text_muted" widget="color" optional="hide"/>
             </list>
         </field>
     </record>
@@ -87,22 +95,22 @@
                         <field name="family_key"/>
                     </group>
                     <group string="Colors">
-                        <field name="color_primary"/>
-                        <field name="color_primary_dark"/>
-                        <field name="color_accent"/>
-                        <field name="color_accent_hover"/>
+                        <field name="color_primary" widget="color"/>
+                        <field name="color_primary_dark" widget="color"/>
+                        <field name="color_accent" widget="color"/>
+                        <field name="color_accent_hover" widget="color"/>
                     </group>
                     <group string="Surfaces">
-                        <field name="surface_base"/>
-                        <field name="surface_muted"/>
-                        <field name="surface_subtle"/>
-                        <field name="surface_raised"/>
-                        <field name="border_default"/>
+                        <field name="surface_base" widget="color"/>
+                        <field name="surface_muted" widget="color"/>
+                        <field name="surface_subtle" widget="color"/>
+                        <field name="surface_raised" widget="color"/>
+                        <field name="border_default" widget="color"/>
                     </group>
                     <group string="Text">
-                        <field name="text_primary"/>
-                        <field name="text_secondary"/>
-                        <field name="text_muted"/>
+                        <field name="text_primary" widget="color"/>
+                        <field name="text_secondary" widget="color"/>
+                        <field name="text_muted" widget="color"/>
                     </group>
                     <footer>
                         <button name="action_reset_component" type="object" string="Reset Component" class="btn-secondary"/>

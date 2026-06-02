@@ -167,6 +167,48 @@
     color: $bao-text-600 !important;
 }
 
+// RR75-R9: Kanban fournisseurs pixel-perfect — badges and counters
+.o_kanban_record .badge.rounded-pill,
+.o_kanban_record .o_tag,
+.o_kanban_record .o_kanban_tags .badge {
+    min-height: 1.3rem;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1.15;
+    border-radius: 20px !important;
+    max-width: max-content;
+}
+
+.o_kanban_record .o_kanban_manage_button_section,
+.o_kanban_record .o_kanban_record_bottom {
+    display: flex !important;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    padding-top: 6px;
+    border-top: 1px solid $bao-border-200;
+    margin-top: 6px;
+}
+
+.o_kanban_record .o_kanban_record_bottom .oe_kanban_bottom_left,
+.o_kanban_record .o_kanban_record_bottom .oe_kanban_bottom_right {
+    display: flex !important;
+    align-items: center;
+    gap: 4px;
+}
+
+.o_kanban_record .o_kanban_record_bottom .badge {
+    min-height: 22px;
+    padding: 2px 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    border-radius: 4px !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
 .o_kanban_renderer .o_kanban_record .badge.rounded-pill,
 .o_kanban_renderer .o_kanban_record .o_tag {
     min-height: 1.3rem;
