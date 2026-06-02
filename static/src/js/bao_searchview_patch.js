@@ -57,8 +57,8 @@ whenReady(() => {
             }
             fw.dataset.baoFw = "1";
         }
-        // Specific: monetary, float, date, many2one, autocomplete fields
-        for (const f of document.querySelectorAll(".o_form_sheet .o_field_monetary, .o_form_sheet .o_field_float, .o_form_sheet .o_field_datetime, .o_form_sheet .o_field_date, .o_form_sheet .o_field_many2one, .o_form_sheet .o_field_char")) {
+        // Specific: monetary, float, date, many2one, autocomplete fields (NOT in x2many tables)
+        for (const f of document.querySelectorAll(".o_form_sheet .o_inner_group .o_field_monetary, .o_form_sheet .o_inner_group .o_field_float, .o_form_sheet .o_inner_group .o_field_datetime, .o_form_sheet .o_inner_group .o_field_date, .o_form_sheet .o_inner_group .o_field_many2one, .o_form_sheet .o_inner_group .o_field_char")) {
             if (f.dataset.baoFw) continue;
             f.style.setProperty("width", "100%", "important");
             for (const inp of f.querySelectorAll("input, .o-autocomplete, .o-autocomplete--input, .o_input_dropdown")) {
