@@ -1816,11 +1816,31 @@ td.o_field_x2many_list_row_add a {
     transform: translateY(-1px);
 }
 
-.o_form_view .o_field_x2many .o_field_many2one .o-autocomplete--input,
-.o_form_view .o_field_x2many .o_field_many2one input[role="combobox"] {
-    @include bao-field-surface;
-    color: $text-strong !important;
-    min-height: 38px;
+// RR78: x2many editable row — compact inputs with BAO habillage
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td input.o_input,
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td select.o_input,
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o-autocomplete--input,
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o_input,
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td input,
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td select {
+    background: $bao-surface-0 !important;
+    border: 1px solid $bao-border-200 !important;
+    border-radius: 4px !important;
+    padding: 2px 6px !important;
+    min-height: 30px !important;
+    height: 30px !important;
+    font-size: 0.85rem !important;
+    box-shadow: none !important;
+}
+
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o_field_many2one .o-autocomplete--input,
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o_field_many2one input {
+    background: $bao-surface-0 !important;
+    border: 1px solid $bao-border-200 !important;
+    border-radius: 4px !important;
+    color: $bao-text-800 !important;
+    min-height: 30px !important;
+    padding: 2px 6px !important;
 }
 
 .o_form_view .o_field_x2many .o-autocomplete--dropdown-menu,
