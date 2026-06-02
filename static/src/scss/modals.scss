@@ -79,83 +79,35 @@
     }
 }
 
-// RR76: Modal searchbar — white background, same style as main CP searchbar
-.modal .o_control_panel,
-.modal .o_control_panel.o_control_panel,
-.o_dialog .o_control_panel,
-.modal-dialog .o_control_panel,
-.modal-content .o_control_panel {
-    background: #ffffff !important;
-    background-image: none !important;
-    border: none !important;
-    padding: 8px 16px !important;
-    color: #303030 !important;
+// RR76: Modal searchbar — same size + toggle inline as CP non-form
+.modal .o_cp_searchview {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
 
     .o_searchview {
-        background: #ffffff !important;
-        border: 1px solid #ced4da !important;
-        border-radius: 4px !important;
         height: 38px !important;
         min-height: 38px !important;
         max-height: 38px !important;
-        box-shadow: none !important;
-        color: #303030 !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
+        padding: 0 8px !important;
+        border-right: none !important;
+        border-radius: 4px 0 0 4px !important;
+        font-size: 0.92rem !important;
     }
 
-    .o_searchview .o_searchview_input_container {
-        flex-wrap: nowrap !important;
-    }
-
-    .o_searchview .o_searchview_input {
-        color: #303030 !important;
-        background: transparent !important;
-    }
-
-    .o_searchview .o_searchview_facet {
-        background: #f1f1f1 !important;
-        border: 1px solid #ced4da !important;
-        border-radius: 6px !important;
-        color: #303030 !important;
-        font-size: 0.8rem !important;
+    > .o_searchview:only-child {
+        border-right: 1px solid currentColor !important;
+        border-radius: 4px !important;
     }
 
     .o_searchview_dropdown_toggler {
-        background: #ffffff !important;
-        border: 1px solid #ced4da !important;
+        height: 38px !important;
+        min-height: 38px !important;
+        min-width: 38px !important;
+        padding: 0 10px !important;
         border-left: none !important;
-        color: #303030 !important;
-    }
-
-    .o_cp_searchview {
-        background: transparent !important;
-    }
-
-    .o_control_panel_navigation {
-        color: #303030 !important;
-
-        .o_pager .o_pager_counter,
-        .o_pager button {
-            color: #303030 !important;
-        }
-
-        button {
-            color: #303030 !important;
-            border-color: #ced4da !important;
-        }
-    }
-
-    // All text inside modal CP must be dark
-    .o_control_panel_breadcrumbs,
-    .o_control_panel_actions,
-    .o_cp_buttons,
-    * {
-        color: #303030 !important;
-    }
-
-    .btn:not(.btn-primary):not(.btn-success):not(.btn-danger):not(.btn-warning) {
-        color: #303030 !important;
+        border-radius: 0 4px 4px 0 !important;
     }
 }
 
