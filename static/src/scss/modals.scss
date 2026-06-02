@@ -79,14 +79,31 @@
     }
 }
 
-// RR76: Modal searchbar — inline toggle, 38px height, no modal degradation
-.modal .o_control_panel_actions,
+// RR76: Modal searchbar — centered, inline toggle, 38px, same as CP non-form
+.modal .o_control_panel .o_control_panel_main {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
+    align-items: center !important;
+    column-gap: 8px !important;
+}
+
+.modal .o_control_panel .o_control_panel_breadcrumbs {
+    justify-self: start !important;
+}
+
+.modal .o_control_panel .o_control_panel_actions {
+    justify-self: center !important;
+}
+
+.modal .o_control_panel .o_control_panel_navigation {
+    justify-self: end !important;
+}
+
 .modal .o_cp_searchview {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: center !important;
-    justify-content: center !important;
 }
 
 .modal .o_cp_searchview .o_searchview {
