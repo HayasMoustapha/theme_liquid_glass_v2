@@ -4,11 +4,22 @@ import { whenReady } from "@odoo/owl";
 whenReady(() => {
     const observer = new MutationObserver(() => {
         // Searchbar: overflow-x auto + max-height 42px
+        const isMobileView = window.innerWidth <= 768;
         for (const sv of document.querySelectorAll(".o_searchview")) {
             if (sv.dataset.baoPatched) continue;
             sv.style.setProperty("max-height", "42px", "important");
             sv.style.setProperty("overflow-x", "auto", "important");
             sv.style.setProperty("overflow-y", "hidden", "important");
+            // Mobile: unify border-radius with toggle
+            if (isMobileView) {
+                const toggle = sv.parentElement && sv.parentElement.querySelector(".o_searchview_dropdown_toggler");
+                if (toggle) {
+                    sv.style.setProperty("border-radius", "4px 0 0 4px", "important");
+                    sv.style.setProperty("border-right", "none", "important");
+                    toggle.style.setProperty("border-radius", "0 4px 4px 0", "important");
+                    toggle.style.setProperty("border-left", "none", "important");
+                }
+            }
             sv.dataset.baoPatched = "1";
         }
 
@@ -58,6 +69,20 @@ whenReady(() => {
                 flex.style.setProperty("width", "100%", "important");
             }
             f.dataset.baoFw = "1";
+        }
+
+        // x2many editable row: compact padding + inputs
+        for (const td of document.querySelectorAll(".o_selected_row td")) {
+            if (td.dataset.baoTd) continue;
+            td.style.setProperty("padding", "4px 6px", "important");
+            for (const inp of td.querySelectorAll("input, select, .o-autocomplete--input, .o_input")) {
+                inp.style.setProperty("height", "28px", "important");
+                inp.style.setProperty("min-height", "28px", "important");
+                inp.style.setProperty("padding", "2px 6px", "important");
+                inp.style.setProperty("border-radius", "4px", "important");
+                inp.style.setProperty("font-size", "0.85rem", "important");
+            }
+            td.dataset.baoTd = "1";
         }
 
         // x2many list tables: full width

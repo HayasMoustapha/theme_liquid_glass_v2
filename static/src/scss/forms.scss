@@ -1816,7 +1816,11 @@ td.o_field_x2many_list_row_add a {
     transform: translateY(-1px);
 }
 
-// RR78: x2many editable row — compact inputs with BAO habillage
+// RR78: x2many editable row — compact padding, more space for inputs
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td {
+    padding: 4px 6px !important;
+}
+
 .o_form_view .o_field_x2many .o_list_renderer .o_selected_row td input.o_input,
 .o_form_view .o_field_x2many .o_list_renderer .o_selected_row td select.o_input,
 .o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o-autocomplete--input,
@@ -1827,10 +1831,11 @@ td.o_field_x2many_list_row_add a {
     border: 1px solid $bao-border-200 !important;
     border-radius: 4px !important;
     padding: 2px 6px !important;
-    min-height: 30px !important;
-    height: 30px !important;
+    min-height: 28px !important;
+    height: 28px !important;
     font-size: 0.85rem !important;
     box-shadow: none !important;
+    width: 100% !important;
 }
 
 .o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o_field_many2one .o-autocomplete--input,
@@ -1839,8 +1844,9 @@ td.o_field_x2many_list_row_add a {
     border: 1px solid $bao-border-200 !important;
     border-radius: 4px !important;
     color: $bao-text-800 !important;
-    min-height: 30px !important;
+    min-height: 28px !important;
     padding: 2px 6px !important;
+    min-width: 140px !important;
 }
 
 .o_form_view .o_field_x2many .o-autocomplete--dropdown-menu,
