@@ -246,6 +246,30 @@ table {
     color: rgba(255, 255, 255, 0.72) !important;
 }
 
+// RR77: Mobile — unify search + filter toggle (no separation)
+@media (max-width: 767.98px) {
+    .o_cp_searchview {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+    }
+
+    .o_cp_searchview .o_searchview {
+        border-radius: var(--bs-border-radius, 4px) 0 0 var(--bs-border-radius, 4px) !important;
+        border-right: none !important;
+    }
+
+    .o_cp_searchview .o_searchview_dropdown_toggler {
+        border-radius: 0 var(--bs-border-radius, 4px) var(--bs-border-radius, 4px) 0 !important;
+        border: 1px solid $bao-border-200 !important;
+        border-left: none !important;
+        background: $bao-surface-0 !important;
+        color: $bao-text-600 !important;
+        min-height: 38px !important;
+        height: 38px !important;
+    }
+}
+
 .o_control_panel {
     border: none !important;
     background: $bao-brand-600 !important;
