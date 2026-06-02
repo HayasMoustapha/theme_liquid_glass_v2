@@ -1816,35 +1816,13 @@ td.o_field_x2many_list_row_add a {
     transform: translateY(-1px);
 }
 
-// RR78: x2many editable row — compact padding, more space for inputs
-.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td {
-    padding: 4px 6px !important;
-}
-
-.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td input.o_input:not([type="checkbox"]):not([type="radio"]),
-.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td select.o_input,
-.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o-autocomplete--input,
-.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o_input:not(.form-check-input),
+// RR80: x2many editable row — only BAO habillage, keep native Odoo sizing
 .o_form_view .o_field_x2many .o_list_renderer .o_selected_row td input:not([type="checkbox"]):not([type="radio"]),
-.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td select {
-    background: $bao-surface-0 !important;
-    border: 1px solid $bao-border-200 !important;
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td select,
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o-autocomplete--input,
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o_input:not(.form-check-input) {
     border-radius: 4px !important;
-    padding: 2px 4px !important;
-    font-size: 0.82rem !important;
     box-shadow: none !important;
-    width: 100% !important;
-}
-
-.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o_field_many2one .o-autocomplete--input,
-.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o_field_many2one input {
-    background: $bao-surface-0 !important;
-    border: 1px solid $bao-border-200 !important;
-    border-radius: 4px !important;
-    color: $bao-text-800 !important;
-    min-height: 28px !important;
-    padding: 2px 6px !important;
-    min-width: 140px !important;
 }
 
 .o_form_view .o_field_x2many .o-autocomplete--dropdown-menu,

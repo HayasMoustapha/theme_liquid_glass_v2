@@ -71,14 +71,11 @@ whenReady(() => {
             f.dataset.baoFw = "1";
         }
 
-        // x2many editable row: compact but flexible (exclude checkbox/radio)
+        // x2many editable row: only cosmetic (border-radius) — keep native Odoo sizing
         for (const td of document.querySelectorAll(".o_selected_row td")) {
             if (td.dataset.baoTd) continue;
-            td.style.setProperty("padding", "4px 4px", "important");
             for (const inp of td.querySelectorAll("input:not([type=checkbox]):not([type=radio]), select, .o-autocomplete--input, .o_input:not(.form-check-input)")) {
-                inp.style.setProperty("padding", "2px 4px", "important");
                 inp.style.setProperty("border-radius", "4px", "important");
-                inp.style.setProperty("font-size", "0.82rem", "important");
             }
             td.dataset.baoTd = "1";
         }
