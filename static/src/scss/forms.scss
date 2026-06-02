@@ -6242,7 +6242,37 @@ td.o_field_x2many_list_row_add a {
     }
 
     .oe_title h1, .oe_title h1 textarea {
-        font-size: 1.4rem !important;
+        font-size: 1.2rem !important;
+        line-height: 1.3 !important;
+    }
+
+    // RR75: Mobile favorite icon — fit-content, not 100%
+    .o_favorite {
+        width: fit-content !important;
+        flex: 0 0 auto !important;
+    }
+
+    .oe_title {
+        font-size: 0.9rem !important;
+    }
+
+    // Reduce spacing and font sizes on mobile
+    .o_form_sheet .o_group {
+        row-gap: 4px !important;
+    }
+
+    .o_form_sheet .o_cell label,
+    .o_form_sheet .o_wrap_label label {
+        font-size: 0.82rem !important;
+    }
+
+    .o_form_statusbar {
+        padding: 0 0 4px !important;
+        gap: 0 4px !important;
+    }
+
+    .o_control_panel {
+        padding: 4px 8px !important;
     }
 }
 

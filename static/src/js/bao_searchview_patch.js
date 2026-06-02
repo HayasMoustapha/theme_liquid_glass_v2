@@ -40,12 +40,16 @@ whenReady(() => {
             }
             fw.dataset.baoFw = "1";
         }
-        // Specific: monetary, float, date fields
-        for (const f of document.querySelectorAll(".o_form_sheet .o_field_monetary, .o_form_sheet .o_field_float, .o_form_sheet .o_field_datetime, .o_form_sheet .o_field_date")) {
+        // Specific: monetary, float, date, many2one, autocomplete fields
+        for (const f of document.querySelectorAll(".o_form_sheet .o_field_monetary, .o_form_sheet .o_field_float, .o_form_sheet .o_field_datetime, .o_form_sheet .o_field_date, .o_form_sheet .o_field_many2one, .o_form_sheet .o_field_char")) {
             if (f.dataset.baoFw) continue;
             f.style.setProperty("width", "100%", "important");
-            for (const inp of f.querySelectorAll("input")) {
+            for (const inp of f.querySelectorAll("input, .o-autocomplete, .o-autocomplete--input, .o_input_dropdown")) {
                 inp.style.setProperty("width", "100%", "important");
+            }
+            // Flex containers inside
+            for (const flex of f.querySelectorAll(".d-flex, .o_input_dropdown")) {
+                flex.style.setProperty("width", "100%", "important");
             }
             f.dataset.baoFw = "1";
         }

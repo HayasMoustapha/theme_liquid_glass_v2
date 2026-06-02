@@ -153,6 +153,9 @@ class ResConfigSettings(models.TransientModel):
             "domain": [("config_id", "=", config.id)],
             "context": {"default_config_id": config.id},
             "target": "current",
+            "help": "<p class='o_view_nocontent_smiling_face'>Create a component color override</p>"
+                    "<p>Override colors for specific UI components. "
+                    "Empty fields inherit from the family or global theme.</p>",
         }
 
     def action_open_bao_module_overrides(self):
@@ -165,6 +168,9 @@ class ResConfigSettings(models.TransientModel):
             "domain": [("config_id", "=", config.id)],
             "context": {"default_config_id": config.id},
             "target": "current",
+            "help": "<p class='o_view_nocontent_smiling_face'>Create a module color override</p>"
+                    "<p>Configure specific colors for individual Odoo modules. "
+                    "Empty color fields inherit the global BAO theme values.</p>",
         }
 
     def action_reset_bao_theme_global(self):
