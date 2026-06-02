@@ -71,16 +71,14 @@ whenReady(() => {
             f.dataset.baoFw = "1";
         }
 
-        // x2many editable row: compact padding + inputs (exclude checkbox/radio)
+        // x2many editable row: compact but flexible (exclude checkbox/radio)
         for (const td of document.querySelectorAll(".o_selected_row td")) {
             if (td.dataset.baoTd) continue;
-            td.style.setProperty("padding", "4px 6px", "important");
+            td.style.setProperty("padding", "4px 4px", "important");
             for (const inp of td.querySelectorAll("input:not([type=checkbox]):not([type=radio]), select, .o-autocomplete--input, .o_input:not(.form-check-input)")) {
-                inp.style.setProperty("height", "28px", "important");
-                inp.style.setProperty("min-height", "28px", "important");
-                inp.style.setProperty("padding", "2px 6px", "important");
+                inp.style.setProperty("padding", "2px 4px", "important");
                 inp.style.setProperty("border-radius", "4px", "important");
-                inp.style.setProperty("font-size", "0.85rem", "important");
+                inp.style.setProperty("font-size", "0.82rem", "important");
             }
             td.dataset.baoTd = "1";
         }
@@ -90,6 +88,22 @@ whenReady(() => {
             if (table.dataset.baoWidth) continue;
             table.style.setProperty("width", "100%", "important");
             table.dataset.baoWidth = "1";
+        }
+
+        // Accounting dashboard: bank/cash card buttons — wrap properly
+        for (const container of document.querySelectorAll(".o_account_dashboard_kanban_view .o_kanban_record .d-flex, .o_kanban_dashboard .o_kanban_record .d-flex")) {
+            if (container.dataset.baoBtnWrap) continue;
+            const btns = container.querySelectorAll(".btn");
+            if (btns.length >= 2) {
+                container.style.setProperty("flex-wrap", "wrap", "important");
+                container.style.setProperty("gap", "4px", "important");
+                for (const btn of btns) {
+                    btn.style.setProperty("white-space", "nowrap", "important");
+                    btn.style.setProperty("font-size", "0.82rem", "important");
+                    btn.style.setProperty("padding", "6px 10px", "important");
+                }
+                container.dataset.baoBtnWrap = "1";
+            }
         }
 
         // App launcher styling

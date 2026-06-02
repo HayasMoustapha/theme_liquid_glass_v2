@@ -209,6 +209,23 @@
     gap: 3px;
 }
 
+// RR79: Accounting dashboard — bank/cash card buttons wrap properly
+.o_account_dashboard_kanban_view .o_kanban_record .d-flex:has(> .btn),
+.o_kanban_dashboard .o_kanban_record .d-flex:has(> .btn) {
+    flex-flow: row wrap !important;
+    gap: 4px !important;
+    align-items: center !important;
+}
+
+.o_account_dashboard_kanban_view .o_kanban_record .btn,
+.o_kanban_dashboard .o_kanban_record .btn {
+    white-space: nowrap !important;
+    font-size: 0.82rem !important;
+    padding: 6px 12px !important;
+    min-height: 34px !important;
+    height: auto !important;
+}
+
 .o_kanban_renderer .o_kanban_record .badge.rounded-pill,
 .o_kanban_renderer .o_kanban_record .o_tag {
     min-height: 1.3rem;
