@@ -34,6 +34,12 @@ whenReady(() => {
             if (fw.dataset.baoFw) continue;
             fw.style.setProperty("width", "100%", "important");
             fw.style.setProperty("max-width", "100%", "important");
+            // Direct child divs (d-flex or not) — force 100% width
+            for (const div of fw.querySelectorAll(":scope > div, :scope > span > div")) {
+                if (!div.querySelector("input[type=checkbox], input[type=radio], .o-checkbox")) {
+                    div.style.setProperty("width", "100%", "important");
+                }
+            }
             // Inputs inside the widget
             for (const inp of fw.querySelectorAll("input:not([type=checkbox]):not([type=radio]), select, .o-autocomplete, .o-autocomplete--input, .o_input")) {
                 inp.style.setProperty("width", "100%", "important");
