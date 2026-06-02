@@ -71,11 +71,15 @@ whenReady(() => {
             f.dataset.baoFw = "1";
         }
 
-        // x2many editable row: only cosmetic (border-radius) — keep native Odoo sizing
+        // x2many editable row: cosmetic + min-width on autocomplete columns
         for (const td of document.querySelectorAll(".o_selected_row td")) {
             if (td.dataset.baoTd) continue;
             for (const inp of td.querySelectorAll("input:not([type=checkbox]):not([type=radio]), select, .o-autocomplete--input, .o_input:not(.form-check-input)")) {
                 inp.style.setProperty("border-radius", "4px", "important");
+            }
+            // Ensure autocomplete/many2one columns have enough width
+            if (td.querySelector(".o-autocomplete, .o_field_many2one, .o_field_many2many_tags")) {
+                td.style.setProperty("min-width", "150px", "important");
             }
             td.dataset.baoTd = "1";
         }

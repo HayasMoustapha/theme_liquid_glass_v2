@@ -1825,9 +1825,11 @@ td.o_field_x2many_list_row_add a {
     box-shadow: none !important;
 }
 
-// RR80: Autocomplete many2one in x2many — ensure minimum usable width
-.o_form_view .o_field_x2many .o_list_renderer td:has(.o_field_many2one) {
-    min-width: 140px !important;
+// RR80: Autocomplete fields in x2many — ensure minimum usable width
+.o_form_view .o_field_x2many .o_list_renderer td:has(.o_field_many2one),
+.o_form_view .o_field_x2many .o_list_renderer td:has(.o_field_many2many_tags),
+.o_form_view .o_field_x2many .o_list_renderer td:has(.o-autocomplete) {
+    min-width: 150px !important;
 }
 
 .o_form_view .o_field_x2many .o_list_renderer td .o-autocomplete {
