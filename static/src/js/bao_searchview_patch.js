@@ -71,11 +71,11 @@ whenReady(() => {
             f.dataset.baoFw = "1";
         }
 
-        // x2many editable row: compact padding + inputs
+        // x2many editable row: compact padding + inputs (exclude checkbox/radio)
         for (const td of document.querySelectorAll(".o_selected_row td")) {
             if (td.dataset.baoTd) continue;
             td.style.setProperty("padding", "4px 6px", "important");
-            for (const inp of td.querySelectorAll("input, select, .o-autocomplete--input, .o_input")) {
+            for (const inp of td.querySelectorAll("input:not([type=checkbox]):not([type=radio]), select, .o-autocomplete--input, .o_input:not(.form-check-input)")) {
                 inp.style.setProperty("height", "28px", "important");
                 inp.style.setProperty("min-height", "28px", "important");
                 inp.style.setProperty("padding", "2px 6px", "important");

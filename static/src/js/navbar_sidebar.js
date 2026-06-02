@@ -1872,7 +1872,16 @@ patch(NavBar.prototype, {
     },
 
     _onLauncherAppClick(app) {
+        // Cover the action manager to prevent flash to previous view
+        const am = document.querySelector(".o_action_manager");
+        if (am) {
+            am.style.setProperty("visibility", "hidden", "important");
+        }
         this.onNavBarDropdownItemSelection(app);
         this.closeEnterpriseLauncher();
+        // Restore visibility after navigation completes
+        setTimeout(() => {
+            if (am) am.style.removeProperty("visibility");
+        }, 2000);
     },
 });

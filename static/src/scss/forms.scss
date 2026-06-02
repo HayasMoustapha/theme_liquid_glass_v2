@@ -1821,11 +1821,11 @@ td.o_field_x2many_list_row_add a {
     padding: 4px 6px !important;
 }
 
-.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td input.o_input,
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td input.o_input:not([type="checkbox"]):not([type="radio"]),
 .o_form_view .o_field_x2many .o_list_renderer .o_selected_row td select.o_input,
 .o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o-autocomplete--input,
-.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o_input,
-.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td input,
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td .o_input:not(.form-check-input),
+.o_form_view .o_field_x2many .o_list_renderer .o_selected_row td input:not([type="checkbox"]):not([type="radio"]),
 .o_form_view .o_field_x2many .o_list_renderer .o_selected_row td select {
     background: $bao-surface-0 !important;
     border: 1px solid $bao-border-200 !important;
