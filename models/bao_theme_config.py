@@ -369,6 +369,11 @@ class BaoThemeConfig(models.Model):
             override = self._find_component_override(component_key)
             if override:
                 rules.append(self._render_css_rule(selector, self.resolve_css_variables(component_key=component_key)))
+        # Module-specific overrides
+        module_css = self.env["bao.theme.module.override"]._generate_module_css()
+        if module_css:
+            rules.append("/* Module-specific overrides */")
+            rules.append(module_css)
         return "\n\n".join(rule for rule in rules if rule) + "\n"
 
     @api.model

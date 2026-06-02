@@ -38,6 +38,7 @@
         'data/bao_theme_preset.xml',
         'views/bao_theme_config_views.xml',
         'views/res_config_settings_views.xml',
+        'views/bao_theme_module_override_views.xml',
         'views/runtime_templates.xml',
         'data/theme_app_menu.xml',
         'views/bao_theme_rh01_fixture_views.xml',

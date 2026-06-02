@@ -1280,6 +1280,7 @@
     flex: 1 1 auto !important;
 }
 
+
 // RR70: Composite cells (Prix de vente, monetary, float)
 .o_form_sheet .o_cell:not(.o_wrap_label) > .o_field_monetary,
 .o_form_sheet .o_cell:not(.o_wrap_label) > .o_field_float,
@@ -1290,6 +1291,15 @@
     align-items: center !important;
     width: 100% !important;
 }
+
+.o_form_sheet .o_inner_group .o_field_widget .o_field_float {
+    width: 100% !important;
+
+    .o_input {
+        width: 100% !important;
+    }
+}
+
 
 // RR70: Note/HTML editors — visible, wide, flexible
 .o_form_view .o_field_html,
@@ -6216,6 +6226,19 @@ td.o_field_x2many_list_row_add a {
     .o_web_client .o-dropdown--menu .o-dropdown-item-unstyled-button > button,
     .o_web_client .dropdown-menu .o-dropdown-item-unstyled-button > button {
         max-width: 100vw !important;
+    }
+
+    // RR72: Mobile — labels above fields, single column
+    .o_form_sheet .o_inner_group {
+        grid-template-columns: 1fr !important;
+    }
+
+    .o_form_sheet .o_wrap_label {
+        min-height: auto !important;
+    }
+
+    .oe_title h1, .oe_title h1 textarea {
+        font-size: 1.4rem !important;
     }
 }
 

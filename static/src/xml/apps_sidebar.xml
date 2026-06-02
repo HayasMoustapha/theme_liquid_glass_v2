@@ -3,13 +3,17 @@
 
     <t t-inherit="web.NavBar" t-inherit-mode="extension">
         <xpath expr="//header" position="after">
-            <div t-if="enterpriseLauncherState.isOpen and !env.isSmall and !isScopedApp"
+            <div t-if="enterpriseLauncherState.isOpen and !isScopedApp"
                  id="o_enterprise_app_launcher"
                  class="o_enterprise_app_launcher"
                  role="dialog"
                  aria-modal="false"
                  aria-label="Applications"
                  t-on-click.self="closeEnterpriseLauncher">
+                <button class="o_enterprise_app_launcher_close" t-on-click="closeEnterpriseLauncher"
+                        aria-label="Close" title="Close">
+                    <i class="oi oi-close"/>
+                </button>
                 <div class="o_enterprise_app_launcher_grid" role="menu" aria-label="Applications">
                     <t t-foreach="menuService.getApps()" t-as="app" t-key="app.id">
                         <a t-att-href="getMenuItemHref(app)"
@@ -18,7 +22,7 @@
                            t-att-title="app.name"
                            role="menuitem"
                            t-att-class="{ 'o_app': true, 'o_enterprise_app_launcher_item': true, focus: menuService.getCurrentApp() === app }"
-                           t-on-click.prevent="() => { this.onNavBarDropdownItemSelection(app); setTimeout(() => this.closeEnterpriseLauncher(), 300); }">
+                           t-on-click.prevent="() => { this.closeEnterpriseLauncher(); this.onNavBarDropdownItemSelection(app); }">
                             <span class="o_enterprise_app_launcher_icon">
                                 <t t-if="app.webIconData">
                                     <img t-attf-src="{{app.webIconData}}"
