@@ -146,22 +146,19 @@ whenReady(() => {
 
     observer.observe(document.body, { childList: true, subtree: true });
 
-    // Force-close launcher on navigation
+    // Restore navbar when launcher is not visible (OWL manages the DOM)
     let _lastUrl = window.location.href;
     setInterval(() => {
         if (window.location.href !== _lastUrl) {
             _lastUrl = window.location.href;
-            const launcher = document.querySelector(".o_enterprise_app_launcher");
-            if (launcher) {
-                launcher.remove();
-                const navbar = document.querySelector(".o_main_navbar");
-                if (navbar) {
-                    navbar.style.removeProperty("opacity");
-                    navbar.style.removeProperty("pointer-events");
-                }
+            // Just restore navbar — never touch OWL-managed DOM
+            const navbar = document.querySelector(".o_main_navbar");
+            if (navbar && navbar.style.opacity === "0") {
+                navbar.style.removeProperty("opacity");
+                navbar.style.removeProperty("pointer-events");
             }
         }
-    }, 200);
+    }, 500);
 
     // Module-specific theme overrides — apply CSS vars based on current URL
     let _moduleOverrides = null;
@@ -177,6 +174,30 @@ whenReady(() => {
     }
 
     function detectCurrentModule() {
+        // Primary: use the menu brand text in the navbar (most reliable)
+        const brand = document.querySelector(".o_menu_brand");
+        if (brand) {
+            const brandText = brand.textContent.trim().toLowerCase();
+            const brandMap = {
+                "achats": "purchase", "purchase": "purchase",
+                "ventes": "sale", "sales": "sale",
+                "inventaire": "stock", "inventory": "stock",
+                "fabrication": "mrp", "manufacturing": "mrp",
+                "crm": "crm", "pipeline": "crm",
+                "contacts": "contacts",
+                "employés": "hr", "employees": "hr",
+                "facturation": "account", "accounting": "account",
+                "point de vente": "point_of_sale", "point of sale": "point_of_sale",
+                "calendrier": "calendar", "calendar": "calendar",
+                "discussion": "mail", "discuss": "mail",
+                "sondages": "survey", "surveys": "survey",
+                "e-mail marketing": "mass_mailing", "email marketing": "mass_mailing",
+            };
+            for (const [key, mod] of Object.entries(brandMap)) {
+                if (brandText.includes(key)) return mod;
+            }
+        }
+        // Fallback: URL path
         const url = window.location.pathname;
         const moduleMap = {
             "/odoo/purchase": "purchase",

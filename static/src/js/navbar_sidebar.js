@@ -1870,4 +1870,9 @@ patch(NavBar.prototype, {
     closeEnterpriseLauncher() {
         this.enterpriseLauncherState.isOpen = false;
     },
+
+    _onLauncherAppClick(app) {
+        this.onNavBarDropdownItemSelection(app);
+        this.closeEnterpriseLauncher();
+    },
 });
