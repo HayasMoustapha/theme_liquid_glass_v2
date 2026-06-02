@@ -14,15 +14,15 @@
                             <div class="content-group">
                                 <div class="row mt8">
                                     <label for="bao_color_primary" class="col-lg-4 o_light_label"/>
-                                    <field name="bao_color_primary" placeholder="#1357a0"/>
+                                    <field name="bao_color_primary" widget="color" placeholder="#1357a0"/>
                                 </div>
                                 <div class="row mt8">
                                     <label for="bao_color_primary_dark" class="col-lg-4 o_light_label"/>
-                                    <field name="bao_color_primary_dark" placeholder="#0f4e92"/>
+                                    <field name="bao_color_primary_dark" widget="color" placeholder="#0f4e92"/>
                                 </div>
                                 <div class="row mt8">
                                     <label for="bao_color_accent" class="col-lg-4 o_light_label"/>
-                                    <field name="bao_color_accent" placeholder="#fde900"/>
+                                    <field name="bao_color_accent" widget="color" placeholder="#fde900"/>
                                 </div>
                             </div>
                         </setting>
@@ -30,19 +30,19 @@
                             <div class="content-group">
                                 <div class="row mt8">
                                     <label for="bao_bg_app" class="col-lg-4 o_light_label"/>
-                                    <field name="bao_bg_app" placeholder="#f9f9f9"/>
+                                    <field name="bao_bg_app" widget="color" placeholder="#f9f9f9"/>
                                 </div>
                                 <div class="row mt8">
                                     <label for="bao_surface_base" class="col-lg-4 o_light_label"/>
-                                    <field name="bao_surface_base" placeholder="#ffffff"/>
+                                    <field name="bao_surface_base" widget="color" placeholder="#ffffff"/>
                                 </div>
                                 <div class="row mt8">
                                     <label for="bao_surface_raised" class="col-lg-4 o_light_label"/>
-                                    <field name="bao_surface_raised" placeholder="#e5e5e5"/>
+                                    <field name="bao_surface_raised" widget="color" placeholder="#e5e5e5"/>
                                 </div>
                                 <div class="row mt8">
                                     <label for="bao_border_default" class="col-lg-4 o_light_label"/>
-                                    <field name="bao_border_default" placeholder="#c9c9c9"/>
+                                    <field name="bao_border_default" widget="color" placeholder="#c9c9c9"/>
                                 </div>
                             </div>
                         </setting>
@@ -50,15 +50,15 @@
                             <div class="content-group">
                                 <div class="row mt8">
                                     <label for="bao_text_primary" class="col-lg-4 o_light_label"/>
-                                    <field name="bao_text_primary" placeholder="#303030"/>
+                                    <field name="bao_text_primary" widget="color" placeholder="#303030"/>
                                 </div>
                                 <div class="row mt8">
                                     <label for="bao_text_secondary" class="col-lg-4 o_light_label"/>
-                                    <field name="bao_text_secondary" placeholder="#3f3f3f"/>
+                                    <field name="bao_text_secondary" widget="color" placeholder="#3f3f3f"/>
                                 </div>
                                 <div class="row mt8">
                                     <label for="bao_text_muted" class="col-lg-4 o_light_label"/>
-                                    <field name="bao_text_muted" placeholder="#8a8a8a"/>
+                                    <field name="bao_text_muted" widget="color" placeholder="#8a8a8a"/>
                                 </div>
                             </div>
                         </setting>
