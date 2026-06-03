@@ -1251,6 +1251,14 @@
     margin-bottom: 0 !important;
 }
 
+// RR81: ALL field widget children (spans, divs) take full width
+.o_form_sheet .o_inner_group .o_field_widget:not(.o_field_boolean) > span,
+.o_form_sheet .o_inner_group .o_field_widget:not(.o_field_boolean) > div:not(:has(input[type="checkbox"])) {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
 // RR70: ALL field cells take 100% width — no exception
 .o_form_sheet .o_inner_group > .o_cell:not(.o_wrap_label),
 .o_form_sheet .o_inner_group > .o_cell_custom:not(.o_wrap_label),

@@ -42,20 +42,17 @@ whenReady(() => {
         // Targeted field widgets: 100% width (exclude checkboxes, radios, booleans)
         const SKIP = ".o_field_boolean, .o-checkbox, [type=checkbox], [type=radio], .o_field_selection_badge";
         for (const fw of document.querySelectorAll(".o_form_sheet .o_cell:not(.o_wrap_label) > .o_field_widget:not(" + SKIP + ")")) {
-            if (fw.dataset.baoFw) continue;
             fw.style.setProperty("width", "100%", "important");
             fw.style.setProperty("max-width", "100%", "important");
-            // Direct child divs (d-flex or not) — force 100% width
-            for (const div of fw.querySelectorAll(":scope > div, :scope > span > div")) {
-                if (!div.querySelector("input[type=checkbox], input[type=radio], .o-checkbox")) {
-                    div.style.setProperty("width", "100%", "important");
-                }
+            // Direct child divs AND spans — always re-apply (OWL may re-render children)
+            for (const child of fw.querySelectorAll(":scope > div, :scope > span, :scope > span > div")) {
+                if (child.querySelector("input[type=checkbox], input[type=radio], .o-checkbox")) continue;
+                if (child.style.width !== "100%") child.style.setProperty("width", "100%", "important");
             }
             // Inputs inside the widget
             for (const inp of fw.querySelectorAll("input:not([type=checkbox]):not([type=radio]), select, .o-autocomplete, .o-autocomplete--input, .o_input")) {
-                inp.style.setProperty("width", "100%", "important");
+                if (inp.style.width !== "100%") inp.style.setProperty("width", "100%", "important");
             }
-            fw.dataset.baoFw = "1";
         }
         // Specific: monetary, float, date, many2one, autocomplete fields (NOT in x2many tables)
         for (const f of document.querySelectorAll(".o_form_sheet .o_inner_group .o_field_monetary, .o_form_sheet .o_inner_group .o_field_float, .o_form_sheet .o_inner_group .o_field_datetime, .o_form_sheet .o_inner_group .o_field_date, .o_form_sheet .o_inner_group .o_field_many2one, .o_form_sheet .o_inner_group .o_field_char")) {
