@@ -8766,7 +8766,7 @@ body:has(#o_enterprise_app_launcher) .o_main_navbar {
 .o_web_client .o_action_manager
     .o_control_panel:not(.o_bao_form_control_panel)
     .o_searchview .o_facet_values {
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
     min-width: 0 !important;
     max-width: 100% !important;
     height: auto !important;
