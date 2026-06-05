@@ -1809,7 +1809,7 @@ patch(NavBar.prototype, {
         super.setup();
         this.ui = useService("ui");
         this.baoRenderedViewportSize = getViewportSize();
-        this.enterpriseLauncherState = useState({ isOpen: false });
+        this.enterpriseLauncherState = useState({ isOpen: false, isNavigating: false });
         window.__baoNativeNavbarAdapt = () => this.adapt?.();
         onMounted(() => {
             syncTopbarReadableLabels(document);
@@ -1871,17 +1871,23 @@ patch(NavBar.prototype, {
         this.enterpriseLauncherState.isOpen = false;
     },
 
-    _onLauncherAppClick(app) {
-        // Cover the action manager to prevent flash to previous view
-        const am = document.querySelector(".o_action_manager");
-        if (am) {
-            am.style.setProperty("visibility", "hidden", "important");
+    async _onLauncherAppClick(app) {
+        // Screen-owning launcher: the full-screen overlay keeps covering the view
+        // while the native action loads, then closes to reveal the already-mounted
+        // target. No visibility/opacity hacks and no blind timer — the transition
+        // is owned by the native action service (Enterprise-like home-menu behavior).
+        if (!app) {
+            return;
         }
-        this.onNavBarDropdownItemSelection(app);
-        this.closeEnterpriseLauncher();
-        // Restore visibility after navigation completes
-        setTimeout(() => {
-            if (am) am.style.removeProperty("visibility");
-        }, 2000);
+        this.enterpriseLauncherState.isNavigating = true;
+        // Defensive guard: never leave the overlay stuck if navigation never settles.
+        const guard = window.setTimeout(() => this.closeEnterpriseLauncher(), 10000);
+        try {
+            await this.menuService.selectMenu(app);
+        } finally {
+            window.clearTimeout(guard);
+            this.enterpriseLauncherState.isNavigating = false;
+            this.closeEnterpriseLauncher();
+        }
     },
 });

@@ -118,12 +118,9 @@ whenReady(() => {
             launcher.style.setProperty("background", "linear-gradient(135deg, " + surface100 + ", " + surface200 + ", " + surface100 + ")", "important");
             launcher.style.setProperty("color", textColor, "important");
             launcher.style.setProperty("padding", "40px", "important");
-
-            const navbar = document.querySelector(".o_main_navbar");
-            if (navbar) {
-                navbar.style.setProperty("opacity", "0", "important");
-                navbar.style.setProperty("pointer-events", "none", "important");
-            }
+            // NOTE: the overlay is position:fixed inset:0 z-index:10000, so it already
+            // covers the navbar. No navbar opacity/pointer-events manipulation is needed
+            // (removing it kills the old open/close race that left navigation residue).
 
             // Close button
             const closeBtn = launcher.querySelector(".o_enterprise_app_launcher_close");
@@ -185,32 +182,9 @@ whenReady(() => {
 
             launcher.dataset.baoLauncher = "1";
         }
-
-        // Restore navbar when launcher closes
-        if (!document.querySelector(".o_enterprise_app_launcher")) {
-            const navbar = document.querySelector(".o_main_navbar");
-            if (navbar && navbar.style.opacity === "0") {
-                navbar.style.removeProperty("opacity");
-                navbar.style.removeProperty("pointer-events");
-            }
-        }
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
-
-    // Restore navbar when launcher is not visible (OWL manages the DOM)
-    let _lastUrl = window.location.href;
-    setInterval(() => {
-        if (window.location.href !== _lastUrl) {
-            _lastUrl = window.location.href;
-            // Just restore navbar — never touch OWL-managed DOM
-            const navbar = document.querySelector(".o_main_navbar");
-            if (navbar && navbar.style.opacity === "0") {
-                navbar.style.removeProperty("opacity");
-                navbar.style.removeProperty("pointer-events");
-            }
-        }
-    }, 500);
 
     // Module-specific theme overrides — apply CSS vars based on current URL
     let _moduleOverrides = null;
