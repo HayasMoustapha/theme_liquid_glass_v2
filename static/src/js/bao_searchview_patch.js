@@ -40,7 +40,9 @@ whenReady(() => {
         }
 
         // Targeted field widgets: 100% width (exclude checkboxes, radios, booleans)
-        const SKIP = ".o_field_boolean, .o-checkbox, [type=checkbox], [type=radio], .o_field_selection_badge";
+        // RR85: also skip the HR org chart — it owns its horizontal layout and the
+        // width:100% squeeze collapsed entry names to one character per line.
+        const SKIP = ".o_field_boolean, .o-checkbox, [type=checkbox], [type=radio], .o_field_selection_badge, .o_field_hr_org_chart";
         for (const fw of document.querySelectorAll(".o_form_sheet .o_cell:not(.o_wrap_label) > .o_field_widget:not(" + SKIP + ")")) {
             fw.style.setProperty("width", "100%", "important");
             fw.style.setProperty("max-width", "100%", "important");

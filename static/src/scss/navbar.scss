@@ -9457,6 +9457,27 @@ body.o_web_client.o_web_client
     display: none !important;
 }
 
+/* ================================================================
+   RR85 — Statusbar first-paint flash mitigation (FINAL AUTHORITY).
+   The stage flow rendered late (0 -> N buttons) and wrapped onto a
+   second line for a frame before Odoo measured widths and collapsed
+   overflow into the dropdown -> visible "degraded then settle" flash.
+   Reserve the final height and force a single line so only the native
+   overflow->dropdown swap happens (no layout jump / multi-line wrap).
+   Doubled classes match the highest existing statusbar specificity.
+   ================================================================ */
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager:has(.o_form_view)
+    .o_form_view .o_form_statusbar {
+    min-height: 44px !important;
+}
+body.o_web_client.o_web_client
+    .o_action_manager.o_action_manager:has(.o_form_view)
+    .o_form_view .o_form_statusbar .o_statusbar_status {
+    flex-wrap: nowrap !important;
+    overflow: hidden !important;
+}
+
 // P5: Input fields — white bg with solid border for readability
 body.o_web_client .o_action_manager:has(.o_form_view) .o_form_view .o_form_sheet
     :is(.o_input, .form-control, input:not([type="checkbox"]):not([type="radio"]), textarea, select) {

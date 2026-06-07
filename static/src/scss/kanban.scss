@@ -423,7 +423,7 @@
         padding: 8px !important;
         background: $bao-surface-0 !important;
         border: 1px solid #e1e1e1 !important;
-        border-radius: 6px !important;
+        border-radius: $radius-sm !important; // RR85: unify card radius with the BAO sm token (10px)
         box-shadow: 1px 2px 4px rgba(13, 79, 148, 0.08) !important;
         color: #303030 !important;
         font-family: $bao-font-body !important;
@@ -1124,7 +1124,7 @@
         padding: 8px !important;
         background: $bao-surface-0 !important;
         border: 1px solid #d9dde2 !important;
-        border-radius: 6px !important;
+        border-radius: $radius-sm !important; // RR85: unify card radius with the BAO sm token (10px)
         box-shadow: none !important;
         overflow: hidden !important;
     }

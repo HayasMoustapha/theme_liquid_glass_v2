@@ -800,6 +800,9 @@
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
+    // RR85: reserve final height so the bar does not jump while Odoo measures
+    // the stages and collapses overflow into the dropdown (kills the degraded flash)
+    min-height: 44px;
     gap: 0 8px !important;
     animation: baoFadeIn 0.15s ease forwards;
     background: transparent !important;
@@ -849,7 +852,9 @@
         max-width: 100%;
         margin-left: auto;
         gap: 0 !important;
-        flex-wrap: nowrap;
+        // RR85: force single line (native default wrap-reverse was letting the
+        // stages wrap onto 2 lines for a frame before collapsing -> the flash)
+        flex-wrap: nowrap !important;
         overflow: hidden;
         flex: 1 1 auto !important;
     }
@@ -7916,5 +7921,56 @@ td.o_field_x2many_list_row_add a {
         margin-top: 0 !important;
         padding-top: 4px !important;
         border-top: none !important;
+    }
+}
+
+// =============================================================================
+// RR85 — Field fill consistency + org-chart protection
+// The JS width:100% patch (bao_searchview_patch.js) missed email/phone/url
+// widgets (they kept their intrinsic ~68% width) and SQUEEZED the HR org-chart
+// (name wrapped one char per line). Carry these in SCSS so the result is stable
+// regardless of OWL re-renders.
+// =============================================================================
+// The widget sits at .o_cell > .o_row > .o_field_widget (an extra .o_row wrapper),
+// which both the JS patch and a direct-child selector miss — use descendants.
+.o_form_sheet .o_field_widget.o_field_email,
+.o_form_sheet .o_field_widget.o_field_phone,
+.o_form_sheet .o_field_widget.o_field_url {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 auto !important;
+
+    input:not([type="checkbox"]):not([type="radio"]),
+    .o_input,
+    .o-autocomplete,
+    .o-autocomplete--input {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+.o_form_sheet .o_cell .o_row:has(> .o_field_widget.o_field_email),
+.o_form_sheet .o_cell .o_row:has(> .o_field_widget.o_field_phone),
+.o_form_sheet .o_cell .o_row:has(> .o_field_widget.o_field_url) {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+}
+
+// RR85: final statusbar single-line override — wins over the earlier conflicting
+// `.o_form_statusbar .o_statusbar_status { flex-wrap: wrap !important }` (same
+// specificity, later in source) so stages don't wrap-flash before native collapse.
+.o_form_statusbar .o_statusbar_status {
+    flex-wrap: nowrap !important;
+}
+
+// Protect the HR org chart: it manages its own horizontal layout; the global
+// width:100% squeeze collapsed entry names to a single character per line.
+.o_field_widget.o_field_hr_org_chart {
+    .o_org_chart_entry_name,
+    [class*="entry_name"],
+    .o_employee_redirect,
+    a {
+        white-space: nowrap !important;
+        width: auto !important;
+        word-break: normal !important;
     }
 }
