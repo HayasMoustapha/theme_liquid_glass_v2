@@ -261,7 +261,7 @@ $bao-grey-label: #5a6a7a;
     .o_notebook .nav-tabs .nav-link { color: $bao-grey-label; }
     .o_notebook .nav-tabs .nav-link.active {
         color: var(--bao-text-heading, #1f1f1f);
-        background-color: var(--bao-surface-subtle, #f0f0f0);
+        background-color: #f0f0f0; // exact BAO active-tab chip
         border-color: var(--bao-border-subtle, #e1e1e1);
         font-weight: 700;
     }
@@ -337,6 +337,11 @@ $bao-grey-label: #5a6a7a;
     .o_kanban_record.bg-warning { background-color: #fdf3a8 !important; color: var(--bao-text-heading, #1f1f1f); border-color: #f4e9a0; }
     .o_kanban_record.bg-danger  { background-color: #fbe0de !important; color: $bao-red; border-color: #f3c1bd; }
     .o_kanban_record.bg-success { background-color: #d9f5e6 !important; color: $bao-green-text; border-color: #bfead2; }
+    // Purchase dashboard KPI tiles (native bootstrap bg-*-subtle) → exact BAO tones
+    .purchase-dashboard-card.bg-warning-subtle { background-color: #fdf3a8 !important; color: var(--bao-text-heading, #1f1f1f) !important; }
+    .purchase-dashboard-card.bg-danger-subtle  { background-color: #fbe0de !important; color: $bao-red !important; }
+    .purchase-dashboard-card.bg-success-subtle { background-color: #d9f5e6 !important; color: $bao-green-text !important; }
+    .purchase-dashboard-card.bg-info-subtle    { background-color: #dcecff !important; color: var(--bao-color-primary, #1357a0) !important; }
     // Card contact icons = BAO danger red
     .o_kanban_record .fa-envelope,
     .o_kanban_record .fa-phone,
