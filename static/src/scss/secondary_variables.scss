@@ -1,0 +1,11 @@
+///
+/// BAO Backend Theme — secondary variable overrides.
+///
+/// Injected into `web._assets_secondary_variables` (runs after the primary
+/// bundle, so all `$o-*` brand tokens above are already the BAO values).
+/// Definitions only, no rule sets.
+///
+
+// Overall web client background (BAO app surface). Bootstrap derives
+// `$body-bg` from this. Default was $o-gray-100 (#f8f9fa).
+$o-webclient-background-color: #f9f9f9;

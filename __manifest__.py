@@ -39,24 +39,24 @@
         'views/bao_theme_config_views.xml',
         'views/res_config_settings_views.xml',
         'views/bao_theme_module_override_views.xml',
-        'views/runtime_templates.xml',
         'data/theme_app_menu.xml',
-        'views/bao_theme_rh01_fixture_views.xml',
+        'views/runtime_templates.xml',
     ],
     'assets': {
+        # BAO palette is applied the sanctioned Odoo way: by overriding $o-*
+        # design tokens in the variable bundles, so Bootstrap/Odoo derive the
+        # look automatically (no per-selector !important warfare).
+        'web._assets_primary_variables': [
+            'theme_liquid_glass_v2/static/src/scss/primary_variables.scss',
+        ],
+        'web._assets_secondary_variables': [
+            'theme_liquid_glass_v2/static/src/scss/secondary_variables.scss',
+        ],
         'web.assets_backend': [
-            'theme_liquid_glass_v2/static/src/scss/variables.scss',
-            'theme_liquid_glass_v2/static/src/scss/glass_theme.scss',
-            'theme_liquid_glass_v2/static/src/scss/buttons.scss',
-            'theme_liquid_glass_v2/static/src/scss/forms.scss',
-            'theme_liquid_glass_v2/static/src/scss/lists.scss',
-            'theme_liquid_glass_v2/static/src/scss/kanban.scss',
-            'theme_liquid_glass_v2/static/src/scss/modals.scss',
-            'theme_liquid_glass_v2/static/src/scss/navbar.scss',
-            'theme_liquid_glass_v2/static/src/scss/icons.scss',
-            'theme_liquid_glass_v2/static/src/js/navbar_sidebar.js',
-            'theme_liquid_glass_v2/static/src/js/bao_searchview_patch.js',
-            'theme_liquid_glass_v2/static/src/xml/apps_sidebar.xml',
+            'theme_liquid_glass_v2/static/src/scss/fonts.scss',
+            # backend_cosmetic paints the live --bao-* config vars onto native
+            # classes (loaded last → wins via .o_web_client specificity).
+            'theme_liquid_glass_v2/static/src/scss/backend_cosmetic.scss',
         ],
         'web.assets_backend_lazy': [
             'theme_liquid_glass_v2/static/src/js/canvas_text.js',

@@ -289,7 +289,14 @@ class BaoThemeConfig(models.Model):
             preset = self.env["bao.theme.preset"].search([("code", "=", "bao_default")], limit=1)
         if not preset:
             raise UserError(_("The default BAO preset is missing. Update the theme module."))
-        return self.create({"name": "BAO Backend Theme", "preset_id": preset.id, "active": True})
+        # /bao/theme/runtime.css is served with a readonly cursor; a create()
+        # here would raise (HTTP 500). The default config normally exists (data
+        # record bao_theme_config_default), so this is a rare fallback — degrade
+        # to a transient in-memory record so the CSS still renders.
+        try:
+            return self.create({"name": "BAO Backend Theme", "preset_id": preset.id, "active": True})
+        except Exception:  # noqa: BLE001 - readonly cursor / replica
+            return self.new({"name": "BAO Backend Theme", "preset_id": preset.id, "active": True})
 
     @api.model
     def _component_family(self, component_key):

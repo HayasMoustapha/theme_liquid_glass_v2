@@ -1,0 +1,47 @@
+///
+/// BAO Backend Theme — web fonts.
+///
+/// Loaded in `web.assets_backend`. Declares the BAO font faces referenced by
+/// `$o-font-family-sans-serif` / `$o-headings-font-family` (primary_variables).
+/// Font files live in ../fonts (static/src/fonts).
+///
+
+@font-face {
+    font-family: "CreightonPro";
+    src: url("../fonts/CreightonProMedium.otf") format("opentype");
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "CreightonPro";
+    src: url("../fonts/CreightonProBlack.otf") format("opentype");
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Regular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Semibold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Bold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}

@@ -1,0 +1,75 @@
+///
+/// BAO Backend Theme — primary variable overrides.
+///
+/// Injected into the `web._assets_primary_variables` bundle, AFTER Odoo's own
+/// primary_variables.scss. We only redefine Odoo `$o-*` design tokens here
+/// (definitions only, no rule sets) so that Bootstrap and Odoo derive the BAO
+/// palette automatically. This replaces the rejected per-selector !important
+/// approach.
+///
+/// IMPORTANT: a few Odoo tokens are derived via SCSS functions at definition
+/// time (so they captured the OLD purple `$o-community-color` #71639e before
+/// this file runs). Those are re-computed explicitly below to avoid purple
+/// residue: `$o-action`, `$o-main-link-color`, `$o-component-active-*`,
+/// `$o-list-group-active-bg`, and the `$o-btns-bs-override` "primary" entry.
+///
+/// Do NOT add `!default` to these overrides — bare assignment must win.
+/// Source palette: BAO tokens (see legacy variables.scss l.44-102).
+
+// --- Brand -----------------------------------------------------------------
+$o-community-color: #1357a0;
+$o-brand-odoo: #1357a0;
+$o-brand-primary: #1357a0;
+$o-action: #1357a0;
+
+// --- Main navbar -----------------------------------------------------------
+// navbar.variables.scss captured `$o-brand-odoo` (purple) into these BEFORE
+// this file runs, so re-set them to the BAO brand. Native navbar text is
+// already light (rgba($o-white,.9)) → stays readable on blue.
+$o-navbar-background: #1357a0;
+$o-navbar-border-bottom: 1px solid darken(#1357a0, 10%);
+
+// --- Status ----------------------------------------------------------------
+$o-success: #03a750;
+$o-info: #1357a0;
+$o-warning: #e6ad35;
+$o-danger: #d94f45;
+
+// --- Text ------------------------------------------------------------------
+$o-main-text-color: #303030;     // BAO text-800 (body)
+$o-main-headings-color: #1f1f1f; // BAO text-900 (headings)
+$o-main-link-color: #1357a0;     // re-derived (was darken of purple brand)
+
+// --- Fonts -----------------------------------------------------------------
+// `o-add-unicode-support-font` is the Odoo helper used by core (keeps emoji /
+// unicode glyph fallback). @font-face for these families lives in fonts.scss.
+$o-font-family-sans-serif: o-add-unicode-support-font(("Open Sans", sans-serif));
+$o-headings-font-family: o-add-unicode-support-font(("CreightonPro", "Open Sans", sans-serif));
+
+// --- Radius (BAO soft rounding) --------------------------------------------
+$o-border-radius: o-to-rem(8px);
+$o-border-radius-sm: o-to-rem(6px);
+$o-border-radius-lg: o-to-rem(12px);
+
+// --- Re-derived tokens (recompute with the BAO brand) ----------------------
+$o-component-active-bg: mix($o-brand-primary, $o-gray-100, 20%);
+$o-component-active-border: $o-brand-primary;
+$o-list-group-active-bg: mix($o-brand-primary, $o-white, 12%);
+
+// Odoo primary button is generated from this map; its entries baked the old
+// purple brand at build time, so re-merge "primary" with the BAO brand.
+$o-btns-bs-override: map-merge($o-btns-bs-override, (
+    "primary": (
+        background: $o-brand-primary,
+        border: $o-brand-primary,
+        color: $o-white,
+
+        hover-background: darken($o-brand-primary, 10%),
+        hover-border: darken($o-brand-primary, 20%),
+        hover-color: $o-white,
+
+        active-background: mix($o-brand-primary, $o-white, 10%),
+        active-border: $o-brand-primary,
+        active-color: darken($o-brand-primary, 20%),
+    ),
+));

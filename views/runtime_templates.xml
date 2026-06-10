@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!--
+      Injects the live BAO runtime stylesheet (served by
+      controllers/bao_theme_runtime.py from the active bao.theme.config) into
+      the web client. This is what makes Settings "BAO Backend Theme" recolor
+      apply live: the CSS sets the bao CSS custom properties consumed by
+      runtime_bridge.scss. Served no-store, so a Settings save (which reloads)
+      re-fetches the fresh palette.
+    -->
     <record id="bao_theme_runtime_css_link" model="ir.ui.view">
         <field name="name">bao.theme.runtime.css.link</field>
         <field name="type">qweb</field>
