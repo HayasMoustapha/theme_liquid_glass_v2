@@ -49,35 +49,90 @@ $bao-grey-label: #5a6a7a;
     }
 
     // ============================================================
-    // 2. CONTROL PANEL / SEARCH / SWITCHER / PAGER
-    //    (native white surface variant — blue-band placement is structural)
+    // 2. CONTROL PANEL = part of the BAO blue chrome band (continuous with
+    //    the navbar). This is THE defining BAO trait: breadcrumb / search /
+    //    buttons / switcher / pager all sit on blue. Achieved cosmetically
+    //    (background + white-on-blue contents) — no DOM move.
     // ============================================================
     .o_control_panel {
-        background-color: var(--bao-surface-base, #ffffff);
-        border-bottom: 1px solid var(--bao-border-subtle, #e1e1e1);
+        background-color: var(--bao-color-primary, #1357a0);
+        border-bottom: 0;
+        color: #ffffff;
     }
-    // Search = rounded white pill
+    // The Bootstrap breadcrumb <ol> carries a white bg ($breadcrumb-bg) which
+    // would show as a white box on the blue band — make it transparent.
+    .o_control_panel .breadcrumb,
+    .o_control_panel .o_breadcrumb > .breadcrumb {
+        background-color: transparent;
+    }
+    // Breadcrumb on blue: white trail, accent-yellow current leaf
+    .o_control_panel .o_breadcrumb,
+    .o_control_panel .o_breadcrumb a,
+    .o_control_panel .breadcrumb-item,
+    .o_control_panel .breadcrumb-item a,
+    .o_control_panel .o_breadcrumb .text-truncate {
+        color: rgba(255, 255, 255, 0.88);
+    }
+    .o_control_panel .o_breadcrumb .o_last_breadcrumb_item,
+    .o_control_panel .o_breadcrumb .active,
+    .o_control_panel .o_last_breadcrumb_item {
+        color: var(--bao-color-accent, #fde900);
+        font-weight: 700;
+    }
+    // Generic control-panel text/icons → white (cog menu, filters toggle, etc.)
+    .o_control_panel .o_cp_action_menus .btn,
+    .o_control_panel .o_cp_action_menus .dropdown-toggle,
+    .o_control_panel .o_searchview_dropdown_toggler,
+    .o_control_panel .o_cp_buttons .btn-link {
+        color: #ffffff;
+    }
+    // Search = rounded white pill on blue
     .o_control_panel .o_searchview {
         background-color: var(--bao-surface-base, #ffffff);
-        border: 1px solid var(--bao-border-subtle, #e1e1e1);
+        border: 1px solid transparent;
         border-radius: 20px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        color: var(--bao-text-primary, #303030);
     }
-    .o_control_panel .o_searchview:focus-within {
-        border-color: var(--bao-color-primary, #1357a0);
-    }
+    .o_control_panel .o_searchview .o_searchview_input { color: var(--bao-text-primary, #303030); }
+    .o_control_panel .o_searchview:focus-within { border-color: #ffffff; }
     .o_searchview .o_searchview_facet .o_searchview_facet_label {
         background-color: var(--bao-color-primary, #1357a0);
         color: #ffffff;
     }
     .o_facet_remove { color: var(--bao-color-primary, #1357a0); }
-    // View switcher — active view in a pill, glyph BAO primary
-    .o_cp_switch_buttons .o_switch_view.active,
-    .o_control_panel .o_cp_switch_buttons .btn.active {
+    // View switcher on blue: white glyphs; active = white pill, primary glyph
+    .o_control_panel .o_cp_switch_buttons .o_switch_view {
+        color: rgba(255, 255, 255, 0.85);
+        border-color: rgba(255, 255, 255, 0.30);
+    }
+    .o_control_panel .o_cp_switch_buttons .o_switch_view.active {
+        background-color: #ffffff;
         color: var(--bao-color-primary, #1357a0);
     }
-    // Graph/analytics screens: active switcher glyph green
-    .o_graph_view .o_cp_switch_buttons .o_switch_view.active { color: $bao-green; }
+    .o_graph_view .o_control_panel .o_cp_switch_buttons .o_switch_view.active { color: $bao-green; }
+    // Pager on blue: white text + translucent arrow buttons
+    .o_control_panel .o_pager { color: #ffffff; }
+    .o_control_panel .o_pager button,
+    .o_control_panel .o_pager .o_pager_next,
+    .o_control_panel .o_pager .o_pager_previous {
+        color: #ffffff;
+        background-color: rgba(255, 255, 255, 0.16);
+        border-color: rgba(255, 255, 255, 0.30);
+    }
+    // Form save / discard on the blue band = translucent white pills
+    .o_control_panel .o_form_button_save,
+    .o_control_panel .o_form_buttons_edit .btn-primary {
+        background-color: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.35);
+        color: #ffffff;
+    }
+    .o_control_panel .o_form_button_cancel,
+    .o_control_panel .o_form_buttons_edit .btn-secondary {
+        background-color: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.30);
+        color: #ffffff;
+    }
 
     // ============================================================
     // 3. BUTTONS
