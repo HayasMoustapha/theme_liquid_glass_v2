@@ -189,6 +189,16 @@ $bao-grey-label: #5a6a7a;
         border-color: var(--bao-color-primary-dark, #0f4e92);
         color: #ffffff;
     }
+    // BAO ref: the confirm/primary action of a DIALOG footer is GREEN (e.g.
+    // "Mettre à jour les préférences"), distinct from the yellow create primary
+    // of the main view and the red workflow primary. Scoped to dialog footers.
+    .o_dialog .modal-footer .btn-primary,
+    .modal-footer .btn-primary {
+        background-color: var(--bao-success-600, #{$bao-green});
+        border-color: var(--bao-success-600, #{$bao-green});
+        color: #ffffff;
+        &:hover, &:focus, &:active { background-color: #02913f; border-color: #02913f; color: #ffffff; }
+    }
 
     // ============================================================
     // 4. APP CONTENT BACKGROUND
@@ -225,6 +235,16 @@ $bao-grey-label: #5a6a7a;
     .o_form_view label.o_form_label sup {
         color: var(--bao-color-primary, #1357a0);
     }
+    // BAO ref: contact icons (email / phone / mobile) next to fields are RED,
+    // not the native text-primary blue. Scoped to the form view.
+    // Bootstrap .text-primary ships !important, so the override needs it too
+    // (scoped exception, same policy as the badge/KPI overrides).
+    .o_form_view .fa-envelope.text-primary,
+    .o_form_view .fa-phone.text-primary,
+    .o_form_view .fa-mobile.text-primary,
+    .o_form_view .o_field_widget .fa-envelope,
+    .o_form_view .o_field_widget .fa-phone,
+    .o_form_view .o_field_widget .fa-mobile { color: $bao-red !important; }
 
     // Fields = filled light boxes (no layout change)
     .o_form_view .o_form_sheet {
