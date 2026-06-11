@@ -694,13 +694,20 @@ $bao-grey-label: #5a6a7a;
     // Chatter = minimal but reasonable width with internal padding; the sheet
     // (flex 2 1, grows) absorbs the rest so there is NO empty band. Chatter is
     // fixed narrow (no grow).
+    // Chatter: wide enough that its topbar (Send / Note / Activity + icons) never
+    // overflows/scrolls and the content can breathe, but no wider than needed.
     .o_form_renderer .o-mail-Form-chatter.o-aside,
     .o_form_renderer .o-mail-ChatterContainer.o-aside {
-        flex: 0 0 27% !important;
-        max-width: 440px;
-        min-width: 360px;
+        flex: 0 0 31% !important;
+        max-width: 520px;
+        min-width: 470px;
     }
+    // Drop the sheet's right padding (the "margin-right" before the chatter) and
+    // reinvest that space as the chatter's internal padding so it breathes inside.
+    .o_form_renderer .o_form_sheet_bg { padding-right: 0 !important; }
     .o-mail-Chatter { padding: 4px 14px; }
+    // Let the chatter topbar wrap instead of horizontally scrolling.
+    .o-mail-Chatter-topbar { overflow-x: visible !important; flex-wrap: wrap; }
     .o-mail-Chatter-sendMessage,
     .o-mail-Chatter-topbar .btn-primary {
         background-color: var(--bao-color-accent, #fde900);
