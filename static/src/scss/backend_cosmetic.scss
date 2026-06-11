@@ -51,14 +51,14 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
         border-bottom: 0;
     }
     .o_main_navbar .o_menu_brand {
-        color: #ffffff;
+        color: var(--bao-on-primary, #ffffff);
         font-weight: 700;
     }
     .o_main_navbar .o_nav_entry,
     .o_main_navbar .dropdown-toggle,
     .o_main_navbar .o_menu_systray,
     .o_main_navbar .o_menu_systray .dropdown-toggle {
-        color: rgba(255, 255, 255, 0.92);
+        color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 92%, transparent);
     }
     // BAO shows a FontAwesome chevron "v" on each top-menu dropdown; native Odoo 19
     // renders no caret. Use the FA glyph (not a CSS border triangle).
@@ -72,7 +72,7 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
         font-size: 0.9em;
         line-height: 1;
         vertical-align: baseline;
-        color: rgba(255, 255, 255, 0.92);
+        color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 92%, transparent);
     }
     // BAO display font (CreightonPro = "Criterion" in the BAO charter) on ALL title
     // surfaces: module/app brand, breadcrumb leaf, form record title, kanban &
@@ -106,7 +106,7 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
     .o_control_panel {
         background-color: var(--bao-color-primary, #1357a0);
         border-bottom: 0;
-        color: #ffffff;
+        color: var(--bao-on-primary, #ffffff);
     }
     // The Bootstrap breadcrumb <ol> carries a white bg ($breadcrumb-bg) which
     // would show as a white box on the blue band — make it transparent.
@@ -120,7 +120,7 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
     .o_control_panel .breadcrumb-item,
     .o_control_panel .breadcrumb-item a,
     .o_control_panel .o_breadcrumb .text-truncate {
-        color: rgba(255, 255, 255, 0.88);
+        color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 88%, transparent);
     }
     .o_control_panel .o_breadcrumb .o_last_breadcrumb_item,
     .o_control_panel .o_breadcrumb .active,
@@ -133,7 +133,7 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
     .o_control_panel .o_cp_action_menus .dropdown-toggle,
     .o_control_panel .o_searchview_dropdown_toggler,
     .o_control_panel .o_cp_buttons .btn-link {
-        color: #ffffff;
+        color: var(--bao-on-primary, #ffffff);
     }
     // Search + filter toggle = ONE continuous white pill on blue. The search owns
     // the left half (rounded left, square right), the filter toggle owns the right
@@ -169,7 +169,7 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
     }
     .o_searchview .o_searchview_facet .o_searchview_facet_label {
         background-color: var(--bao-color-primary, #1357a0);
-        color: #ffffff;
+        color: var(--bao-on-primary, #ffffff);
     }
     .o_facet_remove { color: var(--bao-color-primary, #1357a0); }
     // View switcher on blue: inactive = TRANSPARENT (blue shows through) + white
@@ -177,52 +177,52 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
     // inactive a light-grey fill that hides the white glyph — force transparent.
     .o_control_panel .o_cp_switch_buttons .o_switch_view {
         background-color: transparent;
-        color: rgba(255, 255, 255, 0.85);
-        border-color: rgba(255, 255, 255, 0.30);
+        color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 85%, transparent);
+        border-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 30%, transparent);
     }
-    .o_control_panel .o_cp_switch_buttons .o_switch_view:hover { background-color: rgba(255, 255, 255, 0.15); }
+    .o_control_panel .o_cp_switch_buttons .o_switch_view:hover { background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 15%, transparent); }
     .o_control_panel .o_cp_switch_buttons .o_switch_view.active {
-        background-color: #ffffff;
+        background-color: var(--bao-surface-base, #ffffff);
         color: var(--bao-color-primary, #1357a0);
     }
     .o_graph_view .o_control_panel .o_cp_switch_buttons .o_switch_view.active { color: $bao-green; }
     // Pager on blue: white text + translucent arrow buttons
-    .o_control_panel .o_pager { color: #ffffff; }
+    .o_control_panel .o_pager { color: var(--bao-on-primary, #ffffff); }
     .o_control_panel .o_pager button,
     .o_control_panel .o_pager .o_pager_next,
     .o_control_panel .o_pager .o_pager_previous {
-        color: #ffffff;
-        background-color: rgba(255, 255, 255, 0.16);
-        border-color: rgba(255, 255, 255, 0.30);
+        color: var(--bao-on-primary, #ffffff);
+        background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 16%, transparent);
+        border-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 30%, transparent);
     }
     // Form save / discard on the blue band = translucent white pills
     .o_control_panel .o_form_button_save,
     .o_control_panel .o_form_buttons_edit .btn-primary {
-        background-color: rgba(255, 255, 255, 0.18);
-        border-color: rgba(255, 255, 255, 0.35);
-        color: #ffffff;
+        background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 18%, transparent);
+        border-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 35%, transparent);
+        color: var(--bao-on-primary, #ffffff);
     }
     .o_control_panel .o_form_button_cancel,
     .o_control_panel .o_form_button_discard,
     .o_control_panel .o_form_buttons_edit .btn-secondary {
-        background-color: rgba(255, 255, 255, 0.12);
-        border-color: rgba(255, 255, 255, 0.30);
-        color: #ffffff;
+        background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 12%, transparent);
+        border-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 30%, transparent);
+        color: var(--bao-on-primary, #ffffff);
     }
     // BAO save icon = floppy disk (native O19 ships fa-cloud-upload). Swap glyph.
     .o_control_panel .o_form_button_save .fa-cloud-upload::before { content: "\f0c7"; }
     // Settings TEXT save/discard (btn-primary/secondary, vs the form icon buttons
     // which are btn-light) were washed-out translucent — make them solid + readable.
     .o_control_panel .o_form_button_save.btn-primary {
-        background-color: #ffffff;
-        border-color: #ffffff;
+        background-color: var(--bao-surface-base, #ffffff);
+        border-color: var(--bao-surface-base, #ffffff);
         color: var(--bao-color-primary, #1357a0);
         font-weight: 700;
     }
     .o_control_panel .o_form_button_cancel.btn-secondary {
-        background-color: rgba(255, 255, 255, 0.18);
-        border-color: rgba(255, 255, 255, 0.45);
-        color: #ffffff;
+        background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 18%, transparent);
+        border-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 45%, transparent);
+        color: var(--bao-on-primary, #ffffff);
     }
     // Save/discard ICON buttons on the blue band: native is tiny (py-0 lh-sm ~18px);
     // BAO sizes them as proper ~30px pill buttons with a clear ~17px glyph.
@@ -277,21 +277,21 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
     .o_statusbar_buttons .btn-primary {
         background-color: var(--bao-danger-600, #{$bao-red});
         border-color: var(--bao-danger-600, #{$bao-red});
-        color: #ffffff;
-        &:hover, &:focus, &:active { background-color: #c8443b; border-color: #c8443b; color: #ffffff; }
+        color: var(--bao-on-primary, #ffffff);
+        &:hover, &:focus, &:active { background-color: var(--bao-danger-hover, #c8443b); border-color: var(--bao-danger-hover, #c8443b); color: var(--bao-on-primary, #ffffff); }
     }
     // BAO ref: graph "Mesure" primary = primary-dark blue
     .o_graph_view .o_control_panel .btn-primary {
         background-color: var(--bao-color-primary-dark, #0f4e92);
         border-color: var(--bao-color-primary-dark, #0f4e92);
-        color: #ffffff;
-        &:hover, &:focus, &:active { background-color: var(--bao-color-primary, #1357a0); border-color: var(--bao-color-primary, #1357a0); color: #ffffff; }
+        color: var(--bao-on-primary, #ffffff);
+        &:hover, &:focus, &:active { background-color: var(--bao-color-primary, #1357a0); border-color: var(--bao-color-primary, #1357a0); color: var(--bao-on-primary, #ffffff); }
     }
     // Graph chart-type toggles: active = primary-dark blue
     .o_graph_view .o_control_panel .btn-group .btn.active {
         background-color: var(--bao-color-primary-dark, #0f4e92);
         border-color: var(--bao-color-primary-dark, #0f4e92);
-        color: #ffffff;
+        color: var(--bao-on-primary, #ffffff);
     }
     // BAO ref: the confirm/primary action of a DIALOG footer is GREEN (e.g.
     // "Mettre à jour les préférences"), distinct from the yellow create primary
@@ -300,8 +300,8 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
     .modal-footer .btn-primary {
         background-color: var(--bao-success-solid, #027f3d); // exact BAO dialog green
         border-color: var(--bao-success-solid, #027f3d);
-        color: #ffffff;
-        &:hover, &:focus, &:active { background-color: var(--bao-success-solid-hover, #016733); border-color: var(--bao-success-solid-hover, #016733); color: #ffffff; }
+        color: var(--bao-on-primary, #ffffff);
+        &:hover, &:focus, &:active { background-color: var(--bao-success-solid-hover, #016733); border-color: var(--bao-success-solid-hover, #016733); color: var(--bao-on-primary, #ffffff); }
     }
     // BAO dialog secondary ("Ignorer") = solid mid-grey pill (native is near-white).
     .o_dialog .modal-footer .btn-secondary,
@@ -424,7 +424,7 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
     .o_form_view .o_field_tags .o_tag.o_tag_color_0,
     .o_form_view .o_field_many2many_tags .o_tag.o_tag_color_0,
     .o_field_x2many .o_data_cell .o_field_tags .o_tag.o_tag_color_0 {
-        background-color: #e9e9e9;
+        background-color: var(--bao-neutral-chip, #e9e9e9);
         color: var(--bao-text-primary, #303030);
     }
     // BAO ref: contact icons (email / phone / mobile) next to fields are RED,
@@ -526,18 +526,18 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
     .o_control_panel .o-form-buttonbox .oe_stat_button .o_stat_value,
     .o_control_panel .o-form-buttonbox .oe_stat_button .o_stat_text,
     .o_control_panel .o-form-buttonbox .oe_stat_button .o_button_icon {
-        color: #ffffff;
+        color: var(--bao-on-primary, #ffffff);
     }
     // BAO smart-band signature: the stat buttons carry a RESTING translucent
     // lighter-blue fill (~rgba white 0.18 over #1357a0 = ~#3d79b0), giving the
     // raised glass container look — not just outlines.
     .o_control_panel .o-form-buttonbox .oe_stat_button,
     .o_control_panel .oe_button_box .oe_stat_button {
-        background-color: rgba(255, 255, 255, 0.18);
+        background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 18%, transparent);
         border-color: rgba(255, 255, 255, 0.28);
     }
     .o_control_panel .o-form-buttonbox .oe_stat_button:hover,
-    .o_control_panel .oe_button_box .oe_stat_button:hover { background-color: rgba(255, 255, 255, 0.30); }
+    .o_control_panel .oe_button_box .oe_stat_button:hover { background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 30%, transparent); }
     // The "More" stat-button overflow renders as a .o_popover.o-form-buttonbox on a
     // WHITE surface — the blue-band white treatment must NOT leak there. Reset to
     // dark-on-transparent so the overflow items stay readable and don't bleed.
@@ -644,14 +644,14 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
     // ============================================================
     .o_field_badge .badge.text-bg-success,
     .o_field_badge .badge.bg-success,
-    .badge.text-bg-success { background-color: $bao-green; color: #ffffff; }
+    .badge.text-bg-success { background-color: $bao-green; color: var(--bao-on-primary, #ffffff); }
     .o_field_badge .badge.text-bg-danger,
-    .badge.text-bg-danger { background-color: $bao-red; color: #ffffff; }
+    .badge.text-bg-danger { background-color: $bao-red; color: var(--bao-on-primary, #ffffff); }
     // List draft/neutral state badge = BAO soft grey (Odoo maps it to text-bg-info = brand blue)
     .o_list_renderer .badge.text-bg-info,
     .o_list_renderer .o_field_badge .badge.text-bg-info {
-        background-color: #e7e7e7 !important;
-        color: #5a5a5a !important;
+        background-color: var(--bao-draft-bg, #e7e7e7) !important;
+        color: var(--bao-draft-text, #5a5a5a) !important;
     }
     // Workflow / control-panel action buttons: BAO soft rounding, normal weight
     .o_statusbar_buttons .btn,
@@ -691,8 +691,8 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
     .o_kanban_record .btn-primary {
         background-color: var(--bao-success-solid, #027f3d); // exact BAO dashboard green
         border-color: var(--bao-success-solid, #027f3d);
-        color: #ffffff;
-        &:hover, &:focus, &:active { background-color: var(--bao-success-solid-hover, #016733); border-color: var(--bao-success-solid-hover, #016733); color: #ffffff; }
+        color: var(--bao-on-primary, #ffffff);
+        &:hover, &:focus, &:active { background-color: var(--bao-success-solid-hover, #016733); border-color: var(--bao-success-solid-hover, #016733); color: var(--bao-on-primary, #ffffff); }
     }
     // Stock dashboard counters: non-late links grey (native blue), late red.
     // Late rule placed AFTER so it wins at equal specificity.
@@ -705,10 +705,10 @@ $bao-grey-label: var(--bao-text-label, #5a6a7a);
     .o_kanban_record.bg-danger  { background-color: var(--bao-danger-tile, #fadada) !important; color: var(--bao-danger-600, #{$bao-red}); border-color: var(--bao-danger-tile-border, #f3c1bd); }
     .o_kanban_record.bg-success { background-color: var(--bao-success-tile, #c0fedd) !important; color: var(--bao-success-text, #{$bao-green-text}); border-color: var(--bao-success-tile-border, #a8e9c6); }
     // Purchase dashboard KPI tiles (native bootstrap bg-*-subtle) → exact BAO tones
-    .purchase-dashboard-card.bg-warning-subtle { background-color: #fdf3a8 !important; color: var(--bao-text-heading, #1f1f1f) !important; }
-    .purchase-dashboard-card.bg-danger-subtle  { background-color: #fbe0de !important; color: $bao-red !important; }
-    .purchase-dashboard-card.bg-success-subtle { background-color: #d9f5e6 !important; color: $bao-green-text !important; }
-    .purchase-dashboard-card.bg-info-subtle    { background-color: #dcecff !important; color: var(--bao-color-primary, #1357a0) !important; }
+    .purchase-dashboard-card.bg-warning-subtle { background-color: var(--bao-purchase-warn-tile, #fdf3a8) !important; color: var(--bao-text-heading, #1f1f1f) !important; }
+    .purchase-dashboard-card.bg-danger-subtle  { background-color: var(--bao-purchase-danger-tile, #fbe0de) !important; color: $bao-red !important; }
+    .purchase-dashboard-card.bg-success-subtle { background-color: var(--bao-purchase-success-tile, #d9f5e6) !important; color: $bao-green-text !important; }
+    .purchase-dashboard-card.bg-info-subtle    { background-color: var(--bao-purchase-info-tile, #dcecff) !important; color: var(--bao-color-primary, #1357a0) !important; }
     // Card contact icons = BAO danger red
     .o_kanban_record .fa-envelope,
     .o_kanban_record .fa-phone,

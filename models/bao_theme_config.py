@@ -55,6 +55,14 @@ TOKEN_FIELDS = (
     "help_badge_bg",
     "notebook_chip_bg",
     "font_title",
+    "success_600",
+    "text_label",
+    "text_muted_soft",
+    "on_primary",
+    "danger_hover",
+    "success_solid_hover",
+    "draft_bg",
+    "draft_text",
 )
 
 COLOR_TOKEN_FIELDS = (
@@ -91,6 +99,14 @@ COLOR_TOKEN_FIELDS = (
     "text_muted_strong",
     "help_badge_bg",
     "notebook_chip_bg",
+    "success_600",
+    "text_label",
+    "text_muted_soft",
+    "on_primary",
+    "danger_hover",
+    "success_solid_hover",
+    "draft_bg",
+    "draft_text",
 )
 
 CSS_VAR_BY_FIELD = {
@@ -140,6 +156,14 @@ CSS_VAR_BY_FIELD = {
     "help_badge_bg": "--bao-help-badge-bg",
     "notebook_chip_bg": "--bao-notebook-chip-bg",
     "font_title": "--bao-font-title",
+    "success_600": "--bao-success-600",
+    "text_label": "--bao-text-label",
+    "text_muted_soft": "--bao-text-muted-soft",
+    "on_primary": "--bao-on-primary",
+    "danger_hover": "--bao-danger-hover",
+    "success_solid_hover": "--bao-success-solid-hover",
+    "draft_bg": "--bao-draft-bg",
+    "draft_text": "--bao-draft-text",
 }
 
 FAMILY_SELECTION = [
@@ -253,6 +277,14 @@ class BaoThemeTokenMixin(models.AbstractModel):
     help_badge_bg = fields.Char(string="Help Badge Background")
     notebook_chip_bg = fields.Char(string="Notebook Chip Background")
     font_title = fields.Char(string="Title Font")
+    success_600 = fields.Char(string="Success 600 (bright green)")
+    text_label = fields.Char(string="Form Label Text")
+    text_muted_soft = fields.Char(string="Soft Muted Text")
+    on_primary = fields.Char(string="On-Primary Text (on blue band)")
+    danger_hover = fields.Char(string="Danger Hover")
+    success_solid_hover = fields.Char(string="Success Solid Hover")
+    draft_bg = fields.Char(string="Draft Badge Background")
+    draft_text = fields.Char(string="Draft Badge Text")
 
     @api.model
     def _bao_token_fields(self):

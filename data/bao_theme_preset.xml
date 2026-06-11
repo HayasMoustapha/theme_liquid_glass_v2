@@ -52,6 +52,14 @@
             <field name="help_badge_bg">#e7effa</field>
             <field name="notebook_chip_bg">#f0f0f0</field>
             <field name="font_title">"CreightonPro", "Open Sans", sans-serif</field>
+            <field name="success_600">#03a750</field>
+            <field name="text_label">#5a6a7a</field>
+            <field name="text_muted_soft">#6b6b6b</field>
+            <field name="on_primary">#ffffff</field>
+            <field name="danger_hover">#c8443b</field>
+            <field name="success_solid_hover">#016733</field>
+            <field name="draft_bg">#e7e7e7</field>
+            <field name="draft_text">#5a5a5a</field>
         </record>
 
         <record id="bao_theme_config_default" model="bao.theme.config">

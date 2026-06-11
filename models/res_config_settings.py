@@ -95,6 +95,14 @@ class ResConfigSettings(models.TransientModel):
     bao_help_badge_bg = fields.Char(related="bao_theme_config_id.help_badge_bg", readonly=False, groups="base.group_system")
     bao_notebook_chip_bg = fields.Char(related="bao_theme_config_id.notebook_chip_bg", readonly=False, groups="base.group_system")
     bao_font_title = fields.Char(related="bao_theme_config_id.font_title", readonly=False, groups="base.group_system")
+    bao_success_600 = fields.Char(related="bao_theme_config_id.success_600", readonly=False, groups="base.group_system")
+    bao_text_label = fields.Char(related="bao_theme_config_id.text_label", readonly=False, groups="base.group_system")
+    bao_text_muted_soft = fields.Char(related="bao_theme_config_id.text_muted_soft", readonly=False, groups="base.group_system")
+    bao_on_primary = fields.Char(related="bao_theme_config_id.on_primary", readonly=False, groups="base.group_system")
+    bao_danger_hover = fields.Char(related="bao_theme_config_id.danger_hover", readonly=False, groups="base.group_system")
+    bao_success_solid_hover = fields.Char(related="bao_theme_config_id.success_solid_hover", readonly=False, groups="base.group_system")
+    bao_draft_bg = fields.Char(related="bao_theme_config_id.draft_bg", readonly=False, groups="base.group_system")
+    bao_draft_text = fields.Char(related="bao_theme_config_id.draft_text", readonly=False, groups="base.group_system")
     bao_module_override_ids = fields.One2many(
         related="bao_theme_config_id.module_override_ids",
         readonly=False,

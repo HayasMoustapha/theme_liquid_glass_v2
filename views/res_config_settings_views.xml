@@ -96,6 +96,14 @@
                                 <div class="row mt8"><label for="bao_text_muted_strong" class="col-lg-4 o_light_label"/><field name="bao_text_muted_strong" widget="color" placeholder="#9aa3ad"/></div>
                                 <div class="row mt8"><label for="bao_help_badge_bg" class="col-lg-4 o_light_label"/><field name="bao_help_badge_bg" widget="color" placeholder="#e7effa"/></div>
                                 <div class="row mt8"><label for="bao_notebook_chip_bg" class="col-lg-4 o_light_label"/><field name="bao_notebook_chip_bg" widget="color" placeholder="#f0f0f0"/></div>
+                                <div class="row mt8"><label for="bao_success_600" class="col-lg-4 o_light_label"/><field name="bao_success_600" widget="color" placeholder="#03a750"/></div>
+                                <div class="row mt8"><label for="bao_on_primary" class="col-lg-4 o_light_label"/><field name="bao_on_primary" widget="color" placeholder="#ffffff"/></div>
+                                <div class="row mt8"><label for="bao_text_label" class="col-lg-4 o_light_label"/><field name="bao_text_label" widget="color" placeholder="#5a6a7a"/></div>
+                                <div class="row mt8"><label for="bao_text_muted_soft" class="col-lg-4 o_light_label"/><field name="bao_text_muted_soft" widget="color" placeholder="#6b6b6b"/></div>
+                                <div class="row mt8"><label for="bao_danger_hover" class="col-lg-4 o_light_label"/><field name="bao_danger_hover" widget="color" placeholder="#c8443b"/></div>
+                                <div class="row mt8"><label for="bao_success_solid_hover" class="col-lg-4 o_light_label"/><field name="bao_success_solid_hover" widget="color" placeholder="#016733"/></div>
+                                <div class="row mt8"><label for="bao_draft_bg" class="col-lg-4 o_light_label"/><field name="bao_draft_bg" widget="color" placeholder="#e7e7e7"/></div>
+                                <div class="row mt8"><label for="bao_draft_text" class="col-lg-4 o_light_label"/><field name="bao_draft_text" widget="color" placeholder="#5a5a5a"/></div>
                                 <div class="row mt8"><label for="bao_font_title" class="col-lg-4 o_light_label"/><field name="bao_font_title" placeholder="&quot;CreightonPro&quot;, sans-serif"/></div>
                             </div>
                         </setting>
