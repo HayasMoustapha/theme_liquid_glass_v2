@@ -285,16 +285,16 @@ $bao-grey-label: #5a6a7a;
     // of the main view and the red workflow primary. Scoped to dialog footers.
     .o_dialog .modal-footer .btn-primary,
     .modal-footer .btn-primary {
-        background-color: #027f3d; // exact BAO dialog green (sampled from ref)
-        border-color: #027f3d;
+        background-color: var(--bao-success-solid, #027f3d); // exact BAO dialog green
+        border-color: var(--bao-success-solid, #027f3d);
         color: #ffffff;
-        &:hover, &:focus, &:active { background-color: #016733; border-color: #016733; color: #ffffff; }
+        &:hover, &:focus, &:active { background-color: var(--bao-success-solid-hover, #016733); border-color: var(--bao-success-solid-hover, #016733); color: #ffffff; }
     }
     // BAO dialog secondary ("Ignorer") = solid mid-grey pill (native is near-white).
     .o_dialog .modal-footer .btn-secondary,
     .modal-footer .btn-secondary {
-        background-color: #dcdcdc;
-        border-color: #dcdcdc;
+        background-color: var(--bao-neutral-soft, #dcdcdc);
+        border-color: var(--bao-neutral-soft, #dcdcdc);
         color: var(--bao-text-primary, #303030);
     }
     // Dialog surface = same BAO card language as the form sheet (native classes).
@@ -375,7 +375,7 @@ $bao-grey-label: #5a6a7a;
     .o_form_view .o_field_widget .o_field_help,
     .o_form_view label.o_form_label sup {
         color: var(--bao-color-primary, #1357a0) !important;
-        background-color: #e7effa;
+        background-color: var(--bao-help-badge-bg, #e7effa);
         border-radius: 50%;
         font-weight: 700;
         vertical-align: middle;
@@ -440,7 +440,7 @@ $bao-grey-label: #5a6a7a;
     .o_form_statusbar .o_statusbar_status .o_arrow_button {
         clip-path: none !important;
         background-color: transparent !important;
-        color: #9aa3ad !important;
+        color: var(--bao-text-muted-strong, #9aa3ad) !important;
         border: 1px solid transparent !important;
         border-radius: 16px !important;
         margin: 0 2px !important;
@@ -500,7 +500,7 @@ $bao-grey-label: #5a6a7a;
     .o_notebook .nav-tabs .nav-link { color: $bao-grey-label; }
     .o_notebook .nav-tabs .nav-link.active {
         color: var(--bao-text-heading, #1f1f1f);
-        background-color: #f0f0f0; // exact BAO active-tab chip
+        background-color: var(--bao-notebook-chip-bg, #f0f0f0); // exact BAO active-tab chip
         border-color: var(--bao-border-subtle, #e1e1e1);
         font-weight: 700;
     }
@@ -623,10 +623,10 @@ $bao-grey-label: #5a6a7a;
         font-weight: 700 !important;
     }
     .o_kanban_record .btn-primary {
-        background-color: #027f3d; // exact BAO dashboard green (sampled from ref)
-        border-color: #027f3d;
+        background-color: var(--bao-success-solid, #027f3d); // exact BAO dashboard green
+        border-color: var(--bao-success-solid, #027f3d);
         color: #ffffff;
-        &:hover, &:focus, &:active { background-color: #016733; border-color: #016733; color: #ffffff; }
+        &:hover, &:focus, &:active { background-color: var(--bao-success-solid-hover, #016733); border-color: var(--bao-success-solid-hover, #016733); color: #ffffff; }
     }
     // Stock dashboard counters: non-late links grey (native blue), late red.
     // Late rule placed AFTER so it wins at equal specificity.
@@ -635,9 +635,9 @@ $bao-grey-label: #5a6a7a;
     .o_kanban_record a[name$='_late'] { color: $bao-red; }
     // KPI dashboard tiles — semantic variants (cosmetic recolor of bootstrap bg-*)
     // Exact BAO aggregate-tile fills (sampled pixel-for-pixel from the kanban ref).
-    .o_kanban_record.bg-warning { background-color: #fffbcc !important; color: var(--bao-text-heading, #1f1f1f); border-color: #f4eda0; }
-    .o_kanban_record.bg-danger  { background-color: #fadada !important; color: $bao-red; border-color: #f3c1bd; }
-    .o_kanban_record.bg-success { background-color: #c0fedd !important; color: $bao-green-text; border-color: #a8e9c6; }
+    .o_kanban_record.bg-warning { background-color: var(--bao-warning-tile, #fffbcc) !important; color: var(--bao-text-heading, #1f1f1f); border-color: var(--bao-warning-tile-border, #f4eda0); }
+    .o_kanban_record.bg-danger  { background-color: var(--bao-danger-tile, #fadada) !important; color: var(--bao-danger-600, #{$bao-red}); border-color: var(--bao-danger-tile-border, #f3c1bd); }
+    .o_kanban_record.bg-success { background-color: var(--bao-success-tile, #c0fedd) !important; color: var(--bao-success-text, #{$bao-green-text}); border-color: var(--bao-success-tile-border, #a8e9c6); }
     // Purchase dashboard KPI tiles (native bootstrap bg-*-subtle) → exact BAO tones
     .purchase-dashboard-card.bg-warning-subtle { background-color: #fdf3a8 !important; color: var(--bao-text-heading, #1f1f1f) !important; }
     .purchase-dashboard-card.bg-danger-subtle  { background-color: #fbe0de !important; color: $bao-red !important; }
@@ -679,7 +679,7 @@ $bao-grey-label: #5a6a7a;
     .o-mail-Chatter-topbar .o-mail-Chatter-logNote,
     .o-mail-Chatter-topbar .o-mail-Chatter-activity,
     .o-mail-Chatter-topbar .o-mail-Chatter-scheduleActivity {
-        background-color: #e9e9e9;
+        background-color: var(--bao-neutral-chip, #e9e9e9);
         border-color: transparent;
         color: var(--bao-text-primary, #303030);
     }
