@@ -220,6 +220,7 @@ $bao-grey-label: #5a6a7a;
         padding: 5px 10px !important;
         line-height: 1.2 !important;
         border-radius: 8px;
+        margin-left: 6px; // small gap between save/discard AND from the breadcrumb (P27)
     }
     .o_control_panel .o_form_button_save.btn-light .fa,
     .o_control_panel .o_form_button_cancel.btn-light .fa,
@@ -421,16 +422,26 @@ $bao-grey-label: #5a6a7a;
         }
     }
 
-    // Statusbar — current stage = green success pill; workflow stays native arrows
+    // Statusbar (root fix on Odoo's o_arrow_button classes). BAO = FLAT pills, no
+    // native chevron/arrow clip-path: current = pale-green rounded pill (green
+    // text/border), upcoming = plain muted-grey labels. The native arrow uses
+    // clip-path + a lavender current fill — override both.
     .o_form_statusbar { background-color: var(--bao-surface-base, #ffffff); }
-    .o_form_statusbar .o_statusbar_status .o_arrow_button.o_arrow_button_current {
-        background-color: var(--bao-success-bg, #{$bao-green-bg});
-        border-color: var(--bao-success-border, #{$bao-green});
-        color: var(--bao-success-text, #{$bao-green-text});
+    .o_form_statusbar .o_statusbar_status .o_arrow_button {
+        clip-path: none !important;
+        background-color: transparent !important;
+        color: #9aa3ad !important;
+        border: 1px solid transparent !important;
+        border-radius: 16px !important;
+        margin: 0 2px !important;
+        padding: 4px 14px !important;
+        font-weight: 500;
     }
-    // Inactive workflow stages = muted grey (BAO), distinct from the green current.
-    .o_form_statusbar .o_statusbar_status .o_arrow_button:not(.o_arrow_button_current) {
-        color: #9aa3ad;
+    .o_form_statusbar .o_statusbar_status .o_arrow_button.o_arrow_button_current {
+        background-color: var(--bao-success-bg, #{$bao-green-bg}) !important;
+        color: var(--bao-success-text, #{$bao-green-text}) !important;
+        border-color: var(--bao-success-border, #{$bao-green}) !important;
+        font-weight: 700;
     }
 
     // Smart / stat buttons. In Odoo 19 the button box renders INSIDE the control
