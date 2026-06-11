@@ -356,6 +356,8 @@ $bao-grey-label: #5a6a7a;
         border-color: transparent !important;
         padding-left: 0;
     }
+    // Breathing room below the record title before the first field group (P14).
+    .o_form_sheet .oe_title { margin-bottom: 1rem; }
     // Field labels = semibold muted blue-grey
     .o_form_view label.o_form_label {
         color: $bao-grey-label;
@@ -632,6 +634,13 @@ $bao-grey-label: #5a6a7a;
         background-color: var(--bao-surface-muted, #f9f9f9);
         border: 1px solid var(--bao-border-subtle, #e1e1e1);
         border-radius: var(--bao-radius-sm, 10px);
+    }
+    // Chatter width: native side-by-side chatter takes ~35%; BAO uses a narrower
+    // panel. Cap the aside (only applies when side-by-side; native classes).
+    .o_form_renderer .o-mail-Form-chatter.o-aside,
+    .o_form_renderer .o-mail-ChatterContainer.o-aside {
+        flex: 0 0 32%;
+        max-width: 470px;
     }
     .o-mail-Chatter-sendMessage,
     .o-mail-Chatter-topbar .btn-primary {
