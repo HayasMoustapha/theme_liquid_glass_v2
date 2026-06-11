@@ -127,35 +127,34 @@ $bao-grey-label: #5a6a7a;
     // Search + filter toggle = ONE continuous white pill on blue. The search owns
     // the left half (rounded left, square right), the filter toggle owns the right
     // half (square left, rounded right), same white fill, no visible separation.
-    // BAO search = soft rounded RECTANGLE (small radius, sampled ~6px from the ref),
-    // NOT a pill. Search owns the left, filter toggler the right, same height, fused.
-    .o_control_panel .o_searchview {
+    // Search + filter toggler = ONE unified pill. Style the input-group PARENT
+    // (.o_cp_searchview) as the single white rounded-rect (BAO ~6px, sampled);
+    // children transparent/borderless so there's NO internal seam between the
+    // search and its dropdown toggler. overflow:hidden clips children to the radius.
+    .o_control_panel .o_cp_searchview {
         background-color: var(--bao-surface-base, #ffffff);
-        border: 1px solid transparent;
         border-radius: 6px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
-        color: var(--bao-text-primary, #303030);
+        overflow: hidden;
     }
-    // Square the search right edge ONLY when fused with the filter toggler.
-    .o_control_panel .o_searchview:has(+ .o_searchview_dropdown_toggler) {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
+    .o_control_panel .o_cp_searchview .o_searchview,
+    .o_control_panel .o_cp_searchview .o_searchview_dropdown_toggler {
+        background-color: transparent;
+        border: 0;
+        box-shadow: none;
+        border-radius: 0;
     }
-    .o_control_panel .o_searchview_dropdown_toggler {
-        background-color: var(--bao-surface-base, #ffffff);
-        border: 1px solid transparent;
-        border-top-right-radius: 6px;
-        border-bottom-right-radius: 6px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
-        color: var(--bao-text-secondary, #5a6a7a);
-    }
-    .o_control_panel .o_searchview .o_searchview_input { color: var(--bao-text-primary, #303030); }
-    // On focus, keep the border transparent (a white border on the search half only
-    // created a visible seam/height jump vs the fused filter toggler). Unified ring.
-    .o_control_panel .o_searchview:focus-within,
-    .o_control_panel .o_searchview:focus-within + .o_searchview_dropdown_toggler {
-        border-color: transparent;
+    .o_control_panel .o_cp_searchview .o_searchview_dropdown_toggler { color: var(--bao-text-secondary, #5a6a7a); }
+    .o_control_panel .o_cp_searchview .o_searchview .o_searchview_input { color: var(--bao-text-primary, #303030); }
+    // Focus ring on the unified parent (one pill, no per-half seam).
+    .o_control_panel .o_cp_searchview:focus-within {
         box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.55);
+    }
+    // Center the search filter dropdown under the search bar (scoped to the search
+    // menu class so no other dropdown is affected).
+    .o_search_bar_menu {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
     }
     .o_searchview .o_searchview_facet .o_searchview_facet_label {
         background-color: var(--bao-color-primary, #1357a0);
