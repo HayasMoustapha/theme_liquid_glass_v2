@@ -454,6 +454,25 @@ $bao-grey-label: #5a6a7a;
         border-color: var(--bao-success-border, #{$bao-green}) !important;
         font-weight: 700;
     }
+    // Kill the native arrow remnant: o_arrow_button::before draws a white clip-path
+    // chevron (the leftover "native trace") — neutralise both pseudo-elements.
+    .o_form_statusbar .o_statusbar_status .o_arrow_button::before,
+    .o_form_statusbar .o_statusbar_status .o_arrow_button::after {
+        display: none !important;
+    }
+    // BAO separator between consecutive stages: a muted chevron.
+    .o_form_statusbar .o_statusbar_status .o_arrow_button:not(.dropdown-toggle) + .o_arrow_button:not(.dropdown-toggle)::before {
+        display: inline-block !important;
+        content: "\f105"; // fa-angle-right
+        font-family: "FontAwesome";
+        color: var(--bao-border-default, #c9c9c9);
+        margin: 0 4px 0 -4px;
+        font-weight: 400;
+        clip-path: none !important;
+        background: transparent !important;
+        width: auto !important;
+        height: auto !important;
+    }
 
     // Smart / stat buttons. In Odoo 19 the button box renders INSIDE the control
     // panel (the BAO blue band), NOT the form sheet — so on blue they must be
@@ -621,7 +640,7 @@ $bao-grey-label: #5a6a7a;
     .o_kanban_record .oe_kanban_action .fw-bold.fs-4,
     .o_kanban_record a.oe_kanban_action > .fw-bold {
         color: var(--bao-text-heading, #1f1f1f);
-        font-weight: 700 !important;
+        font-weight: normal !important; // CreightonPro stays normal weight
     }
     .o_kanban_record .btn-primary {
         background-color: var(--bao-success-solid, #027f3d); // exact BAO dashboard green
