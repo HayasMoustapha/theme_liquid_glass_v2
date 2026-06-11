@@ -263,6 +263,35 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
     .o_content .o_data_row.text-info .o_data_cell {
         color: $bao-brand-600 !important;
     }
+    // P18 extension (2026-06-12): more baked-$primary surfaces that ignored a
+    // Settings recolour (proven by setting primary -> green, these stayed #1357a0):
+    // Bootstrap utilities .border-primary / .text-bg-primary, the Settings help
+    // links/icons (.o_doc_link, .o_web_settings_more, fa-question-circle), and the
+    // ACTIVE navbar nav-entry background. Re-point them all at the live var.
+    .border-primary { border-color: $bao-brand-600 !important; }
+    .text-bg-primary { background-color: $bao-brand-600 !important; }
+    .o_content .o_doc_link,
+    .o_content .o_doc_link .fa,
+    .o_content .o_web_settings_more,
+    .o_content .fa-question-circle.text-primary,
+    .o_setting_box .text-primary,
+    .app_settings_block .text-primary { color: $bao-brand-600 !important; }
+    // Active navbar nav-entry kept a baked #1357a0 fill -> follow the live primary
+    // with a subtle dark mix so the selected section still reads as active.
+    .o_main_navbar .o_menu_sections .o_nav_entry { background-color: transparent !important; }
+    .o_main_navbar .o_menu_sections .o_nav_entry.active,
+    .o_main_navbar .o_menu_sections .o-dropdown--active .o_nav_entry,
+    .o_main_navbar .o_menu_sections .show > .o_nav_entry {
+        background-color: color-mix(in srgb, #000 14%, var(--bao-color-primary, #1357a0)) !important;
+    }
+    // Content anchor links inherit Bootstrap's baked $primary link colour (settings
+    // dev-tool links, "Activer le mode développeur", footer credits, arrow icons).
+    // Re-point them at the live var so links follow a Settings recolour too.
+    .o_content a:not(.btn):not(.o_form_uri):not(.dropdown-item):not(.o_data_cell),
+    .o_content .oe_link,
+    .o_content .oi-arrow-right {
+        color: $bao-brand-600 !important;
+    }
 
     // ============================================================
     // 2. CONTROL PANEL = part of the BAO blue chrome band (continuous with
