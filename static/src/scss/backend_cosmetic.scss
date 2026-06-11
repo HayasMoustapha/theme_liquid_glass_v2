@@ -167,6 +167,30 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
     .o_main_navbar .o_menu_systray .dropdown-toggle {
         color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 92%, transparent);
     }
+    // ── App launcher (apps popover, enhanced by ss_enterprise_theme): the navbar
+    // (z=10001) sits ABOVE the launcher gradient popover, but its white-on-blue
+    // contents are invisible on the light launcher. On body.et_launcher_open
+    // (toggled in home_menu_icons.js) keep the blue bar + nav sections + brand
+    // hidden, and show ONLY the apps-menu toggle + systray in DARK BAO ink adapted
+    // to the light gradient — matching Odoo Enterprise's home-menu top bar. (B3.)
+    &.et_launcher_open .o_main_navbar {
+        background-color: transparent !important;
+        box-shadow: none !important;
+    }
+    &.et_launcher_open .o_main_navbar .o_menu_sections,
+    &.et_launcher_open .o_main_navbar .o_menu_brand { visibility: hidden !important; }
+    &.et_launcher_open .o_main_navbar .o_navbar_apps_menu,
+    &.et_launcher_open .o_main_navbar .o_navbar_apps_menu i,
+    &.et_launcher_open .o_main_navbar .o_menu_systray,
+    &.et_launcher_open .o_main_navbar .o_menu_systray a,
+    &.et_launcher_open .o_main_navbar .o_menu_systray button,
+    &.et_launcher_open .o_main_navbar .o_menu_systray .dropdown-toggle,
+    &.et_launcher_open .o_main_navbar .o_menu_systray i,
+    &.et_launcher_open .o_main_navbar .o_menu_systray .fa,
+    &.et_launcher_open .o_main_navbar .o_menu_systray .oi {
+        color: var(--bao-text-primary, #303030) !important;
+        visibility: visible !important;
+    }
     // BAO shows a FontAwesome chevron "v" on each top-menu dropdown; native Odoo 19
     // renders no caret. Use the FA glyph (not a CSS border triangle).
     .o_main_navbar .o_menu_sections .dropdown-toggle::after {
