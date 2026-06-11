@@ -47,6 +47,14 @@ $bao-grey-label: #5a6a7a;
     .o_main_navbar .o_menu_systray .dropdown-toggle {
         color: rgba(255, 255, 255, 0.92);
     }
+    // BAO avatars are circular (Odoo renders them as .rounded = 8px)
+    .o_main_navbar .o_user_avatar,
+    .o_main_navbar .o_avatar,
+    .o_main_navbar .o_user_menu img,
+    .o-mail-Message-avatar img,
+    .o-mail-Chatter .o_avatar {
+        border-radius: 50% !important;
+    }
 
     // ============================================================
     // 2. CONTROL PANEL = part of the BAO blue chrome band (continuous with
@@ -297,6 +305,12 @@ $bao-grey-label: #5a6a7a;
     .o_list_renderer .o_data_row.o_data_row_selected {
         background-color: var(--bao-success-bg, #{$bao-green-bg});
     }
+    // List cell text = BAO dark (BAO refs show reference/name cells dark, not teal links)
+    .o_list_renderer .o_data_cell,
+    .o_list_renderer .o_data_cell .o_field_widget,
+    .o_list_renderer .o_data_cell a.o_form_uri {
+        color: var(--bao-text-primary, #303030);
+    }
     // Footer grand total
     .o_list_table tfoot {
         color: var(--bao-text-heading, #1f1f1f);
@@ -322,6 +336,19 @@ $bao-grey-label: #5a6a7a;
     .badge.text-bg-success { background-color: $bao-green; color: #ffffff; }
     .o_field_badge .badge.text-bg-danger,
     .badge.text-bg-danger { background-color: $bao-red; color: #ffffff; }
+    // List draft/neutral state badge = BAO soft grey (Odoo maps it to text-bg-info = brand blue)
+    .o_list_renderer .badge.text-bg-info,
+    .o_list_renderer .o_field_badge .badge.text-bg-info {
+        background-color: #e7e7e7 !important;
+        color: #5a5a5a !important;
+    }
+    // Workflow / control-panel action buttons: BAO soft rounding, normal weight
+    .o_statusbar_buttons .btn,
+    .o_cp_action_menus .btn,
+    .o_control_panel .o_cp_action_menus .dropdown-toggle {
+        border-radius: 8px;
+    }
+    .o_statusbar_buttons .btn { font-weight: 500; }
 
     // ============================================================
     // 9. KANBAN
@@ -362,6 +389,14 @@ $bao-grey-label: #5a6a7a;
         color: var(--bao-text-heading, #1f1f1f);
         font-weight: 700;
         &:hover, &:focus { background-color: var(--bao-color-accent-hover, #f4df00); color: var(--bao-text-heading, #1f1f1f); }
+    }
+    // Chatter topbar Note / Activité tabs = BAO grey pills
+    .o-mail-Chatter-topbar button.btn-secondary,
+    .o-mail-Chatter-topbar .o-mail-Chatter-logNote,
+    .o-mail-Chatter-topbar .o-mail-Chatter-activity {
+        background-color: #e9e9e9;
+        border-color: transparent;
+        color: var(--bao-text-primary, #303030);
     }
 
     // ============================================================
