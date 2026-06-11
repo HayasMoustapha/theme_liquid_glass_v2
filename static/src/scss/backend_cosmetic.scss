@@ -379,6 +379,26 @@ $bao-grey-label: #5a6a7a;
     }
     // Breathing room below the record title before the first field group (P14).
     .o_form_sheet .oe_title { margin-bottom: 1rem; }
+    // bao_purchase: "Arrivée prévue" (date) + "Délai de livraison" (label + value +
+    // unit) are jammed into one .o_row[name=date_planned_div] and collide (P3/P28).
+    // Stack the date on its own line (top); the delay label/value/unit wrap to the
+    // line below, grouped + gap-spaced so the number and the unit no longer overlap.
+    .o_form_view .o_cell .o_row[name="date_planned_div"] {
+        flex-wrap: wrap;
+        align-items: center;
+        column-gap: 8px;
+        row-gap: 6px;
+    }
+    .o_form_view .o_cell .o_row[name="date_planned_div"] > [name="date_planned"] {
+        flex: 0 0 100%;
+    }
+    .o_form_view .o_cell .o_row[name="date_planned_div"] > [name="x_delivery_delay_value"] {
+        flex: 0 0 56px;
+    }
+    .o_form_view .o_cell .o_row[name="date_planned_div"] > [name="x_delivery_delay_type"] {
+        flex: 0 1 auto;
+        min-width: 90px;
+    }
     // Field labels = semibold muted blue-grey
     .o_form_view label.o_form_label {
         color: $bao-grey-label;
