@@ -311,9 +311,13 @@ $bao-grey-label: #5a6a7a;
     // Dialog field inputs: the form-sheet fill rule is scoped to .o_form_sheet,
     // which a dialog has no — so reproduce the BAO filled-box look in .modal-body.
     .o_dialog .modal-body {
+        // NB: exclude position-absolute spans — Odoo 19 monetary fields render the
+        // "$" prefix as <span class="o_input position-absolute pe-none"> OVERLAYING
+        // the real input; a bg/border there made an opaque layer that hid the value
+        // and blocked editing (P24/P25). Only real inputs get the fill.
         .o_field_widget input.o_input,
         .o_field_widget textarea.o_input,
-        .o_field_widget .o_input:not(.o-autocomplete--input),
+        .o_field_widget .o_input:not(.o-autocomplete--input):not(.position-absolute),
         .o_field_widget select,
         .o_field_widget .o-autocomplete--input {
             background-color: var(--bao-surface-muted, #f9f9f9);
@@ -321,6 +325,7 @@ $bao-grey-label: #5a6a7a;
             border-radius: 6px;
             padding: 5px 10px;
         }
+        .o_field_widget .o_input.position-absolute { background: transparent !important; border: 0 !important; padding: 0 !important; }
     }
 
     // ============================================================
@@ -397,9 +402,13 @@ $bao-grey-label: #5a6a7a;
 
     // Fields = filled light boxes (no layout change)
     .o_form_view .o_form_sheet {
+        // NB: exclude position-absolute spans — Odoo 19 monetary fields render the
+        // "$" prefix as <span class="o_input position-absolute pe-none"> OVERLAYING
+        // the real input; a bg/border there made an opaque layer that hid the value
+        // and blocked editing (P24/P25). Only real inputs get the fill.
         .o_field_widget input.o_input,
         .o_field_widget textarea.o_input,
-        .o_field_widget .o_input:not(.o-autocomplete--input),
+        .o_field_widget .o_input:not(.o-autocomplete--input):not(.position-absolute),
         .o_field_widget select,
         .o_field_widget .o-autocomplete--input {
             background-color: var(--bao-surface-muted, #f9f9f9);
@@ -407,6 +416,7 @@ $bao-grey-label: #5a6a7a;
             border-radius: 6px;
             padding: 5px 10px;
         }
+        .o_field_widget .o_input.position-absolute { background: transparent !important; border: 0 !important; padding: 0 !important; }
         .o_field_widget .o-autocomplete,
         .o_field_widget .o_field_many2one_selection .o-autocomplete {
             border: 0;
