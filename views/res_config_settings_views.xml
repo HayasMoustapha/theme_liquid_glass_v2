@@ -82,6 +82,23 @@
                                 </div>
                             </div>
                         </setting>
+                        <setting string="Status &amp; Semantic Colors" help="BAO status colours, KPI tiles, neutral chips and the title font. Empty fields inherit the BAO defaults.">
+                            <div class="content-group">
+                                <div class="row mt8"><label for="bao_success_solid" class="col-lg-4 o_light_label"/><field name="bao_success_solid" widget="color" placeholder="#027f3d"/></div>
+                                <div class="row mt8"><label for="bao_success_bg" class="col-lg-4 o_light_label"/><field name="bao_success_bg" widget="color" placeholder="#e4f9f0"/></div>
+                                <div class="row mt8"><label for="bao_success_text" class="col-lg-4 o_light_label"/><field name="bao_success_text" widget="color" placeholder="#027f3d"/></div>
+                                <div class="row mt8"><label for="bao_danger_600" class="col-lg-4 o_light_label"/><field name="bao_danger_600" widget="color" placeholder="#d94f45"/></div>
+                                <div class="row mt8"><label for="bao_warning_tile" class="col-lg-4 o_light_label"/><field name="bao_warning_tile" widget="color" placeholder="#fffbcc"/></div>
+                                <div class="row mt8"><label for="bao_danger_tile" class="col-lg-4 o_light_label"/><field name="bao_danger_tile" widget="color" placeholder="#fadada"/></div>
+                                <div class="row mt8"><label for="bao_success_tile" class="col-lg-4 o_light_label"/><field name="bao_success_tile" widget="color" placeholder="#c0fedd"/></div>
+                                <div class="row mt8"><label for="bao_neutral_chip" class="col-lg-4 o_light_label"/><field name="bao_neutral_chip" widget="color" placeholder="#e9e9e9"/></div>
+                                <div class="row mt8"><label for="bao_neutral_soft" class="col-lg-4 o_light_label"/><field name="bao_neutral_soft" widget="color" placeholder="#dcdcdc"/></div>
+                                <div class="row mt8"><label for="bao_text_muted_strong" class="col-lg-4 o_light_label"/><field name="bao_text_muted_strong" widget="color" placeholder="#9aa3ad"/></div>
+                                <div class="row mt8"><label for="bao_help_badge_bg" class="col-lg-4 o_light_label"/><field name="bao_help_badge_bg" widget="color" placeholder="#e7effa"/></div>
+                                <div class="row mt8"><label for="bao_notebook_chip_bg" class="col-lg-4 o_light_label"/><field name="bao_notebook_chip_bg" widget="color" placeholder="#f0f0f0"/></div>
+                                <div class="row mt8"><label for="bao_font_title" class="col-lg-4 o_light_label"/><field name="bao_font_title" placeholder="&quot;CreightonPro&quot;, sans-serif"/></div>
+                            </div>
+                        </setting>
                     </block>
                     <block title="Families" name="bao_family_theme">
                         <setting string="Family Overrides" help="Configure only the approved BAO family token overrides. Empty fields inherit global values.">

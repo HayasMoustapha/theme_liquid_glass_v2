@@ -81,6 +81,20 @@ class ResConfigSettings(models.TransientModel):
         readonly=False,
         groups="base.group_system",
     )
+    # Semantic / BAO-specific tokens (P18) — configurable status colours, tiles, font.
+    bao_success_solid = fields.Char(related="bao_theme_config_id.success_solid", readonly=False, groups="base.group_system")
+    bao_success_bg = fields.Char(related="bao_theme_config_id.success_bg", readonly=False, groups="base.group_system")
+    bao_success_text = fields.Char(related="bao_theme_config_id.success_text", readonly=False, groups="base.group_system")
+    bao_danger_600 = fields.Char(related="bao_theme_config_id.danger_600", readonly=False, groups="base.group_system")
+    bao_warning_tile = fields.Char(related="bao_theme_config_id.warning_tile", readonly=False, groups="base.group_system")
+    bao_danger_tile = fields.Char(related="bao_theme_config_id.danger_tile", readonly=False, groups="base.group_system")
+    bao_success_tile = fields.Char(related="bao_theme_config_id.success_tile", readonly=False, groups="base.group_system")
+    bao_neutral_chip = fields.Char(related="bao_theme_config_id.neutral_chip", readonly=False, groups="base.group_system")
+    bao_neutral_soft = fields.Char(related="bao_theme_config_id.neutral_soft", readonly=False, groups="base.group_system")
+    bao_text_muted_strong = fields.Char(related="bao_theme_config_id.text_muted_strong", readonly=False, groups="base.group_system")
+    bao_help_badge_bg = fields.Char(related="bao_theme_config_id.help_badge_bg", readonly=False, groups="base.group_system")
+    bao_notebook_chip_bg = fields.Char(related="bao_theme_config_id.notebook_chip_bg", readonly=False, groups="base.group_system")
+    bao_font_title = fields.Char(related="bao_theme_config_id.font_title", readonly=False, groups="base.group_system")
     bao_module_override_ids = fields.One2many(
         related="bao_theme_config_id.module_override_ids",
         readonly=False,

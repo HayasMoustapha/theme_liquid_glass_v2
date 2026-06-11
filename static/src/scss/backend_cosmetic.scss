@@ -449,7 +449,7 @@ $bao-grey-label: #5a6a7a;
         background-color: transparent !important;
         color: var(--bao-text-muted-strong, #9aa3ad) !important;
         border: 1px solid transparent !important;
-        border-radius: 16px !important;
+        border-radius: 6px !important;
         margin: 0 2px !important;
         padding: 4px 14px !important;
         font-weight: 500;
@@ -467,12 +467,12 @@ $bao-grey-label: #5a6a7a;
         display: none !important;
     }
     // BAO separator between consecutive stages: a muted chevron.
+    // BAO separator between stages is a dash "—" (not a chevron).
     .o_form_statusbar .o_statusbar_status .o_arrow_button:not(.dropdown-toggle) + .o_arrow_button:not(.dropdown-toggle)::before {
         display: inline-block !important;
-        content: "\f105"; // fa-angle-right
-        font-family: "FontAwesome";
-        color: var(--bao-border-default, #c9c9c9);
-        margin: 0 4px 0 -4px;
+        content: "—";
+        color: var(--bao-text-muted-strong, #9aa3ad);
+        margin: 0 6px 0 -2px;
         font-weight: 400;
         clip-path: none !important;
         background: transparent !important;

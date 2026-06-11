@@ -40,6 +40,21 @@ TOKEN_FIELDS = (
     "shadow_popover",
     "shadow_medium",
     "shadow_heavy",
+    # Semantic / BAO-specific tokens (P18) — drive the runtime vars used by
+    # backend_cosmetic.scss so every colour/font is configurable, no hardcoded hex.
+    "success_solid",
+    "success_bg",
+    "success_text",
+    "danger_600",
+    "warning_tile",
+    "danger_tile",
+    "success_tile",
+    "neutral_chip",
+    "neutral_soft",
+    "text_muted_strong",
+    "help_badge_bg",
+    "notebook_chip_bg",
+    "font_title",
 )
 
 COLOR_TOKEN_FIELDS = (
@@ -64,6 +79,18 @@ COLOR_TOKEN_FIELDS = (
     "text_muted",
     "text_soft",
     "text_disabled",
+    "success_solid",
+    "success_bg",
+    "success_text",
+    "danger_600",
+    "warning_tile",
+    "danger_tile",
+    "success_tile",
+    "neutral_chip",
+    "neutral_soft",
+    "text_muted_strong",
+    "help_badge_bg",
+    "notebook_chip_bg",
 )
 
 CSS_VAR_BY_FIELD = {
@@ -100,6 +127,19 @@ CSS_VAR_BY_FIELD = {
     "shadow_popover": "--bao-shadow-popover",
     "shadow_medium": "--bao-shadow-medium",
     "shadow_heavy": "--bao-shadow-heavy",
+    "success_solid": "--bao-success-solid",
+    "success_bg": "--bao-success-bg",
+    "success_text": "--bao-success-text",
+    "danger_600": "--bao-danger-600",
+    "warning_tile": "--bao-warning-tile",
+    "danger_tile": "--bao-danger-tile",
+    "success_tile": "--bao-success-tile",
+    "neutral_chip": "--bao-neutral-chip",
+    "neutral_soft": "--bao-neutral-soft",
+    "text_muted_strong": "--bao-text-muted-strong",
+    "help_badge_bg": "--bao-help-badge-bg",
+    "notebook_chip_bg": "--bao-notebook-chip-bg",
+    "font_title": "--bao-font-title",
 }
 
 FAMILY_SELECTION = [
@@ -199,6 +239,20 @@ class BaoThemeTokenMixin(models.AbstractModel):
     shadow_popover = fields.Char(string="Popover Shadow")
     shadow_medium = fields.Char(string="Medium Shadow")
     shadow_heavy = fields.Char(string="Heavy Shadow")
+    # Semantic / BAO-specific tokens (P18)
+    success_solid = fields.Char(string="Success Solid")
+    success_bg = fields.Char(string="Success Background")
+    success_text = fields.Char(string="Success Text")
+    danger_600 = fields.Char(string="Danger Color")
+    warning_tile = fields.Char(string="Warning Tile")
+    danger_tile = fields.Char(string="Danger Tile")
+    success_tile = fields.Char(string="Success Tile")
+    neutral_chip = fields.Char(string="Neutral Chip")
+    neutral_soft = fields.Char(string="Neutral Soft")
+    text_muted_strong = fields.Char(string="Strong Muted Text")
+    help_badge_bg = fields.Char(string="Help Badge Background")
+    notebook_chip_bg = fields.Char(string="Notebook Chip Background")
+    font_title = fields.Char(string="Title Font")
 
     @api.model
     def _bao_token_fields(self):
