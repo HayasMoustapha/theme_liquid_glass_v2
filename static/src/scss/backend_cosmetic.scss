@@ -160,11 +160,15 @@ $bao-grey-label: #5a6a7a;
         color: #ffffff;
     }
     .o_facet_remove { color: var(--bao-color-primary, #1357a0); }
-    // View switcher on blue: white glyphs; active = white pill, primary glyph
+    // View switcher on blue: inactive = TRANSPARENT (blue shows through) + white
+    // glyph; active = white pill with primary glyph. Native btn-secondary gives the
+    // inactive a light-grey fill that hides the white glyph — force transparent.
     .o_control_panel .o_cp_switch_buttons .o_switch_view {
+        background-color: transparent;
         color: rgba(255, 255, 255, 0.85);
         border-color: rgba(255, 255, 255, 0.30);
     }
+    .o_control_panel .o_cp_switch_buttons .o_switch_view:hover { background-color: rgba(255, 255, 255, 0.15); }
     .o_control_panel .o_cp_switch_buttons .o_switch_view.active {
         background-color: #ffffff;
         color: var(--bao-color-primary, #1357a0);
