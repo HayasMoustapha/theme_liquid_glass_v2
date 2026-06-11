@@ -30,6 +30,14 @@ $bao-grey-label: #5a6a7a;
 
 .o_web_client {
 
+    // App-launcher background gradient is OWNED + MANAGED here (BAO theme), driven
+    // by the live --bao-color-primary; the complementary ss_enterprise_theme
+    // launcher consumes var(--bao-launcher-bg). Change it once, here.
+    --bao-launcher-bg: linear-gradient(135deg,
+        color-mix(in srgb, var(--bao-color-primary, #1357a0) 16%, #ffffff) 0%,
+        color-mix(in srgb, var(--bao-color-primary, #1357a0) 10%, #ffffff) 50%,
+        color-mix(in srgb, var(--bao-color-primary, #1357a0) 22%, #ffffff) 100%);
+
     // ============================================================
     // 1. NAVBAR (the native top blue band)
     // ============================================================
