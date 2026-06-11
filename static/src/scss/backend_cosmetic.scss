@@ -420,15 +420,36 @@
         column-gap: 8px;
         row-gap: 6px;
     }
+    // 1) the date ("Arrivée prévue") takes its own full line.
     .o_form_view .o_cell .o_row[name="date_planned_div"] > [name="date_planned"] {
         flex: 0 0 100%;
     }
-    .o_form_view .o_cell .o_row[name="date_planned_div"] > [name="x_delivery_delay_value"] {
-        flex: 0 0 56px;
+    // 2) the "Délai de livraison" label sits inline on the next line.
+    .o_form_view .o_cell .o_row[name="date_planned_div"] > label[for^="x_delivery_delay"] {
+        flex: 0 0 auto;
+        margin: 0;
     }
-    .o_form_view .o_cell .o_row[name="date_planned_div"] > [name="x_delivery_delay_type"] {
-        flex: 0 1 auto;
-        min-width: 90px;
+    // 3) the value+unit live in a NESTED .o_row (grandchildren) — use descendant
+    //    selectors (the old > child rules were dead) so they actually apply.
+    .o_form_view .o_cell .o_row[name="date_planned_div"] > .o_row {
+        flex: 1 1 auto;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+    }
+    .o_form_view .o_cell .o_row[name="date_planned_div"] [name="x_delivery_delay_value"] {
+        flex: 0 0 64px;
+    }
+    .o_form_view .o_cell .o_row[name="date_planned_div"] [name="x_delivery_delay_value"] .o_input {
+        width: 64px;
+    }
+    .o_form_view .o_cell .o_row[name="date_planned_div"] [name="x_delivery_delay_type"] {
+        flex: 1 1 auto;
+        min-width: 132px;     // enough for "Jours calendaires" — no truncation
+    }
+    .o_form_view .o_cell .o_row[name="date_planned_div"] [name="x_delivery_delay_type"] .o_select_menu {
+        width: 100% !important;
     }
     // Field labels = semibold muted blue-grey
     .o_form_view label.o_form_label {
