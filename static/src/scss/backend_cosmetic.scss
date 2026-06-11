@@ -211,6 +211,13 @@ $bao-grey-label: #5a6a7a;
         color: #ffffff;
         &:hover, &:focus, &:active { background-color: #02913f; border-color: #02913f; color: #ffffff; }
     }
+    // BAO dialog secondary ("Ignorer") = solid mid-grey pill (native is near-white).
+    .o_dialog .modal-footer .btn-secondary,
+    .modal-footer .btn-secondary {
+        background-color: #dcdcdc;
+        border-color: #dcdcdc;
+        color: var(--bao-text-primary, #303030);
+    }
 
     // ============================================================
     // 4. APP CONTENT BACKGROUND
@@ -242,10 +249,16 @@ $bao-grey-label: #5a6a7a;
         color: $bao-grey-label;
         font-weight: 600;
     }
-    // Field help "?" badge
+    // Field help "?" badge: BAO renders it as a round pale-blue chip with a blue
+    // "?", baseline-aligned. Native is a bare text-info (teal) sup with !important,
+    // so the colour override needs !important too.
     .o_form_view .o_field_widget .o_field_help,
     .o_form_view label.o_form_label sup {
-        color: var(--bao-color-primary, #1357a0);
+        color: var(--bao-color-primary, #1357a0) !important;
+        background-color: #e7effa;
+        border-radius: 50%;
+        font-weight: 700;
+        vertical-align: middle;
     }
     // BAO ref: contact icons (email / phone / mobile) next to fields are RED,
     // not the native text-primary blue. Scoped to the form view.
@@ -437,6 +450,7 @@ $bao-grey-label: #5a6a7a;
     .o_kanban_record .oe_kanban_action .fw-bold.fs-4,
     .o_kanban_record a.oe_kanban_action > .fw-bold {
         color: var(--bao-text-heading, #1f1f1f);
+        font-weight: 700;
     }
     .o_kanban_record .btn-primary {
         background-color: var(--bao-success-600, #{$bao-green});
@@ -444,6 +458,9 @@ $bao-grey-label: #5a6a7a;
         color: #ffffff;
         &:hover, &:focus, &:active { background-color: #02913f; border-color: #02913f; color: #ffffff; }
     }
+    // Stock dashboard counters: non-late links grey (native blue), late red.
+    // Late rule placed AFTER so it wins at equal specificity.
+    .o_kanban_record .stock-overview-links a { color: $bao-grey-label; }
     .o_kanban_record a[name='get_action_picking_tree_late'],
     .o_kanban_record a[name$='_late'] { color: $bao-red; }
     // KPI dashboard tiles — semantic variants (cosmetic recolor of bootstrap bg-*)
@@ -477,9 +494,12 @@ $bao-grey-label: #5a6a7a;
         &:hover, &:focus { background-color: var(--bao-color-accent-hover, #f4df00); color: var(--bao-text-heading, #1f1f1f); }
     }
     // Chatter topbar Note / Activité tabs = BAO grey pills
+    // Note + Activité = uniform grey pills. Odoo 19 schedule-activity button is
+    // .o-mail-Chatter-scheduleActivity (the old .o-mail-Chatter-activity misses it).
     .o-mail-Chatter-topbar button.btn-secondary,
     .o-mail-Chatter-topbar .o-mail-Chatter-logNote,
-    .o-mail-Chatter-topbar .o-mail-Chatter-activity {
+    .o-mail-Chatter-topbar .o-mail-Chatter-activity,
+    .o-mail-Chatter-topbar .o-mail-Chatter-scheduleActivity {
         background-color: #e9e9e9;
         border-color: transparent;
         color: var(--bao-text-primary, #303030);
