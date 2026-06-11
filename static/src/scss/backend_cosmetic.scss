@@ -254,6 +254,7 @@ $bao-grey-label: #5a6a7a;
         border-color: var(--bao-color-accent, #fde900);
         color: var(--bao-text-heading, #1f1f1f);
         font-weight: 700;
+        padding: 5px 20px; // BAO gives the create button generous horizontal padding
 
         &:hover, &:focus, &:active, &:focus-visible {
             background-color: var(--bao-color-accent-hover, #f4df00);
