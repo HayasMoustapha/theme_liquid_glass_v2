@@ -92,6 +92,40 @@
     }
 
     // ============================================================
+    // 1b. NATIVE primary-derived components -> BAO runtime var (P18 systematic).
+    // Odoo bakes the brand hex (#1357a0) at COMPILE time (primary_variables.scss)
+    // into native Bootstrap components, so a Settings recolour does NOT reach
+    // them (navbar menu buttons, .text-info rows/badges, links, smart-button
+    // icons stayed blue when --bao-color-primary changed). Re-point them at the
+    // LIVE var so every primary-coloured surface follows Settings dynamically.
+    // ============================================================
+    // Navbar menu-section buttons keep a baked navbar background -> make them
+    // transparent so the navbar's own var(--bao-color-primary) shows through.
+    .o_main_navbar .o_menu_sections .dropdown-toggle,
+    .o_main_navbar .o_menu_sections .o-dropdown,
+    .o_main_navbar .o_menu_sections .btn {
+        background-color: transparent !important;
+    }
+    // Primary-coloured text / links / smart-button icons in the CONTENT area
+    // (below the blue chrome, which has its own on-primary handling) -> live var.
+    .o_content .text-info,
+    .o_content .btn-link,
+    .o_content .o_form_uri,
+    .o_content a.o_form_uri,
+    .o_content .text-primary,
+    .o_content .oe_stat_button .o_button_icon,
+    .o_content .o-form-buttonbox .o_button_icon,
+    .o_content .o_field_widget .o_button_icon {
+        color: $bao-brand-600 !important;
+    }
+    // decoration-info list rows + their cells follow the live var too.
+    .o_content .o_list_view .text-info,
+    .o_content .o_data_row.text-info,
+    .o_content .o_data_row.text-info .o_data_cell {
+        color: $bao-brand-600 !important;
+    }
+
+    // ============================================================
     // 2. CONTROL PANEL = part of the BAO blue chrome band (continuous with
     //    the navbar). This is THE defining BAO trait: breadcrumb / search /
     //    buttons / switcher / pager all sit on blue. Achieved cosmetically
