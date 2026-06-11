@@ -127,15 +127,16 @@ $bao-grey-label: #5a6a7a;
     // Search + filter toggle = ONE continuous white pill on blue. The search owns
     // the left half (rounded left, square right), the filter toggle owns the right
     // half (square left, rounded right), same white fill, no visible separation.
+    // BAO search = soft rounded RECTANGLE (small radius, sampled ~6px from the ref),
+    // NOT a pill. Search owns the left, filter toggler the right, same height, fused.
     .o_control_panel .o_searchview {
         background-color: var(--bao-surface-base, #ffffff);
         border: 1px solid transparent;
-        border-radius: 20px;
+        border-radius: 6px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
         color: var(--bao-text-primary, #303030);
     }
-    // Square the search right edge ONLY when it is fused with the filter toggler;
-    // standalone (e.g. Settings) keeps the full pill radius.
+    // Square the search right edge ONLY when fused with the filter toggler.
     .o_control_panel .o_searchview:has(+ .o_searchview_dropdown_toggler) {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
@@ -143,8 +144,8 @@ $bao-grey-label: #5a6a7a;
     .o_control_panel .o_searchview_dropdown_toggler {
         background-color: var(--bao-surface-base, #ffffff);
         border: 1px solid transparent;
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
         color: var(--bao-text-secondary, #5a6a7a);
     }
@@ -307,8 +308,13 @@ $bao-grey-label: #5a6a7a;
     }
     .o_dialog .modal-header .modal-title {
         color: var(--bao-text-heading, #1f1f1f);
-        font-weight: 700;
+        font-weight: normal; // CreightonPro title stays normal weight
     }
+    // Modal internal breathing room — content was glued to the edges; pad the body
+    // and header so components have reasonable inset (the dialog has room to spare).
+    .o_dialog .modal-body { padding: 1.25rem 1.5rem !important; }
+    .o_dialog .modal-header { padding: 1rem 1.5rem !important; }
+    .o_dialog .modal-footer { padding: 0.85rem 1.5rem !important; }
     // Dialog field inputs: the form-sheet fill rule is scoped to .o_form_sheet,
     // which a dialog has no — so reproduce the BAO filled-box look in .modal-body.
     .o_dialog .modal-body {
@@ -641,6 +647,7 @@ $bao-grey-label: #5a6a7a;
     .o_kanban_record a.oe_kanban_action > .fw-bold {
         color: var(--bao-text-heading, #1f1f1f);
         font-weight: normal !important; // CreightonPro stays normal weight
+        font-size: 20px !important; // BAO inventory card title (native fs-4 ~16.8px was too small)
     }
     .o_kanban_record .btn-primary {
         background-color: var(--bao-success-solid, #027f3d); // exact BAO dashboard green
