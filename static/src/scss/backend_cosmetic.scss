@@ -181,11 +181,13 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
         vertical-align: baseline;
         color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 92%, transparent);
     }
-    // BAO display font (CreightonPro = "Criterion" in the BAO charter) on ALL title
-    // surfaces: module/app brand, breadcrumb leaf, form record title, kanban &
+    // BAO display font (CreightonPro = "Criterion" in the BAO charter) on the title
+    // surfaces: module/app brand, control-panel SECTION title (breadcrumb first item,
+    // NOT the long record-ref leaf — B5 fix 2026-06-11), form record title, kanban &
     // dashboard card titles. Via --bao-font-title so it stays configurable (P18).
     .o_main_navbar .o_menu_brand,
-    .o_control_panel .o_last_breadcrumb_item,
+    .o_control_panel .o_breadcrumb .breadcrumb-item:first-child,
+    .o_control_panel .o_breadcrumb:not(:has(.breadcrumb-item)) .o_last_breadcrumb_item,
     .o_form_sheet .oe_title h1,
     .o_kanban_record .o_kanban_record_title,
     .o_kanban_record a.oe_kanban_action .fw-bold {
