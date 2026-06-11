@@ -715,31 +715,35 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
     .o_control_panel .o-form-buttonbox .oe_stat_button .o_button_icon {
         color: var(--bao-on-primary, #ffffff);
     }
-    // BAO smart-band signature: the stat buttons carry a RESTING translucent
-    // lighter-blue fill (~rgba white 0.18 over #1357a0 = ~#3d79b0), giving the
-    // raised glass container look — not just outlines.
-    .o_control_panel .o-form-buttonbox .oe_stat_button,
-    .o_control_panel .oe_button_box .oe_stat_button {
+    // BAO smart-band signature: the BAO reference shows ONE unified rounded
+    // translucent bar with thin internal vertical separators, NOT individual pills.
+    // So the CONTAINER carries the translucent fill + rounding; each stat sits flat
+    // inside, divided by a hairline. (B2 parity fix, 2026-06-11.)
+    .o_control_panel .o-form-buttonbox,
+    .o_control_panel .oe_button_box {
         background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 18%, transparent);
-        border-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 28%, transparent);
+        border: 1px solid color-mix(in srgb, var(--bao-on-primary, #ffffff) 28%, transparent);
         border-radius: 6px;
-        overflow: hidden;          // clip the translucent fill to the pill (no bleed)
+        overflow: hidden;          // clip children to the unified pill (no bleed)
     }
-    .o_control_panel .o-form-buttonbox .oe_stat_button:hover,
-    .o_control_panel .oe_button_box .oe_stat_button:hover { background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 30%, transparent); }
-    // The "More" overflow TOGGLE (.o_button_more) on the blue band must match the
-    // other stat buttons (it defaulted to a grey btn-secondary + near-black bolt
-    // icon, which clashed). Translucent white pill + white icon.
+    // Each stat + the "More" toggle = FLAT, transparent, white, split by a hairline.
+    .o_control_panel .o-form-buttonbox .oe_stat_button,
+    .o_control_panel .oe_button_box .oe_stat_button,
     .o_control_panel .o-form-buttonbox .o_button_more,
     .o_control_panel .oe_button_box .o_button_more {
-        background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 18%, transparent) !important;
-        border: 1px solid color-mix(in srgb, var(--bao-on-primary, #ffffff) 28%, transparent) !important;
+        background-color: transparent !important;
+        border: 0 !important;
+        border-right: 1px solid color-mix(in srgb, var(--bao-on-primary, #ffffff) 22%, transparent) !important;
+        border-radius: 0 !important;
         color: var(--bao-on-primary, #ffffff) !important;
-        border-radius: 6px !important;
     }
+    .o_control_panel .o-form-buttonbox > :last-child,
+    .o_control_panel .oe_button_box > :last-child { border-right: 0 !important; }
+    .o_control_panel .o-form-buttonbox .oe_stat_button:hover,
+    .o_control_panel .oe_button_box .oe_stat_button:hover,
     .o_control_panel .o-form-buttonbox .o_button_more:hover,
     .o_control_panel .oe_button_box .o_button_more:hover {
-        background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 30%, transparent) !important;
+        background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 14%, transparent) !important;
     }
     .o_control_panel .o-form-buttonbox .o_button_more .fa,
     .o_control_panel .o-form-buttonbox .o_button_more .oi,
