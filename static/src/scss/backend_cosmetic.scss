@@ -367,7 +367,7 @@ $bao-grey-label: #5a6a7a;
         color: var(--bao-text-heading, #1f1f1f);
     }
     .o_form_view .o_field_account-tax-totals-field .o_tax_total_label,
-    .o_form_view .o_field_tax_totals .o_tax_total_label { color: $bao-grey-label; }
+    .o_form_view .o_field_tax_totals .o_tax_total_label { color: $bao-grey-label; font-weight: 400; }
     // bao_purchase global-margin footer is NOT a BAO-referenced component (absent
     // from the reference set); align it to the native totals treatment so it reads
     // cleanly — label grey, amount dark semibold. Scoped to the footer so the
@@ -450,7 +450,7 @@ $bao-grey-label: #5a6a7a;
     .o_kanban_record .oe_kanban_action .fw-bold.fs-4,
     .o_kanban_record a.oe_kanban_action > .fw-bold {
         color: var(--bao-text-heading, #1f1f1f);
-        font-weight: 700;
+        font-weight: 700 !important;
     }
     .o_kanban_record .btn-primary {
         background-color: var(--bao-success-600, #{$bao-green});
