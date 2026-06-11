@@ -635,13 +635,14 @@ $bao-grey-label: #5a6a7a;
         border: 1px solid var(--bao-border-subtle, #e1e1e1);
         border-radius: var(--bao-radius-sm, 10px);
     }
-    // Chatter width: native side-by-side chatter takes ~35%; BAO uses a narrower
-    // panel. Cap the aside (only applies when side-by-side; native classes).
+    // Chatter sizing: keep the native grow so the aside fully fills its side (no
+    // empty band between sheet and chatter), and inset the content with padding so
+    // it reads like the BAO panel (P6 feel + P23 fill-the-gap).
     .o_form_renderer .o-mail-Form-chatter.o-aside,
     .o_form_renderer .o-mail-ChatterContainer.o-aside {
-        flex: 0 0 32%;
-        max-width: 470px;
+        max-width: 38%;
     }
+    .o-mail-Chatter { padding: 0 12px; }
     .o-mail-Chatter-sendMessage,
     .o-mail-Chatter-topbar .btn-primary {
         background-color: var(--bao-color-accent, #fde900);
