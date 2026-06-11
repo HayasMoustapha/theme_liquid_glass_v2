@@ -640,6 +640,14 @@ $bao-grey-label: #5a6a7a;
         box-shadow: var(--bao-shadow-soft, 0 1px 3px rgba(0, 0, 0, 0.06));
     }
     .o_kanban_record .o_kanban_record_title { color: var(--bao-text-heading, #1f1f1f); font-weight: 700; }
+    // Kanban card numeric stat (amount/value) = darker, heavier (BAO: stat below
+    // the label, bold). Label stays normal above it.
+    .o_kanban_record [name='amount_total'],
+    .o_kanban_record .o_kanban_record_bottom .oe_kanban_text_red,
+    .o_kanban_record strong [name='amount_total'] {
+        font-weight: 700;
+        color: var(--bao-text-heading, #1f1f1f);
+    }
     // Kanban DASHBOARD cards (stock overview etc.): BAO renders the card title
     // dark (native link is blue), the action button GREEN (native primary=yellow),
     // and the "late" counters red. Scoped to kanban card internals.
