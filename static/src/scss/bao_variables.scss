@@ -1,0 +1,129 @@
+///
+/// BAO Backend Theme — centralised variable layer.
+///
+/// Faithful re-application of the legacy mecid-core-suite `variables.scss`
+/// token system, adapted to the cosmetic-skin architecture:
+///
+///   1. `$bao-*-default`  — the BAO palette source-of-truth (compile-time hex).
+///   2. `$bao-*`          — working variables = `var(--bao-*, #{default})`.
+///
+/// The `--bao-*` custom properties are emitted at runtime by
+/// `/bao/theme/runtime.css` (generated from Settings > "BAO Backend Theme"),
+/// so editing a token there recolours the live UI; when a token is left empty
+/// the SCSS default below applies (no rendering shift). The custom-property
+/// NAMES here MUST match `models/bao_theme_config.py::CSS_VAR_BY_FIELD`.
+///
+/// NOTE: we deliberately do NOT seed `:root { --bao-*: … }` in this bundle —
+/// `/bao/theme/runtime.css` is injected EARLY (before assets_backend), so a
+/// bundle-level seed would out-cascade it and break Settings overrides. The
+/// `var(--bao-*, default)` fallback already provides the default safely.
+///
+/// Loaded in web.assets_backend BEFORE backend_cosmetic.scss (same bundle, so
+/// these SCSS vars are in scope there).
+///
+
+// ── 1. BAO palette defaults (source of truth) ──────────────────────────────
+// Brand / shell
+$bao-brand-600-default:        #1357a0;
+$bao-brand-700-default:        #0f4e92;
+$bao-brand-500-default:        #2f6aaa;
+$bao-accent-default:           #fde900;
+$bao-accent-hover-default:     #f4df00;
+$bao-on-primary-default:       #ffffff;  // text/elements on the blue chrome band
+// Surfaces
+$bao-surface-0-default:        #ffffff;
+$bao-surface-50-default:       #f9f9f9;
+$bao-surface-100-default:      #f1f1f1;
+$bao-surface-200-default:      #e5e5e5;
+$bao-bg-app-default:           #f9f9f9;
+// Borders
+$bao-border-200-default:       #e1e1e1;
+$bao-border-300-default:       #c9c9c9;
+$bao-border-selected-default:  #b1b1b1;
+$bao-border-soft-default:      #dedede;
+$bao-border-strong-default:    #c9c9c9;
+// Text
+$bao-text-900-default:         #1f1f1f;  // headings
+$bao-text-800-default:         #303030;  // body
+$bao-text-700-default:         #3f3f3f;  // secondary
+$bao-text-muted-default:       #8a8a8a;
+$bao-text-soft-default:        #a4a4a4;
+$bao-text-disabled-default:    #c9c9c9;
+$bao-text-muted-strong-default:#9aa3ad;  // upcoming statusbar / faint labels
+$bao-text-muted-soft-default:  #6b6b6b;  // generic muted grey
+$bao-text-label-default:       #5a6a7a;  // form field labels
+// Success
+$bao-success-600-default:      #03a750;  // bright BAO green (border/check)
+$bao-success-text-default:     #027f3d;  // green text
+$bao-success-bg-default:       #e4f9f0;  // pale-green pill fill
+$bao-success-solid-default:    #027f3d;  // solid action green
+$bao-success-solid-hover-default:#016733;
+$bao-success-tile-default:     #c0fedd;
+// Danger
+$bao-danger-600-default:       #d94f45;
+$bao-danger-hover-default:     #c8443b;
+$bao-danger-tile-default:      #fadada;
+// Warning / neutral / misc
+$bao-warning-tile-default:     #fffbcc;
+$bao-neutral-chip-default:     #e9e9e9;
+$bao-neutral-soft-default:     #dcdcdc;
+$bao-help-badge-bg-default:    #e7effa;
+$bao-notebook-chip-bg-default: #f0f0f0;
+$bao-draft-bg-default:         #e7e7e7;
+$bao-draft-text-default:       #5a5a5a;
+// Fonts
+$bao-font-body-default:        ("Open Sans", sans-serif);
+$bao-font-title-default:       ("CreightonPro", "Open Sans", sans-serif);
+
+// ── 2. Working variables (resolve through the live --bao-* with the BAO default)
+// Brand / shell
+$bao-brand-600:        var(--bao-color-primary,      #{$bao-brand-600-default});
+$bao-brand-700:        var(--bao-color-primary-dark, #{$bao-brand-700-default});
+$bao-brand-500:        var(--bao-color-primary-soft, #{$bao-brand-500-default});
+$bao-accent:           var(--bao-color-accent,       #{$bao-accent-default});
+$bao-accent-hover:     var(--bao-color-accent-hover, #{$bao-accent-hover-default});
+$bao-on-primary:       var(--bao-on-primary,         #{$bao-on-primary-default});
+// Surfaces
+$bao-surface-0:        var(--bao-surface-base,   #{$bao-surface-0-default});
+$bao-surface-50:       var(--bao-surface-muted,  #{$bao-surface-50-default});
+$bao-surface-100:      var(--bao-surface-subtle, #{$bao-surface-100-default});
+$bao-surface-200:      var(--bao-surface-raised, #{$bao-surface-200-default});
+$bao-bg-app:           var(--bao-bg-app,         #{$bao-bg-app-default});
+// Borders
+$bao-border-200:       var(--bao-border-subtle,   #{$bao-border-200-default});
+$bao-border-300:       var(--bao-border-default,  #{$bao-border-300-default});
+$bao-border-selected:  var(--bao-border-selected, #{$bao-border-selected-default});
+$bao-border-soft:      var(--bao-border-soft,     #{$bao-border-soft-default});
+$bao-border-strong:    var(--bao-border-strong,   #{$bao-border-strong-default});
+// Text
+$bao-text-900:         var(--bao-text-heading,   #{$bao-text-900-default});
+$bao-text-800:         var(--bao-text-primary,   #{$bao-text-800-default});
+$bao-text-700:         var(--bao-text-secondary, #{$bao-text-700-default});
+$bao-text-muted:       var(--bao-text-muted,     #{$bao-text-muted-default});
+$bao-text-soft:        var(--bao-text-soft,      #{$bao-text-soft-default});
+$bao-text-disabled:    var(--bao-text-disabled,  #{$bao-text-disabled-default});
+$bao-text-muted-strong:var(--bao-text-muted-strong, #{$bao-text-muted-strong-default});
+$bao-grey-muted:       var(--bao-text-muted-soft,    #{$bao-text-muted-soft-default});
+$bao-grey-label:       var(--bao-text-label,         #{$bao-text-label-default});
+// Success
+$bao-green:            var(--bao-success-600,         #{$bao-success-600-default});
+$bao-green-text:       var(--bao-success-text,        #{$bao-success-text-default});
+$bao-green-bg:         var(--bao-success-bg,          #{$bao-success-bg-default});
+$bao-success-solid:    var(--bao-success-solid,       #{$bao-success-solid-default});
+$bao-success-solid-hover:var(--bao-success-solid-hover, #{$bao-success-solid-hover-default});
+$bao-success-tile:     var(--bao-success-tile,        #{$bao-success-tile-default});
+// Danger
+$bao-red:              var(--bao-danger-600,   #{$bao-danger-600-default});
+$bao-danger-hover:     var(--bao-danger-hover, #{$bao-danger-hover-default});
+$bao-danger-tile:      var(--bao-danger-tile,  #{$bao-danger-tile-default});
+// Warning / neutral / misc
+$bao-warning-tile:     var(--bao-warning-tile,     #{$bao-warning-tile-default});
+$bao-neutral-chip:     var(--bao-neutral-chip,     #{$bao-neutral-chip-default});
+$bao-neutral-soft:     var(--bao-neutral-soft,     #{$bao-neutral-soft-default});
+$bao-help-badge-bg:    var(--bao-help-badge-bg,    #{$bao-help-badge-bg-default});
+$bao-notebook-chip-bg: var(--bao-notebook-chip-bg, #{$bao-notebook-chip-bg-default});
+$bao-draft-bg:         var(--bao-draft-bg,   #{$bao-draft-bg-default});
+$bao-draft-text:       var(--bao-draft-text, #{$bao-draft-text-default});
+// Fonts
+$bao-font-body:        var(--bao-font-body,  #{$bao-font-body-default});
+$bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});

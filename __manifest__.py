@@ -54,6 +54,10 @@
         ],
         'web.assets_backend': [
             'theme_liquid_glass_v2/static/src/scss/fonts.scss',
+            # Centralised BAO token layer ($bao-*-default constants + $bao-*
+            # working vars = var(--bao-*, default)); must precede the cosmetic
+            # layer so its SCSS vars are in scope there.
+            'theme_liquid_glass_v2/static/src/scss/bao_variables.scss',
             # backend_cosmetic paints the live --bao-* config vars onto native
             # classes (loaded last → wins via .o_web_client specificity).
             'theme_liquid_glass_v2/static/src/scss/backend_cosmetic.scss',

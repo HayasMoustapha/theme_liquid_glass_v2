@@ -21,15 +21,9 @@
 /// Loaded last in web.assets_backend; `.o_web_client` prefix wins specificity.
 ///
 
-// P18: BAO brand colours are runtime variables (configurable from Settings) with
-// the exact BAO hex as fallback (no rendering shift). Every $bao-* usage below
-// resolves through a --bao-* var.
-$bao-green:      var(--bao-success-600, #03a750);
-$bao-green-text: var(--bao-success-text, #027f3d);
-$bao-green-bg:   var(--bao-success-bg, #e4f9f0);
-$bao-red:        var(--bao-danger-600, #d94f45);
-$bao-grey-muted: var(--bao-text-muted-soft, #6b6b6b);
-$bao-grey-label: var(--bao-text-label, #5a6a7a);
+// BAO brand/semantic SCSS vars ($bao-green, $bao-red, $bao-grey-*, etc.) are
+// defined centrally in bao_variables.scss (loaded just before this file). Each
+// resolves through var(--bao-*, BAO-default) so Settings recolours them live.
 
 .o_web_client {
 
