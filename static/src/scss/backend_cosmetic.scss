@@ -608,10 +608,33 @@
     .o_control_panel .o-form-buttonbox .oe_stat_button,
     .o_control_panel .oe_button_box .oe_stat_button {
         background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 18%, transparent);
-        border-color: rgba(255, 255, 255, 0.28);
+        border-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 28%, transparent);
+        border-radius: 6px;
+        overflow: hidden;          // clip the translucent fill to the pill (no bleed)
     }
     .o_control_panel .o-form-buttonbox .oe_stat_button:hover,
     .o_control_panel .oe_button_box .oe_stat_button:hover { background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 30%, transparent); }
+    // The "More" overflow TOGGLE (.o_button_more) on the blue band must match the
+    // other stat buttons (it defaulted to a grey btn-secondary + near-black bolt
+    // icon, which clashed). Translucent white pill + white icon.
+    .o_control_panel .o-form-buttonbox .o_button_more,
+    .o_control_panel .oe_button_box .o_button_more {
+        background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 18%, transparent) !important;
+        border: 1px solid color-mix(in srgb, var(--bao-on-primary, #ffffff) 28%, transparent) !important;
+        color: var(--bao-on-primary, #ffffff) !important;
+        border-radius: 6px !important;
+    }
+    .o_control_panel .o-form-buttonbox .o_button_more:hover,
+    .o_control_panel .oe_button_box .o_button_more:hover {
+        background-color: color-mix(in srgb, var(--bao-on-primary, #ffffff) 30%, transparent) !important;
+    }
+    .o_control_panel .o-form-buttonbox .o_button_more .fa,
+    .o_control_panel .o-form-buttonbox .o_button_more .oi,
+    .o_control_panel .o-form-buttonbox .o_button_more i,
+    .o_control_panel .oe_button_box .o_button_more .fa,
+    .o_control_panel .oe_button_box .o_button_more i {
+        color: var(--bao-on-primary, #ffffff) !important;
+    }
     // The "More" stat-button overflow renders as a .o_popover.o-form-buttonbox on a
     // WHITE surface — the blue-band white treatment must NOT leak there. Reset to
     // dark-on-transparent so the overflow items stay readable and don't bleed.
