@@ -218,6 +218,31 @@ $bao-grey-label: #5a6a7a;
         border-color: #dcdcdc;
         color: var(--bao-text-primary, #303030);
     }
+    // Dialog surface = same BAO card language as the form sheet (native classes).
+    .o_dialog .modal-content {
+        background-color: var(--bao-surface-base, #ffffff);
+        border: 1px solid var(--bao-border-subtle, #e1e1e1);
+        border-radius: var(--bao-radius-sm, 10px);
+        box-shadow: var(--bao-shadow-soft, 0 1px 3px rgba(0, 0, 0, 0.06));
+    }
+    .o_dialog .modal-header .modal-title {
+        color: var(--bao-text-heading, #1f1f1f);
+        font-weight: 700;
+    }
+    // Dialog field inputs: the form-sheet fill rule is scoped to .o_form_sheet,
+    // which a dialog has no — so reproduce the BAO filled-box look in .modal-body.
+    .o_dialog .modal-body {
+        .o_field_widget input.o_input,
+        .o_field_widget textarea.o_input,
+        .o_field_widget .o_input:not(.o-autocomplete--input),
+        .o_field_widget select,
+        .o_field_widget .o-autocomplete--input {
+            background-color: var(--bao-surface-muted, #f9f9f9);
+            border: 1px solid var(--bao-border-subtle, #e1e1e1);
+            border-radius: 6px;
+            padding: 5px 10px;
+        }
+    }
 
     // ============================================================
     // 4. APP CONTENT BACKGROUND
@@ -259,6 +284,15 @@ $bao-grey-label: #5a6a7a;
         border-radius: 50%;
         font-weight: 700;
         vertical-align: middle;
+    }
+    // m2m / tax tag chips: BAO = neutral light-grey pill (native colourless tag is
+    // a dull pink). Scoped to colourless tags so intentionally-coloured ones keep
+    // their colour. (Also covers the tax chip inside order lines.)
+    .o_form_view .o_field_tags .o_tag.o_tag_color_0,
+    .o_form_view .o_field_many2many_tags .o_tag.o_tag_color_0,
+    .o_field_x2many .o_data_cell .o_field_tags .o_tag.o_tag_color_0 {
+        background-color: #e9e9e9;
+        color: var(--bao-text-primary, #303030);
     }
     // BAO ref: contact icons (email / phone / mobile) next to fields are RED,
     // not the native text-primary blue. Scoped to the form view.
@@ -305,6 +339,10 @@ $bao-grey-label: #5a6a7a;
         border-color: var(--bao-success-border, #{$bao-green});
         color: var(--bao-success-text, #{$bao-green-text});
     }
+    // Inactive workflow stages = muted grey (BAO), distinct from the green current.
+    .o_form_statusbar .o_statusbar_status .o_arrow_button:not(.o_arrow_button_current) {
+        color: #9aa3ad;
+    }
 
     // Smart / stat buttons. In Odoo 19 the button box renders INSIDE the control
     // panel (the BAO blue band), NOT the form sheet — so on blue they must be
@@ -323,8 +361,16 @@ $bao-grey-label: #5a6a7a;
     .o_control_panel .o-form-buttonbox .oe_stat_button .o_button_icon {
         color: #ffffff;
     }
-    .o_control_panel .o-form-buttonbox .oe_stat_button { border-color: rgba(255, 255, 255, 0.40); }
-    .o_control_panel .o-form-buttonbox .oe_stat_button:hover { background-color: rgba(255, 255, 255, 0.12); }
+    // BAO smart-band signature: the stat buttons carry a RESTING translucent
+    // lighter-blue fill (~rgba white 0.18 over #1357a0 = ~#3d79b0), giving the
+    // raised glass container look — not just outlines.
+    .o_control_panel .o-form-buttonbox .oe_stat_button,
+    .o_control_panel .oe_button_box .oe_stat_button {
+        background-color: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.28);
+    }
+    .o_control_panel .o-form-buttonbox .oe_stat_button:hover,
+    .o_control_panel .oe_button_box .oe_stat_button:hover { background-color: rgba(255, 255, 255, 0.30); }
 
     // Notebook — active tab = raised light-grey rounded-top chip (BAO uses a chip, not a blue underline)
     .o_notebook .nav-tabs .nav-link { color: $bao-grey-label; }
