@@ -468,41 +468,66 @@
     // native chevron/arrow clip-path: current = pale-green rounded pill (green
     // text/border), upcoming = plain muted-grey labels. The native arrow uses
     // clip-path + a lavender current fill — override both.
-    .o_form_statusbar { background-color: var(--bao-surface-base, #ffffff); }
+    .o_form_statusbar { background-color: $bao-surface-0; }
+    // Every stage = FLAT label, no native clip-path arrow. (.o_web_client prefix
+    // raises specificity above Odoo's own ::before arrow rule that forces block.)
     .o_form_statusbar .o_statusbar_status .o_arrow_button {
         clip-path: none !important;
         background-color: transparent !important;
-        color: var(--bao-text-muted-strong, #9aa3ad) !important;
-        border: 1px solid transparent !important;
-        border-radius: 6px !important;
-        margin: 0 2px !important;
-        padding: 4px 14px !important;
-        font-weight: 500;
+        color: $bao-grey-muted !important;
+        border: 0 !important;
+        border-radius: 14px !important;
+        margin: 0 !important;
+        padding: 4px 12px !important;
+        font-weight: 500 !important;
     }
-    .o_form_statusbar .o_statusbar_status .o_arrow_button.o_arrow_button_current {
-        background-color: var(--bao-success-bg, #{$bao-green-bg}) !important;
-        color: var(--bao-success-text, #{$bao-green-text}) !important;
-        border-color: var(--bao-success-border, #{$bao-green}) !important;
-        font-weight: 700;
-    }
-    // Kill the native arrow remnant: o_arrow_button::before draws a white clip-path
-    // chevron (the leftover "native trace") — neutralise both pseudo-elements.
+    // Neutralise BOTH native arrow pseudo-elements (the leftover white chevron).
     .o_form_statusbar .o_statusbar_status .o_arrow_button::before,
     .o_form_statusbar .o_statusbar_status .o_arrow_button::after {
+        content: none !important;
         display: none !important;
-    }
-    // BAO separator between consecutive stages: a muted chevron.
-    // BAO separator between stages is a dash "—" (not a chevron).
-    .o_form_statusbar .o_statusbar_status .o_arrow_button:not(.dropdown-toggle) + .o_arrow_button:not(.dropdown-toggle)::before {
-        display: inline-block !important;
-        content: "—";
-        color: var(--bao-text-muted-strong, #9aa3ad);
-        margin: 0 6px 0 -2px;
-        font-weight: 400;
         clip-path: none !important;
         background: transparent !important;
+        border: 0 !important;
         width: auto !important;
         height: auto !important;
+    }
+    // ACTIVE stage = pale-green pill, bold green text, BAO green check-circle icon.
+    .o_form_statusbar .o_statusbar_status .o_arrow_button.o_arrow_button_current {
+        background-color: $bao-green-bg !important;
+        color: $bao-green-text !important;
+        font-weight: 700 !important;
+        padding: 4px 15px 4px 11px !important;
+    }
+    .o_form_statusbar .o_statusbar_status .o_arrow_button.o_arrow_button_current::before {
+        content: "\f00c" !important;            // fa-check, white on a green disc
+        font-family: "FontAwesome" !important;
+        display: inline-block !important;
+        width: 17px !important;
+        height: 17px !important;
+        line-height: 17px !important;
+        text-align: center !important;
+        margin-right: 7px !important;
+        border-radius: 50% !important;
+        background-color: $bao-green !important;
+        color: $bao-on-primary !important;
+        font-size: 9px !important;
+        margin-right: 9px !important;
+        flex: 0 0 auto !important;
+    }
+    // SEPARATOR: short muted dash before each NON-active visible stage. Inline-block
+    // + the high-specificity prefix beats Odoo's block-display arrow ::before.
+    .o_form_statusbar .o_statusbar_status .o_arrow_button:not(.dropdown-toggle):not(.d-none):not(.o_arrow_button_current)::before {
+        content: "" !important;             // BAO separator = short rounded line
+        display: inline-block !important;
+        flex: 0 0 auto !important;          // the button is a flexbox: don't stretch
+        width: 16px !important;
+        height: 2px !important;
+        background-color: $bao-text-soft !important;
+        border-radius: 2px !important;
+        margin: 0 10px 0 -2px !important;
+        align-self: center !important;
+        vertical-align: middle !important;
     }
 
     // Smart / stat buttons. In Odoo 19 the button box renders INSIDE the control
