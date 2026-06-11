@@ -59,8 +59,16 @@ $bao-grey-label: #5a6a7a;
         border-right: 0.3em solid transparent;
         border-left: 0.3em solid transparent;
     }
-    // Systray glyphs + brand use the BAO display font for the module title.
-    .o_main_navbar .o_menu_brand { font-family: "CreightonPro", "Open Sans", sans-serif; }
+    // BAO display font (CreightonPro = "Criterion" in the BAO charter) on ALL title
+    // surfaces: module/app brand, breadcrumb leaf, form record title, kanban &
+    // dashboard card titles. Via --bao-font-title so it stays configurable (P18).
+    .o_main_navbar .o_menu_brand,
+    .o_control_panel .o_last_breadcrumb_item,
+    .o_form_sheet .oe_title h1,
+    .o_kanban_record .o_kanban_record_title,
+    .o_kanban_record a.oe_kanban_action .fw-bold {
+        font-family: var(--bao-font-title, "CreightonPro"), "Open Sans", sans-serif;
+    }
     // BAO avatars are circular (Odoo renders them as .rounded = 8px)
     // Odoo 19: the chatter message avatar IS the <img class="o-mail-Message-avatar">
     // (ships .rounded-3 = 12px), not a child <img> — target the element itself.
@@ -117,12 +125,15 @@ $bao-grey-label: #5a6a7a;
     .o_control_panel .o_searchview {
         background-color: var(--bao-surface-base, #ffffff);
         border: 1px solid transparent;
-        border-top-left-radius: 20px;
-        border-bottom-left-radius: 20px;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
+        border-radius: 20px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
         color: var(--bao-text-primary, #303030);
+    }
+    // Square the search right edge ONLY when it is fused with the filter toggler;
+    // standalone (e.g. Settings) keeps the full pill radius.
+    .o_control_panel .o_searchview:has(+ .o_searchview_dropdown_toggler) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
     }
     .o_control_panel .o_searchview_dropdown_toggler {
         background-color: var(--bao-surface-base, #ffffff);
@@ -133,7 +144,13 @@ $bao-grey-label: #5a6a7a;
         color: var(--bao-text-secondary, #5a6a7a);
     }
     .o_control_panel .o_searchview .o_searchview_input { color: var(--bao-text-primary, #303030); }
-    .o_control_panel .o_searchview:focus-within { border-color: #ffffff; }
+    // On focus, keep the border transparent (a white border on the search half only
+    // created a visible seam/height jump vs the fused filter toggler). Unified ring.
+    .o_control_panel .o_searchview:focus-within,
+    .o_control_panel .o_searchview:focus-within + .o_searchview_dropdown_toggler {
+        border-color: transparent;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.55);
+    }
     .o_searchview .o_searchview_facet .o_searchview_facet_label {
         background-color: var(--bao-color-primary, #1357a0);
         color: #ffffff;
@@ -174,6 +191,19 @@ $bao-grey-label: #5a6a7a;
     }
     // BAO save icon = floppy disk (native O19 ships fa-cloud-upload). Swap glyph.
     .o_control_panel .o_form_button_save .fa-cloud-upload::before { content: "\f0c7"; }
+    // Settings TEXT save/discard (btn-primary/secondary, vs the form icon buttons
+    // which are btn-light) were washed-out translucent — make them solid + readable.
+    .o_control_panel .o_form_button_save.btn-primary {
+        background-color: #ffffff;
+        border-color: #ffffff;
+        color: var(--bao-color-primary, #1357a0);
+        font-weight: 700;
+    }
+    .o_control_panel .o_form_button_cancel.btn-secondary {
+        background-color: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.45);
+        color: #ffffff;
+    }
 
     // ============================================================
     // 3. BUTTONS
@@ -296,7 +326,7 @@ $bao-grey-label: #5a6a7a;
     .o_form_sheet .oe_title h1 {
         color: var(--bao-text-heading, #1f1f1f);
         font-weight: 700;
-        font-family: "CreightonPro", "Open Sans", sans-serif;
+        font-family: var(--bao-font-title, "CreightonPro"), "Open Sans", sans-serif;
     }
     // The title field itself stays borderless/transparent (it is a heading, not a
     // boxed field) — overrides the filled-field treatment below.
