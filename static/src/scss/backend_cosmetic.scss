@@ -33,9 +33,11 @@ $bao-grey-label: #5a6a7a;
     // ============================================================
     // 1. NAVBAR (the native top blue band)
     // ============================================================
+    // Navbar + control panel form ONE continuous BAO blue band: the native 1px
+    // dark divider under the navbar must blend (no black/dark line between them).
     .o_main_navbar {
         background-color: var(--bao-color-primary, #1357a0);
-        border-bottom-color: var(--bao-color-primary-dark, #0f4e92);
+        border-bottom: 0;
     }
     .o_main_navbar .o_menu_brand {
         color: #ffffff;
@@ -160,13 +162,23 @@ $bao-grey-label: #5a6a7a;
             color: var(--bao-text-primary, #303030);
         }
     }
-    // Create "Nouveau" = explicit yellow (list + kanban)
+    // Create "Nouveau" = explicit yellow (list + kanban + FORM). The form create
+    // button is a native btn-outline-primary (transparent + blue text) which is
+    // invisible on the blue control-panel band — force the BAO yellow fill too.
     .o_list_button_add,
-    .o-kanban-button-new {
+    .o-kanban-button-new,
+    .o_control_panel .o_form_button_create,
+    .o_control_panel button.o_form_button_create.btn-outline-primary {
         background-color: var(--bao-color-accent, #fde900);
         border-color: var(--bao-color-accent, #fde900);
         color: var(--bao-text-heading, #1f1f1f);
         font-weight: 700;
+
+        &:hover, &:focus, &:active, &:focus-visible {
+            background-color: var(--bao-color-accent-hover, #f4df00);
+            border-color: var(--bao-color-accent-hover, #f4df00);
+            color: var(--bao-text-heading, #1f1f1f);
+        }
     }
     // BAO ref: form workflow primary action (Confirmer/Envoyer) = danger red
     .o_form_statusbar .btn-primary,
@@ -419,6 +431,21 @@ $bao-grey-label: #5a6a7a;
         box-shadow: var(--bao-shadow-soft, 0 1px 3px rgba(0, 0, 0, 0.06));
     }
     .o_kanban_record .o_kanban_record_title { color: var(--bao-text-heading, #1f1f1f); font-weight: 700; }
+    // Kanban DASHBOARD cards (stock overview etc.): BAO renders the card title
+    // dark (native link is blue), the action button GREEN (native primary=yellow),
+    // and the "late" counters red. Scoped to kanban card internals.
+    .o_kanban_record .oe_kanban_action .fw-bold.fs-4,
+    .o_kanban_record a.oe_kanban_action > .fw-bold {
+        color: var(--bao-text-heading, #1f1f1f);
+    }
+    .o_kanban_record .btn-primary {
+        background-color: var(--bao-success-600, #{$bao-green});
+        border-color: var(--bao-success-600, #{$bao-green});
+        color: #ffffff;
+        &:hover, &:focus, &:active { background-color: #02913f; border-color: #02913f; color: #ffffff; }
+    }
+    .o_kanban_record a[name='get_action_picking_tree_late'],
+    .o_kanban_record a[name$='_late'] { color: $bao-red; }
     // KPI dashboard tiles — semantic variants (cosmetic recolor of bootstrap bg-*)
     .o_kanban_record.bg-warning { background-color: #fdf3a8 !important; color: var(--bao-text-heading, #1f1f1f); border-color: #f4e9a0; }
     .o_kanban_record.bg-danger  { background-color: #fbe0de !important; color: $bao-red; border-color: #f3c1bd; }
