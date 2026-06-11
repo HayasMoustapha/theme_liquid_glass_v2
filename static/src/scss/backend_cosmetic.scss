@@ -72,6 +72,7 @@ $bao-grey-label: #5a6a7a;
     .o_kanban_record .o_kanban_record_title,
     .o_kanban_record a.oe_kanban_action .fw-bold {
         font-family: var(--bao-font-title, "CreightonPro"), "Open Sans", sans-serif;
+        font-weight: normal !important; // CreightonPro display font stays at normal weight
     }
     // BAO avatars are circular (Odoo renders them as .rounded = 8px)
     // Odoo 19: the chatter message avatar IS the <img class="o-mail-Message-avatar">
