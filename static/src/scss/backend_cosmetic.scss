@@ -48,9 +48,12 @@ $bao-grey-label: #5a6a7a;
         color: rgba(255, 255, 255, 0.92);
     }
     // BAO avatars are circular (Odoo renders them as .rounded = 8px)
+    // Odoo 19: the chatter message avatar IS the <img class="o-mail-Message-avatar">
+    // (ships .rounded-3 = 12px), not a child <img> — target the element itself.
     .o_main_navbar .o_user_avatar,
     .o_main_navbar .o_avatar,
     .o_main_navbar .o_user_menu img,
+    .o-mail-Message-avatar,
     .o-mail-Message-avatar img,
     .o-mail-Chatter .o_avatar {
         border-radius: 50% !important;
@@ -258,12 +261,25 @@ $bao-grey-label: #5a6a7a;
         color: var(--bao-success-text, #{$bao-green-text});
     }
 
-    // Smart / stat buttons (kept in native sheet placement — relocation is structural)
-    .oe_button_box .oe_stat_button .o_stat_value,
-    .o-form-buttonbox .oe_stat_button .o_stat_value {
+    // Smart / stat buttons. In Odoo 19 the button box renders INSIDE the control
+    // panel (the BAO blue band), NOT the form sheet — so on blue they must be
+    // WHITE for contrast (matches the BAO reference). The white-sheet variant
+    // (other contexts / older Odoo) keeps the BAO blue value + grey label.
+    .o_form_sheet .oe_button_box .oe_stat_button .o_stat_value,
+    .o_form_sheet .o-form-buttonbox .oe_stat_button .o_stat_value {
         color: var(--bao-color-primary, #1357a0);
     }
-    .oe_button_box .oe_stat_button .o_stat_text { color: $bao-grey-label; }
+    .o_form_sheet .oe_button_box .oe_stat_button .o_stat_text,
+    .o_form_sheet .o-form-buttonbox .oe_stat_button .o_stat_text { color: $bao-grey-label; }
+    // On the blue control-panel band: white value/label/icon + translucent border.
+    .o_control_panel .o-form-buttonbox .oe_stat_button,
+    .o_control_panel .o-form-buttonbox .oe_stat_button .o_stat_value,
+    .o_control_panel .o-form-buttonbox .oe_stat_button .o_stat_text,
+    .o_control_panel .o-form-buttonbox .oe_stat_button .o_button_icon {
+        color: #ffffff;
+    }
+    .o_control_panel .o-form-buttonbox .oe_stat_button { border-color: rgba(255, 255, 255, 0.40); }
+    .o_control_panel .o-form-buttonbox .oe_stat_button:hover { background-color: rgba(255, 255, 255, 0.12); }
 
     // Notebook — active tab = raised light-grey rounded-top chip (BAO uses a chip, not a blue underline)
     .o_notebook .nav-tabs .nav-link { color: $bao-grey-label; }
@@ -284,14 +300,37 @@ $bao-grey-label: #5a6a7a;
         color: var(--bao-color-primary, #1357a0);
         font-weight: 600;
     }
+    // Odoo 19 renders the line-delete control as <button class="fa fa-trash-o">,
+    // not an <i> — target both so the BAO-red trash icon actually lands.
     .o_field_x2many .o_list_record_remove i,
-    .o_data_row .o_list_record_remove i { color: $bao-red; }
+    .o_field_x2many .o_list_record_remove .fa,
+    .o_field_x2many .o_list_record_remove button,
+    .o_data_row .o_list_record_remove i,
+    .o_data_row .o_list_record_remove .fa,
+    .o_data_row .o_list_record_remove button { color: $bao-red; }
 
-    // Totals — grand total oversized bold
+    // Totals — BAO ref: grand total large + heavy + near-black, subtotal labels
+    // grey. Odoo 19 renders totals via the tax_totals widget (no .o_total class);
+    // amount_total already ships inline bold@1.3em, we only set BAO heading colour.
     .o_form_view .oe_subtotal_footer .o_total,
     .o_form_view .oe_subtotal_footer tr.border-black td {
         font-weight: 800;
         color: var(--bao-text-heading, #1f1f1f);
+    }
+    .o_form_view .o_field_account-tax-totals-field span[name='amount_total'],
+    .o_form_view .o_field_tax_totals span[name='amount_total'] {
+        color: var(--bao-text-heading, #1f1f1f);
+    }
+    .o_form_view .o_field_account-tax-totals-field .o_tax_total_label,
+    .o_form_view .o_field_tax_totals .o_tax_total_label { color: $bao-grey-label; }
+    // bao_purchase global-margin footer is NOT a BAO-referenced component (absent
+    // from the reference set); align it to the native totals treatment so it reads
+    // cleanly — label grey, amount dark semibold. Scoped to the footer so the
+    // x_total_margin LIST column on order lines is unaffected.
+    .o_form_view .oe_subtotal_footer [name='x_total_margin'],
+    .o_form_view .oe_subtotal_footer [name='x_global_margin_pct'] {
+        color: var(--bao-text-heading, #1f1f1f);
+        font-weight: 700;
     }
 
     // ============================================================
