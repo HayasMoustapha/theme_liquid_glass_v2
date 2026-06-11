@@ -568,7 +568,13 @@ class BaoThemeConfig(models.Model):
         return warnings
 
     def action_reset_global(self):
-        self.write({field_name: False for field_name in TOKEN_FIELDS})
+        # Seed the config token fields FROM THE PRESET (not empty). Writing False left
+        # the fields blank, and the Settings colour widgets render an empty value as
+        # #000000 (black) — so users saw black instead of the BAO palette and edited
+        # from a wrong baseline. Seeding from the preset keeps the real colours visible
+        # and editable; runtime resolution is unchanged (it already starts from preset).
+        for config in self:
+            config.write(config.preset_id._read_token_values(skip_empty=False))
         return True
 
     def action_reset_all(self):

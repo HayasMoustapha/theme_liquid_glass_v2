@@ -2,6 +2,17 @@
 #############################################################################
 from . import models
 from . import controllers
+
+
+def _seed_bao_default_config(env):
+    """Seed the default BAO config's token fields from its preset, so the Settings UI
+    shows the real BAO palette. The config ships with empty token fields (runtime
+    resolution starts from the preset), but the colour widgets render an empty value
+    as #000000 (black) — leaving users unable to see/edit the real colours. Runs on
+    install/upgrade; runtime resolution is unchanged."""
+    config = env.ref("theme_liquid_glass_v2.bao_theme_config_default", raise_if_not_found=False)
+    if config and config.preset_id:
+        config.write(config.preset_id._read_token_values(skip_empty=False))
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #

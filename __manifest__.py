@@ -74,4 +74,7 @@
     'installable': True,
     'application': True,
     'auto_install': False,
+    # Seed the default BAO config token fields from its preset so the Settings UI
+    # shows the real palette (empty fields render black in the colour widget).
+    'post_init_hook': '_seed_bao_default_config',
 }
