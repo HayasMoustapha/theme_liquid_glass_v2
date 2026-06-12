@@ -191,6 +191,50 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
         color: var(--bao-text-primary, #303030) !important;
         visibility: visible !important;
     }
+    // (B3 residual) UNIFORM dark systray ink on the launcher. The native systray glyphs
+    // (.fa chat/activities, .o-dropdown toggles) paint with var(--bao-color-primary) and
+    // win the specificity war. Don't fight it: LOCALLY redefine --bao-color-primary to
+    // the dark ink within the launcher navbar scope, so every glyph that resolves that
+    // var becomes dark on the light launcher — no specificity battle.
+    &.et_launcher_open .o_main_navbar {
+        --bao-color-primary: var(--bao-text-primary, #303030);
+    }
+    // (B4 no-flash) home_menu_icons.js sets body.et_navigating from the launcher click
+    // until the chosen module's view paints. Hold a full-screen cover (launcher gradient)
+    // so the previous screen never flashes during the switch.
+    &.et_navigating::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 9990;
+        background: var(--bao-launcher-bg, #eef4fb);
+        pointer-events: none;
+    }
+    // (B3 searchview) the launcher app-search (.et_search, injected by home_menu_icons.js)
+    // reads like the native control-panel searchview: white rounded pill + magnifier,
+    // centered, BAO border — same visual language as the modules' search bar.
+    .o_popover .et_search {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 60%;
+        max-width: 520px;
+        margin: 4px auto 18px;
+        padding: 7px 14px;
+        background: var(--bao-surface-base, #ffffff);
+        border: 1px solid var(--bao-border-default, #c9c9c9);
+        border-radius: 999px;
+        box-shadow: var(--bao-shadow-soft, 0 1px 3px rgba(0, 0, 0, 0.06));
+    }
+    .o_popover .et_search .et_search_icon { color: var(--bao-text-muted, #8a8a8a); }
+    .o_popover .et_search .et_app_search {
+        flex: 1 1 auto;
+        border: 0;
+        outline: none;
+        background: transparent;
+        color: var(--bao-text-primary, #303030);
+        font-family: var(--bao-font-body, "Open Sans", sans-serif);
+    }
     // BAO shows a FontAwesome chevron "v" on each top-menu dropdown; native Odoo 19
     // renders no caret. Use the FA glyph (not a CSS border triangle).
     .o_main_navbar .o_menu_sections .dropdown-toggle::after {
