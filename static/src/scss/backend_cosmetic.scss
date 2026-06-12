@@ -626,6 +626,23 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
         flex: 0 0 100%;
         min-width: 0;
     }
+    // BAO form layout (B7/P14b + B8): each label sits ABOVE its field and the field
+    // spans 100% of its column, one field per line. Odoo's inner group is a 2-col
+    // grid (label 150px | field 493px) — collapse it to ONE column so the auto-placed
+    // label cell and field cell stack. Composed rows are preserved: multiple fields
+    // share a single .o_wrap_input cell, so they stay on one line inside it.
+    .o_form_sheet .o_inner_group.grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+        column-gap: 0 !important;
+    }
+    // label cell: full width, tiny breathing gap above the field (P14b: no longer glued)
+    .o_form_sheet .o_inner_group.grid > .o_cell.o_wrap_label {
+        width: 100%;
+        padding-bottom: 3px;
+        align-self: end;
+    }
+    // field cell: full width (B8)
+    .o_form_sheet .o_inner_group.grid > .o_cell.o_wrap_input { width: 100%; }
     // Field labels = semibold muted blue-grey
     .o_form_view label.o_form_label {
         color: $bao-grey-label;
