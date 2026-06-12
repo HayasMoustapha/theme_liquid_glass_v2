@@ -545,6 +545,9 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
     // ============================================================
     // 4. APP CONTENT BACKGROUND
     // ============================================================
+    // The body (.o_web_client = &) itself follows bao_bg_app too, so a Settings
+    // bg_app change recolours the WHOLE app background, not just the content panes.
+    &,
     .o_action_manager,
     .o_form_view,
     .o_form_sheet_bg,
