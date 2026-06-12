@@ -619,6 +619,13 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
     .o_form_view .o_cell .o_row[name="date_planned_div"] [name="x_delivery_delay_type"] .o_select_menu {
         width: 100% !important;
     }
+    // 4) any TRAILING composed sub-field (e.g. the "Pas encore de données" display
+    //    that sat to the right of the unit and overlapped "Jours calendaires") drops
+    //    to its OWN full line, so the value+unit group can never collide with it.
+    .o_form_view .o_cell .o_row[name="date_planned_div"] > div:not(.o_row):not([name="date_planned"]) {
+        flex: 0 0 100%;
+        min-width: 0;
+    }
     // Field labels = semibold muted blue-grey
     .o_form_view label.o_form_label {
         color: $bao-grey-label;
