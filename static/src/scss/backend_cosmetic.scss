@@ -775,12 +775,20 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
     .o_form_statusbar .o_statusbar_status .o_arrow_button {
         clip-path: none !important;
         background-color: transparent !important;
-        color: $bao-grey-muted !important;
+        color: $bao-text-soft !important;        // BAO upcoming = light grey (#a4a4a4)
         border: 0 !important;
         border-radius: 14px !important;
         margin: 0 !important;
         padding: 4px 12px !important;
         font-weight: 500 !important;
+    }
+    // DONE stages (workflow BEFORE the active one) = darker grey + semibold (BAO). The
+    // statusbar renders in REVERSED DOM order, so a "done" stage is one that comes AFTER
+    // the current stage in the DOM (= to its LEFT visually). Upcoming stages keep the
+    // lighter base grey above.
+    .o_form_statusbar .o_statusbar_status .o_arrow_button_current ~ .o_arrow_button:not(.dropdown-toggle):not(.d-none) {
+        color: $bao-text-muted !important;       // BAO done = #8a8a8a
+        font-weight: 600 !important;
     }
     // Neutralise BOTH native arrow pseudo-elements (the leftover white chevron).
     .o_form_statusbar .o_statusbar_status .o_arrow_button::before,
@@ -798,34 +806,33 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
         background-color: $bao-green-bg !important;
         color: $bao-green-text !important;
         font-weight: 700 !important;
-        padding: 4px 15px 4px 11px !important;
+        padding: 4px 14px 4px 12px !important;
     }
     .o_form_statusbar .o_statusbar_status .o_arrow_button.o_arrow_button_current::before {
         content: "\f00c" !important;            // fa-check, white on a green disc
         font-family: "FontAwesome" !important;
-        display: inline-block !important;
-        width: 17px !important;
-        height: 17px !important;
-        line-height: 17px !important;
+        position: static !important;            // native arrow ::before is absolute — bring it into flow
+        inset: auto !important;
+        display: inline-flex !important;        // center the check glyph inside the disc
+        align-items: center !important;
+        justify-content: center !important;
+        width: 16px !important;
+        height: 16px !important;
+        min-width: 16px !important;
         text-align: center !important;
-        margin-right: 7px !important;
         border-radius: 50% !important;
         background-color: $bao-green !important;
         color: $bao-on-primary !important;
         font-size: 9px !important;
-        margin-right: 9px !important;
-        flex: 0 0 auto !important;
+        line-height: 1 !important;
+        margin: 0 8px 0 0 !important;
+        padding: 0 !important;
+        vertical-align: middle !important;      // center the disc against the pill text
     }
-    // SEPARATOR (BUGFIX 2026-06-16): BAO links stages with a short muted dash BETWEEN
-    // them (on BOTH sides of the active pill) and NEVER a leading dash before the first
-    // stage. The old rule put the dash as ::before on every non-current stage, which
-    // (a) left a STRAY LEADING dash before the visually-first stage when a later stage
-    // was active, and (b) dropped the dash on the LEFT of the active pill (its ::before
-    // is the check icon). The statusbar renders in REVERSED DOM order (DOM-first stage =
-    // visually rightmost), so the correct connector is an ::after on every real stage
-    // that is PRECEDED by another real stage in the DOM (= has a stage to its LEFT
-    // visually). ::after is independent of the active stage's ::before icon, so the dash
-    // on the left of the active pill is preserved and the first stage gets no leading dash.
+    // SEPARATOR: BAO links stages with a short muted dash BETWEEN them, never a leading
+    // dash before the first stage. The statusbar renders in REVERSED DOM order, so the dash
+    // is an ::after on every real stage PRECEDED by another real stage in the DOM (= a stage
+    // to its LEFT visually). ::after is independent of the active stage's ::before icon.
     .o_form_statusbar .o_statusbar_status .o_arrow_button:not(.dropdown-toggle):not(.d-none) ~ .o_arrow_button:not(.dropdown-toggle):not(.d-none)::after {
         content: "" !important;             // BAO separator = short rounded line
         display: inline-block !important;
