@@ -816,9 +816,17 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
         margin-right: 9px !important;
         flex: 0 0 auto !important;
     }
-    // SEPARATOR: short muted dash before each NON-active visible stage. Inline-block
-    // + the high-specificity prefix beats Odoo's block-display arrow ::before.
-    .o_form_statusbar .o_statusbar_status .o_arrow_button:not(.dropdown-toggle):not(.d-none):not(.o_arrow_button_current)::before {
+    // SEPARATOR (BUGFIX 2026-06-16): BAO links stages with a short muted dash BETWEEN
+    // them (on BOTH sides of the active pill) and NEVER a leading dash before the first
+    // stage. The old rule put the dash as ::before on every non-current stage, which
+    // (a) left a STRAY LEADING dash before the visually-first stage when a later stage
+    // was active, and (b) dropped the dash on the LEFT of the active pill (its ::before
+    // is the check icon). The statusbar renders in REVERSED DOM order (DOM-first stage =
+    // visually rightmost), so the correct connector is an ::after on every real stage
+    // that is PRECEDED by another real stage in the DOM (= has a stage to its LEFT
+    // visually). ::after is independent of the active stage's ::before icon, so the dash
+    // on the left of the active pill is preserved and the first stage gets no leading dash.
+    .o_form_statusbar .o_statusbar_status .o_arrow_button:not(.dropdown-toggle):not(.d-none) ~ .o_arrow_button:not(.dropdown-toggle):not(.d-none)::after {
         content: "" !important;             // BAO separator = short rounded line
         display: inline-block !important;
         flex: 0 0 auto !important;          // the button is a flexbox: don't stretch
@@ -826,7 +834,7 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
         height: 2px !important;
         background-color: $bao-text-soft !important;
         border-radius: 2px !important;
-        margin: 0 10px 0 -2px !important;
+        margin: 0 9px !important;
         align-self: center !important;
         vertical-align: middle !important;
     }
