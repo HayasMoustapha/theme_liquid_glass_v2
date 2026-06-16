@@ -109,18 +109,45 @@
                         </setting>
                     </block>
                     <block title="Families" name="bao_family_theme">
-                        <setting string="Family Overrides" help="Configure only the approved BAO family token overrides. Empty fields inherit global values.">
-                            <button name="action_open_bao_family_overrides" type="object" string="Manage Family Overrides" icon="oi-arrow-right" class="btn-link"/>
+                        <setting string="Family Overrides" help="Override colours for a whole BAO family, directly here. Empty fields inherit global values. Click Save to apply.">
+                            <field name="bao_family_override_ids" nolabel="1" colspan="2">
+                                <list editable="bottom">
+                                    <field name="family_key"/>
+                                    <field name="color_primary" widget="color"/>
+                                    <field name="color_accent" widget="color"/>
+                                    <field name="bg_app" widget="color"/>
+                                    <field name="surface_base" widget="color"/>
+                                    <field name="text_primary" widget="color"/>
+                                </list>
+                            </field>
                         </setting>
                     </block>
                     <block title="Targeted Components" name="bao_component_theme">
-                        <setting string="Component Overrides" help="Configure only the approved BAO component token overrides. Components inherit their family by default.">
-                            <button name="action_open_bao_component_overrides" type="object" string="Manage Component Overrides" icon="oi-arrow-right" class="btn-link"/>
+                        <setting string="Component Overrides" help="Override colours for specific UI components, directly here. Empty fields inherit the family or global theme. Click Save to apply.">
+                            <field name="bao_component_override_ids" nolabel="1" colspan="2">
+                                <list editable="bottom">
+                                    <field name="component_key"/>
+                                    <field name="color_primary" widget="color"/>
+                                    <field name="color_accent" widget="color"/>
+                                    <field name="bg_app" widget="color"/>
+                                    <field name="surface_base" widget="color"/>
+                                    <field name="text_primary" widget="color"/>
+                                </list>
+                            </field>
                         </setting>
                     </block>
                     <block title="Module-Specific Themes" name="bao_module_themes">
-                        <setting string="Module Color Overrides" help="Configure specific colors for individual Odoo modules. Empty fields inherit global theme values. Changes apply per-module when navigating between apps.">
-                            <button name="action_open_bao_module_overrides" type="object" string="Manage Module Overrides" icon="oi-arrow-right" class="btn-link"/>
+                        <setting string="Module Color Overrides" help="Set colours for specific Odoo modules, directly here. Empty fields inherit the global theme. Applied per-module as you navigate. Click Save to apply.">
+                            <field name="bao_module_override_ids" nolabel="1" colspan="2">
+                                <list editable="bottom">
+                                    <field name="module_id"/>
+                                    <field name="color_primary" widget="color"/>
+                                    <field name="color_accent" widget="color"/>
+                                    <field name="bg_app" widget="color"/>
+                                    <field name="surface_base" widget="color"/>
+                                    <field name="text_primary" widget="color"/>
+                                </list>
+                            </field>
                         </setting>
                     </block>
                     <block title="Preview And Reset" name="bao_preview_reset">

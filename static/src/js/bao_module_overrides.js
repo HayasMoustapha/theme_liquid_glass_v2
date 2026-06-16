@@ -115,4 +115,6 @@ const baoModuleOverridesService = {
     },
 };
 
-registry.category("services").add("bao_module_overrides", baoModuleOverridesService);
+// force:true so a duplicate registration (e.g. a leftover ir.asset alongside the manifest
+// entry during a transition) overwrites instead of throwing and breaking the page.
+registry.category("services").add("bao_module_overrides", baoModuleOverridesService, { force: true });
