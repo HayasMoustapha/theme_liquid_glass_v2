@@ -176,7 +176,20 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
     &.et_launcher_open .o_main_navbar {
         background-color: transparent !important;
         box-shadow: none !important;
+        // BUGFIX (2026-06-16): z-index:10001 only wins if the navbar is POSITIONED.
+        // Native .o_main_navbar is position:static, so its z-index was IGNORED and the
+        // launcher popover (.o_popover, position:fixed z-index:10000) painted OVER the
+        // apps-menu + systray — the icons were present (dark ink) but COVERED. Give the
+        // navbar a stacking position so its z-index takes effect and the systray shows
+        // above the launcher overlay.
+        position: relative !important;
+        z-index: 10001 !important;
+        // the transparent 46px band must not swallow clicks over the popover below it;
+        // re-enable pointer events only on the interactive launcher controls (below).
+        pointer-events: none !important;
     }
+    &.et_launcher_open .o_main_navbar .o_navbar_apps_menu,
+    &.et_launcher_open .o_main_navbar .o_menu_systray { pointer-events: auto !important; }
     &.et_launcher_open .o_main_navbar .o_menu_sections,
     &.et_launcher_open .o_main_navbar .o_menu_brand { visibility: hidden !important; }
     &.et_launcher_open .o_main_navbar .o_navbar_apps_menu,
