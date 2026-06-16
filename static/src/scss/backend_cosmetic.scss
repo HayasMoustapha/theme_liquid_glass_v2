@@ -199,6 +199,14 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
     &.et_launcher_open .o_main_navbar {
         --bao-color-primary: var(--bao-text-primary, #303030);
     }
+    // DEPENDENCY NOTE (B3/B4, proven 2026-06-16): the launcher search (.et_search) and the
+    // no-flash cover are OWNED at runtime by the separate `ss_enterprise_theme` module
+    // (home_menu_icons.js injects the search + facets; backend_theme.css styles them with
+    // !important and provides the live searchview-with-filter). When that module is present,
+    // these theme rules are OVERRIDDEN and do not render — they are kept ON PURPOSE as a
+    // GRACEFUL FALLBACK for deployments where `ss_enterprise_theme` is absent. The systray
+    // dark-ink above (var redefinition) is the theme's own, non-overridden contribution.
+    //
     // (B4 no-flash) home_menu_icons.js sets body.et_navigating from the launcher click
     // until the chosen module's view paints. Hold a full-screen cover (launcher gradient)
     // so the previous screen never flashes during the switch.
