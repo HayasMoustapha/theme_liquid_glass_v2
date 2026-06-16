@@ -61,6 +61,10 @@
             # backend_cosmetic paints the live --bao-* config vars onto native
             # classes (loaded last → wins via .o_web_client specificity).
             'theme_liquid_glass_v2/static/src/scss/backend_cosmetic.scss',
+            # Applies per-module colour overrides (bao.theme.module.override) onto
+            # :root as the user navigates — restores module-scoped config that the
+            # RR88 refonte dropped with the old searchview patch JS.
+            'theme_liquid_glass_v2/static/src/js/bao_module_overrides.js',
         ],
         'web.assets_backend_lazy': [
             'theme_liquid_glass_v2/static/src/js/canvas_text.js',
