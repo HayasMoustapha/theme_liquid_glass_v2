@@ -683,6 +683,8 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
     .o_form_view .o_cell .o_row[name="date_planned_div"] [name="x_delivery_delay_type"] {
         flex: 1 1 auto;
         min-width: 132px;     // enough for "Jours calendaires" — no truncation
+        // responsive separation from the number field (~12px small -> ~50px wide)
+            margin-left: clamp(12px, 3vw, 50px) !important;
     }
     .o_form_view .o_cell .o_row[name="date_planned_div"] [name="x_delivery_delay_type"] .o_select_menu {
         width: 100% !important;
