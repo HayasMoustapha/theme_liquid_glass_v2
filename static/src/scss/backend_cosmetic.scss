@@ -694,26 +694,12 @@ $bao-font-title:       var(--bao-font-title, #{$bao-font-title-default});
         flex: 0 0 100%;
         min-width: 0;
     }
-    // BAO form layout (B7/P14b + B8, re-applied 2026-06-17 per user): each label sits
-    // ABOVE its field and the field spans 100% of its column, one field per line. Odoo's
-    // inner group is a 2-col grid (label 150px | field) — collapse EACH group to ONE
-    // column so the auto-placed label cell and field cell stack. The two side-by-side
-    // groups stay side-by-side, so the form keeps BAO's two columns, each field
-    // label-above-field. Composed rows are preserved: multiple fields share one
-    // .o_wrap_input cell, so they remain on a single line inside it.
-    .o_form_sheet .o_inner_group.grid {
-        grid-template-columns: minmax(0, 1fr) !important;
-        column-gap: 0 !important;
-    }
-    // label cell: full width + small breathing gap above the field (P14b: not glued)
-    .o_form_sheet .o_inner_group.grid > .o_cell.o_wrap_label {
-        width: 100% !important;
-        padding-bottom: 3px !important;
-        align-self: end !important;
-    }
-    // field cell: full width (B8)
-    .o_form_sheet .o_inner_group.grid > .o_cell.o_wrap_input { width: 100% !important; }
-    // Field labels = semibold muted blue-grey
+    // FORM DISPOSITION = NATIVE Odoo (per user 2026-06-17): the field/value layout and
+    // structure of forms must match native Odoo exactly — only the BAO *style* (colours,
+    // typography) differs. So the label stays to the LEFT of its value in Odoo's native
+    // 2-col inner group; the B7/B8 label-above / field-100% experiment is NOT applied.
+    // (Only cosmetic styling of labels/values below is BAO.)
+    // Field labels = semibold muted blue-grey (style only, native disposition)
     .o_form_view label.o_form_label {
         color: $bao-grey-label;
         font-weight: 600;
